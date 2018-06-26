@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NET.efilnukefesin.Contracts.Users\NET.efilnukefesin.Contracts.Users.csproj" />
+    <ProjectReference Include="..\NET.efilnukefesin.Implementations.Base\NET.efilnukefesin.Implementations.Base.csproj" />
   </ItemGroup>
 
 </Project>
