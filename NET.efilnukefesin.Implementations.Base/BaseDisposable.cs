@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NET.efilnukefesin.Implementations.Base
 {
-    public abstract class BaseDisposable
+    public abstract class BaseDisposable : IDisposable
     {
         #region Properties
 

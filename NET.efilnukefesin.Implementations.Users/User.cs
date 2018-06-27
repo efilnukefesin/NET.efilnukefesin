@@ -8,9 +8,24 @@ namespace NET.efilnukefesin.Implementations.Users
 {
     public class User : BaseObject, IUser
     {
+        #region Properties
+        public ICollection<ILogin> Logins { get; set; }
+
+        #endregion Properties
+
+        #region Construction
+
+        #endregion Construction
+
+        #region Methods
+
+        #region dispose
         protected override void dispose()
         {
             throw new NotImplementedException();
         }
+        #endregion dispose
+
+        #endregion Methods
     }
 }

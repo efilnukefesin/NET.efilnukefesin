@@ -8,9 +8,30 @@ namespace NET.efilnukefesin.Implementations.Users
 {
     public class Alias : BaseObject, IAlias
     {
+        #region Properties
+
+        public string Name { get; set; }
+
+        #endregion Properties
+
+        #region Construction
+
+        public Alias(string Name)
+        {
+            this.Name = Name;
+        }
+
+        #endregion Construction
+
+        #region Methods
+
+        #region dispose
         protected override void dispose()
         {
             throw new NotImplementedException();
         }
+        #endregion dispose
+
+        #endregion Methods
     }
 }
