@@ -4,4 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NET.efilnukefesin.Contracts.Xml\NET.efilnukefesin.Contracts.Xml.csproj" />
+  </ItemGroup>
+
 </Project>

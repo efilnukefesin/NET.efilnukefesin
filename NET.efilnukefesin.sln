@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NET.efilnukefesin.Contracts
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NET.efilnukefesin.Implementations.DependencyInjection", "NET.efilnukefesin.Implementations.DependencyInjection\NET.efilnukefesin.Implementations.DependencyInjection.csproj", "{6CE36ED5-BBAA-401C-BCE2-DB82E77DB776}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NET.efilnukefesin.Contracts.Xml", "NET.efilnukefesin.Contracts.Xml\NET.efilnukefesin.Contracts.Xml.csproj", "{C38B0A6F-72E5-4262-8B54-778CE6B82BDA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,10 @@ Global
 		{6CE36ED5-BBAA-401C-BCE2-DB82E77DB776}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CE36ED5-BBAA-401C-BCE2-DB82E77DB776}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CE36ED5-BBAA-401C-BCE2-DB82E77DB776}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C38B0A6F-72E5-4262-8B54-778CE6B82BDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C38B0A6F-72E5-4262-8B54-778CE6B82BDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C38B0A6F-72E5-4262-8B54-778CE6B82BDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C38B0A6F-72E5-4262-8B54-778CE6B82BDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

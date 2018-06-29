@@ -1,4 +1,5 @@
 ﻿using NET.efilnukefesin.Contracts.DependencyInjection.Enums;
+using NET.efilnukefesin.Contracts.Xml;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Xml.Linq;
 
 namespace NET.efilnukefesin.Contracts.DependencyInjection
 {
-    public interface IDependencyManager : IDisposable
+    public interface IDependencyManager : ILoadFromXml, IDisposable
     {
         #region Methods
 
@@ -17,7 +18,6 @@ namespace NET.efilnukefesin.Contracts.DependencyInjection
         void RegisterType<TFrom, TTo>(Lifetime Lifetime) where TFrom : class where TTo : class, TFrom;
         void RegisterInstance<TFrom>(TFrom Instance) where TFrom : class;
         XElement SaveToXml(bool AddAssemblyDetail = false);
-        void LoadFromXml(XElement xeConfig);
 
         #endregion Methods
     }
