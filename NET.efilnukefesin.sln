@@ -13,10 +13,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Implement
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NET.efilnukefesin.Contracts.Mvvm", "NET.efilnukefesin.Contracts.Mvvm\NET.efilnukefesin.Contracts.Mvvm.csproj", "{BC6AEE24-256A-467F-AEDA-FACC2D6CDCD2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E79C1371-008B-4B5C-999D-6310E6C89008}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Documentation", ".Documentation", "{E79C1371-008B-4B5C-999D-6310E6C89008}"
 	ProjectSection(SolutionItems) = preProject
 		Namespaces.docx = Namespaces.docx
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contracts", "Contracts", "{51C9C628-C7DF-447F-989B-67F06D0020FC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{B60B9204-4881-4055-B0DE-BBF6671D1C2D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Implementations", "Implementations", "{E9149DF0-3851-48A8-9661-4BD65F788DF8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{34700DE2-8D2C-4F8B-9B5C-D55C86980A55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +55,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EEF2A616-4186-4E75-A36C-290B23200F7C} = {51C9C628-C7DF-447F-989B-67F06D0020FC}
+		{AF398D4E-EA3E-4915-B982-910295508D6B} = {E9149DF0-3851-48A8-9661-4BD65F788DF8}
+		{1F766D4C-9012-4417-8313-E343208CCAC7} = {51C9C628-C7DF-447F-989B-67F06D0020FC}
+		{33BEAE94-343E-4B47-B7CE-17268C77E9D8} = {E9149DF0-3851-48A8-9661-4BD65F788DF8}
+		{BC6AEE24-256A-467F-AEDA-FACC2D6CDCD2} = {51C9C628-C7DF-447F-989B-67F06D0020FC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {882C485C-819B-4BBA-9EDA-8A724F92F5AA}
