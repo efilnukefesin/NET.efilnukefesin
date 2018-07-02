@@ -38,7 +38,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Extensions.Wpf.Converters", "NET.efilnukefesin.Extensions.Wpf.Converters\NET.efilnukefesin.Extensions.Wpf.Converters.csproj", "{84060400-6486-40C8-A4AB-15195A1A9FF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NET.efilnukefesin.Extensions.Wpf.Commands", "NET.efilnukefesin.Extensions.Wpf.Commands\NET.efilnukefesin.Extensions.Wpf.Commands.csproj", "{EE545836-3B73-424D-96AD-7BF38342B584}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Extensions.Wpf.Commands", "NET.efilnukefesin.Extensions.Wpf.Commands\NET.efilnukefesin.Extensions.Wpf.Commands.csproj", "{EE545836-3B73-424D-96AD-7BF38342B584}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NET.efilnukefesin.Extensions.Wpf.UserControls", "NET.efilnukefesin.Extensions.Wpf.UserControls\NET.efilnukefesin.Extensions.Wpf.UserControls.csproj", "{BCED43FE-A805-49F9-AC63-F311E76A7235}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -90,6 +92,10 @@ Global
 		{EE545836-3B73-424D-96AD-7BF38342B584}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE545836-3B73-424D-96AD-7BF38342B584}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE545836-3B73-424D-96AD-7BF38342B584}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCED43FE-A805-49F9-AC63-F311E76A7235}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCED43FE-A805-49F9-AC63-F311E76A7235}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCED43FE-A805-49F9-AC63-F311E76A7235}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCED43FE-A805-49F9-AC63-F311E76A7235}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -106,6 +112,7 @@ Global
 		{E4E26AEF-E5CD-4E62-A7C8-13BEF5B77BEF} = {5284C932-F047-40E1-95D8-877F2D58AD1D}
 		{84060400-6486-40C8-A4AB-15195A1A9FF7} = {5284C932-F047-40E1-95D8-877F2D58AD1D}
 		{EE545836-3B73-424D-96AD-7BF38342B584} = {5284C932-F047-40E1-95D8-877F2D58AD1D}
+		{BCED43FE-A805-49F9-AC63-F311E76A7235} = {5284C932-F047-40E1-95D8-877F2D58AD1D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {882C485C-819B-4BBA-9EDA-8A724F92F5AA}
