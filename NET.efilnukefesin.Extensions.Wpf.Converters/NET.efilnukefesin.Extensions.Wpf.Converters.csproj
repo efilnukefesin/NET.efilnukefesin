@@ -2,10 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>net462</TargetFramework>
-    <Version>0.0.4</Version>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
 
 </Project>

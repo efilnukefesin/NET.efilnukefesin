@@ -1,12 +1,20 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net462</TargetFramework>
+    <Version>0.0.5</Version>
+    <Authors>efilnukefesin</Authors>
+    <Company>efilnukefesin.NET</Company>
+    <Copyright>efilnukefesin.NET</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\NET.efilnukefesin.Contracts.Users\NET.efilnukefesin.Contracts.Users.csproj" />
     <ProjectReference Include="..\NET.efilnukefesin.Implementations.Base\NET.efilnukefesin.Implementations.Base.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.DirectoryServices.AccountManagement" />
   </ItemGroup>
 
 </Project>
