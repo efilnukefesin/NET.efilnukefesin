@@ -19,6 +19,8 @@ namespace NET.efilnukefesin.Implementations.Users
         public string Username { get; set; }
         public Image Image { get; set; }
         public string UserDisplayname { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
 
         #endregion Properties
 
@@ -30,6 +32,11 @@ namespace NET.efilnukefesin.Implementations.Users
             try
             {
                 this.UserDisplayname = UserPrincipal.Current.DisplayName;
+                this.Name = UserPrincipal.Current.Name;
+                this.Surname = UserPrincipal.Current.Surname;
+                this.Logins = new List<ILogin>();
+                this.Logins.Add(new Login(new Alias(UserPrincipal.Current.EmailAddress), string.Empty));
+
             }
             catch (Exception ex)
             {

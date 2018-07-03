@@ -13,6 +13,8 @@ namespace NET.efilnukefesin.Contracts.Users
         string Username { get; set; }
         [Obsolete]
         string UserDisplayname { get; set; }
+        string Name { get; set; }
+        string Surname { get; set; }
         Image Image { get; set; }
     }
 }
