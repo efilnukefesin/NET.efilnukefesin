@@ -2,9 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Authors>efilnukefesin</Authors>
-    <Company>efilnukefesin.NET</Company>
-    <Copyright>efilnukefesin.NET</Copyright>
   </PropertyGroup>
 
 </Project>
