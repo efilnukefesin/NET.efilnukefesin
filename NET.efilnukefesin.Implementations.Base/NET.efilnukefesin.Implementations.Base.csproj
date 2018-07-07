@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
-    <PackageReleaseNotes>Added IErrorInfo Implementation</PackageReleaseNotes>
+    <PackageReleaseNotes>Added IResult Implementation</PackageReleaseNotes>
     <Description>Base class implementations</Description>
   </PropertyGroup>
 
