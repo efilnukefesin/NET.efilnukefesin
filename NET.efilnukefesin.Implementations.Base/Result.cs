@@ -11,6 +11,8 @@ namespace NET.efilnukefesin.Implementations.Base
 
         public T Value { get; }
 
+        public bool IsValid { get; private set; }
+
         #region IsError
         public bool IsError
         {
@@ -27,16 +29,25 @@ namespace NET.efilnukefesin.Implementations.Base
 
         #region Construction
 
+        public Result(bool IsValid, T Value = default(T))
+        {
+            this.Value = Value;
+            this.Error = null;
+            this.IsValid = IsValid;
+        }
+
         public Result(T Value)
         {
             this.Value = Value;
             this.Error = null;
+            this.IsValid = true;
         }
 
         public Result(IErrorInfo Error)
         {
             this.Error = Error;
             this.Value = default(T);
+            this.IsValid = false;
         }
 
         #endregion Construction
@@ -44,6 +55,5 @@ namespace NET.efilnukefesin.Implementations.Base
         #region Methods
 
         #endregion Methods
-
     }
 }
