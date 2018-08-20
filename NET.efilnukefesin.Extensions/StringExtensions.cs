@@ -20,5 +20,21 @@ namespace NET.efilnukefesin.Extensions
             return hashString;
         }
         #endregion ToSha256
+
+        #region ToBase64
+        public static string ToBase64(this string plainText)
+        {
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+            return System.Convert.ToBase64String(plainTextBytes);
+        }
+        #endregion ToBase64
+
+        #region FromBase64
+        public static string FromBase64(this string base64EncodedData)
+        {
+            var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
+            return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+        }
+        #endregion FromBase64
     }
 }

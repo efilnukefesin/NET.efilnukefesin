@@ -5,6 +5,8 @@
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
+    <Version>1.2.0</Version>
+    <PackageReleaseNotes>Added Type Exensions class</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>
