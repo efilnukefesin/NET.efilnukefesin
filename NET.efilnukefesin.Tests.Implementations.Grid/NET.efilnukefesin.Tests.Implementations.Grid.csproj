@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NET.efilnukefesin.Contracts.Grid\NET.efilnukefesin.Contracts.Grid.csproj" />
+    <ProjectReference Include="..\NET.efilnukefesin.Implementations.Base\NET.efilnukefesin.Implementations.Base.csproj" />
     <ProjectReference Include="..\NET.efilnukefesin.Implementations.Grid\NET.efilnukefesin.Implementations.Grid.csproj" />
   </ItemGroup>
 

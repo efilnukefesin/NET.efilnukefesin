@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NET.efilnukefesin.Contracts.Grid
 {
-    public interface IGridItem
+    public interface IGridItem<T>
     {
     }
 }

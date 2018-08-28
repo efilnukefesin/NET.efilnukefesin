@@ -1,30 +1,25 @@
 ﻿using NET.efilnukefesin.Contracts.Base;
-using NET.efilnukefesin.Contracts.Grid;
-using NET.efilnukefesin.Implementations.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NET.efilnukefesin.Implementations.Grid
+namespace NET.efilnukefesin.Implementations.Base
 {
-    public class Grid<T> : IGrid<T>
+    public class Size : ISize
     {
         #region Properties
 
-        private ISize size;
+        public int Width { get; set; }
+        public int Height { get; set; }
 
         #endregion Properties
 
         #region Construction
 
-        public Grid(int Width, int Height)
+        public Size(int Width, int Height)
         {
-            this.size = new Size(Width, Height);
-        }
-
-        public Grid(ISize size)
-        {
-            this.size = size;
+            this.Width = Width;
+            this.Height = Height;
         }
 
         #endregion Construction
