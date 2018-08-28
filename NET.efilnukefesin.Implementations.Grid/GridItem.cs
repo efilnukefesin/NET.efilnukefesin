@@ -9,9 +9,9 @@ namespace NET.efilnukefesin.Implementations.Grid
     {
         #region Properties
 
-        private int x;
-        private int y;
-        private T data;
+        public int X { get; set; }
+        public int Y { get; set; }
+        public T Data { get; set; }
 
         #endregion Properties
 
@@ -19,9 +19,9 @@ namespace NET.efilnukefesin.Implementations.Grid
 
         public GridItem(int X, int Y, T Data)
         {
-            this.x = X;
-            this.y = Y;
-            this.data = Data;
+            this.X = X;
+            this.Y = Y;
+            this.Data = Data;
         }
 
         #endregion Construction

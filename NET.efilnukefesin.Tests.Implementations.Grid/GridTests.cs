@@ -50,7 +50,20 @@ namespace NET.efilnukefesin.Tests.Implementations.Grid
         [TestClass]
         public class GridMethods : GridTests
         {
+            #region Indexer
+            [TestMethod]
+            public void Indexer()
+            {
+                IGrid<object> item = new Grid<object>(new Size(10, 20));
+                item[5, 5] = "Something";
 
+                Assert.AreEqual("Something", item[5, 5]);
+
+                item[5, 5] = 5;
+
+                Assert.AreEqual(5, item[5, 5]);
+            }
+            #endregion Indexer
         }
         #endregion GridMethods
     }
