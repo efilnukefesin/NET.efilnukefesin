@@ -137,6 +137,14 @@ namespace NET.efilnukefesin.Implementations.Grid
                         }
                     }
                 }
+                else
+                {
+                    result = false;
+                }
+            }
+            else
+            {
+                result = false;
             }
 
             return result;
