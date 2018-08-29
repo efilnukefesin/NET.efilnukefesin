@@ -104,6 +104,41 @@ namespace NET.efilnukefesin.Tests.Implementations.Grid
                 }
             }
             #endregion Clear
+
+            #region EqualsNegative
+            [TestMethod]
+            public void EqualsNegative()
+            {
+                Size mapSize = new Size(10, 20);
+                string demoText = "DemoText";
+                Random random = new Random();
+
+                IGrid<object> item = new Grid<object>(mapSize);
+                IGrid<object> item2 = new Grid<object>(mapSize);
+
+                item.Fill(demoText);
+
+                Assert.AreEqual(false, item.Equals(item2));
+            }
+            #endregion EqualsNegative
+
+            #region EqualsPositive
+            [TestMethod]
+            public void EqualsPositive()
+            {
+                Size mapSize = new Size(10, 20);
+                string demoText = "DemoText";
+                Random random = new Random();
+
+                IGrid<object> item = new Grid<object>(mapSize);
+                IGrid<object> item2 = new Grid<object>(mapSize);
+
+                item.Fill(demoText);
+                item2.Fill(demoText);
+
+                Assert.AreEqual(true, item.Equals(item2));
+            }
+            #endregion EqualsPositive
         }
         #endregion GridMethods
     }

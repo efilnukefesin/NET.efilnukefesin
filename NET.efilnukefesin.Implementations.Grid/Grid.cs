@@ -115,6 +115,34 @@ namespace NET.efilnukefesin.Implementations.Grid
         }
         #endregion Clear
 
+        #region Equals
+        public override bool Equals(object obj)
+        {
+            bool result = true;
+
+            if (obj is Grid<T>)
+            {
+                Grid<T> castObj = (Grid<T>)obj;
+                if (this.size.ToString().Equals(castObj.size.ToString()))
+                {
+                    for (int x = 0; x < this.size.Width; x++)
+                    {
+                        for (int y = 0; y < this.size.Height; y++)
+                        {
+                            if (!this[x, y].Equals(castObj[x, y]))
+                            {
+                                result = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+        #endregion Equals
+
         #endregion Methods
 
         #region Events
