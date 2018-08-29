@@ -125,16 +125,45 @@ namespace NET.efilnukefesin.Implementations.Grid
                 Grid<T> castObj = (Grid<T>)obj;
                 if (this.size.ToString().Equals(castObj.size.ToString()))
                 {
-                    for (int x = 0; x < this.size.Width; x++)
+                    if (this.items.Count == castObj.items.Count)
                     {
-                        for (int y = 0; y < this.size.Height; y++)
+                        for (int x = 0; x < this.size.Width; x++)
                         {
-                            if (!this[x, y].Equals(castObj[x, y]))
+                            for (int y = 0; y < this.size.Height; y++)
                             {
-                                result = false;
-                                break;
+                                if (this[x, y] == null)
+                                {
+                                    if (castObj[x, y] != null)
+                                    {
+                                        result = false;
+                                        break;
+                                    }
+                                }
+
+                                if (castObj[x, y] == null)
+                                {
+                                    if (this[x, y] != null)
+                                    {
+                                        result = false;
+                                        break;
+                                    }
+                                }
+
+                                if (!(this[x, y] == null && castObj[x, y] == null))
+                                {
+                                    if (!this[x, y].Equals(castObj[x, y]))
+                                    {
+                                        result = false;
+                                        break;
+                                    }
+                                }
+                                
                             }
                         }
+                    }
+                    else
+                    {
+                        result = false;
                     }
                 }
                 else

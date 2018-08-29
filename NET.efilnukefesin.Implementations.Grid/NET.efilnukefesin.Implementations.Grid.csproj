@@ -1,12 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
-    <Version>1.1.5</Version>
-    <PackageReleaseNotes>Added Equals override to Grid</PackageReleaseNotes>
+    <Version>1.1.6</Version>
+    <PackageReleaseNotes>Bugfixed Equals override to Grid</PackageReleaseNotes>
     <Description>Implementation of IGrid - a class capable of storing any Type in a 2D array-like</Description>
   </PropertyGroup>
 
