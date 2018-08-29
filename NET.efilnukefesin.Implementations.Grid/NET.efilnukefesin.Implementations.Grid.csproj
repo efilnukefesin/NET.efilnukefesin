@@ -5,8 +5,8 @@
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
-    <Version>1.1.1</Version>
-    <PackageReleaseNotes>Added some useful methods</PackageReleaseNotes>
+    <Version>1.1.2</Version>
+    <PackageReleaseNotes>GridItem is internal now</PackageReleaseNotes>
     <Description>Implementation of IGrid - a class capable of storing any Type in a 2D array-like</Description>
   </PropertyGroup>
 

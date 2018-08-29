@@ -8,5 +8,6 @@ namespace NET.efilnukefesin.Contracts.Base
     {
         int Width { get; set; }
         int Height { get; set; }
+        float AspectRatio { get; }
     }
 }
