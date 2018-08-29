@@ -95,6 +95,26 @@ namespace NET.efilnukefesin.Implementations.Grid
         }
         #endregion setValue
 
+        #region Fill
+        public void Fill(T value)
+        {
+            for (int x = 0; x < this.size.Width; x++)
+            {
+                for (int y = 0; y < this.size.Height; y++)
+                {
+                    this[x, y] = value;
+                }
+            }
+        }
+        #endregion Fill
+
+        #region Clear
+        public void Clear()
+        {
+            this.items.Clear();
+        }
+        #endregion Clear
+
         #endregion Methods
 
         #region Events

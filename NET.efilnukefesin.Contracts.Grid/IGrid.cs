@@ -10,6 +10,9 @@ namespace NET.efilnukefesin.Contracts.Grid
 
         T this[int x, int y] { get; set; }
 
+        void Fill(T value);
+        void Clear();
+
         #endregion Indexer
     }
 }
