@@ -13,8 +13,8 @@ namespace NET.efilnukefesin.Implementations.Grid
     {
         #region Properties
 
-        private ISize size;
         private ICollection<IGridItem<T>> items;
+        public ISize Size { get; private set; }
 
         #endregion Properties
 
@@ -22,13 +22,13 @@ namespace NET.efilnukefesin.Implementations.Grid
 
         public Grid(int Width, int Height)
         {
-            this.size = new Size(Width, Height);
+            this.Size = new Size(Width, Height);
             this.initialize();
         }
 
         public Grid(ISize size)
         {
-            this.size = size;
+            this.Size = size;
             this.initialize();
         }
 
@@ -98,9 +98,9 @@ namespace NET.efilnukefesin.Implementations.Grid
         #region Fill
         public void Fill(T value)
         {
-            for (int x = 0; x < this.size.Width; x++)
+            for (int x = 0; x < this.Size.Width; x++)
             {
-                for (int y = 0; y < this.size.Height; y++)
+                for (int y = 0; y < this.Size.Height; y++)
                 {
                     this[x, y] = value;
                 }
@@ -115,6 +115,21 @@ namespace NET.efilnukefesin.Implementations.Grid
         }
         #endregion Clear
 
+        #region CopyFrom
+        public void CopyFrom(IGrid<T> Source)
+        {
+            this.Clear();
+            this.Size = Source.Size;
+            for (int x = 0; x < this.Size.Width; x++)
+            {
+                for (int y = 0; y < this.Size.Height; y++)
+                {
+                    this[x, y] = Source[x, y];
+                }
+            }
+        }
+        #endregion CopyFrom
+
         #region Equals
         public override bool Equals(object obj)
         {
@@ -123,13 +138,13 @@ namespace NET.efilnukefesin.Implementations.Grid
             if (obj is Grid<T>)
             {
                 Grid<T> castObj = (Grid<T>)obj;
-                if (this.size.ToString().Equals(castObj.size.ToString()))
+                if (this.Size.ToString().Equals(castObj.Size.ToString()))
                 {
                     if (this.items.Count == castObj.items.Count)
                     {
-                        for (int x = 0; x < this.size.Width; x++)
+                        for (int x = 0; x < this.Size.Width; x++)
                         {
-                            for (int y = 0; y < this.size.Height; y++)
+                            for (int y = 0; y < this.Size.Height; y++)
                             {
                                 if (this[x, y] == null)
                                 {

@@ -139,6 +139,27 @@ namespace NET.efilnukefesin.Tests.Implementations.Grid
                 Assert.AreEqual(true, item.Equals(item2));
             }
             #endregion EqualsPositive
+
+            #region Copy
+            [TestMethod]
+            public void Copy()
+            {
+                Size mapSize = new Size(10, 20);
+                string demoText = "DemoText";
+                Random random = new Random();
+
+                IGrid<object> item = new Grid<object>(mapSize);
+                IGrid<object> item2 = new Grid<object>(mapSize);
+
+                item.Fill(demoText);
+                item2.CopyFrom(item);
+
+                Assert.AreEqual(true, item.Equals(item2));
+
+                item.Clear();
+                Assert.AreEqual(false, item.Equals(item2));
+            }
+            #endregion Copy
         }
         #endregion GridMethods
     }
