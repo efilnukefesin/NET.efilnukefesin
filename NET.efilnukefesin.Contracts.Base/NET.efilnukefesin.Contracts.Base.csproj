@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.2.3</Version>
+    <Version>1.2.4</Version>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
     <Description>Base Contracts</Description>
-    <PackageReleaseNotes>Added ISize Property</PackageReleaseNotes>
+    <PackageReleaseNotes>Added CreationDate Property to IBaseObject</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>

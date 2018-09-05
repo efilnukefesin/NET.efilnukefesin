@@ -18,6 +18,17 @@ namespace NET.efilnukefesin.Implementations.Base
         }
         #endregion Id
 
+        public DateTimeOffset CreationDate { get; private set; }
+
         #endregion Properties
+
+        #region Construction
+
+        public BaseObject()
+        {
+            this.CreationDate = DateTimeOffset.Now;
+        }
+
+        #endregion Construction
     }
 }
