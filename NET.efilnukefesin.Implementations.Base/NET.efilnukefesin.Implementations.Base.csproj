@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -9,11 +9,6 @@
     <PackageReleaseNotes>Added CreationDate</PackageReleaseNotes>
     <Description>Base class implementations</Description>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Serilog.Sinks.Async" Version="1.3.0" />
-    <PackageReference Include="Serilog.Sinks.Debug" Version="1.0.1" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\NET.efilnukefesin.Contracts.Base\NET.efilnukefesin.Contracts.Base.csproj" />
