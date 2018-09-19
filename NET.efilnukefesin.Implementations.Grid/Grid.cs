@@ -98,6 +98,7 @@ namespace NET.efilnukefesin.Implementations.Grid
         #region Fill
         public void Fill(T value)
         {
+            //TODO: very expensive, optimize
             for (int x = 0; x < this.Size.Width; x++)
             {
                 for (int y = 0; y < this.Size.Height; y++)
@@ -120,6 +121,9 @@ namespace NET.efilnukefesin.Implementations.Grid
         {
             this.Clear();
             this.Size = Source.Size;
+
+            //TODO: very expensive, optimize
+
             for (int x = 0; x < this.Size.Width; x++)
             {
                 for (int y = 0; y < this.Size.Height; y++)
@@ -138,43 +142,12 @@ namespace NET.efilnukefesin.Implementations.Grid
             if (obj is Grid<T>)
             {
                 Grid<T> castObj = (Grid<T>)obj;
+
                 if (this.Size.ToString().Equals(castObj.Size.ToString()))
                 {
                     if (this.items.Count == castObj.items.Count)
                     {
-                        for (int x = 0; x < this.Size.Width; x++)
-                        {
-                            for (int y = 0; y < this.Size.Height; y++)
-                            {
-                                if (this[x, y] == null)
-                                {
-                                    if (castObj[x, y] != null)
-                                    {
-                                        result = false;
-                                        break;
-                                    }
-                                }
-
-                                if (castObj[x, y] == null)
-                                {
-                                    if (this[x, y] != null)
-                                    {
-                                        result = false;
-                                        break;
-                                    }
-                                }
-
-                                if (!(this[x, y] == null && castObj[x, y] == null))
-                                {
-                                    if (!this[x, y].Equals(castObj[x, y]))
-                                    {
-                                        result = false;
-                                        break;
-                                    }
-                                }
-                                
-                            }
-                        }
+                        this.items.Cast<IGridItem<T>>().SequenceEqual<IGridItem<T>>(castObj.items.Cast<IGridItem<T>>());
                     }
                     else
                     {

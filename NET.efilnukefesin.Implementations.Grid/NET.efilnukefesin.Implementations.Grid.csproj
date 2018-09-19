@@ -5,8 +5,8 @@
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
-    <Version>1.1.7</Version>
-    <PackageReleaseNotes>Bugfixed Equals override to Grid</PackageReleaseNotes>
+    <Version>1.1.9</Version>
+    <PackageReleaseNotes>Improved Performance of Equals()</PackageReleaseNotes>
     <Description>Implementation of IGrid - a class capable of storing any Type in a 2D array-like</Description>
   </PropertyGroup>
 
