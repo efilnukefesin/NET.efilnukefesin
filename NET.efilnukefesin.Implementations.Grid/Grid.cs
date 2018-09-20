@@ -64,7 +64,7 @@ namespace NET.efilnukefesin.Implementations.Grid
         {
             T result = default(T);
 
-            if (this.items.Any(i => i.X.Equals(x) && i.Y.Equals(y)))
+            if (this.isPositionOccupied(x, y))
             {
                 result = this.items.Where(i => i.X.Equals(x) && i.Y.Equals(y)).FirstOrDefault().Data;
             }
@@ -76,8 +76,7 @@ namespace NET.efilnukefesin.Implementations.Grid
         #region addOrUpdate
         private void addOrUpdate(int x, int y, T value)
         {
-            T temp = this.getItem(x, y);
-            if (temp == null)
+            if (!this.isPositionOccupied(x, y))
             {
                 this.items.Add(new GridItem<T>(x, y, value));
             }
@@ -87,6 +86,13 @@ namespace NET.efilnukefesin.Implementations.Grid
             }
         }
         #endregion addOrUpdate
+
+        #region isPositionOccupied
+        private bool isPositionOccupied(int x, int y)
+        {
+            return this.items.Any(i => i.X.Equals(x) && i.Y.Equals(y));
+        }
+        #endregion isPositionOccupied
 
         #region setValue
         private void setValue(int x, int y, T value)
@@ -98,7 +104,6 @@ namespace NET.efilnukefesin.Implementations.Grid
         #region Fill
         public void Fill(T value)
         {
-            //TODO: very expensive, optimize
             for (int x = 0; x < this.Size.Width; x++)
             {
                 for (int y = 0; y < this.Size.Height; y++)
@@ -121,8 +126,6 @@ namespace NET.efilnukefesin.Implementations.Grid
         {
             this.Clear();
             this.Size = Source.Size;
-
-            //TODO: very expensive, optimize
 
             for (int x = 0; x < this.Size.Width; x++)
             {
