@@ -137,6 +137,20 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         }
         #endregion Resolve
 
+        #region Resolve
+        public T Resolve<T>(IEnumerable<object> parameters)
+        {
+            this.buildContainerIfNecessary();
+
+            List<Parameter> tempParameters = new List<Parameter>();
+            foreach (var parameter in parameters)
+            {
+                tempParameters.Add(new TypedParameter(parameter.GetType(), parameter));
+            }
+            return this.container.Resolve<T>(tempParameters);
+        }
+        #endregion Resolve
+
         #region RegisterType: registers a type
         /// <summary>
         /// registers a type
