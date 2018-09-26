@@ -14,6 +14,7 @@ namespace NET.efilnukefesin.Contracts.DependencyInjection
         T Resolve<T>();
         object Resolve(Type TypeToResolve);
         T Resolve<T>(IDictionary<string, object> parameters);
+        T Resolve<T>(IEnumerable<object> parameters);
         void RegisterType<TFrom, TTo>() where TFrom : class where TTo : class, TFrom;
         void RegisterType<TFrom, TTo>(Lifetime Lifetime) where TFrom : class where TTo : class, TFrom;
         void RegisterInstance<TFrom>(TFrom Instance) where TFrom : class;
