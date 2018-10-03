@@ -54,9 +54,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Contracts
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Implementations.Grid", "NET.efilnukefesin.Implementations.Grid\NET.efilnukefesin.Implementations.Grid.csproj", "{02392C5E-980C-4138-8ECF-F04B398EFAF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NET.efilnukefesin.Contracts.Logger", "NET.efilnukefesin.Contracts.Logger\NET.efilnukefesin.Contracts.Logger.csproj", "{61646FF7-1F03-4085-A66B-E58DE07FEAAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Contracts.Logger", "NET.efilnukefesin.Contracts.Logger\NET.efilnukefesin.Contracts.Logger.csproj", "{61646FF7-1F03-4085-A66B-E58DE07FEAAB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NET.efilnukefesin.Implementations.Logger.SerilogLogger", "NET.efilnukefesin.Implementations.Logger.SerilogLogger\NET.efilnukefesin.Implementations.Logger.SerilogLogger.csproj", "{A96253A9-5157-42A4-AA6A-5D7439B85479}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Implementations.Logger.SerilogLogger", "NET.efilnukefesin.Implementations.Logger.SerilogLogger\NET.efilnukefesin.Implementations.Logger.SerilogLogger.csproj", "{A96253A9-5157-42A4-AA6A-5D7439B85479}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BaseClasses", "BaseClasses", "{F042015D-3ED3-4B8C-A607-6EACF8386A45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NET.efilnukefesin.BaseClasses.Test", "NET.efilnukefesin.BaseClasses.Test\NET.efilnukefesin.BaseClasses.Test.csproj", "{A03A0A6E-4E39-4ECB-8505-AB6E8826AE01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -140,6 +144,10 @@ Global
 		{A96253A9-5157-42A4-AA6A-5D7439B85479}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A96253A9-5157-42A4-AA6A-5D7439B85479}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A96253A9-5157-42A4-AA6A-5D7439B85479}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A03A0A6E-4E39-4ECB-8505-AB6E8826AE01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A03A0A6E-4E39-4ECB-8505-AB6E8826AE01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A03A0A6E-4E39-4ECB-8505-AB6E8826AE01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A03A0A6E-4E39-4ECB-8505-AB6E8826AE01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -164,6 +172,7 @@ Global
 		{02392C5E-980C-4138-8ECF-F04B398EFAF7} = {E9149DF0-3851-48A8-9661-4BD65F788DF8}
 		{61646FF7-1F03-4085-A66B-E58DE07FEAAB} = {51C9C628-C7DF-447F-989B-67F06D0020FC}
 		{A96253A9-5157-42A4-AA6A-5D7439B85479} = {E9149DF0-3851-48A8-9661-4BD65F788DF8}
+		{A03A0A6E-4E39-4ECB-8505-AB6E8826AE01} = {F042015D-3ED3-4B8C-A607-6EACF8386A45}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {882C485C-819B-4BBA-9EDA-8A724F92F5AA}
