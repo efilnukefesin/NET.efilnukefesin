@@ -9,14 +9,7 @@ namespace NET.efilnukefesin.Implementations.Base
     {
         #region Properties
 
-        #region Id
-        private Guid id = Guid.NewGuid();
-        public Guid Id
-        {
-            get { return this.id; }
-            set { this.id = value; }
-        }
-        #endregion Id
+        public Guid Id { get; private set; }
 
         public DateTimeOffset CreationDate { get; private set; }
 
@@ -27,6 +20,13 @@ namespace NET.efilnukefesin.Implementations.Base
         public BaseObject()
         {
             this.CreationDate = DateTimeOffset.Now;
+            this.Id = Guid.NewGuid();
+        }
+
+        public BaseObject(Guid Id)
+        {
+            this.CreationDate = DateTimeOffset.Now;
+            this.Id = Id;
         }
 
         #endregion Construction
