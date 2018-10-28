@@ -56,7 +56,7 @@ namespace NET.efilnukefesin.Implementations.Base
         #region ToString
         public override string ToString()
         {
-            return string.Format("{0:##.#} / {1:##.#} @ {2:##.###}", this.Width, this.Height, this.AspectRatio);
+            return $"{this.Width:##.#} / {this.Height:##.#} @ {this.AspectRatio:##.###}";
         }
         #endregion ToString
 
