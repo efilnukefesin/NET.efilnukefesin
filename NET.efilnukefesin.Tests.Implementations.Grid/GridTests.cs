@@ -38,7 +38,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Grid
             [TestMethod]
             public void ConstructWithObjectAndSize()
             {
-                IGrid<object> item = new Grid<object>(new Size(10, 20));
+                IGrid<object> item = new Grid<object>(new SizeF(10, 20));
 
                 Assert.IsNotNull(item);
             }
@@ -54,7 +54,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Grid
             [TestMethod]
             public void Indexer()
             {
-                IGrid<object> item = new Grid<object>(new Size(10, 20));
+                IGrid<object> item = new Grid<object>(new SizeF(10, 20));
                 item[5, 5] = "Something";
 
                 Assert.AreEqual("Something", item[5, 5]);
@@ -70,7 +70,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Grid
             [DataRow(1000)]
             public void Fill(int numberOfIterations)
             {
-                Size mapSize = new Size(10, 20);
+                SizeF mapSize = new SizeF(10, 20);
                 string demoText = "DemoText";
                 Random random = new Random();
 
@@ -89,7 +89,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Grid
             [DataRow(1000)]
             public void Clear(int numberOfIterations)
             {
-                Size mapSize = new Size(10, 20);
+                SizeF mapSize = new SizeF(10, 20);
                 string demoText = "DemoText";
                 Random random = new Random();
 
@@ -109,7 +109,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Grid
             [TestMethod]
             public void EqualsNegative()
             {
-                Size mapSize = new Size(10, 20);
+                SizeF mapSize = new SizeF(10, 20);
                 string demoText = "DemoText";
                 Random random = new Random();
 
@@ -126,7 +126,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Grid
             [TestMethod]
             public void EqualsPositive()
             {
-                Size mapSize = new Size(10, 20);
+                SizeF mapSize = new SizeF(10, 20);
                 string demoText = "DemoText";
                 Random random = new Random();
 
@@ -144,7 +144,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Grid
             [TestMethod]
             public void Copy()
             {
-                Size mapSize = new Size(10, 20);
+                SizeF mapSize = new SizeF(10, 20);
                 string demoText = "DemoText";
                 Random random = new Random();
 

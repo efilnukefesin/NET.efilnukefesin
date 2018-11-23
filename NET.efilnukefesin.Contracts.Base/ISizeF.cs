@@ -4,19 +4,19 @@ using System.Text;
 
 namespace NET.efilnukefesin.Contracts.Base
 {
-    public interface ISize
+    public interface ISizeF
     {
         #region Properties
 
-        int Width { get; set; }
-        int Height { get; set; }
+        float Width { get; set; }
+        float Height { get; set; }
         float AspectRatio { get; }
 
         #endregion Properties
 
         #region Methods
 
-        ISize Half();
+        ISizeF Half();
 
         #endregion Methods
     }

@@ -5,13 +5,13 @@ using System.Text;
 
 namespace NET.efilnukefesin.Implementations.Base
 {
-    public class Size : ISize
+    public class SizeF : ISizeF
     {
         #region Properties
 
-        public int Width { get; set; }
+        public float Width { get; set; }
 
-        public int Height { get; set; }
+        public float Height { get; set; }
 
         #region AspectRatio
         public float AspectRatio
@@ -24,13 +24,19 @@ namespace NET.efilnukefesin.Implementations.Base
 
         #region Construction
 
-        public Size()
+        public SizeF()
         {
-            this.Width = 0;
-            this.Height = 0;
+            this.Width = 0f;
+            this.Height = 0f;
         }
 
-        public Size(int Width, int Height)
+        public SizeF(int Width, int Height)
+        {
+            this.Width = Width;
+            this.Height = Height;
+        }
+
+        public SizeF(float Width, float Height)
         {
             this.Width = Width;
             this.Height = Height;
@@ -41,16 +47,16 @@ namespace NET.efilnukefesin.Implementations.Base
         #region Methods
 
         #region Half
-        public ISize Half()
+        public ISizeF Half()
         {
-            return new Size((int)(this.Width / 2f), (int)(this.Height / 2f));
+            return new SizeF(this.Width / 2f, this.Height / 2f);
         }
         #endregion Half
 
         #region ToString
         public override string ToString()
         {
-            return $"{this.Width} / {this.Height} @ {this.AspectRatio:##.###}";
+            return $"{this.Width:##.#} / {this.Height:##.#} @ {this.AspectRatio:##.###}";
         }
         #endregion ToString
 
@@ -59,14 +65,14 @@ namespace NET.efilnukefesin.Implementations.Base
         #region Static Methods
 
         #region Parse
-        public static Size Parse(string input)
+        public static SizeF Parse(string input)
         {
-            Size result = new Size();
+            SizeF result = new SizeF();
             try
             {
                 string[] parts = input.Split('/', '@');
-                result.Width = int.Parse(parts[0]);
-                result.Height = int.Parse(parts[1]);
+                result.Width = float.Parse(parts[0]);
+                result.Height = float.Parse(parts[1]);
             }
             catch (Exception ex)
             {

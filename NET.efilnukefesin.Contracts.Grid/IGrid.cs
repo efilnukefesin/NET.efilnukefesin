@@ -9,7 +9,7 @@ namespace NET.efilnukefesin.Contracts.Grid
     {
         #region Properties
 
-        ISize Size { get; }
+        ISizeF Size { get; }
 
         #endregion Properties
 
