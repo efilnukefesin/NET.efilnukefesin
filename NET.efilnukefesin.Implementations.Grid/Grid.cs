@@ -14,7 +14,7 @@ namespace NET.efilnukefesin.Implementations.Grid
         #region Properties
 
         private ICollection<IGridItem<T>> items;
-        public ISizeF Size { get; private set; }
+        public ISize Size { get; private set; }
 
         #endregion Properties
 
@@ -22,11 +22,11 @@ namespace NET.efilnukefesin.Implementations.Grid
 
         public Grid(int Width, int Height)
         {
-            this.Size = new SizeF(Width, Height);
+            this.Size = new Size(Width, Height);
             this.initialize();
         }
 
-        public Grid(ISizeF size)
+        public Grid(ISize size)
         {
             this.Size = size;
             this.initialize();
