@@ -9,7 +9,7 @@ namespace NET.efilnukefesin.Contracts.Nodes
     {
         #region Properties
 
-        T Root { get; };
+        T Root { get; }
 
         #endregion Properties
 

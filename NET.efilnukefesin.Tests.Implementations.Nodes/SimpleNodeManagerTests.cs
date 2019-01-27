@@ -29,7 +29,21 @@ namespace NET.efilnukefesin.Tests.Implementations.Nodes
         [TestClass]
         public class SimpleNodeManagerMethods : SimpleNodeManagerTests
         {
+            #region AddRoot
+            [TestMethod]
+            public void AddRoot()
+            {
+                throw new NotImplementedException();
+            }
+            #endregion AddRoot
 
+            #region GetCurrentNode
+            [TestMethod]
+            public void GetCurrentNode()
+            {
+                throw new NotImplementedException();
+            }
+            #endregion GetCurrentNode
         }
         #endregion SimpleNodeManagerMethods
     }
