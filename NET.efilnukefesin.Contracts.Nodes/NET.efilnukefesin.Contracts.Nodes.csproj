@@ -9,4 +9,8 @@
     <Version>0.9.0</Version>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NET.efilnukefesin.Contracts.Base\NET.efilnukefesin.Contracts.Base.csproj" />
+  </ItemGroup>
+
 </Project>

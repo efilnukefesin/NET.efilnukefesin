@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.4.0</Version>
+    <Version>1.5.0</Version>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
     <Description>Base Contracts</Description>
-    <PackageReleaseNotes>Modified ISize Interface to return also half a size</PackageReleaseNotes>
+    <PackageReleaseNotes>Added event interfaces</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>

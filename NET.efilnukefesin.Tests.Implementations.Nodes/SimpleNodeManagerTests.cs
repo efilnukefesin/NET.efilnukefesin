@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NET.efilnukefesin.BaseTest;
+using NET.efilnukefesin.BaseClasses.Test;
 using System;
 using System.Collections.Generic;
 using System.Text;

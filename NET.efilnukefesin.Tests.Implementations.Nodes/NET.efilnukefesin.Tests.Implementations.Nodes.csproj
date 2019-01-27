@@ -7,10 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BaseTest" Version="2.1.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.3.2" />
     <PackageReference Include="MSTest.TestFramework" Version="1.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NET.efilnukefesin.BaseClasses.Test\NET.efilnukefesin.BaseClasses.Test.csproj" />
+    <ProjectReference Include="..\NET.efilnukefesin.Contracts.Nodes\NET.efilnukefesin.Contracts.Nodes.csproj" />
+    <ProjectReference Include="..\NET.efilnukefesin.Implementations.Nodes\NET.efilnukefesin.Implementations.Nodes.csproj" />
   </ItemGroup>
 
 </Project>

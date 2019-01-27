@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NET.efilnukefesin.BaseTest;
+using NET.efilnukefesin.BaseClasses.Test;
 using NET.efilnukefesin.Contracts.Grid;
 using NET.efilnukefesin.Implementations.Grid;
 using System;
