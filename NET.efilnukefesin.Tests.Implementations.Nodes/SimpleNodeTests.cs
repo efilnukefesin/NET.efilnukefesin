@@ -65,5 +65,4 @@ namespace NET.efilnukefesin.Tests.Implementations.Nodes
         }
         #endregion SimpleNodeMethods
     }
-
 }

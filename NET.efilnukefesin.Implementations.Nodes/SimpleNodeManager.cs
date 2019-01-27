@@ -6,9 +6,14 @@ using NET.efilnukefesin.Implementations.Base;
 
 namespace NET.efilnukefesin.Implementations.Nodes
 {
-    public class SimpleNodeManager : BaseObject, INodeManager
+    //TODO: how to traverse through nodes?
+    public class SimpleNodeManager<T> : BaseObject, INodeManager<T> where T: INode
     {
         #region Properties
+
+        public T Root { get; private set; }
+
+        private T activeNode;
 
         #endregion Properties
 
@@ -18,10 +23,27 @@ namespace NET.efilnukefesin.Implementations.Nodes
 
         #region Methods
 
+        #region AddRoot
+        public void AddRoot(T RootNode)
+        {
+            this.Root = RootNode;
+        }
+        #endregion AddRoot
+
+        #region GetCurrentNode
+        public T GetCurrentNode()
+        {
+            return this.activeNode;
+        }
+        #endregion GetCurrentNode
+
+        #region dispose
         protected override void dispose()
         {
-            throw new NotImplementedException();
+            this.Root = default(T);
+            this.activeNode = default(T);
         }
+        #endregion dispose
 
         #endregion Methods
     }
