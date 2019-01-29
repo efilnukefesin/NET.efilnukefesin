@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\NET.efilnukefesin.BaseClasses.Test\NET.efilnukefesin.BaseClasses.Test.csproj" />
     <ProjectReference Include="..\NET.efilnukefesin.Contracts.Nodes\NET.efilnukefesin.Contracts.Nodes.csproj" />
+    <ProjectReference Include="..\NET.efilnukefesin.Implementations.DependencyInjection\NET.efilnukefesin.Implementations.DependencyInjection.csproj" />
     <ProjectReference Include="..\NET.efilnukefesin.Implementations.Nodes\NET.efilnukefesin.Implementations.Nodes.csproj" />
   </ItemGroup>
 

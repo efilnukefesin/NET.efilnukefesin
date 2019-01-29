@@ -4,6 +4,7 @@ using NET.efilnukefesin.Contracts.Nodes;
 using NET.efilnukefesin.Implementations.Nodes;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace NET.efilnukefesin.Tests.Implementations.Nodes
@@ -35,7 +36,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Nodes
             [TestMethod]
             public void OnEnter()
             {
-                INode node = new SimpleNode();
+                INode node = new SimpleNode(null);
                 int counter = 0;
 
                 node.OnEnter += (o, e) => { counter++; };
@@ -51,7 +52,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Nodes
             [TestMethod]
             public void OnExit()
             {
-                INode node = new SimpleNode();
+                INode node = new SimpleNode(null);
                 int counter = 0;
 
                 node.OnExit += (o, e) => { counter++; };
@@ -62,6 +63,21 @@ namespace NET.efilnukefesin.Tests.Implementations.Nodes
                 Assert.AreEqual(2, counter);
             }
             #endregion OnExit
+
+            #region AddChild
+            [TestMethod]
+            public void AddChild()
+            {
+                INode node = new SimpleNode(null);
+
+                node.AddChild(new SimpleNode(node));
+                node.AddChild(new SimpleNode(node));
+                node.AddChild(new SimpleNode(node));
+
+                Assert.IsNotNull(node);
+                Assert.AreEqual(3, node.Children.ToList().Count);
+            }
+            #endregion AddChild
         }
         #endregion SimpleNodeMethods
     }

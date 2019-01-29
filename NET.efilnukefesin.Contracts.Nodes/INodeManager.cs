@@ -17,6 +17,7 @@ namespace NET.efilnukefesin.Contracts.Nodes
 
         T GetCurrentNode();
         void AddRoot(T RootNode);
+        void SetCurrentNode(T Node);
 
         #endregion Methods
 

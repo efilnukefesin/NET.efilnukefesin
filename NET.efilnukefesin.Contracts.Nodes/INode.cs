@@ -17,6 +17,8 @@ namespace NET.efilnukefesin.Contracts.Nodes
 
         #region Methods
 
+        void AddChild(INode Child);
+
         #region Traverse: Pass the node and do all necessary actions
         /// <summary>
         /// Pass the node and do all necessary actions

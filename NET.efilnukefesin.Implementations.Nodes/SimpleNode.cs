@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using NET.efilnukefesin.Contracts.Nodes;
 using NET.efilnukefesin.Implementations.Base;
@@ -10,16 +11,29 @@ namespace NET.efilnukefesin.Implementations.Nodes
     {
         #region Properties
 
-        public INode Parent { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IEnumerable<INode> Children { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public INode Parent { get; set; }
+        public IEnumerable<INode> Children { get; set; }
 
         #endregion Properties
 
         #region Construction
 
+        public SimpleNode(INode Parent)
+        {
+            this.Parent = Parent;
+            this.Children = new List<INode>();
+        }
+
         #endregion Construction
 
         #region Methods
+
+        #region AddChild
+        public void AddChild(INode Child)
+        {
+            this.Children = this.Children.Concat(new[] { Child });
+        }
+        #endregion AddChild
 
         public void Traverse()
         {
