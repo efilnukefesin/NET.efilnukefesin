@@ -40,10 +40,13 @@ namespace NET.efilnukefesin.Implementations.Nodes
             throw new NotImplementedException();
         }
 
+        #region dispose
         protected override void dispose()
         {
-            throw new NotImplementedException();
+            this.Parent = null;
+            this.Children = null;
         }
+        #endregion dispose
 
         #region Enter
         public void Enter()
