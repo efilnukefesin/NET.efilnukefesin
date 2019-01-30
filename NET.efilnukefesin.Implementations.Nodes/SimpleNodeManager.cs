@@ -6,7 +6,7 @@ using NET.efilnukefesin.Implementations.Base;
 
 namespace NET.efilnukefesin.Implementations.Nodes
 {
-    public class SimpleNodeManager<T> : BaseObject, INodeManager<T> where T: INode
+    public class SimpleNodeManager<I, T> : BaseObject, INodeManager<I, T> where T: INode<I>
     {
         #region Properties
 

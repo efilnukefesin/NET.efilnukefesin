@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NET.efilnukefesin.Contracts.Nodes
 {
-    public interface INodeManager<T> : IBaseObject where T: INode
+    public interface INodeManager<I, T> : IBaseObject where T: INode<I>
     {
         #region Properties
 

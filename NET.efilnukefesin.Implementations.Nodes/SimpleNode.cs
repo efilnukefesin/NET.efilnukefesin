@@ -7,21 +7,23 @@ using NET.efilnukefesin.Implementations.Base;
 
 namespace NET.efilnukefesin.Implementations.Nodes
 {
-    public class SimpleNode : BaseObject, INode
+    public class SimpleNode : BaseObject, INode<object>
     {
         #region Properties
 
-        public INode Parent { get; set; }
-        public IEnumerable<INode> Children { get; set; }
+        public object Data { get; set; }
+        public INode<object> Parent { get; set; }
+        public IEnumerable<INode<object>> Children { get; set; }
 
         #endregion Properties
 
         #region Construction
 
-        public SimpleNode(INode Parent)
+        public SimpleNode(object Data, INode<object> Parent)
         {
+            this.Data = Data;
             this.Parent = Parent;
-            this.Children = new List<INode>();
+            this.Children = new List<INode<object>>();
         }
 
         #endregion Construction
@@ -29,7 +31,7 @@ namespace NET.efilnukefesin.Implementations.Nodes
         #region Methods
 
         #region AddChild
-        public void AddChild(INode Child)
+        public void AddChild(INode<object> Child)
         {
             this.Children = this.Children.Concat(new[] { Child });
         }

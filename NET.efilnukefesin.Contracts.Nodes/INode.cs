@@ -6,18 +6,19 @@ using System.Text;
 
 namespace NET.efilnukefesin.Contracts.Nodes
 {
-    public interface INode : IBaseObject, IOnEnter, IOnExit
+    public interface INode<T> : IBaseObject, IOnEnter, IOnExit
     {
         #region Properties
 
-        INode Parent { get; set; }
-        IEnumerable<INode> Children { get; set; }
+        T Data { get; set; }
+        INode<T> Parent { get; set; }
+        IEnumerable<INode<T>> Children { get; set; }
 
         #endregion Properties
 
         #region Methods
 
-        void AddChild(INode Child);
+        void AddChild(INode<T> Child);
 
         #region Traverse: Pass the node and do all necessary actions
         /// <summary>

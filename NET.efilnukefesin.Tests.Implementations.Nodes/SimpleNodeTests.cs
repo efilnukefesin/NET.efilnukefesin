@@ -36,7 +36,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Nodes
             [TestMethod]
             public void OnEnter()
             {
-                INode node = new SimpleNode(null);
+                INode<object> node = new SimpleNode("SomeObject", null);
                 int counter = 0;
 
                 node.OnEnter += (o, e) => { counter++; };
@@ -52,7 +52,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Nodes
             [TestMethod]
             public void OnExit()
             {
-                INode node = new SimpleNode(null);
+                INode<object> node = new SimpleNode("SomeObject", null);
                 int counter = 0;
 
                 node.OnExit += (o, e) => { counter++; };
@@ -68,11 +68,11 @@ namespace NET.efilnukefesin.Tests.Implementations.Nodes
             [TestMethod]
             public void AddChild()
             {
-                INode node = new SimpleNode(null);
+                INode<object> node = new SimpleNode("SomeObject1", null);
 
-                node.AddChild(new SimpleNode(node));
-                node.AddChild(new SimpleNode(node));
-                node.AddChild(new SimpleNode(node));
+                node.AddChild(new SimpleNode("SomeObject2", node));
+                node.AddChild(new SimpleNode("SomeObject3", node));
+                node.AddChild(new SimpleNode("SomeObject4", node));
 
                 Assert.IsNotNull(node);
                 Assert.AreEqual(3, node.Children.ToList().Count);
