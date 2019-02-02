@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Xml.Linq;
 using System.Xml.Serialization;
@@ -12,11 +13,11 @@ namespace NET.efilnukefesin.Extensions
         #region LoadFromXml
         public static T FromXml<T>(this XElement element)
         {
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
+            DataContractSerializer dcSerializer = new DataContractSerializer(typeof(T));
             MemoryStream msXml = new MemoryStream();
             element.Save(msXml);
             msXml.Position = 0;
-            T result = (T)xmlSerializer.Deserialize(msXml);
+            T result = (T)dcSerializer.ReadObject(msXml);
             msXml.Close();
             return result;
         }
@@ -25,9 +26,9 @@ namespace NET.efilnukefesin.Extensions
         #region SaveToXml
         public static XElement ToXml(this object Input)
         {
-            XmlSerializer xmlSerializer = new XmlSerializer(Input.GetType());
+            DataContractSerializer dcSerializer = new DataContractSerializer(Input.GetType());
             MemoryStream msXml = new MemoryStream();
-            xmlSerializer.Serialize(msXml, Input);
+            dcSerializer.WriteObject(msXml, Input);
             msXml.Position = 0;
             XElement result = XElement.Load(msXml);
             msXml.Close();

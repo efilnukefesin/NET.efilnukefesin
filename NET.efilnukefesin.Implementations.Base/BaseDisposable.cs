@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Xml.Serialization;
 
 namespace NET.efilnukefesin.Implementations.Base
 {
+    [DataContract]
     public abstract class BaseDisposable : IDisposable
     {
         #region Properties
 
+        [IgnoreDataMember]
         [XmlIgnore]
         public virtual bool IsDisposing { get; private set; }
 

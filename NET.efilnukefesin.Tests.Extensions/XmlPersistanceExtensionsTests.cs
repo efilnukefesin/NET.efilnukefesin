@@ -21,7 +21,9 @@ namespace NET.efilnukefesin.Tests.Extensions
             public void LoadFromXml()
             {
                 int i = 0;
-                i = XElement.Parse("<int>16</int>").FromXml<int>();
+                i = XElement.Parse("<int xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/\">16</int>").FromXml<int>();
+
+                Assert.AreEqual(16, i);
             }
             #endregion LoadFromXml
 
@@ -32,6 +34,8 @@ namespace NET.efilnukefesin.Tests.Extensions
                 int i = 16;
 
                 var x = i.ToXml();
+
+                Assert.AreEqual("<int xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/\">16</int>", x.Value);
             }
             #endregion SaveToXml
         }
