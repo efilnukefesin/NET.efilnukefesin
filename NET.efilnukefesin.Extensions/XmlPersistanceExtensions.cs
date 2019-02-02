@@ -10,7 +10,7 @@ namespace NET.efilnukefesin.Extensions
     public static class XmlPersistanceExtensions
     {
         #region LoadFromXml
-        public static T LoadFromXml<T>(this XElement element)
+        public static T FromXml<T>(this XElement element)
         {
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
             MemoryStream msXml = new MemoryStream();
@@ -23,7 +23,7 @@ namespace NET.efilnukefesin.Extensions
         #endregion LoadFromXml
 
         #region SaveToXml
-        public static XElement SaveToXml(this object Input)
+        public static XElement ToXml(this object Input)
         {
             XmlSerializer xmlSerializer = new XmlSerializer(Input.GetType());
             MemoryStream msXml = new MemoryStream();

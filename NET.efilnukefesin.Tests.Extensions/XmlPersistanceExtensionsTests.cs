@@ -21,7 +21,7 @@ namespace NET.efilnukefesin.Tests.Extensions
             public void LoadFromXml()
             {
                 int i = 0;
-                i = XElement.Parse("<int>16</int>").LoadFromXml<int>();
+                i = XElement.Parse("<int>16</int>").FromXml<int>();
             }
             #endregion LoadFromXml
 
@@ -31,7 +31,7 @@ namespace NET.efilnukefesin.Tests.Extensions
             {
                 int i = 16;
 
-                var x = i.SaveToXml();
+                var x = i.ToXml();
             }
             #endregion SaveToXml
         }
