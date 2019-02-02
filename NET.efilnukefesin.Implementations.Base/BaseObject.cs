@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace NET.efilnukefesin.Implementations.Base
 {
@@ -9,8 +10,9 @@ namespace NET.efilnukefesin.Implementations.Base
     {
         #region Properties
 
-        public Guid Id { get; private set; }
+        public Guid Id { get; set; }
 
+        [XmlIgnore]
         public DateTimeOffset CreationDate { get; private set; }
 
         #endregion Properties

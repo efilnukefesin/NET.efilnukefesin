@@ -14,16 +14,18 @@ namespace NET.efilnukefesin.Implementations.Nodes
         public T Data { get; set; }
         public INode<T> Parent { get; set; }
         public IEnumerable<INode<T>> Children { get; set; }
+        public Action TraverseAction { get; set; }
 
         #endregion Properties
 
         #region Construction
 
-        public SimpleNode(T Data, INode<T> Parent)
+        public SimpleNode(T Data, INode<T> Parent, Action TraverseAction = null)
         {
             this.Data = Data;
             this.Parent = Parent;
             this.Children = new List<INode<T>>();
+            this.TraverseAction = TraverseAction;
         }
 
         #endregion Construction
@@ -37,10 +39,12 @@ namespace NET.efilnukefesin.Implementations.Nodes
         }
         #endregion AddChild
 
+        #region Traverse
         public void Traverse()
         {
-            throw new NotImplementedException();
+            this.TraverseAction?.Invoke();
         }
+        #endregion Traverse
 
         #region dispose
         protected override void dispose()

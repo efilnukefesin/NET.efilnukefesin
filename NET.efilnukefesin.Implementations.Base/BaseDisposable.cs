@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace NET.efilnukefesin.Implementations.Base
 {
@@ -8,6 +9,7 @@ namespace NET.efilnukefesin.Implementations.Base
     {
         #region Properties
 
+        [XmlIgnore]
         public virtual bool IsDisposing { get; private set; }
 
         #endregion Properties

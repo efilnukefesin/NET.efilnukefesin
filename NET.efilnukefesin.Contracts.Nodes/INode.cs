@@ -13,6 +13,7 @@ namespace NET.efilnukefesin.Contracts.Nodes
         T Data { get; set; }
         INode<T> Parent { get; set; }
         IEnumerable<INode<T>> Children { get; set; }
+        Action TraverseAction { get; set; }
 
         #endregion Properties
 
