@@ -2,7 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net462</TargetFramework>
-    <Version>1.0.1</Version>
+    <Version>1.1.0</Version>
+    <Company>efilnukefesin.NET</Company>
+    <Authors>efilnukefesin</Authors>
+    <Copyright>efilnukefesin.NET</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
