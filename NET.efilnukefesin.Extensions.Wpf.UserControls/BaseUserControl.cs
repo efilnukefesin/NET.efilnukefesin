@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 
 namespace NET.efilnukefesin.Extensions.Wpf.UserControls
 {
-    public abstract class BaseUserControl : UserControl
+    public class BaseUserControl : UserControl
     {
         //#region Properties
 
