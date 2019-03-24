@@ -70,7 +70,8 @@ namespace NET.efilnukefesin.Implementations.Mvvm
         #region Navigate
         public bool Navigate(string ViewModelName)
         {
-            return this.navigationPresenter.Present(this.viewsAndViewModels.Where(x => x.Value.Equals(ViewModelName)).FirstOrDefault().Key);
+            string viewName = this.viewsAndViewModels.Where(x => x.Value.Equals(ViewModelName)).FirstOrDefault().Key;
+            return this.navigationPresenter.Present(viewName, StaticViewModelLocator.Current.GetInstance(ViewModelName));
         }
         #endregion Navigate
 

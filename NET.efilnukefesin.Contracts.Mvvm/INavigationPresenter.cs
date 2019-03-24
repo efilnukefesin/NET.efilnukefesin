@@ -8,7 +8,7 @@ namespace NET.efilnukefesin.Contracts.Mvvm
     {
         #region Methods
         void RegisterPresenter(object Presenter);
-        bool Present(string ViewUri);
+        bool Present(string ViewUri, object DataContext);
         #endregion Methods
     }
 }
