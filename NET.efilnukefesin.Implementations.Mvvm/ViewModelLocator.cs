@@ -80,7 +80,7 @@ namespace NET.efilnukefesin.Implementations.Mvvm
                         {
                             if (!this.registeredInstances.ContainsKey(locatorAttribute.Name))
                             {
-                                object instance = DiManager.GetInstance().Resolve(currentType);
+                                object instance = DiManager.GetInstance().Resolve(currentType);  //TODO: just add type, let resolving be done by using app
                                 this.registeredInstances.Add(locatorAttribute.Name, instance);
                             }
                         }
