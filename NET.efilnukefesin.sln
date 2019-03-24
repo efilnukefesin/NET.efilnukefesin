@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27729.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28714.193
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Contracts.Base", "NET.efilnukefesin.Contracts.Base\NET.efilnukefesin.Contracts.Base.csproj", "{EEF2A616-4186-4E75-A36C-290B23200F7C}"
 EndProject
@@ -68,7 +68,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Implement
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Tests.Implementations.Nodes", "NET.efilnukefesin.Tests.Implementations.Nodes\NET.efilnukefesin.Tests.Implementations.Nodes.csproj", "{99A3B402-E790-479B-BEAC-788C614C3831}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NET.efilnukefesin.Tests.Extensions", "NET.efilnukefesin.Tests.Extensions\NET.efilnukefesin.Tests.Extensions.csproj", "{5B36EBA4-1A30-4BB4-B005-363CEB7BFCD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Tests.Extensions", "NET.efilnukefesin.Tests.Extensions\NET.efilnukefesin.Tests.Extensions.csproj", "{5B36EBA4-1A30-4BB4-B005-363CEB7BFCD3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NET.efilnukefesin.Implementations.Mvvm", "NET.efilnukefesin.Implementations.Mvvm\NET.efilnukefesin.Implementations.Mvvm.csproj", "{4C19D4A4-1FC0-496D-976C-4C1FD7908962}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -172,6 +174,10 @@ Global
 		{5B36EBA4-1A30-4BB4-B005-363CEB7BFCD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B36EBA4-1A30-4BB4-B005-363CEB7BFCD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B36EBA4-1A30-4BB4-B005-363CEB7BFCD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C19D4A4-1FC0-496D-976C-4C1FD7908962}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C19D4A4-1FC0-496D-976C-4C1FD7908962}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C19D4A4-1FC0-496D-976C-4C1FD7908962}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C19D4A4-1FC0-496D-976C-4C1FD7908962}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -201,6 +207,7 @@ Global
 		{58BA7123-5ACD-4E0F-8844-2DF087D3AFD1} = {E9149DF0-3851-48A8-9661-4BD65F788DF8}
 		{99A3B402-E790-479B-BEAC-788C614C3831} = {34700DE2-8D2C-4F8B-9B5C-D55C86980A55}
 		{5B36EBA4-1A30-4BB4-B005-363CEB7BFCD3} = {34700DE2-8D2C-4F8B-9B5C-D55C86980A55}
+		{4C19D4A4-1FC0-496D-976C-4C1FD7908962} = {E9149DF0-3851-48A8-9661-4BD65F788DF8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {882C485C-819B-4BBA-9EDA-8A724F92F5AA}

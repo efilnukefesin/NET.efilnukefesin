@@ -2,10 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.0.2</Version>
+    <Version>1.0.0</Version>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
+    <Description>Interfaces providing Mvvm functionality</Description>
+    <PackageReleaseNotes>added Navigation stuff</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>
