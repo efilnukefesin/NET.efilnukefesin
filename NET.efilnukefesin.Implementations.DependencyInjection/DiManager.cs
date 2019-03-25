@@ -22,9 +22,9 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
 
         #endregion Singleton Properties
 
-        #region container: the DI container to be abstracted, in this case M$ Unity
+        #region container: the DI container to be abstracted
         /// <summary>
-        /// the DI container to be abstracted, in this case M$ Unity
+        /// the DI container to be abstracted
         /// </summary>
         private IContainer container;
         #endregion container
@@ -56,6 +56,8 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         }
         #endregion NumberOfRegistrations
 
+        private Dictionary<Type, Type> registeredTypes;
+
         #endregion Properties
 
         #region Construction
@@ -67,6 +69,7 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
             this.builder = new ContainerBuilder();
             this.builder.RegisterSource(new AnyConcreteTypeNotAlreadyRegisteredSource());
             this.container = null;  //create the container, easy
+            this.registeredTypes = new Dictionary<Type, Type>();
         }
 
         #endregion Construction
@@ -166,6 +169,16 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         }
         #endregion Resolve
 
+        #region addToInternalRegister
+        private void addToInternalRegister(Type interfaceType, Type serviceType)
+        {
+            if (!this.registeredTypes.ContainsKey(interfaceType))
+            {
+                this.registeredTypes.Add(interfaceType, serviceType);
+            }
+        }
+        #endregion addToInternalRegister
+
         #region RegisterType: registers a type
         /// <summary>
         /// registers a type
@@ -175,7 +188,7 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         public void RegisterType<TFrom, TTo>() where TFrom : class where TTo : class, TFrom
         {
             this.builder.RegisterType<TTo>().As<TFrom>();
-            //this.container = this.builder.Build();
+            this.addToInternalRegister(typeof(TFrom), typeof(TTo));
         }
         #endregion RegisterType
 
@@ -196,7 +209,7 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
             {
                 this.builder.RegisterType<TTo>().As<TFrom>();
             }
-            //this.container = this.builder.Build();
+            this.addToInternalRegister(typeof(TFrom), typeof(TTo));
         }
         #endregion RegisterType
 
@@ -220,7 +233,7 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
             {
                 this.builder.RegisterType(TTo).As(TFrom);
             }
-            //this.container = this.builder.Build();
+            this.addToInternalRegister(TFrom, TTo);
         }
         #endregion registerType
 
@@ -335,6 +348,42 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
             }
         }
         #endregion buildContainerIfNecessary
+
+        #region IsRegistered
+        public bool IsRegistered(Type TypeToCheck)
+        {
+            bool result = false;
+
+            if (this.registeredTypes.ContainsKey(TypeToCheck))
+            {
+                result = true;
+            }
+            else if (this.registeredTypes.ContainsValue(TypeToCheck))
+            {
+                result = true;
+            }
+
+            return result;
+        }
+        #endregion IsRegistered
+
+        #region IsRegistered
+        public bool IsRegistered<T>()
+        {
+            bool result = false;
+
+            if (this.registeredTypes.ContainsKey(typeof(T)))
+            {
+                result = true;
+            }
+            else if (this.registeredTypes.ContainsValue(typeof(T)))
+            {
+                result = true;
+            }
+
+            return result;
+        }
+        #endregion IsRegistered
 
         #endregion Methods
     }

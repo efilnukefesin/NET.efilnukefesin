@@ -20,6 +20,8 @@ namespace NET.efilnukefesin.Contracts.DependencyInjection
         void RegisterType<TFrom, TTo>(Lifetime Lifetime) where TFrom : class where TTo : class, TFrom;
         void RegisterInstance<TFrom>(TFrom Instance) where TFrom : class;
         XElement SaveToXml(bool AddAssemblyDetail = false);
+        bool IsRegistered(Type TypeToCheck);
+        bool IsRegistered<T>();
 
         #endregion Methods
     }
