@@ -19,7 +19,7 @@ namespace NET.efilnukefesin.Extensions.Wpf.UserControls
     public class BaseUserControl : UserControl
     {
         //TODO: reactivate / implement
-        //#region Properties
+        #region Properties
 
         //#region BoundDataContextProperty: the data context which can be bound now
         ///// <summary>
@@ -28,9 +28,9 @@ namespace NET.efilnukefesin.Extensions.Wpf.UserControls
         //public static readonly DependencyProperty BoundDataContextProperty = DependencyProperty.Register("BoundDataContext", typeof(object), typeof(BaseUserControl), new PropertyMetadata(null, BaseUserControl.onBoundDataContextChanged));
         //#endregion BoundDataContextProperty
 
-        //#endregion Properties
+        #endregion Properties
 
-        //#region Construction
+        #region Construction
 
         //public BaseUserControl()
         //{
@@ -38,11 +38,11 @@ namespace NET.efilnukefesin.Extensions.Wpf.UserControls
         //    this.SetBinding(BoundDataContextProperty, new Binding());
         //}
 
-        //#endregion Construction
+        #endregion Construction
 
-        //#region Methods
+        #region Methods
 
-        //#region onBoundDataContextChanged
+        #region onBoundDataContextChanged
         ///// <summary>
         ///// e.NewValue is your new DataContext
         ///// </summary>
@@ -54,12 +54,8 @@ namespace NET.efilnukefesin.Extensions.Wpf.UserControls
         //    // d is your UserControl
 
         //}
-        //#endregion onBoundDataContextChanged
+        #endregion onBoundDataContextChanged
 
-        //#endregion Methods
-
-        //#region Events
-
-        //#endregion Events
+        #endregion Methods
     }
 }
