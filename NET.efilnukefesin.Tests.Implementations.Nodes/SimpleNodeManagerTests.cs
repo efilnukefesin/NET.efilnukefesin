@@ -16,7 +16,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Nodes
         #region RegisterDependencies
         protected void RegisterDependencies()
         {
-            DiManager.GetInstance().RegisterInstance<INodeManager<string, INode<string>>>(new SimpleNodeManager<string, INode<string>>());
+            DiManager.GetInstance().RegisterInstance<INodeManager<INode<string>, string>>(new SimpleNodeManager<INode<string>, string>(new SimpleNode<string>(string.Empty, null)));
         }
         #endregion RegisterDependencies
 
@@ -45,8 +45,8 @@ namespace NET.efilnukefesin.Tests.Implementations.Nodes
             public void AddRoot()
             {
                 this.RegisterDependencies();
-                INodeManager<string, INode<string>> nodeManager = DiManager.GetInstance().Resolve<INodeManager<string, INode<string>>>();
                 INode<string> node = new SimpleNode<string>("Somestring", null);
+                INodeManager<INode<string>, string> nodeManager = DiManager.GetInstance().Resolve<INodeManager<INode<string>, string>>();
 
                 nodeManager.AddRoot(node);
 
@@ -60,11 +60,11 @@ namespace NET.efilnukefesin.Tests.Implementations.Nodes
             public void GetCurrentNode()
             {
                 this.RegisterDependencies();
-                INodeManager<string, INode<string>> nodeManager = DiManager.GetInstance().Resolve<INodeManager<string, INode<string>>>();
+                INodeManager<INode<string>, string> nodeManager = DiManager.GetInstance().Resolve<INodeManager<INode<string>, string>>();
                 INode<string> node = new SimpleNode<string>("Somestring", null);
 
                 nodeManager.AddRoot(node);
-                INode<string> currentNode = nodeManager.GetCurrentNode();
+                INode<string> currentNode = nodeManager.ActiveNode;
 
                 Assert.IsNotNull(currentNode);
                 Assert.AreEqual(node.Id, currentNode.Id);
@@ -76,16 +76,16 @@ namespace NET.efilnukefesin.Tests.Implementations.Nodes
             public void SetCurrentNode()
             {
                 this.RegisterDependencies();
-                INodeManager<string, INode<string>> nodeManager = DiManager.GetInstance().Resolve<INodeManager<string, INode<string>>>();
+                INodeManager<INode<string>, string> nodeManager = DiManager.GetInstance().Resolve<INodeManager<INode<string>, string>>();
                 INode<string> node = new SimpleNode<string>("Somestring", null);
                 node.AddChild(new SimpleNode<string>("Somestring2", node));
                 node.AddChild(new SimpleNode<string>("Somestring3", node));
                 node.AddChild(new SimpleNode<string>("Somestring4", node));
 
                 nodeManager.AddRoot(node);
-                INode<string> currentNode = nodeManager.GetCurrentNode();
-                nodeManager.SetCurrentNode(node.Children.ToList()[1]);
-                INode<string> currentNodeNew = nodeManager.GetCurrentNode();
+                INode<string> currentNode = nodeManager.ActiveNode;
+                nodeManager.Traverse(1);
+                INode<string> currentNodeNew = nodeManager.ActiveNode;
 
                 Assert.IsNotNull(currentNodeNew);
                 Assert.AreEqual(node.Children.ToList()[1].Id, currentNodeNew.Id);

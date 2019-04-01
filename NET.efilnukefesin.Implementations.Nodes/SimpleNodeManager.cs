@@ -1,54 +1,60 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using NET.efilnukefesin.Contracts.Nodes;
 using NET.efilnukefesin.Implementations.Base;
 
 namespace NET.efilnukefesin.Implementations.Nodes
 {
-    public class SimpleNodeManager<I, T> : BaseObject, INodeManager<I, T> where T: INode<I>
+    public class SimpleNodeManager<TNode, TPayload> : BaseObject, INodeManager<TNode, TPayload> where TNode : INode<TPayload>
     {
         #region Properties
 
-        public T Root { get; private set; }
-
-        private T activeNode;
+        public TNode Root { get; private set; }
+        public TNode ActiveNode { get; private set; }
 
         #endregion Properties
 
         #region Construction
+
+        public SimpleNodeManager(TNode Root)
+        {
+            this.AddRoot(Root);
+        }
 
         #endregion Construction
 
         #region Methods
 
         #region AddRoot
-        public void AddRoot(T RootNode)
+        public void AddRoot(TNode Root)
         {
-            this.Root = RootNode;
-            this.activeNode = this.Root;
+            this.Root = Root;
+            this.ActiveNode = this.Root;
         }
         #endregion AddRoot
 
-        #region GetCurrentNode
-        public T GetCurrentNode()
+        #region GetCurrentChildCount
+        public int GetCurrentChildCount()
         {
-            return this.activeNode;
+            return this.ActiveNode.Children.Count();
         }
-        #endregion GetCurrentNode
+        #endregion GetCurrentChildCount
 
-        #region SetCurrentNode
-        public void SetCurrentNode(T Node)
+        #region Traverse
+        public void Traverse(int childIndex)
         {
-            this.activeNode = Node;
+            this.ActiveNode.Children.ToList()[childIndex].Traverse();
+            this.ActiveNode = (TNode)this.ActiveNode.Children.ToList()[childIndex];
         }
-        #endregion SetCurrentNode
+        #endregion Traverse
 
         #region dispose
         protected override void dispose()
         {
-            this.Root = default(T);
-            this.activeNode = default(T);
+            this.Root = default(TNode);
+            this.ActiveNode = default(TNode);
         }
         #endregion dispose
 
