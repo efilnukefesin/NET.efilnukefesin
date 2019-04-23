@@ -5,49 +5,45 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
-using System.Windows.Shapes;
 
 namespace NET.efilnukefesin.Tests.Extensions.Wpf.Converters
 {
     [TestClass]
-    public class RectangleResizeConverterTests : BaseSimpleTest
+    public class RectResizeConverterTests : BaseSimpleTest
     {
-        #region RectangleResizeConverterProperties
+        #region RectResizeConverterProperties
         [TestClass]
-        public class RectangleResizeConverterProperties : RectangleResizeConverterTests
+        public class RectResizeConverterProperties : RectangleResizeConverterTests
         {
 
         }
-        #endregion RectangleResizeConverterProperties
+        #endregion RectResizeConverterProperties
 
-        #region RectangleResizeConverterConstruction
+        #region RectResizeConverterConstruction
         [TestClass]
-        public class RectangleResizeConverterConstruction : RectangleResizeConverterTests
+        public class RectResizeConverterConstruction : RectangleResizeConverterTests
         {
 
         }
-        #endregion RectangleResizeConverterConstruction
+        #endregion RectResizeConverterConstruction
 
-        #region RectangleResizeConverterMethods
+        #region RectResizeConverterMethods
         [TestClass]
-        public class RectangleResizeConverterMethods : RectangleResizeConverterTests
+        public class RectResizeConverterMethods : RectangleResizeConverterTests
         {
             #region Convert
-            [DataTestMethod]
-            [DataRow("-10")]
-            [DataRow("-10/-10")]
-            public void Convert(string Parameter)
+            [TestMethod]
+            public void Convert()
             {
                 RectangleResizeConverter rectangleResizeConverter = new RectangleResizeConverter();
-                Rectangle sourceRect = new Rectangle();
-                sourceRect.Width = 100;
-                sourceRect.Height = 100;
+                Rect sourceRect = new Rect(10, 10, 100, 100);
+                double converterParameter = -10f;
 
-                Rect targetRect = (Rect)rectangleResizeConverter.Convert(sourceRect, typeof(Rect), Parameter, new System.Globalization.CultureInfo("De"));
+                Rect targetRect = (Rect)rectangleResizeConverter.Convert(sourceRect, typeof(Rect), converterParameter, new System.Globalization.CultureInfo("De"));
 
                 Assert.IsNotNull(targetRect);
-                Assert.AreEqual(10, targetRect.X);
-                Assert.AreEqual(10, targetRect.Y);
+                Assert.AreEqual(20, targetRect.X);
+                Assert.AreEqual(20, targetRect.Y);
                 Assert.AreEqual(80, targetRect.Width);
                 Assert.AreEqual(80, targetRect.Height);
             }
@@ -79,6 +75,6 @@ namespace NET.efilnukefesin.Tests.Extensions.Wpf.Converters
             }
             #endregion ConvertBack
         }
-        #endregion RectangleResizeConverterMethods
+        #endregion RectResizeConverterMethods
     }
 }

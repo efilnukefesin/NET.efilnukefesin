@@ -17,7 +17,8 @@
     <ProjectReference Include="..\NET.efilnukefesin.Extensions.Wpf.Converters\NET.efilnukefesin.Extensions.Wpf.Converters.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup>    <Reference Include="PresentationFramework" />
+
     <Reference Include="WindowsBase" />
   </ItemGroup>
 
