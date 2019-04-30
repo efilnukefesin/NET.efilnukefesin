@@ -1,6 +1,0 @@
-<Project>
-  <PropertyGroup>
-    <PackageOutputPath>$(MSBuildThisFileDirectory).NuGetOutput</PackageOutputPath>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  </PropertyGroup>
-</Project>

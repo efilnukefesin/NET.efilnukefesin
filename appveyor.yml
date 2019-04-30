@@ -1,0 +1,11 @@
+version: '{build}'
+install:
+   - appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
+init:
+- cmd: dotnet --info
+build_script:
+- cmd: ./build.cmd
+test: off
+artifacts:
+- path: ./**/*.nupkg
+deploy: off

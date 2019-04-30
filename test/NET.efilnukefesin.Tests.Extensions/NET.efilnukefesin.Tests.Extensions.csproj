@@ -13,8 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NET.efilnukefesin.BaseClasses.Test\NET.efilnukefesin.BaseClasses.Test.csproj" />
-    <ProjectReference Include="..\NET.efilnukefesin.Extensions\NET.efilnukefesin.Extensions.csproj" />
+    <ProjectReference Include="..\..\src\NET.efilnukefesin.BaseClasses.Test\NET.efilnukefesin.BaseClasses.Test.csproj" />
+    <ProjectReference Include="..\..\src\NET.efilnukefesin.Extensions\NET.efilnukefesin.Extensions.csproj" />
   </ItemGroup>
 
 </Project>

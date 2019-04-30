@@ -3,76 +3,68 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28714.193
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Contracts.Base", "NET.efilnukefesin.Contracts.Base\NET.efilnukefesin.Contracts.Base.csproj", "{EEF2A616-4186-4E75-A36C-290B23200F7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Contracts.Base", "src\NET.efilnukefesin.Contracts.Base\NET.efilnukefesin.Contracts.Base.csproj", "{EEF2A616-4186-4E75-A36C-290B23200F7C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Implementations.Base", "NET.efilnukefesin.Implementations.Base\NET.efilnukefesin.Implementations.Base.csproj", "{AF398D4E-EA3E-4915-B982-910295508D6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Implementations.Base", "src\NET.efilnukefesin.Implementations.Base\NET.efilnukefesin.Implementations.Base.csproj", "{AF398D4E-EA3E-4915-B982-910295508D6B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Contracts.Users", "NET.efilnukefesin.Contracts.Users\NET.efilnukefesin.Contracts.Users.csproj", "{1F766D4C-9012-4417-8313-E343208CCAC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Contracts.Users", "src\NET.efilnukefesin.Contracts.Users\NET.efilnukefesin.Contracts.Users.csproj", "{1F766D4C-9012-4417-8313-E343208CCAC7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Implementations.Users", "NET.efilnukefesin.Implementations.Users\NET.efilnukefesin.Implementations.Users.csproj", "{33BEAE94-343E-4B47-B7CE-17268C77E9D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Implementations.Users", "src\NET.efilnukefesin.Implementations.Users\NET.efilnukefesin.Implementations.Users.csproj", "{33BEAE94-343E-4B47-B7CE-17268C77E9D8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Contracts.Mvvm", "NET.efilnukefesin.Contracts.Mvvm\NET.efilnukefesin.Contracts.Mvvm.csproj", "{BC6AEE24-256A-467F-AEDA-FACC2D6CDCD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Contracts.Mvvm", "src\NET.efilnukefesin.Contracts.Mvvm\NET.efilnukefesin.Contracts.Mvvm.csproj", "{BC6AEE24-256A-467F-AEDA-FACC2D6CDCD2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Documentation", ".Documentation", "{E79C1371-008B-4B5C-999D-6310E6C89008}"
 	ProjectSection(SolutionItems) = preProject
 		Namespaces.docx = Namespaces.docx
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contracts", "Contracts", "{51C9C628-C7DF-447F-989B-67F06D0020FC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{34700DE2-8D2C-4F8B-9B5C-D55C86980A55}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{B60B9204-4881-4055-B0DE-BBF6671D1C2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Contracts.DependencyInjection", "src\NET.efilnukefesin.Contracts.DependencyInjection\NET.efilnukefesin.Contracts.DependencyInjection.csproj", "{2A7AFD55-D315-44A6-A834-2A33D1F5E6C2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Implementations", "Implementations", "{E9149DF0-3851-48A8-9661-4BD65F788DF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Implementations.DependencyInjection", "src\NET.efilnukefesin.Implementations.DependencyInjection\NET.efilnukefesin.Implementations.DependencyInjection.csproj", "{6CE36ED5-BBAA-401C-BCE2-DB82E77DB776}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{34700DE2-8D2C-4F8B-9B5C-D55C86980A55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Contracts.Xml", "src\NET.efilnukefesin.Contracts.Xml\NET.efilnukefesin.Contracts.Xml.csproj", "{C38B0A6F-72E5-4262-8B54-778CE6B82BDA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Contracts.DependencyInjection", "NET.efilnukefesin.Contracts.DependencyInjection\NET.efilnukefesin.Contracts.DependencyInjection.csproj", "{2A7AFD55-D315-44A6-A834-2A33D1F5E6C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Extensions", "src\NET.efilnukefesin.Extensions\NET.efilnukefesin.Extensions.csproj", "{E1EA1C94-496B-4103-928B-96E64D67976C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Implementations.DependencyInjection", "NET.efilnukefesin.Implementations.DependencyInjection\NET.efilnukefesin.Implementations.DependencyInjection.csproj", "{6CE36ED5-BBAA-401C-BCE2-DB82E77DB776}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Helpers", "src\NET.efilnukefesin.Helpers\NET.efilnukefesin.Helpers.csproj", "{E7DF6E24-E090-4452-BCBC-CBD21D8F52F9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Contracts.Xml", "NET.efilnukefesin.Contracts.Xml\NET.efilnukefesin.Contracts.Xml.csproj", "{C38B0A6F-72E5-4262-8B54-778CE6B82BDA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Tests.Implementations.Grid", "test\NET.efilnukefesin.Tests.Implementations.Grid\NET.efilnukefesin.Tests.Implementations.Grid.csproj", "{687F8D76-962A-434B-9B70-B3D66496D6E3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Extensions.Wpf.AttachedProperties.ListView", "NET.efilnukefesin.Extensions.Wpf.AttachedProperties.ListView\NET.efilnukefesin.Extensions.Wpf.AttachedProperties.ListView.csproj", "{E4E26AEF-E5CD-4E62-A7C8-13BEF5B77BEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Contracts.Grid", "src\NET.efilnukefesin.Contracts.Grid\NET.efilnukefesin.Contracts.Grid.csproj", "{FEF7C2B4-9426-437A-857A-F9D105E66284}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{5284C932-F047-40E1-95D8-877F2D58AD1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Implementations.Grid", "src\NET.efilnukefesin.Implementations.Grid\NET.efilnukefesin.Implementations.Grid.csproj", "{02392C5E-980C-4138-8ECF-F04B398EFAF7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Extensions.Wpf.Converters", "NET.efilnukefesin.Extensions.Wpf.Converters\NET.efilnukefesin.Extensions.Wpf.Converters.csproj", "{84060400-6486-40C8-A4AB-15195A1A9FF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Contracts.Logger", "src\NET.efilnukefesin.Contracts.Logger\NET.efilnukefesin.Contracts.Logger.csproj", "{61646FF7-1F03-4085-A66B-E58DE07FEAAB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Extensions.Wpf.Commands", "NET.efilnukefesin.Extensions.Wpf.Commands\NET.efilnukefesin.Extensions.Wpf.Commands.csproj", "{EE545836-3B73-424D-96AD-7BF38342B584}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Implementations.Logger.SerilogLogger", "src\NET.efilnukefesin.Implementations.Logger.SerilogLogger\NET.efilnukefesin.Implementations.Logger.SerilogLogger.csproj", "{A96253A9-5157-42A4-AA6A-5D7439B85479}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Extensions.Wpf.UserControls", "NET.efilnukefesin.Extensions.Wpf.UserControls\NET.efilnukefesin.Extensions.Wpf.UserControls.csproj", "{BCED43FE-A805-49F9-AC63-F311E76A7235}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.BaseClasses.Test", "src\NET.efilnukefesin.BaseClasses.Test\NET.efilnukefesin.BaseClasses.Test.csproj", "{A03A0A6E-4E39-4ECB-8505-AB6E8826AE01}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Extensions", "NET.efilnukefesin.Extensions\NET.efilnukefesin.Extensions.csproj", "{E1EA1C94-496B-4103-928B-96E64D67976C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Contracts.Nodes", "src\NET.efilnukefesin.Contracts.Nodes\NET.efilnukefesin.Contracts.Nodes.csproj", "{AF90C1DA-1F8F-415E-A40E-944AB86A6949}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Helpers", "Helpers", "{69D0194F-A015-45FE-8161-3EF1841A3121}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Implementations.Nodes", "src\NET.efilnukefesin.Implementations.Nodes\NET.efilnukefesin.Implementations.Nodes.csproj", "{58BA7123-5ACD-4E0F-8844-2DF087D3AFD1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Helpers", "NET.efilnukefesin.Helpers\NET.efilnukefesin.Helpers.csproj", "{E7DF6E24-E090-4452-BCBC-CBD21D8F52F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Tests.Implementations.Nodes", "test\NET.efilnukefesin.Tests.Implementations.Nodes\NET.efilnukefesin.Tests.Implementations.Nodes.csproj", "{99A3B402-E790-479B-BEAC-788C614C3831}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Tests.Implementations.Grid", "NET.efilnukefesin.Tests.Implementations.Grid\NET.efilnukefesin.Tests.Implementations.Grid.csproj", "{687F8D76-962A-434B-9B70-B3D66496D6E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Tests.Extensions", "test\NET.efilnukefesin.Tests.Extensions\NET.efilnukefesin.Tests.Extensions.csproj", "{5B36EBA4-1A30-4BB4-B005-363CEB7BFCD3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Contracts.Grid", "NET.efilnukefesin.Contracts.Grid\NET.efilnukefesin.Contracts.Grid.csproj", "{FEF7C2B4-9426-437A-857A-F9D105E66284}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Implementations.Mvvm", "src\NET.efilnukefesin.Implementations.Mvvm\NET.efilnukefesin.Implementations.Mvvm.csproj", "{4C19D4A4-1FC0-496D-976C-4C1FD7908962}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Implementations.Grid", "NET.efilnukefesin.Implementations.Grid\NET.efilnukefesin.Implementations.Grid.csproj", "{02392C5E-980C-4138-8ECF-F04B398EFAF7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F9EE6468-8CD1-4428-AB9B-FC8F60644116}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Contracts.Logger", "NET.efilnukefesin.Contracts.Logger\NET.efilnukefesin.Contracts.Logger.csproj", "{61646FF7-1F03-4085-A66B-E58DE07FEAAB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{CAA74920-CABA-4DDE-9145-F2FF7D2D8768}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Implementations.Logger.SerilogLogger", "NET.efilnukefesin.Implementations.Logger.SerilogLogger\NET.efilnukefesin.Implementations.Logger.SerilogLogger.csproj", "{A96253A9-5157-42A4-AA6A-5D7439B85479}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6D95D130-5675-45F5-9751-61E9CE37C5BB}"
+	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
+		build.cmd = build.cmd
+		build.ps1 = build.ps1
+		README.md = README.md
+	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BaseClasses", "BaseClasses", "{F042015D-3ED3-4B8C-A607-6EACF8386A45}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.BaseClasses.Test", "NET.efilnukefesin.BaseClasses.Test\NET.efilnukefesin.BaseClasses.Test.csproj", "{A03A0A6E-4E39-4ECB-8505-AB6E8826AE01}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Contracts.Nodes", "NET.efilnukefesin.Contracts.Nodes\NET.efilnukefesin.Contracts.Nodes.csproj", "{AF90C1DA-1F8F-415E-A40E-944AB86A6949}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Implementations.Nodes", "NET.efilnukefesin.Implementations.Nodes\NET.efilnukefesin.Implementations.Nodes.csproj", "{58BA7123-5ACD-4E0F-8844-2DF087D3AFD1}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Tests.Implementations.Nodes", "NET.efilnukefesin.Tests.Implementations.Nodes\NET.efilnukefesin.Tests.Implementations.Nodes.csproj", "{99A3B402-E790-479B-BEAC-788C614C3831}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Tests.Extensions", "NET.efilnukefesin.Tests.Extensions\NET.efilnukefesin.Tests.Extensions.csproj", "{5B36EBA4-1A30-4BB4-B005-363CEB7BFCD3}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Implementations.Mvvm", "NET.efilnukefesin.Implementations.Mvvm\NET.efilnukefesin.Implementations.Mvvm.csproj", "{4C19D4A4-1FC0-496D-976C-4C1FD7908962}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NET.efilnukefesin.Tests.Extensions.Wpf.Converters", "NET.efilnukefesin.Tests.Extensions.Wpf.Converters\NET.efilnukefesin.Tests.Extensions.Wpf.Converters.csproj", "{6A642F7F-6A21-4DCA-993B-EF45410B6AB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Builder", "build\Builder\Builder.csproj", "{ACA6035E-B929-4BE1-92E3-69E60040B4B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -112,22 +104,6 @@ Global
 		{C38B0A6F-72E5-4262-8B54-778CE6B82BDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C38B0A6F-72E5-4262-8B54-778CE6B82BDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C38B0A6F-72E5-4262-8B54-778CE6B82BDA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E4E26AEF-E5CD-4E62-A7C8-13BEF5B77BEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E4E26AEF-E5CD-4E62-A7C8-13BEF5B77BEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E4E26AEF-E5CD-4E62-A7C8-13BEF5B77BEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E4E26AEF-E5CD-4E62-A7C8-13BEF5B77BEF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{84060400-6486-40C8-A4AB-15195A1A9FF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{84060400-6486-40C8-A4AB-15195A1A9FF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{84060400-6486-40C8-A4AB-15195A1A9FF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{84060400-6486-40C8-A4AB-15195A1A9FF7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EE545836-3B73-424D-96AD-7BF38342B584}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE545836-3B73-424D-96AD-7BF38342B584}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE545836-3B73-424D-96AD-7BF38342B584}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EE545836-3B73-424D-96AD-7BF38342B584}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BCED43FE-A805-49F9-AC63-F311E76A7235}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BCED43FE-A805-49F9-AC63-F311E76A7235}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BCED43FE-A805-49F9-AC63-F311E76A7235}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BCED43FE-A805-49F9-AC63-F311E76A7235}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E1EA1C94-496B-4103-928B-96E64D67976C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E1EA1C94-496B-4103-928B-96E64D67976C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1EA1C94-496B-4103-928B-96E64D67976C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -180,41 +156,37 @@ Global
 		{4C19D4A4-1FC0-496D-976C-4C1FD7908962}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C19D4A4-1FC0-496D-976C-4C1FD7908962}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C19D4A4-1FC0-496D-976C-4C1FD7908962}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6A642F7F-6A21-4DCA-993B-EF45410B6AB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6A642F7F-6A21-4DCA-993B-EF45410B6AB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6A642F7F-6A21-4DCA-993B-EF45410B6AB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6A642F7F-6A21-4DCA-993B-EF45410B6AB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACA6035E-B929-4BE1-92E3-69E60040B4B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACA6035E-B929-4BE1-92E3-69E60040B4B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACA6035E-B929-4BE1-92E3-69E60040B4B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACA6035E-B929-4BE1-92E3-69E60040B4B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{EEF2A616-4186-4E75-A36C-290B23200F7C} = {51C9C628-C7DF-447F-989B-67F06D0020FC}
-		{AF398D4E-EA3E-4915-B982-910295508D6B} = {E9149DF0-3851-48A8-9661-4BD65F788DF8}
-		{1F766D4C-9012-4417-8313-E343208CCAC7} = {51C9C628-C7DF-447F-989B-67F06D0020FC}
-		{33BEAE94-343E-4B47-B7CE-17268C77E9D8} = {E9149DF0-3851-48A8-9661-4BD65F788DF8}
-		{BC6AEE24-256A-467F-AEDA-FACC2D6CDCD2} = {51C9C628-C7DF-447F-989B-67F06D0020FC}
-		{2A7AFD55-D315-44A6-A834-2A33D1F5E6C2} = {51C9C628-C7DF-447F-989B-67F06D0020FC}
-		{6CE36ED5-BBAA-401C-BCE2-DB82E77DB776} = {E9149DF0-3851-48A8-9661-4BD65F788DF8}
-		{C38B0A6F-72E5-4262-8B54-778CE6B82BDA} = {51C9C628-C7DF-447F-989B-67F06D0020FC}
-		{E4E26AEF-E5CD-4E62-A7C8-13BEF5B77BEF} = {5284C932-F047-40E1-95D8-877F2D58AD1D}
-		{84060400-6486-40C8-A4AB-15195A1A9FF7} = {5284C932-F047-40E1-95D8-877F2D58AD1D}
-		{EE545836-3B73-424D-96AD-7BF38342B584} = {5284C932-F047-40E1-95D8-877F2D58AD1D}
-		{BCED43FE-A805-49F9-AC63-F311E76A7235} = {5284C932-F047-40E1-95D8-877F2D58AD1D}
-		{E1EA1C94-496B-4103-928B-96E64D67976C} = {5284C932-F047-40E1-95D8-877F2D58AD1D}
-		{E7DF6E24-E090-4452-BCBC-CBD21D8F52F9} = {69D0194F-A015-45FE-8161-3EF1841A3121}
+		{EEF2A616-4186-4E75-A36C-290B23200F7C} = {F9EE6468-8CD1-4428-AB9B-FC8F60644116}
+		{AF398D4E-EA3E-4915-B982-910295508D6B} = {F9EE6468-8CD1-4428-AB9B-FC8F60644116}
+		{1F766D4C-9012-4417-8313-E343208CCAC7} = {F9EE6468-8CD1-4428-AB9B-FC8F60644116}
+		{33BEAE94-343E-4B47-B7CE-17268C77E9D8} = {F9EE6468-8CD1-4428-AB9B-FC8F60644116}
+		{BC6AEE24-256A-467F-AEDA-FACC2D6CDCD2} = {F9EE6468-8CD1-4428-AB9B-FC8F60644116}
+		{2A7AFD55-D315-44A6-A834-2A33D1F5E6C2} = {F9EE6468-8CD1-4428-AB9B-FC8F60644116}
+		{6CE36ED5-BBAA-401C-BCE2-DB82E77DB776} = {F9EE6468-8CD1-4428-AB9B-FC8F60644116}
+		{C38B0A6F-72E5-4262-8B54-778CE6B82BDA} = {F9EE6468-8CD1-4428-AB9B-FC8F60644116}
+		{E1EA1C94-496B-4103-928B-96E64D67976C} = {F9EE6468-8CD1-4428-AB9B-FC8F60644116}
+		{E7DF6E24-E090-4452-BCBC-CBD21D8F52F9} = {F9EE6468-8CD1-4428-AB9B-FC8F60644116}
 		{687F8D76-962A-434B-9B70-B3D66496D6E3} = {34700DE2-8D2C-4F8B-9B5C-D55C86980A55}
-		{FEF7C2B4-9426-437A-857A-F9D105E66284} = {51C9C628-C7DF-447F-989B-67F06D0020FC}
-		{02392C5E-980C-4138-8ECF-F04B398EFAF7} = {E9149DF0-3851-48A8-9661-4BD65F788DF8}
-		{61646FF7-1F03-4085-A66B-E58DE07FEAAB} = {51C9C628-C7DF-447F-989B-67F06D0020FC}
-		{A96253A9-5157-42A4-AA6A-5D7439B85479} = {E9149DF0-3851-48A8-9661-4BD65F788DF8}
-		{A03A0A6E-4E39-4ECB-8505-AB6E8826AE01} = {F042015D-3ED3-4B8C-A607-6EACF8386A45}
-		{AF90C1DA-1F8F-415E-A40E-944AB86A6949} = {51C9C628-C7DF-447F-989B-67F06D0020FC}
-		{58BA7123-5ACD-4E0F-8844-2DF087D3AFD1} = {E9149DF0-3851-48A8-9661-4BD65F788DF8}
+		{FEF7C2B4-9426-437A-857A-F9D105E66284} = {F9EE6468-8CD1-4428-AB9B-FC8F60644116}
+		{02392C5E-980C-4138-8ECF-F04B398EFAF7} = {F9EE6468-8CD1-4428-AB9B-FC8F60644116}
+		{61646FF7-1F03-4085-A66B-E58DE07FEAAB} = {F9EE6468-8CD1-4428-AB9B-FC8F60644116}
+		{A96253A9-5157-42A4-AA6A-5D7439B85479} = {F9EE6468-8CD1-4428-AB9B-FC8F60644116}
+		{A03A0A6E-4E39-4ECB-8505-AB6E8826AE01} = {F9EE6468-8CD1-4428-AB9B-FC8F60644116}
+		{AF90C1DA-1F8F-415E-A40E-944AB86A6949} = {F9EE6468-8CD1-4428-AB9B-FC8F60644116}
+		{58BA7123-5ACD-4E0F-8844-2DF087D3AFD1} = {F9EE6468-8CD1-4428-AB9B-FC8F60644116}
 		{99A3B402-E790-479B-BEAC-788C614C3831} = {34700DE2-8D2C-4F8B-9B5C-D55C86980A55}
 		{5B36EBA4-1A30-4BB4-B005-363CEB7BFCD3} = {34700DE2-8D2C-4F8B-9B5C-D55C86980A55}
-		{4C19D4A4-1FC0-496D-976C-4C1FD7908962} = {E9149DF0-3851-48A8-9661-4BD65F788DF8}
-		{6A642F7F-6A21-4DCA-993B-EF45410B6AB3} = {34700DE2-8D2C-4F8B-9B5C-D55C86980A55}
+		{4C19D4A4-1FC0-496D-976C-4C1FD7908962} = {F9EE6468-8CD1-4428-AB9B-FC8F60644116}
+		{ACA6035E-B929-4BE1-92E3-69E60040B4B8} = {CAA74920-CABA-4DDE-9145-F2FF7D2D8768}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {882C485C-819B-4BBA-9EDA-8A724F92F5AA}
