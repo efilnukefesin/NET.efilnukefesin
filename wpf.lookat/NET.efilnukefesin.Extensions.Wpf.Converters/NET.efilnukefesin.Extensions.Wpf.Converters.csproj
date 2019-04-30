@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Authors>efilnukefesin</Authors>
+    <Company>efilnukefesin.NET</Company>
+    <Copyright>efilnukefesin.NET</Copyright>
+    <Version>1.2.1</Version>
+    <Description>Diverse Converters needed in Wpf such as BoolToVisibleOrCollapsed or ImageToBitmapSource.</Description>
+    <PackageReleaseNotes>Modifed RectangleResizeConverter to accept different values for x and y.</PackageReleaseNotes>
+  </PropertyGroup>
+
+</Project>
