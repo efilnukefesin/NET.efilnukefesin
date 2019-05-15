@@ -145,12 +145,7 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         {
             this.buildContainerIfNecessary();
 
-            List<Parameter> tempParameters = new List<Parameter>();
-            foreach (var parameter in parameters)
-            {
-                tempParameters.Add(new TypedParameter(parameter.GetType(), parameter));
-            }
-            return this.container.Resolve<T>(tempParameters);
+            return this.container.Resolve<T>(this.convertParameters(parameters.ToArray()));
         }
         #endregion Resolve
 
@@ -159,13 +154,7 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         {
             this.buildContainerIfNecessary();
 
-            List<Parameter> tempParameters = new List<Parameter>();
-            for (int i = 0; i < parameters.Length; i++)
-            {
-                object parameter = parameters[i];
-                tempParameters.Add(new TypedParameter(parameter.GetType(), parameter));
-            }
-            return this.container.Resolve<T>(tempParameters);
+            return this.container.Resolve<T>(this.convertParameters(parameters));
         }
         #endregion Resolve
 
@@ -194,7 +183,7 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
 
         public void RegisterType<TFrom, TTo>(params object[] parameters) where TFrom : class where TTo : class, TFrom
         {
-            this.builder.RegisterType<TTo>().As<TFrom>().WithParameters();
+            this.builder.RegisterType<TTo>().As<TFrom>().WithParameters(this.convertParameters(parameters));
             this.addToInternalRegister(typeof(TFrom), typeof(TTo));
         }
 
@@ -223,11 +212,11 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         {
             if (Lifetime == Lifetime.Singleton)
             {
-                this.builder.RegisterType<TTo>().As<TFrom>().SingleInstance().WithParameters();
+                this.builder.RegisterType<TTo>().As<TFrom>().SingleInstance().WithParameters(this.convertParameters(parameters));
             }
             else
             {
-                this.builder.RegisterType<TTo>().As<TFrom>().WithParameters();
+                this.builder.RegisterType<TTo>().As<TFrom>().WithParameters(this.convertParameters(parameters));
             }
             this.addToInternalRegister(typeof(TFrom), typeof(TTo));
         }
@@ -403,6 +392,24 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
             return result;
         }
         #endregion IsRegistered
+
+        #region convertParameters: converts given parameter lists to AutoFac specific Parameter lists
+        /// <summary>
+        /// converts given parameter lists to AutoFac specific Parameter lists
+        /// </summary>
+        /// <param name="parameters">the params-Array</param>
+        /// <returns>a list of AutoFac parameters</returns>
+        private List<Parameter> convertParameters(object[] parameters)
+        {
+            List<Parameter> tempParameters = new List<Parameter>();
+            foreach (var parameter in parameters)
+            {
+                tempParameters.Add(new TypedParameter(parameter.GetType(), parameter));
+            }
+
+            return tempParameters;
+        }
+        #endregion convertParameters
 
         #endregion Methods
     }
