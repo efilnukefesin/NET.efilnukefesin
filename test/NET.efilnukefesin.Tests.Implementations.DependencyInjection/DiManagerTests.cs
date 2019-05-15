@@ -49,6 +49,26 @@ namespace NET.efilnukefesin.Tests.Implementations.DiManager
                 Assert.IsInstanceOfType(result, typeof(ClassC));
             }
             #endregion Resolve
+
+            #region RegisterWithServiceParameter
+            [TestMethod]
+            public void RegisterWithServiceParameter()
+            {
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<ClassA, ClassA>(new TestService("abc"));
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<ClassB, ClassB>(Contracts.DependencyInjection.Enums.Lifetime.Singleton, new TestService("xyz"));
+
+                var classA = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<ClassA>();
+                var classB = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<ClassB>();
+
+                Assert.IsNotNull(classA);
+                Assert.IsNotNull(classB);
+                Assert.IsNotNull(classA.Service);
+                Assert.IsNotNull(classB.Service);
+                Assert.AreEqual("abc", classA.Service.SomeString);
+                Assert.AreEqual("xyz", classB.Service.SomeString);
+
+            }
+            #endregion RegisterWithServiceParameter
         }
         #endregion DiManagerMethods
     }
