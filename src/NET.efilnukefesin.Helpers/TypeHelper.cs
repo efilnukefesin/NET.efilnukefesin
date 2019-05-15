@@ -59,5 +59,21 @@ namespace NET.efilnukefesin.Helpers
             return result;
         }
         #endregion FindDeprecatedMethods
+
+        #region CreateInstance
+        public static T CreateInstance<T>(params object[] Parameters)
+        {
+            T result = default(T);
+            try
+            {
+                result = (T)Activator.CreateInstance(typeof(T), args: Parameters);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return result;
+        }
+        #endregion CreateInstance
     }
 }
