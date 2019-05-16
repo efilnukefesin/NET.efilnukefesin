@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NET.efilnukefesin.BaseClasses.Test;
 using NET.efilnukefesin.Contracts.DependencyInjection;
+using NET.efilnukefesin.Contracts.DependencyInjection.Classes;
 using NET.efilnukefesin.Tests.Implementations.DependencyInjection.Assets;
 using System;
 using System.Collections.Generic;
@@ -50,12 +51,13 @@ namespace NET.efilnukefesin.Tests.Implementations.DiManager
             }
             #endregion Resolve
 
-            #region RegisterWithServiceParameter
+            #region RegisterTarget
             [TestMethod]
-            public void RegisterWithServiceParameter()
+            public void RegisterTarget()
             {
-                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<ClassA, ClassA>(new TestService("abc"));
-                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<ClassB, ClassB>(Contracts.DependencyInjection.Enums.Lifetime.Singleton, new TestService("xyz"));
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<IRegularParameterlessService, RegularParameterlessService>();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<ClassA>(new List<TypeInstanceParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(ITestService), new TestService("abc")) });
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<ClassB>(new List<TypeInstanceParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(ITestService), new TestService("xyz")) });
 
                 var classA = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<ClassA>();
                 var classB = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<ClassB>();
@@ -66,9 +68,8 @@ namespace NET.efilnukefesin.Tests.Implementations.DiManager
                 Assert.IsNotNull(classB.Service);
                 Assert.AreEqual("abc", classA.Service.SomeString);
                 Assert.AreEqual("xyz", classB.Service.SomeString);
-
             }
-            #endregion RegisterWithServiceParameter
+            #endregion RegisterTarget
         }
         #endregion DiManagerMethods
     }

@@ -8,9 +8,12 @@ namespace NET.efilnukefesin.Tests.Implementations.DependencyInjection.Assets
     {
         private ITestService service;
         public ITestService Service { get { return this.service; } }
-        public ClassA(ITestService Service)
+
+        private IRegularParameterlessService regularParameterlessService;
+        public ClassA(ITestService Service, IRegularParameterlessService regularParameterlessService)
         {
             this.service = Service;
+            this.regularParameterlessService = regularParameterlessService;
         }
     }
 }

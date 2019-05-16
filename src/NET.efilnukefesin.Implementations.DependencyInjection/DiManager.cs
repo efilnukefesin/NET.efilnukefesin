@@ -2,6 +2,7 @@
 using Autofac.Core;
 using Autofac.Features.ResolveAnything;
 using NET.efilnukefesin.Contracts.DependencyInjection;
+using NET.efilnukefesin.Contracts.DependencyInjection.Classes;
 using NET.efilnukefesin.Contracts.DependencyInjection.Enums;
 using System;
 using System.Collections.Generic;
@@ -181,10 +182,15 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         }
         #endregion RegisterType
 
-        public void RegisterType<TFrom, TTo>(params object[] parameters) where TFrom : class where TTo : class, TFrom
+        public void RegisterTarget<T>(IEnumerable<TypeInstanceParameterInfoObject> parameters) where T : class
         {
-            this.builder.RegisterType<TTo>().As<TFrom>().WithParameters(this.convertParameters(parameters));
-            this.addToInternalRegister(typeof(TFrom), typeof(TTo));
+            List<TypedParameter> paramsForBuilder = new List<TypedParameter>();
+            foreach (TypeInstanceParameterInfoObject typeInstanceParameterInfoObject in parameters)
+            {
+                paramsForBuilder.Add(new TypedParameter(typeInstanceParameterInfoObject.Type, typeInstanceParameterInfoObject.Instance));
+            }
+            this.builder.RegisterType<T>().WithParameters(paramsForBuilder);
+            this.addToInternalRegister(typeof(T), typeof(T));
         }
 
         #region RegisterType: registers a type with a lifetime manager
@@ -207,19 +213,6 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
             this.addToInternalRegister(typeof(TFrom), typeof(TTo));
         }
         #endregion RegisterType
-
-        public void RegisterType<TFrom, TTo>(Lifetime Lifetime, params object[] parameters) where TFrom : class where TTo : class, TFrom
-        {
-            if (Lifetime == Lifetime.Singleton)
-            {
-                this.builder.RegisterType<TTo>().As<TFrom>().SingleInstance().WithParameters(this.convertParameters(parameters));
-            }
-            else
-            {
-                this.builder.RegisterType<TTo>().As<TFrom>().WithParameters(this.convertParameters(parameters));
-            }
-            this.addToInternalRegister(typeof(TFrom), typeof(TTo));
-        }
 
         #region registerType
             private void registerType(Type TFrom, Type TTo, Lifetime Lifetime)
