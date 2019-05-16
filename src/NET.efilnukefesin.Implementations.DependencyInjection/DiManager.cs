@@ -67,15 +67,22 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         /// </summary>
         protected DiManager()
         {
-            this.builder = new ContainerBuilder();
-            this.builder.RegisterSource(new AnyConcreteTypeNotAlreadyRegisteredSource());
-            this.container = null;  //create the container, easy
-            this.registeredTypes = new Dictionary<Type, Type>();
+            this.initialize();
         }
 
         #endregion Construction
 
         #region Methods
+
+        #region initialize
+        private void initialize()
+        {
+            this.builder = new ContainerBuilder();
+            this.builder.RegisterSource(new AnyConcreteTypeNotAlreadyRegisteredSource());
+            this.container = null;  //create the container, easy
+            this.registeredTypes = new Dictionary<Type, Type>();
+        }
+        #endregion initialize
 
         #region Singleton Methods
 
@@ -182,6 +189,7 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         }
         #endregion RegisterType
 
+        #region RegisterTarget
         public void RegisterTarget<T>(IEnumerable<TypeInstanceParameterInfoObject> parameters) where T : class
         {
             List<TypedParameter> paramsForBuilder = new List<TypedParameter>();
@@ -192,6 +200,7 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
             this.builder.RegisterType<T>().WithParameters(paramsForBuilder);
             this.addToInternalRegister(typeof(T), typeof(T));
         }
+        #endregion RegisterTarget
 
         #region RegisterType: registers a type with a lifetime manager
         /// <summary>
@@ -250,6 +259,13 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
             //this.container = this.builder.Build();
         }
         #endregion RegisterInstance
+
+        #region Reset
+        public void Reset()
+        {
+            this.initialize();
+        }
+        #endregion Reset
 
         #region Dispose: disposes the container
         /// <summary>

@@ -5,6 +5,7 @@ using NET.efilnukefesin.Contracts.DependencyInjection.Classes;
 using NET.efilnukefesin.Tests.Implementations.DependencyInjection.Assets;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace NET.efilnukefesin.Tests.Implementations.DiManager
@@ -55,6 +56,8 @@ namespace NET.efilnukefesin.Tests.Implementations.DiManager
             [TestMethod]
             public void RegisterTarget()
             {
+                //Debugger.Launch();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Reset();
                 NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<IRegularParameterlessService, RegularParameterlessService>();
                 NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<ClassA>(new List<TypeInstanceParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(ITestService), new TestService("abc")) });
                 NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<ClassB>(new List<TypeInstanceParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(ITestService), new TestService("xyz")) });
