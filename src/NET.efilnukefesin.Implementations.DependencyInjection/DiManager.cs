@@ -189,7 +189,12 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         }
         #endregion RegisterType
 
-        #region RegisterTarget
+        #region RegisterTarget: registers a target for detailed parameter delivery
+        /// <summary>
+        /// registers a target for detailed parameter delivery
+        /// </summary>
+        /// <typeparam name="T">the target type</typeparam>
+        /// <param name="parameters">the parameters in list form</param>
         public void RegisterTarget<T>(IEnumerable<TypeInstanceParameterInfoObject> parameters) where T : class
         {
             List<TypedParameter> paramsForBuilder = new List<TypedParameter>();
@@ -223,8 +228,14 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         }
         #endregion RegisterType
 
-        #region registerType
-            private void registerType(Type TFrom, Type TTo, Lifetime Lifetime)
+        #region registerType: internal wrapping method
+        /// <summary>
+        /// internal wrapping method
+        /// </summary>
+        /// <param name="TFrom">Interface type</param>
+        /// <param name="TTo">Service Type</param>
+        /// <param name="Lifetime">the Lifetime</param>
+        private void registerType(Type TFrom, Type TTo, Lifetime Lifetime)
         {
             if (TFrom == null)
             {
