@@ -1,12 +1,19 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using Moq.Protected;
 using NET.efilnukefesin.BaseClasses.Test;
 using NET.efilnukefesin.Contracts.DependencyInjection;
 using NET.efilnukefesin.Contracts.DependencyInjection.Classes;
 using NET.efilnukefesin.Tests.Implementations.DependencyInjection.Assets;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net;
+using System.Net.Http;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace NET.efilnukefesin.Tests.Implementations.DiManager
 {
@@ -56,7 +63,6 @@ namespace NET.efilnukefesin.Tests.Implementations.DiManager
             [TestMethod]
             public void RegisterTarget()
             {
-                //Debugger.Launch();
                 NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Reset();
                 NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<IRegularParameterlessService, RegularParameterlessService>();
                 NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<ClassA>(new List<TypeInstanceParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(ITestService), new TestService("abc")) });
@@ -78,7 +84,6 @@ namespace NET.efilnukefesin.Tests.Implementations.DiManager
             [TestMethod]
             public void RegisterTargetWithUri()
             {
-                //Debugger.Launch();
                 NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Reset();
                 NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<IRegularParameterlessService, RegularParameterlessService>();
                 NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<ClassA>(new List<TypeInstanceParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(ITestService), new TestServiceWithUri(new Uri("http://google.de"), "abc")) });
@@ -95,6 +100,79 @@ namespace NET.efilnukefesin.Tests.Implementations.DiManager
                 Assert.AreEqual("xyz", classB.Service.SomeString);
             }
             #endregion RegisterTargetWithUri
+
+            #region PrimitiveParameterInjection
+            [TestMethod]
+            public void PrimitiveParameterInjection()
+            {
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Reset();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<IRegularParameterlessService, RegularParameterlessService>();
+
+                var classC = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<ClassC>(666, "TheString");
+
+                Assert.IsNotNull(classC);
+                Assert.IsNotNull(classC.Service);
+                Assert.AreEqual(666, classC.TheNumber);
+                Assert.AreEqual("TheString", classC.SomeString);
+            }
+            #endregion PrimitiveParameterInjection
+
+            #region ComplexParameterInjection
+            [TestMethod]
+            public void ComplexParameterInjection()
+            {
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Reset();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<IRegularParameterlessService, RegularParameterlessService>();
+
+                var classD = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<ClassD>(666, "TheString", new ComplexClass("AnotherText", 999.9999));
+
+                Assert.IsNotNull(classD);
+                Assert.IsNotNull(classD.Service);
+                Assert.IsNotNull(classD.Complex);
+                Assert.AreEqual(666, classD.TheNumber);
+                Assert.AreEqual("TheString", classD.SomeString);
+                Assert.AreEqual("AnotherText", classD.Complex.TheText);
+                Assert.AreEqual(999.9999, classD.Complex.TheNumber);
+            }
+            #endregion ComplexParameterInjection
+
+            #region HttpMessageHandlerParameterInjection
+            [TestMethod]
+            public void HttpMessageHandlerParameterInjection()
+            {
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Reset();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<IRegularParameterlessService, RegularParameterlessService>();
+
+                var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
+                handlerMock
+                   .Protected()
+                   // Setup the PROTECTED method to mock
+                   .Setup<Task<HttpResponseMessage>>(
+                      "SendAsync",
+                      ItExpr.IsAny<HttpRequestMessage>(),
+                      ItExpr.IsAny<CancellationToken>()
+                   )
+                   // prepare the expected response of the mocked http call
+                   .ReturnsAsync(new HttpResponseMessage()
+                   {
+                       StatusCode = HttpStatusCode.OK,
+                       Content = new StringContent("Hello World!"),
+                   })
+                   .Verifiable();
+
+                var classE = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<ClassE>(666, "TheString", new ComplexClass("AnotherText", 999.9999), handlerMock.Object);
+
+                Assert.IsNotNull(classE);
+                Assert.IsNotNull(classE.Service);
+                Assert.IsNotNull(classE.Complex);
+                Assert.IsNotNull(classE.Handler);
+                Assert.AreEqual(666, classE.TheNumber);
+                Assert.AreEqual("TheString", classE.SomeString);
+                Assert.AreEqual("AnotherText", classE.Complex.TheText);
+                Assert.AreEqual(999.9999, classE.Complex.TheNumber);
+                throw new NotImplementedException();
+            }
+            #endregion HttpMessageHandlerParameterInjection
         }
         #endregion DiManagerMethods
     }
