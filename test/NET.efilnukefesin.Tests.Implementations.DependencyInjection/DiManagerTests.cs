@@ -73,6 +73,28 @@ namespace NET.efilnukefesin.Tests.Implementations.DiManager
                 Assert.AreEqual("xyz", classB.Service.SomeString);
             }
             #endregion RegisterTarget
+
+            #region RegisterTargetWithUri
+            [TestMethod]
+            public void RegisterTargetWithUri()
+            {
+                //Debugger.Launch();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Reset();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<IRegularParameterlessService, RegularParameterlessService>();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<ClassA>(new List<TypeInstanceParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(ITestService), new TestServiceWithUri(new Uri("http://google.de"), "abc")) });
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<ClassB>(new List<TypeInstanceParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(ITestService), new TestServiceWithUri(new Uri("http://google.de"), "xyz")) });
+
+                var classA = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<ClassA>();
+                var classB = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<ClassB>();
+
+                Assert.IsNotNull(classA);
+                Assert.IsNotNull(classB);
+                Assert.IsNotNull(classA.Service);
+                Assert.IsNotNull(classB.Service);
+                Assert.AreEqual("abc", classA.Service.SomeString);
+                Assert.AreEqual("xyz", classB.Service.SomeString);
+            }
+            #endregion RegisterTargetWithUri
         }
         #endregion DiManagerMethods
     }
