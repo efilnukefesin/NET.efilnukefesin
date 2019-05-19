@@ -59,6 +59,8 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
 
         private Dictionary<Type, Type> registeredTypes;
 
+        private Dictionary<string, Type> typeTranslations;
+
         #endregion Properties
 
         #region Construction
@@ -81,6 +83,7 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
             this.builder.RegisterSource(new AnyConcreteTypeNotAlreadyRegisteredSource());
             this.container = null;  //create the container, easy
             this.registeredTypes = new Dictionary<Type, Type>();
+            this.typeTranslations = new Dictionary<string, Type>();
         }
         #endregion initialize
 
@@ -287,6 +290,10 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
             this.builder = null;
             this.container?.Dispose();
             this.container = null;
+            this.registeredTypes.Clear();
+            this.registeredTypes = null;
+            this.typeTranslations.Clear();
+            this.typeTranslations = null;
             DiManager.instance = null;
         }
         #endregion Dispose
@@ -424,12 +431,38 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
             List<Parameter> tempParameters = new List<Parameter>();
             foreach (var parameter in parameters)
             {
-                tempParameters.Add(new TypedParameter(parameter.GetType(), parameter));
+                Type parameterType = parameter.GetType();
+                if (this.typeTranslations.ContainsKey(parameterType.Name) || this.typeTranslations.ContainsKey(parameterType.FullName))
+                {
+                    parameterType = this.typeTranslations.ContainsKey(parameterType.Name) ? this.typeTranslations[parameterType.Name] : this.typeTranslations[parameterType.FullName];
+                }
+                tempParameters.Add(new TypedParameter(parameterType, parameter));
             }
 
             return tempParameters;
         }
         #endregion convertParameters
+
+        #region AddTypeTranslation: this method is used to add a translation for an (e.g.) mocked type, which could end with "Proxy" or something.
+        /// <summary>
+        /// this method is used to add a translation for an (e.g.) mocked type, which could end with "Proxy" or something.
+        /// </summary>
+        /// <param name="Value">the Source Type to be casted, as string as this could be dynamic</param>
+        /// <param name="TargetType">the Type this Source Type shall be casted into</param>
+        /// <returns>true, if successfuly added</returns>
+        public bool AddTypeTranslation(string Value, Type TargetType)
+        {
+            bool result = false;
+
+            if (!this.typeTranslations.ContainsKey(Value))
+            {
+                this.typeTranslations.Add(Value, TargetType);
+                result = true;
+            }
+
+            return result;
+        }
+        #endregion AddTypeTranslation
 
         #endregion Methods
     }

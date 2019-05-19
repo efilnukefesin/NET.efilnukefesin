@@ -25,6 +25,15 @@ namespace NET.efilnukefesin.Contracts.DependencyInjection
         XElement SaveToXml(bool AddAssemblyDetail = false);
         bool IsRegistered(Type TypeToCheck);
         bool IsRegistered<T>();
+        #region AddTypeTranslation: this method is used to add a translation for an (e.g.) mocked type, which could end with "Proxy" or something.
+        /// <summary>
+        /// this method is used to add a translation for an (e.g.) mocked type, which could end with "Proxy" or something.
+        /// </summary>
+        /// <param name="Value">the Source Type to be casted, as string as this could be dynamic</param>
+        /// <param name="TargetType">the Type this Source Type shall be casted into</param>
+        /// <returns>true, if successfuly added</returns>
+        bool AddTypeTranslation(string Value, Type TargetType);
+        #endregion AddTypeTranslation
 
         #endregion Methods
     }

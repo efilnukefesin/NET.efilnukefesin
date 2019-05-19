@@ -52,10 +52,10 @@ namespace NET.efilnukefesin.Tests.Implementations.DiManager
             [TestMethod]
             public void Resolve()
             {
-                var result = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<ClassC>();
+                var result = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<SimpleClass>();
 
                 Assert.IsNotNull(result);
-                Assert.IsInstanceOfType(result, typeof(ClassC));
+                Assert.IsInstanceOfType(result, typeof(SimpleClass));
             }
             #endregion Resolve
 
@@ -142,6 +142,8 @@ namespace NET.efilnukefesin.Tests.Implementations.DiManager
             {
                 NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Reset();
                 NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<IRegularParameterlessService, RegularParameterlessService>();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().AddTypeTranslation("HttpMessageHandlerProxy", typeof(HttpMessageHandler));
+                //NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().AddTypeTranslation("Castle.Proxies.HttpMessageHandlerProxy", typeof(HttpMessageHandler));
 
                 var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
                 handlerMock
@@ -170,7 +172,6 @@ namespace NET.efilnukefesin.Tests.Implementations.DiManager
                 Assert.AreEqual("TheString", classE.SomeString);
                 Assert.AreEqual("AnotherText", classE.Complex.TheText);
                 Assert.AreEqual(999.9999, classE.Complex.TheNumber);
-                throw new NotImplementedException();
             }
             #endregion HttpMessageHandlerParameterInjection
         }
