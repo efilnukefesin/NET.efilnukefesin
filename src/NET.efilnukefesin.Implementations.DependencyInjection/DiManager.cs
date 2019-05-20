@@ -4,15 +4,17 @@ using Autofac.Features.ResolveAnything;
 using NET.efilnukefesin.Contracts.DependencyInjection;
 using NET.efilnukefesin.Contracts.DependencyInjection.Classes;
 using NET.efilnukefesin.Contracts.DependencyInjection.Enums;
+using NET.efilnukefesin.Implementations.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Xml.Linq;
 
 namespace NET.efilnukefesin.Implementations.DependencyInjection
 {
-    public class DiManager : IDependencyManager
+    public class DiManager : BaseObject, IDependencyManager
     {
         #region Properties
 
@@ -198,12 +200,44 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         /// </summary>
         /// <typeparam name="T">the target type</typeparam>
         /// <param name="parameters">the parameters in list form</param>
-        public void RegisterTarget<T>(IEnumerable<TypeInstanceParameterInfoObject> parameters) where T : class
+        public void RegisterTarget<T>(IEnumerable<ParameterInfoObject> parameters) where T : class
         {
-            List<TypedParameter> paramsForBuilder = new List<TypedParameter>();
-            foreach (TypeInstanceParameterInfoObject typeInstanceParameterInfoObject in parameters)
+            List<Parameter> paramsForBuilder = new List<Parameter>();
+            foreach (var parameterInfoObject in parameters)
             {
-                paramsForBuilder.Add(new TypedParameter(typeInstanceParameterInfoObject.Type, typeInstanceParameterInfoObject.Instance));
+                if (parameterInfoObject is TypeInstanceParameterInfoObject)
+                {
+                    TypeInstanceParameterInfoObject convertedParamaterInfoObject = parameterInfoObject as TypeInstanceParameterInfoObject;
+                    Type parameterType = convertedParamaterInfoObject.Type;
+                    if (this.typeTranslations.ContainsKey(parameterType.Name) || this.typeTranslations.ContainsKey(parameterType.FullName))
+                    {
+                        parameterType = this.typeTranslations.ContainsKey(parameterType.Name) ? this.typeTranslations[parameterType.Name] : this.typeTranslations[parameterType.FullName];
+                    }
+                    paramsForBuilder.Add(new TypedParameter(parameterType, convertedParamaterInfoObject.Instance));
+                }
+                else if (parameterInfoObject is DynamicParameterInfoObject)
+                {
+                    DynamicParameterInfoObject convertedParameterInfoObject = parameterInfoObject as DynamicParameterInfoObject;
+
+                    Func<ParameterInfo, IComponentContext, bool> predicate = null;
+                    Func<ParameterInfo, IComponentContext, object> valueAccessor = null;
+
+                    if (convertedParameterInfoObject.Field == null)
+                    {
+                        //resolve only type
+                        predicate = (pi, ctx) => pi.ParameterType.Equals(convertedParameterInfoObject.TypeToResolve)/* && pi.Name == "configSectionName"*/;
+                        valueAccessor = (pi, ctx) => ctx.Resolve(convertedParameterInfoObject.TypeToResolve, this.convertParameters(convertedParameterInfoObject.Parameters));
+                    }
+                    //else
+                    //{
+                    //    //TODO: resolve type and call field value
+                    //    //***
+                    //    predicate = (pi, ctx) => pi.ParameterType == typeof(string) && pi.Name == "configSectionName";
+                    //    valueAccessor = (pi, ctx) => ctx.Resolve<>();
+                    //}
+
+                    paramsForBuilder.Add(new ResolvedParameter(predicate, valueAccessor));
+                }
             }
             this.builder.RegisterType<T>().WithParameters(paramsForBuilder);
             this.addToInternalRegister(typeof(T), typeof(T));
@@ -280,23 +314,6 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
             this.initialize();
         }
         #endregion Reset
-
-        #region Dispose: disposes the container
-        /// <summary>
-        /// disposes the container
-        /// </summary>
-        public void Dispose()
-        {
-            this.builder = null;
-            this.container?.Dispose();
-            this.container = null;
-            this.registeredTypes.Clear();
-            this.registeredTypes = null;
-            this.typeTranslations.Clear();
-            this.typeTranslations = null;
-            DiManager.instance = null;
-        }
-        #endregion Dispose
 
         #region SaveToXml
         public XElement SaveToXml(bool AddAssemblyDetail = false)
@@ -463,6 +480,20 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
             return result;
         }
         #endregion AddTypeTranslation
+
+        #region dispose
+        protected override void dispose()
+        {
+            this.builder = null;
+            this.container?.Dispose();
+            this.container = null;
+            this.registeredTypes.Clear();
+            this.registeredTypes = null;
+            this.typeTranslations.Clear();
+            this.typeTranslations = null;
+            DiManager.instance = null;
+        }
+        #endregion dispose
 
         #endregion Methods
     }

@@ -86,8 +86,10 @@ namespace NET.efilnukefesin.Tests.Implementations.DiManager
             {
                 NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Reset();
                 NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<IRegularParameterlessService, RegularParameterlessService>();
-                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<ClassA>(new List<TypeInstanceParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(ITestService), new TestServiceWithUri(new Uri("http://google.de"), "abc")) });
-                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<ClassB>(new List<TypeInstanceParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(ITestService), new TestServiceWithUri(new Uri("http://google.de"), "xyz")) });
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<ITestService, TestServiceWithUri>();
+                //NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<ClassA>(new List<ParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(ITestService), new TestServiceWithUri(new Uri("http://google.com"), "abc")) });
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<ClassA>(new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(ITestService), new Uri("http://google.com"), "abc") });
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<ClassB>(new List<ParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(ITestService), new TestServiceWithUri(new Uri("http://google.de"), "xyz")) });
 
                 var classA = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<ClassA>();
                 var classB = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<ClassB>();
