@@ -8,9 +8,8 @@ namespace NET.efilnukefesin.Contracts.Base
     {
         #region Properties
 
-        T Value { get; }
-        bool IsValid { get; }
-        bool IsError { get; }
+        T Payload { get; }
+        bool IsError { get; set; }
         IErrorInfo Error { get; }
 
         #endregion Properties
