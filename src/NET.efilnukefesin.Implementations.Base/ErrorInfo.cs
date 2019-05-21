@@ -47,7 +47,7 @@ namespace NET.efilnukefesin.Implementations.Base
 
         #region Construction
 
-        public ErrorInfo(int ErrorId, string Message, Exception Ex, bool IsFatal = false)
+        public ErrorInfo(int ErrorId, string Message, Exception Ex = null, bool IsFatal = false)
         {
             this.ErrorId = ErrorId;
             this.Message = Message;
