@@ -1,5 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NET.efilnukefesin.BaseClasses.Test;
+using NET.efilnukefesin.Implementations.Base;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -33,15 +35,13 @@ namespace NET.efilnukefesin.Tests.Implementations.Base
             [TestMethod]
             public void JsonSerialize()
             {
-                DiSetup.Tests();
-                IUserService userService = DiHelper.GetService<IUserService>();
-                userService.CreateTestData();
+                string testString = "Hello World";
 
-                User user = userService.GetUserBySubject("88421113");
-
-                SimpleResult<object> result = new SimpleResult<object>(user);
+                SimpleResult<string> result = new SimpleResult<string>(testString);
 
                 string output = JsonConvert.SerializeObject(result);
+
+                //TODO: add asserts and stuff
 
             }
             #endregion JsonSerialize
