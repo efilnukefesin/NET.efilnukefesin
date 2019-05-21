@@ -81,9 +81,9 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.RestDataS
             }
             #endregion GetAsync
 
-            #region PostAsync
+            #region CreateOrUpdateAsync
             [TestMethod]
-            public void PostAsync()
+            public void CreateOrUpdateAsync()
             {
                 DiSetup.Tests();
 
@@ -106,11 +106,11 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.RestDataS
 
                 IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://localhost"), "someToken25", handlerMock.Object);
 
-                bool result = dataService.PostAsync<bool>("SomeOtherAction", true).GetAwaiter().GetResult();
+                bool result = dataService.CreateOrUpdateAsync<bool>("SomeOtherAction", true).GetAwaiter().GetResult();
 
                 Assert.AreEqual(true, result);
             }
-            #endregion PostAsync
+            #endregion CreateOrUpdateAsync
         }
         #endregion DataServiceMethods
     }

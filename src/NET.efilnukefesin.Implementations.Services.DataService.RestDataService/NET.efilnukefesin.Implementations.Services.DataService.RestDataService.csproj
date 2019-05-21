@@ -2,9 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.5.0</Version>
+    <Version>0.6.0</Version>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
+    <PackageProjectUrl></PackageProjectUrl>
+    <Copyright>efilnukefesin.NET</Copyright>
+    <Description>Implementation of a REST Data Service</Description>
+    <PackageReleaseNotes>added the missing CRUD methods</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

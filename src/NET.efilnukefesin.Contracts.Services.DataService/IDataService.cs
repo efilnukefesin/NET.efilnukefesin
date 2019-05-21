@@ -19,9 +19,8 @@ namespace NET.efilnukefesin.Contracts.Services.DataService
         void AddOrReplaceAuthentication(string BearerToken);
 
         Task<T> GetAsync<T>(string Action, params object[] Parameters);
-        Task<bool> PostAsync<T>(string Action, T Value);
-
-        //TODO: implement CRUD methods
+        Task<bool> CreateOrUpdateAsync<T>(string Action, T Value);
+        Task<bool> DeleteAsync<T>(string Action, params object[] Parameters)
 
         #endregion Methods
 

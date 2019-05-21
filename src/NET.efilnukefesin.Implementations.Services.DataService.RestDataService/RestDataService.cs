@@ -65,14 +65,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
         {
             T result = default(T);
 
-            string parameters = string.Empty;
-            if (Parameters.Count() > 0)
-            {
-                foreach (object parameter in Parameters)
-                {
-                    parameters += "/" + parameter.ToString();
-                }
-            }
+            string parameters = this.convertParameters(Parameters);
 
             HttpResponseMessage response = await this.httpClient.GetAsync(this.EndpointRegister.GetEndpoint(Action) + parameters);
             if (response.IsSuccessStatusCode)
@@ -88,8 +81,8 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
         }
         #endregion GetAsync
 
-        #region PostAsync
-        public async Task<bool> PostAsync<T>(string Action, T Value)
+        #region CreateOrUpdateAsync
+        public async Task<bool> CreateOrUpdateAsync<T>(string Action, T Value)
         {
             bool result = false;
             HttpResponseMessage response = await this.httpClient.PostAsync(this.EndpointRegister.GetEndpoint(Action), new StringContent(JsonConvert.SerializeObject(Value)));
@@ -104,7 +97,49 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
             }
             return result;
         }
-        #endregion PostAsync
+        #endregion CreateOrUpdateAsync
+
+        #region DeleteAsync
+        public async Task<bool> DeleteAsync<T>(string Action, params object[] Parameters)
+        {
+            bool result = false;
+
+            string parameters = this.convertParameters(Parameters);
+
+            HttpResponseMessage response = await this.httpClient.DeleteAsync(this.EndpointRegister.GetEndpoint(Action) + parameters);
+            if (response.IsSuccessStatusCode)
+            {
+                string json = response.Content.ReadAsStringAsync().Result;
+                SimpleResult<bool> requestResult = JsonConvert.DeserializeObject<SimpleResult<bool>>(json);
+                if (!requestResult.IsError)
+                {
+                    result = requestResult.Payload;
+                }
+            }
+            return result;
+        }
+        #endregion DeleteAsync
+
+        #region convertParameters: converts the given parameters to a string delimited with '/'
+        /// <summary>
+        /// converts the given parameters to a string delimited with '/'
+        /// </summary>
+        /// <param name="Parameters">an array of objects</param>
+        /// <returns>the Uri compatible string</returns>
+        private string convertParameters(object[] Parameters)
+        {
+            string parameters = string.Empty;
+            if (Parameters.Count() > 0)
+            {
+                foreach (object parameter in Parameters)
+                {
+                    parameters += "/" + parameter.ToString();
+                }
+            }
+
+            return parameters;
+        }
+        #endregion convertParameters
 
         #region dispose
         protected override void dispose()
