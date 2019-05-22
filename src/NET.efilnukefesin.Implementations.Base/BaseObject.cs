@@ -13,7 +13,8 @@ namespace NET.efilnukefesin.Implementations.Base
         #region Properties
 
         [DataMember]
-        public Guid Id { get; set; }
+        //public Guid Id { get; set; }
+        public string Id { get; set; }
 
         [IgnoreDataMember]
         [XmlIgnore]
@@ -26,13 +27,15 @@ namespace NET.efilnukefesin.Implementations.Base
         public BaseObject()
         {
             this.CreationDate = DateTimeOffset.Now;
-            this.Id = Guid.NewGuid();
+            //this.Id = Guid.NewGuid();
+            this.Id = Guid.NewGuid().ToString();
         }
 
         public BaseObject(Guid Id)
         {
             this.CreationDate = DateTimeOffset.Now;
-            this.Id = Id;
+            //this.Id = Id;
+            this.Id = Id.ToString();
         }
 
         #endregion Construction

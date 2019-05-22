@@ -6,6 +6,8 @@ namespace NET.efilnukefesin.Contracts.Base
 {
     public interface IId
     {
-        Guid Id { get; set; }
+        //TODO: check out NET Standard 3.0 Release version and use Guid again due to serialization trouble
+        //Guid Id { get; set; }
+        string Id { get; set; }
     }
 }
