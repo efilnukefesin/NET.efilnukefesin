@@ -2,17 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.6.4</Version>
+    <Version>1.6.5</Version>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
     <PackageReleaseNotes>added jsonobject attribute</PackageReleaseNotes>
     <Description>Base class implementations</Description>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\NET.efilnukefesin.Contracts.Base\NET.efilnukefesin.Contracts.Base.csproj" />

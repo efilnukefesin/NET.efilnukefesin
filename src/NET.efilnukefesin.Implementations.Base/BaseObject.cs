@@ -1,5 +1,4 @@
 ﻿using NET.efilnukefesin.Contracts.Base;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -9,7 +8,6 @@ using System.Xml.Serialization;
 namespace NET.efilnukefesin.Implementations.Base
 {
     [DataContract]
-    [JsonObject]
     public abstract class BaseObject : BaseDisposable, IBaseObject
     {
         #region Properties

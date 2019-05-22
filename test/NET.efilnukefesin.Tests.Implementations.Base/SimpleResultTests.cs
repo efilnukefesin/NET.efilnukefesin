@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NET.efilnukefesin.BaseClasses.Test;
 using NET.efilnukefesin.Implementations.Base;
+using NET.efilnukefesin.Tests.Implementations.Base.Assets;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -35,14 +36,14 @@ namespace NET.efilnukefesin.Tests.Implementations.Base
             [TestMethod]
             public void JsonSerialize()
             {
-                string testString = "Hello World";
+                ABitComplexClass aBitComplexClass = new ABitComplexClass(Guid.NewGuid(), "Hello World"); 
+                SimpleResult<ABitComplexClass> result = new SimpleResult<ABitComplexClass>(aBitComplexClass);
 
-                SimpleResult<string> result = new SimpleResult<string>(testString);
+                var resultString = JsonConvert.SerializeObject(result);
+                var otherWayRound = JsonConvert.DeserializeObject<SimpleResult<ABitComplexClass>>(resultString);
 
-                string output = JsonConvert.SerializeObject(result);
-
-                //TODO: add asserts and stuff
-
+                Assert.IsNotNull(otherWayRound);
+                Assert.IsInstanceOfType(otherWayRound, typeof(SimpleResult<ABitComplexClass>));
             }
             #endregion JsonSerialize
         }
