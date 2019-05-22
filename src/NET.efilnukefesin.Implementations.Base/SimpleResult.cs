@@ -11,7 +11,7 @@ namespace NET.efilnukefesin.Implementations.Base
     /// class representing a result value
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class SimpleResult<T> : BaseObject, IResult<T>
+    public class SimpleResult<T> : BaseObject/*, IResult<T>*/
     {
         #region Properties
 
@@ -22,7 +22,7 @@ namespace NET.efilnukefesin.Implementations.Base
         public bool IsError { get; set; }
 
         [DataMember]
-        public IErrorInfo Error { get; set; }
+        public ErrorInfo Error { get; set; }
 
         #endregion Properties
 

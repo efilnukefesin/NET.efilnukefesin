@@ -20,7 +20,7 @@ namespace NET.efilnukefesin.Contracts.Services.DataService
 
         Task<T> GetAsync<T>(string Action, params object[] Parameters);
         Task<bool> CreateOrUpdateAsync<T>(string Action, T Value);
-        Task<bool> DeleteAsync<T>(string Action, params object[] Parameters)
+        Task<bool> DeleteAsync<T>(string Action, params object[] Parameters);
 
         #endregion Methods
 
