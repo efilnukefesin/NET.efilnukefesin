@@ -7,7 +7,8 @@
   install:
   # .NET Core SDK binaries
   #- ps: $urlCurrent = "https://download.visualstudio.microsoft.com/download/pr/a3fe6da8-1ec8-48e5-b93d-cbf6cbe4e1ad/b4c6e212cda446fcc6c305296130e76b/dotnet-sdk-3.0.100-preview4-011223-win-x64.zip"
-  - ps: $urlCurrent = "https://download.visualstudio.microsoft.com/download/pr/14417e56-3f88-486d-8065-ef802653699b/30cfec0c5c4af7993e7ce83670fb279b/dotnet-sdk-3.0.100-preview3-010431-win-x64.zip"
+  #- ps: $urlCurrent = "https://download.visualstudio.microsoft.com/download/pr/14417e56-3f88-486d-8065-ef802653699b/30cfec0c5c4af7993e7ce83670fb279b/dotnet-sdk-3.0.100-preview3-010431-win-x64.zip"
+  - ps: $urlCurrent = "https://download.visualstudio.microsoft.com/download/pr/78836c06-166d-4145-ae7b-da5693e36665/431a2fd34af25742527bc5cafe4d8fae/dotnet-sdk-3.0.100-preview5-011568-win-x64.zip"
   - ps: $env:DOTNET_INSTALL_DIR = "$pwd\.dotnetsdk"
   - ps: mkdir $env:DOTNET_INSTALL_DIR -Force | Out-Null
   - ps: $tempFileCurrent = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), [System.IO.Path]::GetRandomFileName())
