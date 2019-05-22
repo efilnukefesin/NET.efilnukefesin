@@ -1,14 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.6.0</Version>
+    <Version>0.6.1</Version>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <PackageProjectUrl></PackageProjectUrl>
     <Copyright>efilnukefesin.NET</Copyright>
     <Description>Implementation of a REST Data Service</Description>
-    <PackageReleaseNotes>added the missing CRUD methods</PackageReleaseNotes>
+    <PackageReleaseNotes>added an internal trace of the last response for debugging</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

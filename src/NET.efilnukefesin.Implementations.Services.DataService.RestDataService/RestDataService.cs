@@ -19,6 +19,8 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
 
         public IEndpointRegister EndpointRegister { get; private set; }
 
+        private HttpResponseMessage lastResponse = null;  //for debugging / lookup
+
         #endregion Properties
 
         #region Construction
@@ -68,6 +70,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
             string parameters = this.convertParameters(Parameters);
 
             HttpResponseMessage response = await this.httpClient.GetAsync(this.EndpointRegister.GetEndpoint(Action) + parameters);
+            this.lastResponse = response;
             if (response.IsSuccessStatusCode)
             {
                 string json = response.Content.ReadAsStringAsync().Result;
@@ -86,6 +89,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
         {
             bool result = false;
             HttpResponseMessage response = await this.httpClient.PostAsync(this.EndpointRegister.GetEndpoint(Action), new StringContent(JsonConvert.SerializeObject(Value)));
+            this.lastResponse = response;
             if (response.IsSuccessStatusCode)
             {
                 string json = response.Content.ReadAsStringAsync().Result;
@@ -107,6 +111,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
             string parameters = this.convertParameters(Parameters);
 
             HttpResponseMessage response = await this.httpClient.DeleteAsync(this.EndpointRegister.GetEndpoint(Action) + parameters);
+            this.lastResponse = response;
             if (response.IsSuccessStatusCode)
             {
                 string json = response.Content.ReadAsStringAsync().Result;
