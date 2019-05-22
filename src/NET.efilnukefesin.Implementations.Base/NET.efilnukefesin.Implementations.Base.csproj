@@ -1,14 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.6.2</Version>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Version>1.6.3</Version>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
-    <PackageReleaseNotes>changed errorinfo property not to use the interface due to serialization issues.</PackageReleaseNotes>
+    <PackageReleaseNotes>added jsonobject attribute</PackageReleaseNotes>
     <Description>Base class implementations</Description>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\NET.efilnukefesin.Contracts.Base\NET.efilnukefesin.Contracts.Base.csproj" />
