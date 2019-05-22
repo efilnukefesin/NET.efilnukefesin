@@ -20,6 +20,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
         public IEndpointRegister EndpointRegister { get; private set; }
 
         private HttpResponseMessage lastResponse = null;  //for debugging / lookup
+        private string lastContent = string.Empty;  //for debugging / lookup
 
         #endregion Properties
 
@@ -74,6 +75,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
             if (response.IsSuccessStatusCode)
             {
                 string json = response.Content.ReadAsStringAsync().Result;
+                this.lastContent = json;
                 SimpleResult<T> requestResult = JsonConvert.DeserializeObject<SimpleResult<T>>(json);
                 if (!requestResult.IsError)
                 {
@@ -93,6 +95,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
             if (response.IsSuccessStatusCode)
             {
                 string json = response.Content.ReadAsStringAsync().Result;
+                this.lastContent = json;
                 SimpleResult<bool> requestResult = JsonConvert.DeserializeObject<SimpleResult<bool>>(json);
                 if (!requestResult.IsError)
                 {
@@ -115,6 +118,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
             if (response.IsSuccessStatusCode)
             {
                 string json = response.Content.ReadAsStringAsync().Result;
+                this.lastContent = json;
                 SimpleResult<bool> requestResult = JsonConvert.DeserializeObject<SimpleResult<bool>>(json);
                 if (!requestResult.IsError)
                 {

@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>0.6.2</Version>
+    <Version>0.6.3</Version>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <PackageProjectUrl></PackageProjectUrl>
     <Copyright>efilnukefesin.NET</Copyright>
     <Description>Implementation of a REST Data Service</Description>
-    <PackageReleaseNotes>added an internal trace of the last response for debugging</PackageReleaseNotes>
+    <PackageReleaseNotes>added an internal trace of the last response for debugging, e.g. the lastContent</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
