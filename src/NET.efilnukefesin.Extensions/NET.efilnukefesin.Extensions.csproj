@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
-    <Version>1.3.3</Version>
+    <Version>1.3.4</Version>
     <PackageReleaseNotes>Added Type Extensions class</PackageReleaseNotes>
     <Description>Byte- string- and other extensions to keep the flow up!</Description>
   </PropertyGroup>

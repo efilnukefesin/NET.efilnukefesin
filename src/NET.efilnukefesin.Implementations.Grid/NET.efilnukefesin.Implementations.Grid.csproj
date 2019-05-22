@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
-    <Version>1.2.1</Version>
+    <Version>1.2.2</Version>
     <PackageReleaseNotes>Updated packages</PackageReleaseNotes>
     <Description>Implementation of IGrid - a class capable of storing any Type in a 2D array-like</Description>
   </PropertyGroup>
