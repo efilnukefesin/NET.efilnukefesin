@@ -78,6 +78,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Tests.Imp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Tests.Implementations.Base", "test\NET.efilnukefesin.Tests.Implementations.Base\NET.efilnukefesin.Tests.Implementations.Base.csproj", "{0963FF41-8857-4805-854F-F636CA3EF0AA}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Extensions.Wpf.Commands", "src\NET.efilnukefesin.Extensions.Wpf.Commands\NET.efilnukefesin.Extensions.Wpf.Commands.csproj", "{933171E8-B877-4CEB-B3C4-0D94CF2808BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -196,6 +198,10 @@ Global
 		{0963FF41-8857-4805-854F-F636CA3EF0AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0963FF41-8857-4805-854F-F636CA3EF0AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0963FF41-8857-4805-854F-F636CA3EF0AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{933171E8-B877-4CEB-B3C4-0D94CF2808BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{933171E8-B877-4CEB-B3C4-0D94CF2808BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{933171E8-B877-4CEB-B3C4-0D94CF2808BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{933171E8-B877-4CEB-B3C4-0D94CF2808BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -229,6 +235,7 @@ Global
 		{88806358-6035-4DFF-8EEC-6DDA43B8E692} = {F9EE6468-8CD1-4428-AB9B-FC8F60644116}
 		{06F7D6EE-E27F-4045-BD95-7948897A4C2A} = {34700DE2-8D2C-4F8B-9B5C-D55C86980A55}
 		{0963FF41-8857-4805-854F-F636CA3EF0AA} = {34700DE2-8D2C-4F8B-9B5C-D55C86980A55}
+		{933171E8-B877-4CEB-B3C4-0D94CF2808BD} = {F9EE6468-8CD1-4428-AB9B-FC8F60644116}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {882C485C-819B-4BBA-9EDA-8A724F92F5AA}
