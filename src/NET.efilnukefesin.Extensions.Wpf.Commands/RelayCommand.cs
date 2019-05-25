@@ -8,12 +8,12 @@ using System.Windows.Input;
 
 namespace NET.efilnukefesin.Extensions.Wpf.Commands
 {
-    public class RelayCommand : ICommand
+    public class RelayCommand : BaseCommand
     {
         #region Properties
 
-        readonly Action executeAction;
-        readonly Func<bool> canExecuteAction;
+        private readonly Action executeAction;
+        private readonly Func<bool> canExecuteAction;
 
         #endregion Properties
 
@@ -36,13 +36,15 @@ namespace NET.efilnukefesin.Extensions.Wpf.Commands
         }
         #endregion Construction
 
-        #region ICommand Members
+        #region Methods
 
+        #region CanExecute
         [DebuggerStepThrough]
         public bool CanExecute(object parameter)
         {
             return this.canExecuteAction == null ? true : this.canExecuteAction();
         }
+        #endregion CanExecute
 
         public event EventHandler CanExecuteChanged
         {
@@ -50,11 +52,20 @@ namespace NET.efilnukefesin.Extensions.Wpf.Commands
             remove { CommandManager.RequerySuggested -= value; }
         }
 
+        #region Execute
         public void Execute(object parameter)
         {
             this.executeAction();
         }
+        #endregion Execute
 
-        #endregion // ICommand Members
+        #region dispose
+        protected override void dispose()
+        {
+
+        }
+        #endregion dispose
+
+        #endregion Methods
     }
 }

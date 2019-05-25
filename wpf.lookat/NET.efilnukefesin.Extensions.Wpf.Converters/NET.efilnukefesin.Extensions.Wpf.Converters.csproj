@@ -11,4 +11,10 @@
     <PackageReleaseNotes>Modifed RectangleResizeConverter to accept different values for x and y.</PackageReleaseNotes>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+
 </Project>

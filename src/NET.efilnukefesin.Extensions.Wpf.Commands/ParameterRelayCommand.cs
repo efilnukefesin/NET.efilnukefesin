@@ -4,12 +4,12 @@ using System.Windows.Input;
 
 namespace NET.efilnukefesin.Extensions.Wpf.Commands
 {
-    public class ParameterRelayCommand<T> : ICommand
+    public class ParameterRelayCommand<T> : BaseCommand
     {
         #region Properties
 
-        readonly Action<T> executeAction;
-        readonly Predicate<T> canExecuteAction;
+        private readonly Action<T> executeAction;
+        private readonly Predicate<T> canExecuteAction;
 
         #endregion Properties
 
@@ -32,13 +32,15 @@ namespace NET.efilnukefesin.Extensions.Wpf.Commands
         }
         #endregion Construction
 
-        #region ICommand Members
+        #region Methods
 
+        #region CanExecute
         [DebuggerStepThrough]
         public bool CanExecute(object parameter)
         {
             return this.canExecuteAction == null ? true : this.canExecuteAction((T)parameter);
         }
+        #endregion CanExecute
 
         public event EventHandler CanExecuteChanged
         {
@@ -46,11 +48,20 @@ namespace NET.efilnukefesin.Extensions.Wpf.Commands
             remove { CommandManager.RequerySuggested -= value; }
         }
 
+        #region Execute
         public void Execute(object parameter)
         {
             this.executeAction((T)parameter);
         }
+        #endregion Execute
 
-        #endregion // ICommand Members
+        #region dispose
+        protected override void dispose()
+        {
+            
+        }
+        #endregion dispose
+
+        #endregion Methods
     }
 }
