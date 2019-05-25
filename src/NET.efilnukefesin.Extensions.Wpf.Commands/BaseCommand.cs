@@ -6,13 +6,19 @@ using System.Windows.Input;
 
 namespace NET.efilnukefesin.Extensions.Wpf.Commands
 {
-    public abstract class BaseCommand : BaseObject, ICommand
+    public abstract class BaseCommand : BaseObject
     {
         #region RaiseCanExecuteChanged
         public void RaiseCanExecuteChanged()
         {
-            CommandManager.InvalidateRequerySuggested()
+            CommandManager.InvalidateRequerySuggested();
         }
         #endregion RaiseCanExecuteChanged
+
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
     }
 }

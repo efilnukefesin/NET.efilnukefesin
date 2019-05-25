@@ -6,7 +6,7 @@
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
     <Description>Command implementations</Description>
     <PackageReleaseNotes>Added RaiseCanExecuteChanged method to invalidate command stuff.</PackageReleaseNotes>
   </PropertyGroup>

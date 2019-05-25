@@ -202,6 +202,19 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         /// <param name="parameters">the parameters in list form</param>
         public void RegisterTarget<T>(IEnumerable<ParameterInfoObject> parameters) where T : class
         {
+            this.RegisterTarget<T>(Lifetime.NewInstanceEveryTime, parameters);
+        }
+        #endregion RegisterTarget
+
+        #region RegisterTarget
+        /// <summary>
+        /// registers a target for detailed parameter delivery
+        /// </summary>
+        /// <typeparam name="T">the target type</typeparam>
+        /// <param name="Lifetime">the lifetime of the target</param>
+        /// <param name="parameters">the parameters in list form</param>
+        public void RegisterTarget<T>(Lifetime Lifetime, IEnumerable<ParameterInfoObject> parameters) where T : class
+        {
             List<Parameter> paramsForBuilder = new List<Parameter>();
             foreach (var parameterInfoObject in parameters)
             {
@@ -239,7 +252,19 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
                     paramsForBuilder.Add(new ResolvedParameter(predicate, valueAccessor));
                 }
             }
-            this.builder.RegisterType<T>().WithParameters(paramsForBuilder);
+
+            switch (Lifetime)
+            {
+                case Lifetime.Singleton:
+                    this.builder.RegisterType<T>().WithParameters(paramsForBuilder).SingleInstance();
+                    break;
+                case Lifetime.NewInstanceEveryTime:
+                    this.builder.RegisterType<T>().WithParameters(paramsForBuilder);
+                    break;
+                default:
+                    break;
+            }
+
             this.addToInternalRegister(typeof(T), typeof(T));
         }
         #endregion RegisterTarget

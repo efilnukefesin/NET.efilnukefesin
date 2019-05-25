@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace NET.efilnukefesin.Extensions.Wpf.Commands
 {
-    public class RelayCommand : BaseCommand
+    public class RelayCommand : BaseCommand, ICommand
     {
         #region Properties
 
@@ -45,12 +45,6 @@ namespace NET.efilnukefesin.Extensions.Wpf.Commands
             return this.canExecuteAction == null ? true : this.canExecuteAction();
         }
         #endregion CanExecute
-
-        public event EventHandler CanExecuteChanged
-        {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
-        }
 
         #region Execute
         public void Execute(object parameter)
