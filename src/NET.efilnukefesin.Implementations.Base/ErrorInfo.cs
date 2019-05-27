@@ -9,6 +9,7 @@ namespace NET.efilnukefesin.Implementations.Base
     {
         #region Properties
         public string Message { get; set; }
+        public string Hint { get; set; }
         public int ErrorId { get; set; }
         public Exception Ex { get; set; }
 
@@ -47,12 +48,13 @@ namespace NET.efilnukefesin.Implementations.Base
 
         #region Construction
 
-        public ErrorInfo(int ErrorId, string Message, Exception Ex = null, bool IsFatal = false)
+        public ErrorInfo(int ErrorId, string Message, string Hint = null, Exception Ex = null, bool IsFatal = false)
         {
             this.ErrorId = ErrorId;
             this.Message = Message;
             this.Ex = Ex;
             this.IsFatal = IsFatal;
+            this.Hint = Hint;
         }
 
         #endregion Construction
