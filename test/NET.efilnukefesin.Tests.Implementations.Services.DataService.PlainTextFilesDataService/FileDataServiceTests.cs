@@ -73,6 +73,21 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.FileDataS
                 Assert.AreEqual(true, result);
             }
             #endregion CreateOrUpdateAsync
+
+            #region DeleteAsync
+            [TestMethod]
+            public void DeleteAsync()
+            {
+                DiSetup.FileDataServiceTests();
+                DiSetup.InitializeFileEndpoints();
+
+                IDataService dataService = DiHelper.GetService<IDataService>(this.testPath);
+
+                bool result = dataService.DeleteAsync<bool>("SomeOtherAction", true).GetAwaiter().GetResult();
+
+                Assert.AreEqual(true, result);
+            }
+            #endregion DeleteAsync
         }
         #endregion FileDataServiceMethods
     }
