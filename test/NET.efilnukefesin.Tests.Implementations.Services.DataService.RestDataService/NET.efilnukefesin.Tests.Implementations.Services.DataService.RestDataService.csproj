@@ -20,6 +20,7 @@
     <ProjectReference Include="..\..\src\NET.efilnukefesin.Implementations.DependencyInjection\NET.efilnukefesin.Implementations.DependencyInjection.csproj" />
     <ProjectReference Include="..\..\src\NET.efilnukefesin.Implementations.Services.DataService.EndpointRegister\NET.efilnukefesin.Implementations.Services.DataService.EndpointRegister.csproj" />
     <ProjectReference Include="..\..\src\NET.efilnukefesin.Implementations.Services.DataService.RestDataService\NET.efilnukefesin.Implementations.Services.DataService.RestDataService.csproj" />
+    <ProjectReference Include="..\NET.efilnukefesin.Tests.BootStrapper\NET.efilnukefesin.Tests.BootStrapper.csproj" />
   </ItemGroup>
 
 </Project>

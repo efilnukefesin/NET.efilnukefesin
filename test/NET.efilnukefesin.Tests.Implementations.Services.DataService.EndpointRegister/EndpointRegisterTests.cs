@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NET.efilnukefesin.BaseClasses.Test;
 using NET.efilnukefesin.Contracts.Services.DataService;
+using NET.efilnukefesin.Tests.BootStrapper;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -34,7 +35,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.EndpointR
             [TestMethod]
             public void GetEndpoint()
             {
-                DiSetup.Tests();
+                DiSetup.RestDataServiceTests();
                 IEndpointRegister endpointRegister = DiHelper.GetService<IEndpointRegister>();
                 bool wasSuccessfullyAdded = endpointRegister.AddEndpoint("SomeEndpointTest", "TestString");
 

@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NET.efilnukefesin.BaseClasses.Test;
 using NET.efilnukefesin.Contracts.Services.DataService;
+using NET.efilnukefesin.Tests.BootStrapper;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -28,11 +29,12 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.PlainText
             [TestMethod]
             public void IsNotNull()
             {
-                DiSetup.Tests();
+                DiSetup.PlainTextFilesDataServiceTests();
 
                 IDataService dataService = DiHelper.GetService<IDataService>(this.testPath);
 
                 Assert.IsNotNull(dataService);
+                Assert.IsInstanceOfType(dataService, typeof(NET.efilnukefesin.Implementations.Services.DataService.PlainTextFilesDataService.PlainTextFilesDataService));
             }
             #endregion IsNotNull
         }
@@ -46,8 +48,8 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.PlainText
             [TestMethod]
             public void GetAsync()
             {
-                DiSetup.Tests();
-
+                DiSetup.PlainTextFilesDataServiceTests();
+                DiSetup.InitializeFileEndpoints();
 
                 IDataService dataService = DiHelper.GetService<IDataService>(this.testPath);
 
@@ -61,7 +63,8 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.PlainText
             [TestMethod]
             public void CreateOrUpdateAsync()
             {
-                DiSetup.Tests();
+                DiSetup.PlainTextFilesDataServiceTests();
+                DiSetup.InitializeFileEndpoints();
 
                 IDataService dataService = DiHelper.GetService<IDataService>(this.testPath);
 

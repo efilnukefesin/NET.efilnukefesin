@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.RestDataService
+namespace NET.efilnukefesin.Tests.BootStrapper
 {
     //TODO: move to own Helper Lib / DiManager lib
     /// <summary>

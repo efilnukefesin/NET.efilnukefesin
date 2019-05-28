@@ -4,6 +4,7 @@ using Moq.Protected;
 using NET.efilnukefesin.BaseClasses.Test;
 using NET.efilnukefesin.Contracts.Services.DataService;
 using NET.efilnukefesin.Implementations.Base;
+using NET.efilnukefesin.Tests.BootStrapper;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -34,11 +35,13 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.RestDataS
             [TestMethod]
             public void IsNotNull()
             {
-                DiSetup.Tests();
+                DiSetup.RestDataServiceTests();
+                DiSetup.InitializeRestEndpoints();
 
                 IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://baseUri"), "someToken");
 
                 Assert.IsNotNull(dataService);
+                Assert.IsInstanceOfType(dataService, typeof(NET.efilnukefesin.Implementations.Services.DataService.RestDataService.RestDataService));
             }
             #endregion IsNotNull
         }
@@ -52,7 +55,8 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.RestDataS
             [TestMethod]
             public void GetAsync()
             {
-                DiSetup.Tests();
+                DiSetup.RestDataServiceTests();
+                DiSetup.InitializeRestEndpoints();
 
                 // https://gingter.org/2018/07/26/how-to-mock-httpclient-in-your-net-c-unit-tests/
                 // ARRANGE
@@ -85,7 +89,8 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.RestDataS
             [TestMethod]
             public void CreateOrUpdateAsync()
             {
-                DiSetup.Tests();
+                DiSetup.RestDataServiceTests();
+                DiSetup.InitializeRestEndpoints();
 
                 var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
                 handlerMock

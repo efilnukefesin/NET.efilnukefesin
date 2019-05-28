@@ -6,26 +6,34 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 
-namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.RestDataService
+namespace NET.efilnukefesin.Tests.BootStrapper
 {
     public static class DiSetup
     {
         #region Methods
 
-        #region Tests
-        public static void Tests()
+        #region RestDataServiceTestsTests
+        public static void RestDataServiceTests()
         {
             DiSetup.@base();
+            DiManager.GetInstance().RegisterType<IDataService, NET.efilnukefesin.Implementations.Services.DataService.RestDataService.RestDataService>();  //TODO: switch per test
             DiManager.GetInstance().AddTypeTranslation("HttpMessageHandlerProxy", typeof(HttpMessageHandler));
         }
-        #endregion Tests
+        #endregion RestDataServiceTestsTests
 
+        #region PlainTextFilesDataServiceTestsTests
+        public static void PlainTextFilesDataServiceTests()
+        {
+            DiSetup.@base();
+            DiManager.GetInstance().RegisterType<IDataService, NET.efilnukefesin.Implementations.Services.DataService.PlainTextFilesDataService.PlainTextFilesDataService>();  //TODO: switch per test
+            DiManager.GetInstance().AddTypeTranslation("HttpMessageHandlerProxy", typeof(HttpMessageHandler));
+        }
+        #endregion PlainTextFilesDataServiceTestsTests
 
         #region base
         private static void @base()
         {
             DiManager.GetInstance().RegisterType<IEndpointRegister, NET.efilnukefesin.Implementations.Services.DataService.EndpointRegister.EndpointRegister>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);  //where is all the data coming from?
-            DiManager.GetInstance().RegisterType<IDataService, NET.efilnukefesin.Implementations.Services.DataService.RestDataService.RestDataService>();  //where is all the data coming from?
 
             //DiManager.GetInstance().RegisterTarget<PermissionServer.SDK.Client>(new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), new Uri("http://localhost:6008")) });
             //DiManager.GetInstance().RegisterTarget<SuperHotFeatureServer.SDK.Client>(new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), new Uri("http://localhost:6010")) });
@@ -34,9 +42,9 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.RestDataS
         }
         #endregion base
 
-        #region Initialize
+        #region InitializeRestEndpoints
         //TODO: migrate later on somewhere else, when making a generic Bootstrapper
-        public static void Initialize()
+        public static void InitializeRestEndpoints()
         {
             IEndpointRegister endpointRegister = DiHelper.GetService<IEndpointRegister>();
             if (endpointRegister != null)
@@ -49,7 +57,19 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.RestDataS
                 endpointRegister.AddEndpoint("PermissionServer.Client.BaseClient.GetGivenPermissionsAsync", "api/permissions/givenpermissions");
             }
         }
-        #endregion Initialize
+        #endregion InitializeRestEndpoints
+
+        #region InitializeFileEndpoints
+        //TODO: migrate later on somewhere else, when making a generic Bootstrapper
+        public static void InitializeFileEndpoints()
+        {
+            IEndpointRegister endpointRegister = DiHelper.GetService<IEndpointRegister>();
+            if (endpointRegister != null)
+            {
+                endpointRegister.AddEndpoint("SuperHotFeatureServer.SDK.Client.GetValueAsync", "api/values");
+            }
+        }
+        #endregion InitializeFileEndpoints
 
         #endregion Methods
     }
