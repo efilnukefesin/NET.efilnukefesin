@@ -10,6 +10,8 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.PlainText
     [TestClass]
     public class PlainTextFilesDataServiceTests : BaseSimpleTest
     {
+        protected string testPath = "/Content/Testfiles";
+
         #region DataServiceProperties
         [TestClass]
         public class PlainTextFilesDataServiceProperties : PlainTextFilesDataServiceTests
@@ -28,7 +30,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.PlainText
             {
                 DiSetup.Tests();
 
-                IDataService dataService = DiHelper.GetService<IDataService>("/Assets/Testdata/");
+                IDataService dataService = DiHelper.GetService<IDataService>(this.testPath);
 
                 Assert.IsNotNull(dataService);
             }
@@ -47,7 +49,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.PlainText
                 DiSetup.Tests();
 
 
-                IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://baseUri"), "someToken", handlerMock.Object);
+                IDataService dataService = DiHelper.GetService<IDataService>(this.testPath);
 
                 bool result = dataService.GetAsync<bool>("SomeAction").GetAwaiter().GetResult();
 
@@ -61,7 +63,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.PlainText
             {
                 DiSetup.Tests();
 
-                IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://localhost"), "someToken25", handlerMock.Object);
+                IDataService dataService = DiHelper.GetService<IDataService>(this.testPath);
 
                 bool result = dataService.CreateOrUpdateAsync<bool>("SomeOtherAction", true).GetAwaiter().GetResult();
 

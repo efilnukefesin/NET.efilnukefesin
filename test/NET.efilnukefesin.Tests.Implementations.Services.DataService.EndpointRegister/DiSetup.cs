@@ -1,12 +1,12 @@
 ﻿using NET.efilnukefesin.Contracts.Services.DataService;
 using NET.efilnukefesin.Implementations.DependencyInjection;
-using NET.efilnukefesin.Implementations.Services.DataService.PlainTextFilesDataService;
+using NET.efilnukefesin.Implementations.Services.DataService.RestDataService;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 
-namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.PlainTextFilesDataService
+namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.EndpointRegister
 {
     public static class DiSetup
     {
@@ -24,7 +24,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.PlainText
         private static void @base()
         {
             DiManager.GetInstance().RegisterType<IEndpointRegister, NET.efilnukefesin.Implementations.Services.DataService.EndpointRegister.EndpointRegister>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);  //where is all the data coming from?
-            DiManager.GetInstance().RegisterType<IDataService, NET.efilnukefesin.Implementations.Services.DataService.PlainTextFilesDataService.PlainTextFilesDataService>();  //where is all the data coming from?
+            DiManager.GetInstance().RegisterType<IDataService, NET.efilnukefesin.Implementations.Services.DataService.RestDataService.RestDataService>();  //where is all the data coming from?
 
             //DiManager.GetInstance().RegisterTarget<PermissionServer.SDK.Client>(new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), new Uri("http://localhost:6008")) });
             //DiManager.GetInstance().RegisterTarget<SuperHotFeatureServer.SDK.Client>(new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), new Uri("http://localhost:6010")) });
@@ -40,7 +40,6 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.PlainText
             IEndpointRegister endpointRegister = DiHelper.GetService<IEndpointRegister>();
             if (endpointRegister != null)
             {
-                //TODO: add path values
                 endpointRegister.AddEndpoint("SuperHotFeatureServer.SDK.Client.GetValueAsync", "api/values");
                 endpointRegister.AddEndpoint("SuperHotOtherFeatureServer.SDK.Client.GetValueAsync", "api/values");
                 endpointRegister.AddEndpoint("PermissionServer.SDK.Client.AddUserAsync", "api/adduser");

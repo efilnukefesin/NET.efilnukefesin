@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
+namespace NET.efilnukefesin.Implementations.Services.DataService.EndpointRegister
 {
     public class EndpointRegister : BaseObject, IEndpointRegister
     {

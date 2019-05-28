@@ -2,18 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>0.7.0</Version>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
-    <PackageProjectUrl></PackageProjectUrl>
     <Copyright>efilnukefesin.NET</Copyright>
-    <Description>Implementation of a REST Data Service</Description>
-    <PackageReleaseNotes>added an internal trace of the last response for debugging, e.g. the lastContent</PackageReleaseNotes>
+    <Version>0.8.0</Version>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\NET.efilnukefesin.Contracts.Services.DataService\NET.efilnukefesin.Contracts.Services.DataService.csproj" />

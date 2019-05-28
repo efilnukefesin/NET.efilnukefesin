@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.RestDataService
+namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.EndpointRegister
 {
     [TestClass]
     public class EndpointRegisterTests : BaseSimpleTest

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
@@ -16,6 +16,7 @@
     <ProjectReference Include="..\..\src\NET.efilnukefesin.BaseClasses.Test\NET.efilnukefesin.BaseClasses.Test.csproj" />
     <ProjectReference Include="..\..\src\NET.efilnukefesin.Contracts.Services.DataService\NET.efilnukefesin.Contracts.Services.DataService.csproj" />
     <ProjectReference Include="..\..\src\NET.efilnukefesin.Implementations.DependencyInjection\NET.efilnukefesin.Implementations.DependencyInjection.csproj" />
+    <ProjectReference Include="..\..\src\NET.efilnukefesin.Implementations.Services.DataService.EndpointRegister\NET.efilnukefesin.Implementations.Services.DataService.EndpointRegister.csproj" />
     <ProjectReference Include="..\..\src\NET.efilnukefesin.Implementations.Services.DataService.PlainTextFilesDataService\NET.efilnukefesin.Implementations.Services.DataService.PlainTextFilesDataService.csproj" />
   </ItemGroup>
 
