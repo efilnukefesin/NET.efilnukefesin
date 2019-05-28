@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NET.efilnukefesin.Implementations.Services.DataService.PlainTextFilesDataService
+namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
 {
-    public class PlainTextFilesDataService : BaseObject, IDataService
+    public class FileDataService : BaseObject, IDataService
     {
         #region Properties
         public IEndpointRegister EndpointRegister { get; set; }
@@ -18,7 +18,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.PlainTextFilesD
 
         #region Construction
 
-        public PlainTextFilesDataService(string BaseFolder, IEndpointRegister EndpointRegister)
+        public FileDataService(string BaseFolder, IEndpointRegister EndpointRegister)
         {
             this.EndpointRegister = EndpointRegister;
             this.baseFolder = BaseFolder;

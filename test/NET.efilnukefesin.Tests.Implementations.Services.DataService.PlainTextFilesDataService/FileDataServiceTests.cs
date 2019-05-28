@@ -6,49 +6,49 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.PlainTextFilesDataService
+namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.FileDataService
 {
     [TestClass]
-    public class PlainTextFilesDataServiceTests : BaseSimpleTest
+    public class FileDataServiceTests : BaseSimpleTest
     {
         protected string testPath = "/Content/Testfiles";
 
-        #region DataServiceProperties
+        #region FileDataServiceProperties
         [TestClass]
-        public class PlainTextFilesDataServiceProperties : PlainTextFilesDataServiceTests
+        public class FileDataServiceProperties : FileDataServiceTests
         {
 
         }
-        #endregion DataServiceProperties
+        #endregion FileDataServiceProperties
 
-        #region DataServiceConstruction
+        #region FileDataServiceConstruction
         [TestClass]
-        public class PlainTextFilesDataServiceConstruction : PlainTextFilesDataServiceTests
+        public class FileDataServiceConstruction : FileDataServiceTests
         {
             #region IsNotNull
             [TestMethod]
             public void IsNotNull()
             {
-                DiSetup.PlainTextFilesDataServiceTests();
+                DiSetup.FileDataServiceTests();
 
                 IDataService dataService = DiHelper.GetService<IDataService>(this.testPath);
 
                 Assert.IsNotNull(dataService);
-                Assert.IsInstanceOfType(dataService, typeof(NET.efilnukefesin.Implementations.Services.DataService.PlainTextFilesDataService.PlainTextFilesDataService));
+                Assert.IsInstanceOfType(dataService, typeof(NET.efilnukefesin.Implementations.Services.DataService.FileDataService.FileDataService));
             }
             #endregion IsNotNull
         }
-        #endregion DataServiceConstruction
+        #endregion FileDataServiceConstruction
 
-        #region DataServiceMethods
+        #region FileDataServiceMethods
         [TestClass]
-        public class PlainTextFilesDataServiceMethods : PlainTextFilesDataServiceTests
+        public class FileDataServiceMethods : FileDataServiceTests
         {
             #region GetAsync
             [TestMethod]
             public void GetAsync()
             {
-                DiSetup.PlainTextFilesDataServiceTests();
+                DiSetup.FileDataServiceTests();
                 DiSetup.InitializeFileEndpoints();
 
                 IDataService dataService = DiHelper.GetService<IDataService>(this.testPath);
@@ -63,7 +63,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.PlainText
             [TestMethod]
             public void CreateOrUpdateAsync()
             {
-                DiSetup.PlainTextFilesDataServiceTests();
+                DiSetup.FileDataServiceTests();
                 DiSetup.InitializeFileEndpoints();
 
                 IDataService dataService = DiHelper.GetService<IDataService>(this.testPath);
@@ -74,6 +74,6 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.PlainText
             }
             #endregion CreateOrUpdateAsync
         }
-        #endregion DataServiceMethods
+        #endregion FileDataServiceMethods
     }
 }

@@ -21,14 +21,14 @@ namespace NET.efilnukefesin.Tests.BootStrapper
         }
         #endregion RestDataServiceTestsTests
 
-        #region PlainTextFilesDataServiceTestsTests
-        public static void PlainTextFilesDataServiceTests()
+        #region FileDataServiceTests
+        public static void FileDataServiceTests()
         {
             DiSetup.@base();
-            DiManager.GetInstance().RegisterType<IDataService, NET.efilnukefesin.Implementations.Services.DataService.PlainTextFilesDataService.PlainTextFilesDataService>();  //TODO: switch per test
+            DiManager.GetInstance().RegisterType<IDataService, NET.efilnukefesin.Implementations.Services.DataService.FileDataService.FileDataService>();  //TODO: switch per test
             DiManager.GetInstance().AddTypeTranslation("HttpMessageHandlerProxy", typeof(HttpMessageHandler));
         }
-        #endregion PlainTextFilesDataServiceTestsTests
+        #endregion FileDataServiceTests
 
         #region base
         private static void @base()
