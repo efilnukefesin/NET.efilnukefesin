@@ -44,20 +44,23 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.FileDataS
         [TestClass]
         public class FileDataServiceMethods : FileDataServiceTests
         {
-            #region GetAsync
+            #region GetAsyncInt
             [TestMethod]
-            public void GetAsync()
+            public void GetAsyncInt()
             {
                 DiSetup.FileDataServiceTests();
                 DiSetup.InitializeFileEndpoints();
 
                 IDataService dataService = DiHelper.GetService<IDataService>(this.testPath);
 
-                bool result = dataService.GetAsync<bool>("SomeAction").GetAwaiter().GetResult();
+                var result = dataService.GetAsync<int>("GetAsyncTest1Action").GetAwaiter().GetResult();
 
-                Assert.AreEqual(true, result);
+                Assert.IsNotNull(result);
+                Assert.AreEqual(123, result);
             }
-            #endregion GetAsync
+            #endregion GetAsyncInt
+
+            //TODO: add more complex objects and lists here, continue with TextFile2 and 3
 
             #region CreateOrUpdateAsync
             [TestMethod]

@@ -1,7 +1,9 @@
 ﻿using NET.efilnukefesin.Contracts.Services.DataService;
 using NET.efilnukefesin.Implementations.Base;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -40,23 +42,33 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
         #endregion AddOrReplaceAuthentication
 
         #region CreateOrUpdateAsync
-        public Task<bool> CreateOrUpdateAsync<T>(string Action, T Value)
+        public async Task<bool> CreateOrUpdateAsync<T>(string Action, T Value)
         {
             throw new NotImplementedException();
         }
         #endregion CreateOrUpdateAsync
 
         #region DeleteAsync
-        public Task<bool> DeleteAsync<T>(string Action, params object[] Parameters)
+        public async Task<bool> DeleteAsync<T>(string Action, params object[] Parameters)
         {
             throw new NotImplementedException();
         }
         #endregion DeleteAsync
 
         #region GetAsync
-        public Task<T> GetAsync<T>(string Action, params object[] Parameters)
+        public async Task<T> GetAsync<T>(string Action, params object[] Parameters)
         {
-            throw new NotImplementedException();
+            T result = default;
+
+            string filename = Path.Join(Directory.GetCurrentDirectory(), Path.Join(this.baseFolder, this.EndpointRegister.GetEndpoint(Action)));
+
+            if (File.Exists(filename))
+            {
+                string text = File.ReadAllText(filename, Encoding.UTF8);
+                result = JsonConvert.DeserializeObject<T>(text);
+            }
+
+            return result;
         }
         #endregion GetAsync
 

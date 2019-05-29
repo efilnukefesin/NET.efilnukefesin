@@ -22,7 +22,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Content\" />
+    <None Update="Content\Testfiles\TextFile3.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Testfiles\TextFile2.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Testfiles\TextFile1.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

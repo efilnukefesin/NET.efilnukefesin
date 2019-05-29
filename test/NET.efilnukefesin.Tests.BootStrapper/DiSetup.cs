@@ -66,7 +66,9 @@ namespace NET.efilnukefesin.Tests.BootStrapper
             IEndpointRegister endpointRegister = DiHelper.GetService<IEndpointRegister>();
             if (endpointRegister != null)
             {
-                endpointRegister.AddEndpoint("SuperHotFeatureServer.SDK.Client.GetValueAsync", "api/values");
+                endpointRegister.AddEndpoint("GetAsyncTest1Action", "TextFile1.json");
+                endpointRegister.AddEndpoint("GetAsyncTest2Action", "TextFile2.json");
+                endpointRegister.AddEndpoint("GetAsyncTest3Action", "TextFile3.json");
             }
         }
         #endregion InitializeFileEndpoints
