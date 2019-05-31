@@ -62,9 +62,9 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.FileDataS
 
             //TODO: add more complex objects and lists here, continue with TextFile2 and 3
 
-            #region CreateOrUpdateAsync
+            #region CreateOrUpdateAsyncAppend
             [TestMethod]
-            public void CreateOrUpdateAsync()
+            public void CreateOrUpdateAsyncAppend()
             {
                 DiSetup.FileDataServiceTests();
                 DiSetup.InitializeFileEndpoints();
@@ -75,7 +75,22 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.FileDataS
 
                 Assert.AreEqual(true, result);
             }
-            #endregion CreateOrUpdateAsync
+            #endregion CreateOrUpdateAsyncAppend
+
+            #region CreateOrUpdateAsyncUpdate
+            [TestMethod]
+            public void CreateOrUpdateAsyncUpdate()
+            {
+                DiSetup.FileDataServiceTests();
+                DiSetup.InitializeFileEndpoints();
+
+                IDataService dataService = DiHelper.GetService<IDataService>(this.testPath);
+
+                bool result = dataService.CreateOrUpdateAsync<string>("CreateOrUpdateAsyncTest2Action", "Opel").GetAwaiter().GetResult();
+
+                Assert.AreEqual(true, result);
+            }
+            #endregion CreateOrUpdateAsyncUpdate
 
             #region DeleteAsync
             [TestMethod]
@@ -86,7 +101,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.FileDataS
 
                 IDataService dataService = DiHelper.GetService<IDataService>(this.testPath);
 
-                bool result = dataService.DeleteAsync<bool>("SomeOtherAction", true).GetAwaiter().GetResult();
+                bool result = dataService.DeleteAsync<string>("DeleteAsyncTest1Action", "Opel").GetAwaiter().GetResult();
 
                 Assert.AreEqual(true, result);
             }

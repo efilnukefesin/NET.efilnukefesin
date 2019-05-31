@@ -5,8 +5,8 @@
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
-    <Version>1.3.4</Version>
-    <PackageReleaseNotes>Added Type Extensions class</PackageReleaseNotes>
+    <Version>1.4.0</Version>
+    <PackageReleaseNotes>Added IEnumerableExtensions</PackageReleaseNotes>
     <Description>Byte- string- and other extensions to keep the flow up!</Description>
   </PropertyGroup>
 

@@ -1,4 +1,5 @@
 ﻿using NET.efilnukefesin.Contracts.Services.DataService;
+using NET.efilnukefesin.Extensions;
 using NET.efilnukefesin.Implementations.Base;
 using Newtonsoft.Json;
 using System;
@@ -51,18 +52,21 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
 
             if (File.Exists(filename))
             {
-                string text = File.ReadAllText(filename, Encoding.UTF8);
+                string text = await File.ReadAllTextAsync(filename, Encoding.UTF8);
                 var content = JsonConvert.DeserializeObject<IEnumerable<T>>(text);
                 if (content.ToList().Contains(Value))
                 {
                     //Update
+                    content = content.Replace(content.ToList().IndexOf(Value), Value);
                 }
                 else
                 {
                     //Append
+                    content = content.Add(Value);
                 }
-                //find Value, if not append
-                throw new NotImplementedException();
+                var newContent = JsonConvert.SerializeObject(content);
+                await File.WriteAllTextAsync(filename, newContent);
+                
                 result = true;
             }
 
@@ -73,7 +77,36 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
         #region DeleteAsync
         public async Task<bool> DeleteAsync<T>(string Action, params object[] Parameters)
         {
-            throw new NotImplementedException();
+            bool result = false;
+
+            string filename = this.getFilename(Action);
+
+            if (File.Exists(filename))
+            {
+                string text = await File.ReadAllTextAsync(filename, Encoding.UTF8);
+                var content = JsonConvert.DeserializeObject<IEnumerable<T>>(text);
+
+                int index = -1;
+
+                foreach (T item in content)
+                {
+                    index++;
+                    string itemText = JsonConvert.SerializeObject(item);
+                    if (itemText.Contains(Parameters[0].ToString()))
+                    {
+                        break;
+                    }
+                }
+
+                content = content.Remove(index);
+
+                var newContent = JsonConvert.SerializeObject(content);
+                await File.WriteAllTextAsync(filename, newContent);
+
+                result = true;
+            }
+
+            return result;
         }
         #endregion DeleteAsync
 
