@@ -12,23 +12,23 @@ namespace NET.efilnukefesin.Tests.Implementations.Base
     [TestClass]
     public class SimpleResultTests : BaseSimpleTest
     {
-        #region UserServiceProperties
+        #region SimpleResultProperties
         [TestClass]
         public class SimpleResultProperties : SimpleResultTests
         {
 
         }
-        #endregion UserServiceProperties
+        #endregion SimpleResultProperties
 
-        #region UserServiceConstruction
+        #region SimpleResultConstruction
         [TestClass]
         public class SimpleResultConstruction : SimpleResultTests
         {
 
         }
-        #endregion UserServiceConstruction
+        #endregion SimpleResultConstruction
 
-        #region UserServiceMethods
+        #region SimpleResultMethods
         [TestClass]
         public class SimpleResultMethods : SimpleResultTests
         {
@@ -47,6 +47,6 @@ namespace NET.efilnukefesin.Tests.Implementations.Base
             }
             #endregion JsonSerialize
         }
-        #endregion UserServiceMethods
+        #endregion SimpleResultMethods
     }
 }

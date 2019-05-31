@@ -20,6 +20,14 @@ namespace NET.efilnukefesin.Implementations.Base
         [XmlIgnore]
         public DateTimeOffset CreationDate { get; private set; }
 
+        [IgnoreDataMember]
+        [XmlIgnore]
+        public int CreationIndex { get; private set; }
+
+        [IgnoreDataMember]
+        [XmlIgnore]
+        private static int highestCreationIndex = 0;
+
         #endregion Properties
 
         #region Construction
@@ -29,6 +37,8 @@ namespace NET.efilnukefesin.Implementations.Base
             this.CreationDate = DateTimeOffset.Now;
             //this.Id = Guid.NewGuid();
             this.Id = Guid.NewGuid().ToString();
+            this.CreationIndex = BaseObject.highestCreationIndex;
+            BaseObject.highestCreationIndex++;
         }
 
         public BaseObject(Guid Id)
