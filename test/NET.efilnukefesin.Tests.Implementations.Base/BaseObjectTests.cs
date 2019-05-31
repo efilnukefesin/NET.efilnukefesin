@@ -1,5 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NET.efilnukefesin.BaseClasses.Test;
+using NET.efilnukefesin.Contracts.Base;
+using NET.efilnukefesin.Tests.Implementations.Base.Assets;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,7 +19,12 @@ namespace NET.efilnukefesin.Tests.Implementations.Base
             [TestMethod]
             public void CreationIndex()
             {
-                throw new NotImplementedException();
+                IBaseObject object1 = new StraightFromBaseObject();
+                IBaseObject object2 = new StraightFromBaseObject();
+
+                Assert.IsNotNull(object1);
+                Assert.IsNotNull(object2);
+                Assert.AreEqual(object1.CreationIndex + 1, object2.CreationIndex);
             }
             #endregion CreationIndex
         }
@@ -35,20 +42,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Base
         [TestClass]
         public class BaseObjectMethods : BaseObjectTests
         {
-            #region JsonSerialize
-            [TestMethod]
-            public void JsonSerialize()
-            {
-                ABitComplexClass aBitComplexClass = new ABitComplexClass(Guid.NewGuid(), "Hello World");
-                BaseObject<ABitComplexClass> result = new BaseObject<ABitComplexClass>(aBitComplexClass);
-
-                var resultString = JsonConvert.SerializeObject(result);
-                var otherWayRound = JsonConvert.DeserializeObject<BaseObject<ABitComplexClass>>(resultString);
-
-                Assert.IsNotNull(otherWayRound);
-                Assert.IsInstanceOfType(otherWayRound, typeof(BaseObject<ABitComplexClass>));
-            }
-            #endregion JsonSerialize
+            
         }
         #endregion UserServiceMethods
     }
