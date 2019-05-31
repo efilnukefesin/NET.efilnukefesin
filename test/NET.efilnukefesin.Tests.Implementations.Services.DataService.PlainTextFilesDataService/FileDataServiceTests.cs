@@ -71,7 +71,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.FileDataS
 
                 IDataService dataService = DiHelper.GetService<IDataService>(this.testPath);
 
-                bool result = dataService.CreateOrUpdateAsync<bool>("SomeOtherAction", true).GetAwaiter().GetResult();
+                bool result = dataService.CreateOrUpdateAsync<string>("CreateOrUpdateAsyncTest1Action", "TestString").GetAwaiter().GetResult();
 
                 Assert.AreEqual(true, result);
             }

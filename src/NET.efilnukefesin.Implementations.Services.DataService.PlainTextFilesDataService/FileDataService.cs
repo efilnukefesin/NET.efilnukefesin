@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -44,7 +45,28 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
         #region CreateOrUpdateAsync
         public async Task<bool> CreateOrUpdateAsync<T>(string Action, T Value)
         {
-            throw new NotImplementedException();
+            bool result = false;
+
+            string filename = this.getFilename(Action);
+
+            if (File.Exists(filename))
+            {
+                string text = File.ReadAllText(filename, Encoding.UTF8);
+                var content = JsonConvert.DeserializeObject<IEnumerable<T>>(text);
+                if (content.ToList().Contains(Value))
+                {
+                    //Update
+                }
+                else
+                {
+                    //Append
+                }
+                //find Value, if not append
+                throw new NotImplementedException();
+                result = true;
+            }
+
+            return result;
         }
         #endregion CreateOrUpdateAsync
 
@@ -60,7 +82,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
         {
             T result = default;
 
-            string filename = Path.Join(Directory.GetCurrentDirectory(), Path.Join(this.baseFolder, this.EndpointRegister.GetEndpoint(Action)));
+            string filename = this.getFilename(Action);
 
             if (File.Exists(filename))
             {
@@ -71,6 +93,14 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
             return result;
         }
         #endregion GetAsync
+
+        #region getFilename
+        private string getFilename(string Action)
+        {
+            string result = Path.Join(Directory.GetCurrentDirectory(), Path.Join(this.baseFolder, this.EndpointRegister.GetEndpoint(Action)));
+            return result;
+        }
+        #endregion getFilename
 
         #region dispose
         protected override void dispose()
