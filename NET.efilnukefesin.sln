@@ -80,9 +80,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Tests.Imp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Extensions.Wpf.Commands", "src\NET.efilnukefesin.Extensions.Wpf.Commands\NET.efilnukefesin.Extensions.Wpf.Commands.csproj", "{933171E8-B877-4CEB-B3C4-0D94CF2808BD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Implementations.Services.DataService.PlainTextFilesDataService", "src\NET.efilnukefesin.Implementations.Services.DataService.PlainTextFilesDataService\NET.efilnukefesin.Implementations.Services.DataService.PlainTextFilesDataService.csproj", "{BF7494CE-9C86-431E-A385-A151395EE710}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Implementations.Services.DataService.FileDataService", "src\NET.efilnukefesin.Implementations.Services.DataService.PlainTextFilesDataService\NET.efilnukefesin.Implementations.Services.DataService.FileDataService.csproj", "{BF7494CE-9C86-431E-A385-A151395EE710}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Tests.Implementations.Services.DataService.PlainTextFilesDataService", "test\NET.efilnukefesin.Tests.Implementations.Services.DataService.PlainTextFilesDataService\NET.efilnukefesin.Tests.Implementations.Services.DataService.PlainTextFilesDataService.csproj", "{C38CBECA-02B1-42D3-950E-B62491EACDEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Tests.Implementations.Services.DataService.FileDataService", "test\NET.efilnukefesin.Tests.Implementations.Services.DataService.PlainTextFilesDataService\NET.efilnukefesin.Tests.Implementations.Services.DataService.FileDataService.csproj", "{C38CBECA-02B1-42D3-950E-B62491EACDEF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Implementations.Services.DataService.EndpointRegister", "src\NET.efilnukefesin.Implementations.Services.DataService.EndpointRegister\NET.efilnukefesin.Implementations.Services.DataService.EndpointRegister.csproj", "{13BFDD81-1C66-4BA5-BD08-4EBE2371D11D}"
 EndProject

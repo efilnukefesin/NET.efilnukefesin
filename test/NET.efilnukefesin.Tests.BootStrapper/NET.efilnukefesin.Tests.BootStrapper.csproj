@@ -8,7 +8,7 @@
     <ProjectReference Include="..\..\src\NET.efilnukefesin.Contracts.Services.DataService\NET.efilnukefesin.Contracts.Services.DataService.csproj" />
     <ProjectReference Include="..\..\src\NET.efilnukefesin.Implementations.DependencyInjection\NET.efilnukefesin.Implementations.DependencyInjection.csproj" />
     <ProjectReference Include="..\..\src\NET.efilnukefesin.Implementations.Services.DataService.EndpointRegister\NET.efilnukefesin.Implementations.Services.DataService.EndpointRegister.csproj" />
-    <ProjectReference Include="..\..\src\NET.efilnukefesin.Implementations.Services.DataService.PlainTextFilesDataService\NET.efilnukefesin.Implementations.Services.DataService.PlainTextFilesDataService.csproj" />
+    <ProjectReference Include="..\..\src\NET.efilnukefesin.Implementations.Services.DataService.PlainTextFilesDataService\NET.efilnukefesin.Implementations.Services.DataService.FileDataService.csproj" />
     <ProjectReference Include="..\..\src\NET.efilnukefesin.Implementations.Services.DataService.RestDataService\NET.efilnukefesin.Implementations.Services.DataService.RestDataService.csproj" />
   </ItemGroup>
 

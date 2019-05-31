@@ -21,14 +21,14 @@ namespace NET.efilnukefesin.Tests.BootStrapper
         }
         #endregion RestDataServiceTestsTests
 
-        #region PlainTextFilesDataServiceTestsTests
-        public static void PlainTextFilesDataServiceTests()
+        #region FileDataServiceTests
+        public static void FileDataServiceTests()
         {
             DiSetup.@base();
-            DiManager.GetInstance().RegisterType<IDataService, NET.efilnukefesin.Implementations.Services.DataService.PlainTextFilesDataService.PlainTextFilesDataService>();  //TODO: switch per test
+            DiManager.GetInstance().RegisterType<IDataService, NET.efilnukefesin.Implementations.Services.DataService.FileDataService.FileDataService>();  //TODO: switch per test
             DiManager.GetInstance().AddTypeTranslation("HttpMessageHandlerProxy", typeof(HttpMessageHandler));
         }
-        #endregion PlainTextFilesDataServiceTestsTests
+        #endregion FileDataServiceTests
 
         #region base
         private static void @base()
@@ -66,7 +66,9 @@ namespace NET.efilnukefesin.Tests.BootStrapper
             IEndpointRegister endpointRegister = DiHelper.GetService<IEndpointRegister>();
             if (endpointRegister != null)
             {
-                endpointRegister.AddEndpoint("SuperHotFeatureServer.SDK.Client.GetValueAsync", "api/values");
+                endpointRegister.AddEndpoint("GetAsyncTest1Action", "TextFile1.json");
+                endpointRegister.AddEndpoint("GetAsyncTest2Action", "TextFile2.json");
+                endpointRegister.AddEndpoint("GetAsyncTest3Action", "TextFile3.json");
             }
         }
         #endregion InitializeFileEndpoints
