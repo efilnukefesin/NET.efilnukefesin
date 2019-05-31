@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>1.7.0</Version>
+    <Version>1.7.1</Version>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
     <Description>Base Contracts</Description>
-    <PackageReleaseNotes>added ICreationIndex interface</PackageReleaseNotes>
+    <PackageReleaseNotes>added ICreationSiblings interface</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>

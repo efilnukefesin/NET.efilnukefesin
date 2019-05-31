@@ -26,7 +26,19 @@ namespace NET.efilnukefesin.Implementations.Base
 
         [IgnoreDataMember]
         [XmlIgnore]
+        public IBaseObject CreationPredecessor { get; set; } = default;
+
+        [IgnoreDataMember]
+        [XmlIgnore]
+        public IBaseObject CreationSucessor { get; set; } = default;
+
+        [IgnoreDataMember]
+        [XmlIgnore]
         private static int highestCreationIndex = 0;
+
+        [IgnoreDataMember]
+        [XmlIgnore]
+        private static IBaseObject lastCreatedBaseObject = default;
 
         #endregion Properties
 
@@ -39,6 +51,12 @@ namespace NET.efilnukefesin.Implementations.Base
             this.Id = Guid.NewGuid().ToString();
             this.CreationIndex = BaseObject.highestCreationIndex;
             BaseObject.highestCreationIndex++;
+            this.CreationPredecessor = BaseObject.lastCreatedBaseObject;
+            if (BaseObject.lastCreatedBaseObject != null)
+            {
+                BaseObject.lastCreatedBaseObject.CreationSucessor = this;
+            }
+            BaseObject.lastCreatedBaseObject = this;
         }
 
         public BaseObject(Guid Id)

@@ -11,7 +11,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Base
     [TestClass]
     public class BaseObjectTests : BaseSimpleTest
     {
-        #region UserServiceProperties
+        #region BaseObjectProperties
         [TestClass]
         public class BaseObjectProperties : BaseObjectTests
         {
@@ -28,22 +28,22 @@ namespace NET.efilnukefesin.Tests.Implementations.Base
             }
             #endregion CreationIndex
         }
-        #endregion UserServiceProperties
+        #endregion BaseObjectProperties
 
-        #region UserServiceConstruction
+        #region BaseObjectConstruction
         [TestClass]
         public class BaseObjectConstruction : BaseObjectTests
         {
 
         }
-        #endregion UserServiceConstruction
+        #endregion BaseObjectConstruction
 
-        #region UserServiceMethods
+        #region BaseObjectMethods
         [TestClass]
         public class BaseObjectMethods : BaseObjectTests
         {
             
         }
-        #endregion UserServiceMethods
+        #endregion BaseObjectMethods
     }
 }

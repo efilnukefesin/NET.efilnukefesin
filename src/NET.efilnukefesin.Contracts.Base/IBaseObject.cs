@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NET.efilnukefesin.Contracts.Base
 {
-    public interface IBaseObject : IId, ICreationDate, ICreationIndex
+    public interface IBaseObject : IId, ICreationDate, ICreationIndex, ICreationSiblings
     {
         
     }
