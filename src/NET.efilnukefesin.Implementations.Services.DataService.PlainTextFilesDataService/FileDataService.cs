@@ -94,7 +94,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
                     string itemText = JsonConvert.SerializeObject(item);
                     if (itemText.Contains(Parameters[0].ToString()))
                     {
-                        break;
+                        break;  //TODO: think of logic here, focussing on id, perhaps a beginswith is better
                     }
                 }
 
