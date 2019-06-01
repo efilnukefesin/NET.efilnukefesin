@@ -14,6 +14,7 @@ namespace NET.efilnukefesin.Implementations.Mvvm
         #region Properties
         private static IViewModelLocator locator = new ViewModelLocator();
 
+        #region Current
         public static IViewModelLocator Current
         {
             get
@@ -21,10 +22,13 @@ namespace NET.efilnukefesin.Implementations.Mvvm
                 return StaticViewModelLocator.locator;
             }
         }
+        #endregion Current
+
         #endregion Properties
 
         #region Methods
 
+        #region Register
         public static void Register(IViewModelLocator locatorToRegister)
         {
             if (locatorToRegister == null)
@@ -33,6 +37,8 @@ namespace NET.efilnukefesin.Implementations.Mvvm
             }
             StaticViewModelLocator.locator = locatorToRegister;
         }
+        #endregion Register
+
         #endregion Methods
     }
 }

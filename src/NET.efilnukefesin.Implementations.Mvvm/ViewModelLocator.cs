@@ -25,6 +25,16 @@ namespace NET.efilnukefesin.Implementations.Mvvm
 
         #endregion Construction
 
+        #region Indexer
+        public object this[string name]
+        {
+            get
+            {
+                return GetInstance(name);
+            }
+        }
+        #endregion Indexer
+
         #region Methods
 
         #region Register
@@ -32,7 +42,7 @@ namespace NET.efilnukefesin.Implementations.Mvvm
         {
             if (String.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException("ViewModelLocator.Register: No name supplied");
             }
 
             if (!registeredInstances.ContainsKey(name))
@@ -41,7 +51,7 @@ namespace NET.efilnukefesin.Implementations.Mvvm
             }
             else
             {
-                throw new Exception(String.Format("Instance with name '{0}' already registered", name));
+                throw new Exception($"ViewModelLocator.Register: Instance with name '{name}' already registered");
             }
         }
         #endregion Register
@@ -49,21 +59,15 @@ namespace NET.efilnukefesin.Implementations.Mvvm
         #region GetInstance
         public object GetInstance(string name)
         {
-            if (registeredInstances.ContainsKey(name))
+            object result = default;
+            if (this.registeredInstances.ContainsKey(name))
             {
-                return registeredInstances[name];
+                result = this.registeredInstances[name];
             }
-            return null;
+            
+            return result;
         }
         #endregion GetInstance
-
-        public object this[string name]
-        {
-            get
-            {
-                return GetInstance(name);
-            }
-        }
 
         #region findAndAddViewModelInstances
         private void findAndAddViewModelInstances()
