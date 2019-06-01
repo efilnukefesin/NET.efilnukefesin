@@ -8,6 +8,13 @@ namespace NET.efilnukefesin.Contracts.DependencyInjection.Classes
     {
         #region Properties
 
+        #region ServiceInterface: the Service interface to use
+        /// <summary>
+        /// the Service interface to use
+        /// </summary>
+        public Type ServiceInterface { get; set; }
+        #endregion ServiceInterface
+
         #region TypeToResolve: type to resolve dynamically
         /// <summary>
         /// type to resolve dynamically
@@ -43,6 +50,15 @@ namespace NET.efilnukefesin.Contracts.DependencyInjection.Classes
         public DynamicParameterInfoObject(Type typeToResolve, params object[] parameters)
         {
             this.TypeToResolve = typeToResolve;
+            this.ServiceInterface = typeToResolve;
+            this.Field = null;
+            this.Parameters = parameters;
+        }
+
+        public DynamicParameterInfoObject(Type serviceInterface, Type typeToResolve, params object[] parameters)
+        {
+            this.TypeToResolve = typeToResolve;
+            this.ServiceInterface = serviceInterface;
             this.Field = null;
             this.Parameters = parameters;
         }

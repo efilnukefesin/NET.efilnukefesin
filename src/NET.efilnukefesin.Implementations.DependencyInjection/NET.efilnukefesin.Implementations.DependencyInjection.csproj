@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>1.3.2</Version>
+    <Version>1.3.3</Version>
     <PackageReleaseNotes>Added lifetime for RegisterTarget method.</PackageReleaseNotes>
     <Description>Implementation of Inversion of Control.</Description>
     <PackageTags>Dependency Injection, Inversion of Control, IoC, DI</PackageTags>

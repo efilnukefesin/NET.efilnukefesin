@@ -189,7 +189,7 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         /// <typeparam name="TTo">the concrete implementation</typeparam>
         public void RegisterType<TFrom, TTo>() where TFrom : class where TTo : class, TFrom
         {
-            this.builder.RegisterType<TTo>().As<TFrom>();
+            this.builder.RegisterType<TTo>().As<TFrom>().AsSelf();
             this.addToInternalRegister(typeof(TFrom), typeof(TTo));
         }
         #endregion RegisterType
@@ -238,7 +238,7 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
                     if (convertedParameterInfoObject.Field == null)
                     {
                         //resolve only type
-                        predicate = (pi, ctx) => pi.ParameterType.Equals(convertedParameterInfoObject.TypeToResolve)/* && pi.Name == "configSectionName"*/;
+                        predicate = (pi, ctx) => pi.ParameterType.Equals(convertedParameterInfoObject.ServiceInterface)/* && pi.Name == "configSectionName"*/;
                         valueAccessor = (pi, ctx) => ctx.Resolve(convertedParameterInfoObject.TypeToResolve, this.convertParameters(convertedParameterInfoObject.Parameters));
                     }
                     //else
@@ -256,10 +256,10 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
             switch (Lifetime)
             {
                 case Lifetime.Singleton:
-                    this.builder.RegisterType<T>().WithParameters(paramsForBuilder).SingleInstance();
+                    this.builder.RegisterType<T>().WithParameters(paramsForBuilder).AsSelf().SingleInstance();
                     break;
                 case Lifetime.NewInstanceEveryTime:
-                    this.builder.RegisterType<T>().WithParameters(paramsForBuilder);
+                    this.builder.RegisterType<T>().WithParameters(paramsForBuilder).AsSelf();
                     break;
                 default:
                     break;
@@ -280,11 +280,11 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         {
             if (Lifetime == Lifetime.Singleton)
             {
-                this.builder.RegisterType<TTo>().As<TFrom>().SingleInstance();
+                this.builder.RegisterType<TTo>().As<TFrom>().AsSelf().SingleInstance();
             }
             else
             {
-                this.builder.RegisterType<TTo>().As<TFrom>();
+                this.builder.RegisterType<TTo>().As<TFrom>().AsSelf();
             }
             this.addToInternalRegister(typeof(TFrom), typeof(TTo));
         }
@@ -310,11 +310,11 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
 
             if (Lifetime == Lifetime.Singleton)
             {
-                this.builder.RegisterType(TTo).As(TFrom).SingleInstance();
+                this.builder.RegisterType(TTo).As(TFrom).AsSelf().SingleInstance();
             }
             else
             {
-                this.builder.RegisterType(TTo).As(TFrom);
+                this.builder.RegisterType(TTo).As(TFrom).AsSelf();
             }
             this.addToInternalRegister(TFrom, TTo);
         }
