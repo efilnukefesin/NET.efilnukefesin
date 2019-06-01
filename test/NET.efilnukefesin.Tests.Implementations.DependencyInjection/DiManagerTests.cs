@@ -177,18 +177,71 @@ namespace NET.efilnukefesin.Tests.Implementations.DiManager
             }
             #endregion HttpMessageHandlerParameterInjection
 
-            #region TwoServicesForOneInterface
+            #region TwoServicesForOneInterfaceWithOneParameter
             [TestMethod]
-            public void TwoServicesForOneInterface()
+            public void TwoServicesForOneInterfaceWithOneParameter()
             {
                 NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Reset();
-                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<IRegularParameterlessService, RegularParameterlessService>();
-                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<ClassA>(new List<TypeInstanceParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(ITestService), new TestService("abc")) });
-                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<ClassB>(new List<TypeInstanceParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(ITestService), new TestService("xyz")) });
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<ITwoServicesForOneInterfaceService, TwoServicesForOneInterfaceService1>();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<ITwoServicesForOneInterfaceService, TwoServicesForOneInterfaceService2>();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<TwoServicesForOneInterfaceTarget1>(new List<TypeInstanceParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(ITwoServicesForOneInterfaceService), new TwoServicesForOneInterfaceService1(666)) });
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<TwoServicesForOneInterfaceTarget2>(new List<TypeInstanceParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(ITwoServicesForOneInterfaceService), new TwoServicesForOneInterfaceService2("xyz")) });
 
-                ***
+                var a = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<TwoServicesForOneInterfaceTarget1>();
+                var b = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<TwoServicesForOneInterfaceTarget2>();
+
+                Assert.IsNotNull(a);
+                Assert.IsNotNull(b);
+                Assert.IsInstanceOfType(a.Service, typeof(TwoServicesForOneInterfaceService1));
+                Assert.IsInstanceOfType(b.Service, typeof(TwoServicesForOneInterfaceService2));
             }
-            #endregion TwoServicesForOneInterface
+            #endregion TwoServicesForOneInterfaceWithOneParameter
+
+            #region TwoServicesForOneInterfaceWithTwoParameters
+            [TestMethod]
+            public void TwoServicesForOneInterfaceWithTwoParameters()
+            {
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Reset();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<ITwoServicesForOneInterfaceService, TwoServicesForOneInterfaceService1>();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<ITwoServicesForOneInterfaceService, TwoServicesForOneInterfaceService2>();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<ITwoServicesForOneInterfaceOtherService, TwoServicesForOneInterfaceOtherService>();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<TwoServicesForOneInterfaceTarget3>(new List<ParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(ITwoServicesForOneInterfaceService), new TwoServicesForOneInterfaceService1(666)) });
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<TwoServicesForOneInterfaceTarget4>(new List<ParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(ITwoServicesForOneInterfaceService), new TwoServicesForOneInterfaceService2("xyz")) });
+
+                var a = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<TwoServicesForOneInterfaceTarget3>();
+                var b = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<TwoServicesForOneInterfaceTarget4>();
+
+                Assert.IsNotNull(a);
+                Assert.IsNotNull(b);
+                Assert.IsInstanceOfType(a.Service, typeof(TwoServicesForOneInterfaceService1));
+                Assert.IsInstanceOfType(b.Service, typeof(TwoServicesForOneInterfaceService2));
+                Assert.IsInstanceOfType(a.Service2, typeof(TwoServicesForOneInterfaceOtherService));
+                Assert.IsInstanceOfType(b.Service2, typeof(TwoServicesForOneInterfaceOtherService));
+            }
+            #endregion TwoServicesForOneInterfaceWithTwoParameters
+
+            #region TwoServicesForOneInterfaceWithTwoParametersDynamically
+            [TestMethod]
+            public void TwoServicesForOneInterfaceWithTwoParametersDynamically()
+            {
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Reset();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<ITwoServicesForOneInterfaceService, TwoServicesForOneInterfaceService1>();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<ITwoServicesForOneInterfaceService, TwoServicesForOneInterfaceService2>();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<ITwoServicesForOneInterfaceOtherService, TwoServicesForOneInterfaceOtherService>();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<TwoServicesForOneInterfaceTarget3>(new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(ITwoServicesForOneInterfaceService), 666) });
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<TwoServicesForOneInterfaceTarget4>(new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(ITwoServicesForOneInterfaceService), "xyz") });
+
+                var a = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<TwoServicesForOneInterfaceTarget3>();
+                var b = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<TwoServicesForOneInterfaceTarget4>();
+
+                Assert.IsNotNull(a);
+                Assert.IsNotNull(b);
+                Assert.IsInstanceOfType(a.Service, typeof(TwoServicesForOneInterfaceService1));
+                Assert.IsInstanceOfType(b.Service, typeof(TwoServicesForOneInterfaceService2));
+                Assert.IsInstanceOfType(a.Service2, typeof(TwoServicesForOneInterfaceOtherService));
+                Assert.IsInstanceOfType(b.Service2, typeof(TwoServicesForOneInterfaceOtherService));
+            }
+            #endregion TwoServicesForOneInterfaceWithTwoParametersDynamically
         }
         #endregion DiManagerMethods
     }
