@@ -11,15 +11,17 @@ namespace NET.efilnukefesin.Tests.Implementations.DependencyInjection.Assets.Ser
         #region Properties
 
         private IUserService userService;
-        private IDataService dataService;
+        private IRoleService roleService;
+        private IPermissionService permissionService;
 
         #endregion Properties
 
         #region Construction
-        public DemoAuthenticationService(IUserService userService, IDataService dataService)
+        public DemoAuthenticationService(IUserService userService, IRoleService roleService, IPermissionService permissionService)
         {
             this.userService = userService;
-            this.dataService = dataService;
+            this.roleService = roleService;
+            this.permissionService = permissionService;
         }
         #endregion Construction
 
@@ -28,7 +30,9 @@ namespace NET.efilnukefesin.Tests.Implementations.DependencyInjection.Assets.Ser
         #region dispose
         protected override void dispose()
         {
-
+            this.userService = null;
+            this.roleService = null;
+            this.permissionService = null;
         }
         #endregion dispose
 

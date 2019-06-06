@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>1.7.1</Version>
+    <Version>1.7.2</Version>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
-    <PackageReleaseNotes>added ICreationSiblings interface</PackageReleaseNotes>
+    <PackageReleaseNotes>added a null check</PackageReleaseNotes>
     <Description>Base class implementations</Description>
   </PropertyGroup>
 
