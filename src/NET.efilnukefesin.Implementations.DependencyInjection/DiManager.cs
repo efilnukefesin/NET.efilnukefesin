@@ -216,43 +216,45 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         public void RegisterTarget<T>(Lifetime Lifetime, IEnumerable<ParameterInfoObject> parameters) where T : class
         {
             List<Parameter> paramsForBuilder = new List<Parameter>();
-            foreach (var parameterInfoObject in parameters)
+            if (parameters != null)
             {
-                if (parameterInfoObject is TypeInstanceParameterInfoObject)
+                foreach (var parameterInfoObject in parameters)
                 {
-                    TypeInstanceParameterInfoObject convertedParamaterInfoObject = parameterInfoObject as TypeInstanceParameterInfoObject;
-                    Type parameterType = convertedParamaterInfoObject.Type;
-                    if (this.typeTranslations.ContainsKey(parameterType.Name) || this.typeTranslations.ContainsKey(parameterType.FullName))
+                    if (parameterInfoObject is TypeInstanceParameterInfoObject)
                     {
-                        parameterType = this.typeTranslations.ContainsKey(parameterType.Name) ? this.typeTranslations[parameterType.Name] : this.typeTranslations[parameterType.FullName];
+                        TypeInstanceParameterInfoObject convertedParamaterInfoObject = parameterInfoObject as TypeInstanceParameterInfoObject;
+                        Type parameterType = convertedParamaterInfoObject.Type;
+                        if (this.typeTranslations.ContainsKey(parameterType.Name) || this.typeTranslations.ContainsKey(parameterType.FullName))
+                        {
+                            parameterType = this.typeTranslations.ContainsKey(parameterType.Name) ? this.typeTranslations[parameterType.Name] : this.typeTranslations[parameterType.FullName];
+                        }
+                        paramsForBuilder.Add(new TypedParameter(parameterType, convertedParamaterInfoObject.Instance));
                     }
-                    paramsForBuilder.Add(new TypedParameter(parameterType, convertedParamaterInfoObject.Instance));
-                }
-                else if (parameterInfoObject is DynamicParameterInfoObject)
-                {
-                    DynamicParameterInfoObject convertedParameterInfoObject = parameterInfoObject as DynamicParameterInfoObject;
-
-                    Func<ParameterInfo, IComponentContext, bool> predicate = null;
-                    Func<ParameterInfo, IComponentContext, object> valueAccessor = null;
-
-                    if (convertedParameterInfoObject.Field == null)
+                    else if (parameterInfoObject is DynamicParameterInfoObject)
                     {
-                        //resolve only type
-                        predicate = (pi, ctx) => pi.ParameterType.Equals(convertedParameterInfoObject.ServiceInterface)/* && pi.Name == "configSectionName"*/;
-                        valueAccessor = (pi, ctx) => ctx.Resolve(convertedParameterInfoObject.TypeToResolve, this.convertParameters(convertedParameterInfoObject.Parameters));
-                    }
-                    //else
-                    //{
-                    //    //TODO: resolve type and call field value
-                    //    //***
-                    //    predicate = (pi, ctx) => pi.ParameterType == typeof(string) && pi.Name == "configSectionName";
-                    //    valueAccessor = (pi, ctx) => ctx.Resolve<>();
-                    //}
+                        DynamicParameterInfoObject convertedParameterInfoObject = parameterInfoObject as DynamicParameterInfoObject;
 
-                    paramsForBuilder.Add(new ResolvedParameter(predicate, valueAccessor));
+                        Func<ParameterInfo, IComponentContext, bool> predicate = null;
+                        Func<ParameterInfo, IComponentContext, object> valueAccessor = null;
+
+                        if (convertedParameterInfoObject.Field == null)
+                        {
+                            //resolve only type
+                            predicate = (pi, ctx) => pi.ParameterType.Equals(convertedParameterInfoObject.ServiceInterface)/* && pi.Name == "configSectionName"*/;
+                            valueAccessor = (pi, ctx) => ctx.Resolve(convertedParameterInfoObject.TypeToResolve, this.convertParameters(convertedParameterInfoObject.Parameters));
+                        }
+                        //else
+                        //{
+                        //    //TODO: resolve type and call field value
+                        //    //***
+                        //    predicate = (pi, ctx) => pi.ParameterType == typeof(string) && pi.Name == "configSectionName";
+                        //    valueAccessor = (pi, ctx) => ctx.Resolve<>();
+                        //}
+
+                        paramsForBuilder.Add(new ResolvedParameter(predicate, valueAccessor));
+                    }
                 }
             }
-
             switch (Lifetime)
             {
                 case Lifetime.Singleton:

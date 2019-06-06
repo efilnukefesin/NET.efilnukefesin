@@ -5,6 +5,8 @@ using NET.efilnukefesin.BaseClasses.Test;
 using NET.efilnukefesin.Contracts.DependencyInjection;
 using NET.efilnukefesin.Contracts.DependencyInjection.Classes;
 using NET.efilnukefesin.Tests.Implementations.DependencyInjection.Assets;
+using NET.efilnukefesin.Tests.Implementations.DependencyInjection.Assets.Interfaces;
+using NET.efilnukefesin.Tests.Implementations.DependencyInjection.Assets.Services;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -265,6 +267,22 @@ namespace NET.efilnukefesin.Tests.Implementations.DiManager
                 Assert.IsInstanceOfType(b.Service2, typeof(TwoServicesForOneInterfaceOtherService));
             }
             #endregion TwoServicesForOneInterfaceWithTwoParametersDynamically
+
+            #region ComplexResolving
+            [TestMethod]
+            public void ComplexResolving()
+            {
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Reset();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<IDataService, DemoFileDataService>();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<IDataService, DemoSomeDataService>();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<IUserService, DemoUserService>();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<DemoAuthenticationService>(null);
+
+                var authenticationService = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<DemoAuthenticationService>();
+
+                Assert.IsNotNull(authenticationService);
+            }
+            #endregion ComplexResolving
         }
         #endregion DiManagerMethods
     }
