@@ -11,7 +11,7 @@ namespace NET.efilnukefesin.Tests.Implementations.DependencyInjection.Assets.Ser
         #region Properties
 
         private IRoleService roleService;
-        private IDataService dataService;
+        public IDataService DataService { get; private set; }
 
         #endregion Properties
 
@@ -20,7 +20,7 @@ namespace NET.efilnukefesin.Tests.Implementations.DependencyInjection.Assets.Ser
         public DemoUserService(IRoleService roleService, IDataService dataService)
         {
             this.roleService = roleService;
-            this.dataService = dataService;
+            this.DataService = dataService;
         }
 
         #endregion Construction
@@ -31,7 +31,7 @@ namespace NET.efilnukefesin.Tests.Implementations.DependencyInjection.Assets.Ser
         protected override void dispose()
         {
             this.roleService = null;
-            this.dataService = null;
+            this.DataService = null;
         }
         #endregion dispose
 

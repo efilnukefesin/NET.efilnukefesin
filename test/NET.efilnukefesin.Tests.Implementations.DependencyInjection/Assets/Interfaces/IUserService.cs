@@ -6,5 +6,6 @@ namespace NET.efilnukefesin.Tests.Implementations.DependencyInjection.Assets.Int
 {
     interface IUserService
     {
+        IDataService DataService { get; }
     }
 }

@@ -10,9 +10,16 @@ namespace NET.efilnukefesin.Tests.Implementations.DependencyInjection.Assets.Ser
     {
         #region Properties
 
+        public string BasePath { get; set; }
+
         #endregion Properties
 
         #region Construction
+
+        public DemoFileDataService(string basePath)
+        {
+            BasePath = basePath ?? throw new ArgumentNullException(nameof(basePath));
+        }
 
         #endregion Construction
 
