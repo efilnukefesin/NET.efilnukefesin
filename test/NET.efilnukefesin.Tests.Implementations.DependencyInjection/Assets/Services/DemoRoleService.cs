@@ -10,9 +10,18 @@ namespace NET.efilnukefesin.Tests.Implementations.DependencyInjection.Assets.Ser
     {
         #region Properties
 
+        private IPermissionService permissionService;
+        private IDataService dataService;
+
         #endregion Properties
 
         #region Construction
+
+        public DemoRoleService(IPermissionService permissionService, IDataService dataService)
+        {
+            this.permissionService = permissionService;
+            this.dataService = dataService;
+        }
 
         #endregion Construction
 
@@ -21,7 +30,8 @@ namespace NET.efilnukefesin.Tests.Implementations.DependencyInjection.Assets.Ser
         #region dispose
         protected override void dispose()
         {
-
+            this.permissionService = null;
+            this.dataService = null;
         }
         #endregion dispose
 
