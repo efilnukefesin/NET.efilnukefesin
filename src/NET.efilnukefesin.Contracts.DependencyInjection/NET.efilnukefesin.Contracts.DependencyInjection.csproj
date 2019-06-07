@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>1.3.3</Version>
-    <PackageReleaseNotes>Added also lifetime Parameter.</PackageReleaseNotes>
+    <Version>1.4.0</Version>
+    <PackageReleaseNotes>Added c'tor to DynamicParameterInfoObject without params to support type 'translation'</PackageReleaseNotes>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Description>Contract for the IoC facade class.</Description>
