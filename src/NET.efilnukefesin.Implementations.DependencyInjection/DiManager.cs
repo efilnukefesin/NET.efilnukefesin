@@ -471,16 +471,18 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         private List<Parameter> convertParameters(object[] parameters)
         {
             List<Parameter> tempParameters = new List<Parameter>();
-            foreach (var parameter in parameters)
+            if (parameters != null)
             {
-                Type parameterType = parameter.GetType();
-                if (this.typeTranslations.ContainsKey(parameterType.Name) || this.typeTranslations.ContainsKey(parameterType.FullName))
+                foreach (var parameter in parameters)
                 {
-                    parameterType = this.typeTranslations.ContainsKey(parameterType.Name) ? this.typeTranslations[parameterType.Name] : this.typeTranslations[parameterType.FullName];
+                    Type parameterType = parameter.GetType();
+                    if (this.typeTranslations.ContainsKey(parameterType.Name) || this.typeTranslations.ContainsKey(parameterType.FullName))
+                    {
+                        parameterType = this.typeTranslations.ContainsKey(parameterType.Name) ? this.typeTranslations[parameterType.Name] : this.typeTranslations[parameterType.FullName];
+                    }
+                    tempParameters.Add(new TypedParameter(parameterType, parameter));
                 }
-                tempParameters.Add(new TypedParameter(parameterType, parameter));
             }
-
             return tempParameters;
         }
         #endregion convertParameters

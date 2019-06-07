@@ -63,6 +63,14 @@ namespace NET.efilnukefesin.Contracts.DependencyInjection.Classes
             this.Parameters = parameters;
         }
 
+        public DynamicParameterInfoObject(Type serviceInterface, Type typeToResolve)
+        {
+            this.TypeToResolve = typeToResolve;
+            this.ServiceInterface = serviceInterface;
+            this.Field = null;
+            this.Parameters = null;
+        }
+
         #endregion Construction
 
         #region Methods

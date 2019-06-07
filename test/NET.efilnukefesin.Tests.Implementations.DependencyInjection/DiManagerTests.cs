@@ -279,11 +279,14 @@ namespace NET.efilnukefesin.Tests.Implementations.DiManager
                 NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<IUserService, DemoUserService>(Lifetime.Singleton);
                 NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<IRoleService, DemoRoleService>();
                 NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<IPermissionService, DemoPermissionService>();
-                //NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<DemoUserService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(DemoFileDataService), "BasePath") });
-                //NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<DemoRoleService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(DemoFileDataService), "BasePath") });
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<DemoUserService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(DemoFileDataService), "BasePath"), new DynamicParameterInfoObject(typeof(IRoleService), typeof(DemoRoleService)) });
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<DemoRoleService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(DemoFileDataService), "BasePath"), new DynamicParameterInfoObject(typeof(IPermissionService), typeof(DemoPermissionService)) });
                 NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<DemoPermissionService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(DemoFileDataService), "BasePath") });
-                //NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<DemoAuthenticationService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(DemoFileDataService), "BasePath") });
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<DemoAuthenticationService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(DemoFileDataService), "BasePath"), new DynamicParameterInfoObject(typeof(IUserService), typeof(DemoUserService)), new DynamicParameterInfoObject(typeof(IPermissionService), typeof(DemoPermissionService)), new DynamicParameterInfoObject(typeof(IRoleService), typeof(DemoRoleService)) });
 
+                var userService = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<DemoUserService>();
+                var permissionService = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<DemoPermissionService>();
+                var roleService = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<DemoRoleService>();
                 var authenticationService = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<DemoAuthenticationService>();
 
                 Assert.IsNotNull(authenticationService);
