@@ -59,7 +59,12 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         }
         #endregion NumberOfRegistrations
 
+        #region registeredTypes: dict containing the Service type as key and the Interface as Value, as this can be doubled
+        /// <summary>
+        /// dict containing the Service type as key and the Interface as Value, as this can be doubled
+        /// </summary>
         private Dictionary<Type, Type> registeredTypes;
+        #endregion registeredTypes
 
         private Dictionary<string, Type> typeTranslations;
 
@@ -174,9 +179,9 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         #region addToInternalRegister
         private void addToInternalRegister(Type interfaceType, Type serviceType)
         {
-            if (!this.registeredTypes.ContainsKey(interfaceType))
+            if (!this.registeredTypes.ContainsKey(serviceType))
             {
-                this.registeredTypes.Add(interfaceType, serviceType);
+                this.registeredTypes.Add(serviceType, interfaceType);
             }
         }
         #endregion addToInternalRegister
@@ -433,11 +438,11 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         {
             bool result = false;
 
-            if (this.registeredTypes.ContainsKey(TypeToCheck))
+            if (this.registeredTypes.ContainsValue(TypeToCheck))
             {
                 result = true;
             }
-            else if (this.registeredTypes.ContainsValue(TypeToCheck))
+            else if (this.registeredTypes.ContainsKey(TypeToCheck))
             {
                 result = true;
             }
@@ -451,14 +456,7 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         {
             bool result = false;
 
-            if (this.registeredTypes.ContainsKey(typeof(T)))
-            {
-                result = true;
-            }
-            else if (this.registeredTypes.ContainsValue(typeof(T)))
-            {
-                result = true;
-            }
+            result = this.IsRegistered(typeof(T));
 
             return result;
         }

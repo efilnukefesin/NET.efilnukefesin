@@ -10,9 +10,16 @@ namespace NET.efilnukefesin.Tests.Implementations.DependencyInjection.Assets.Ser
     {
         #region Properties
 
+        public int SomeNumber { get; set; }
+
         #endregion Properties
 
         #region Construction
+
+        public DemoSomeDataService(int someNumber)
+        {
+            SomeNumber = someNumber;
+        }
 
         #endregion Construction
 
