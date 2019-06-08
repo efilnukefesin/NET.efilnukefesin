@@ -321,6 +321,8 @@ namespace NET.efilnukefesin.Tests.Implementations.DiManager
                 NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<DemoPermissionService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(DemoFileDataService2), "BasePath") });
                 NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<DemoAuthenticationService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(DemoFileDataService2), "BasePath"), new DynamicParameterInfoObject(typeof(IUserService), typeof(DemoUserService)), new DynamicParameterInfoObject(typeof(IPermissionService), typeof(DemoPermissionService)), new DynamicParameterInfoObject(typeof(IRoleService), typeof(DemoRoleService)) });
 
+                //TODO: tell dimanager that if you resolve that target (as it's registered) using the interface, then use stuff I told you above.
+
                 var userService = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<IUserService>();
                 var permissionService = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<IPermissionService>();
                 var roleService = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<IRoleService>();
