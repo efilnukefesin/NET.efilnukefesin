@@ -21,6 +21,8 @@ namespace NET.efilnukefesin.Contracts.DependencyInjection
         void RegisterType<TFrom, TTo>(Lifetime Lifetime) where TFrom : class where TTo : class, TFrom;
         void RegisterTarget<T>(IEnumerable<ParameterInfoObject> parameters) where T : class;
         void RegisterTarget<T>(Lifetime Lifetime, IEnumerable<ParameterInfoObject> parameters) where T : class;
+        void RegisterTarget<I, T>(IEnumerable<ParameterInfoObject> parameters) where I: class where T : class, I;
+        void RegisterTarget<I, T>(Lifetime Lifetime, IEnumerable<ParameterInfoObject> parameters) where I : class where T : class, I;
         void RegisterInstance<TFrom>(TFrom Instance) where TFrom : class;
         void Reset();
         XElement SaveToXml(bool AddAssemblyDetail = false);

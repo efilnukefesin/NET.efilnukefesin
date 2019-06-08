@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>1.4.0</Version>
-    <PackageReleaseNotes>Added c'tor to DynamicParameterInfoObject without params to support type 'translation'</PackageReleaseNotes>
+    <Version>1.5.0</Version>
+    <PackageReleaseNotes>Added interface type to RegisterTarget method to be able to resolve via Interface</PackageReleaseNotes>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Description>Contract for the IoC facade class.</Description>

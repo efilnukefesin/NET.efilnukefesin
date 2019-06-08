@@ -207,7 +207,7 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         /// <param name="parameters">the parameters in list form</param>
         public void RegisterTarget<T>(IEnumerable<ParameterInfoObject> parameters) where T : class
         {
-            this.RegisterTarget<T>(Lifetime.NewInstanceEveryTime, parameters);
+            this.RegisterTarget<T, T>(Lifetime.NewInstanceEveryTime, parameters);
         }
         #endregion RegisterTarget
 
@@ -219,6 +219,20 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         /// <param name="Lifetime">the lifetime of the target</param>
         /// <param name="parameters">the parameters in list form</param>
         public void RegisterTarget<T>(Lifetime Lifetime, IEnumerable<ParameterInfoObject> parameters) where T : class
+        {
+            this.RegisterTarget<T, T>(Lifetime, parameters);
+        }
+        #endregion RegisterTarget
+
+        #region RegisterTarget
+        public void RegisterTarget<I, T>(IEnumerable<ParameterInfoObject> parameters) where I : class where T : class, I
+        {
+            this.RegisterTarget<I, T>(Lifetime.NewInstanceEveryTime, parameters);
+        }
+        #endregion RegisterTarget
+
+        #region RegisterTarget
+        public void RegisterTarget<I, T>(Lifetime Lifetime, IEnumerable<ParameterInfoObject> parameters) where I : class where T : class, I
         {
             List<Parameter> paramsForBuilder = new List<Parameter>();
             if (parameters != null)
@@ -263,16 +277,16 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
             switch (Lifetime)
             {
                 case Lifetime.Singleton:
-                    this.builder.RegisterType<T>().WithParameters(paramsForBuilder).AsSelf().SingleInstance();
+                    this.builder.RegisterType<T>().WithParameters(paramsForBuilder).As<I>().AsSelf().SingleInstance();
                     break;
                 case Lifetime.NewInstanceEveryTime:
-                    this.builder.RegisterType<T>().WithParameters(paramsForBuilder).AsSelf();
+                    this.builder.RegisterType<T>().WithParameters(paramsForBuilder).As<I>().AsSelf();
                     break;
                 default:
                     break;
             }
 
-            this.addToInternalRegister(typeof(T), typeof(T));
+            this.addToInternalRegister(typeof(I), typeof(T));
         }
         #endregion RegisterTarget
 
