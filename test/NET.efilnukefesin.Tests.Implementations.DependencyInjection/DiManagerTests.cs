@@ -223,29 +223,6 @@ namespace NET.efilnukefesin.Tests.Implementations.DiManager
             }
             #endregion TwoServicesForOneInterfaceWithTwoParameters
 
-            //#region TwoServicesForOneInterfaceWithTwoParametersIndirect
-            //[TestMethod]
-            //public void TwoServicesForOneInterfaceWithTwoParametersIndirect()
-            //{
-            //    NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Reset();
-            //    NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<ITwoServicesForOneInterfaceService, TwoServicesForOneInterfaceService1>();
-            //    NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<ITwoServicesForOneInterfaceService, TwoServicesForOneInterfaceService2>();
-            //    NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<ITwoServicesForOneInterfaceOtherService, TwoServicesForOneInterfaceOtherService>();
-            //    NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<TwoServicesForOneInterfaceTarget3>(new List<ParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(ITwoServicesForOneInterfaceService), new TwoServicesForOneInterfaceService3(666)) });
-            //    NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<TwoServicesForOneInterfaceTarget4>(new List<ParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(ITwoServicesForOneInterfaceService), new TwoServicesForOneInterfaceService4("xyz")) });
-
-            //    var a = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<TwoServicesForOneInterfaceTarget3>();
-            //    var b = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<TwoServicesForOneInterfaceTarget4>();
-
-            //    Assert.IsNotNull(a);
-            //    Assert.IsNotNull(b);
-            //    Assert.IsInstanceOfType(a.Service, typeof(TwoServicesForOneInterfaceService1));
-            //    Assert.IsInstanceOfType(b.Service, typeof(TwoServicesForOneInterfaceService2));
-            //    Assert.IsInstanceOfType(a.Service2, typeof(TwoServicesForOneInterfaceOtherService));
-            //    Assert.IsInstanceOfType(b.Service2, typeof(TwoServicesForOneInterfaceOtherService));
-            //}
-            //#endregion TwoServicesForOneInterfaceWithTwoParametersIndirect
-
             #region TwoServicesForOneInterfaceWithTwoParametersDynamically
             [TestMethod]
             public void TwoServicesForOneInterfaceWithTwoParametersDynamically()
@@ -290,6 +267,9 @@ namespace NET.efilnukefesin.Tests.Implementations.DiManager
                 var authenticationService = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<DemoAuthenticationService>();
 
                 Assert.IsNotNull(authenticationService);
+                Assert.IsNotNull(userService);
+                Assert.IsNotNull(permissionService);
+                Assert.IsNotNull(roleService);
                 Assert.IsInstanceOfType(authenticationService.UserService.DataService, typeof(DemoFileDataService));
                 Assert.AreEqual("BasePath", (authenticationService.UserService.DataService as DemoFileDataService).BasePath);
             }
@@ -317,10 +297,43 @@ namespace NET.efilnukefesin.Tests.Implementations.DiManager
                 var authenticationService = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<DemoAuthenticationService>();
 
                 Assert.IsNotNull(authenticationService);
+                Assert.IsNotNull(userService);
+                Assert.IsNotNull(permissionService);
+                Assert.IsNotNull(roleService);
                 Assert.IsInstanceOfType(authenticationService.UserService.DataService, typeof(DemoFileDataService2));
                 Assert.AreEqual("BasePath", (authenticationService.UserService.DataService as DemoFileDataService2).BasePath);
             }
             #endregion ComplexerResolving
+
+            #region ComplexerResolvingViaInterface
+            [TestMethod]
+            public void ComplexerResolvingViaInterface()
+            {
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Reset();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<IDataService, DemoFileDataService2>();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<IDataService, DemoSomeDataService2>();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<ILogger, DemoLogger>();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<IUserService, DemoUserService>(Lifetime.Singleton);
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<IRoleService, DemoRoleService>();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterType<IPermissionService, DemoPermissionService>();
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<DemoUserService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(DemoFileDataService2), "BasePath"), new DynamicParameterInfoObject(typeof(IRoleService), typeof(DemoRoleService)) });
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<DemoRoleService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(DemoFileDataService2), "BasePath"), new DynamicParameterInfoObject(typeof(IPermissionService), typeof(DemoPermissionService)) });
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<DemoPermissionService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(DemoFileDataService2), "BasePath") });
+                NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().RegisterTarget<DemoAuthenticationService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(DemoFileDataService2), "BasePath"), new DynamicParameterInfoObject(typeof(IUserService), typeof(DemoUserService)), new DynamicParameterInfoObject(typeof(IPermissionService), typeof(DemoPermissionService)), new DynamicParameterInfoObject(typeof(IRoleService), typeof(DemoRoleService)) });
+
+                var userService = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<IUserService>();
+                var permissionService = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<IPermissionService>();
+                var roleService = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<IRoleService>();
+                var authenticationService = NET.efilnukefesin.Implementations.DependencyInjection.DiManager.GetInstance().Resolve<DemoAuthenticationService>();
+
+                Assert.IsNotNull(authenticationService);
+                Assert.IsNotNull(userService);
+                Assert.IsNotNull(permissionService);
+                Assert.IsNotNull(roleService);
+                Assert.IsInstanceOfType(authenticationService.UserService.DataService, typeof(DemoFileDataService2));
+                Assert.AreEqual("BasePath", (authenticationService.UserService.DataService as DemoFileDataService2).BasePath);
+            }
+            #endregion ComplexerResolvingViaInterface
         }
         #endregion DiManagerMethods
     }
