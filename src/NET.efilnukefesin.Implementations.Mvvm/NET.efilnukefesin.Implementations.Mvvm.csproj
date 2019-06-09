@@ -4,8 +4,8 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <Company>efilnukefesin.NET</Company>
     <Description>Mvvm implementations</Description>
-    <Version>1.0.3</Version>
-    <PackageReleaseNotes>Refactored the code a bit</PackageReleaseNotes>
+    <Version>1.1.0</Version>
+    <PackageReleaseNotes>added some events</PackageReleaseNotes>
     <Copyright>efilnukefesin.NET</Copyright>
     <Authors>efilnukefesin</Authors>
   </PropertyGroup>

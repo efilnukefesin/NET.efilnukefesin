@@ -1,4 +1,5 @@
 ﻿using NET.efilnukefesin.Contracts.Mvvm;
+using NET.efilnukefesin.Implementations.Base;
 using NET.efilnukefesin.Implementations.Mvvm.Attributes;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Text;
 
 namespace NET.efilnukefesin.Implementations.Mvvm
 {
-    public class NavigationService : INavigationService
+    public class NavigationService : BaseObject, INavigationService
     {
         #region Properties
 
@@ -70,8 +71,19 @@ namespace NET.efilnukefesin.Implementations.Mvvm
         #region Navigate
         public bool Navigate(string ViewModelName)
         {
+            bool result = false;
+            this.OnNavigationStarted(new EventArgs());
             string viewName = this.viewsAndViewModels.Where(x => x.Value.Equals(ViewModelName)).FirstOrDefault().Key;
-            return this.navigationPresenter.Present(viewName, StaticViewModelLocator.Current.GetInstance(ViewModelName));
+            result = this.navigationPresenter.Present(viewName, StaticViewModelLocator.Current.GetInstance(ViewModelName));
+            if (result)
+            {
+                this.OnNavigationSuccessful(new EventArgs());
+            }
+            else
+            {
+                this.OnNavigationFailed(new EventArgs());
+            }
+            return result;
         }
         #endregion Navigate
 
@@ -82,6 +94,44 @@ namespace NET.efilnukefesin.Implementations.Mvvm
         }
         #endregion CanNavigate
 
+        #region dispose
+        protected override void dispose()
+        {
+            this.viewsAndViewModels.Clear();
+            this.viewsAndViewModels = null;
+            this.navigationPresenter = null;
+        }
+        #endregion dispose
+
         #endregion Methods
+
+        #region Events
+
+        #region OnNavigationStarted
+        protected virtual void OnNavigationStarted(EventArgs e)
+        {
+            this.NavigationStarted?.Invoke(this, e);
+        }
+        #endregion OnNavigationStarted
+
+        #region OnNavigationSuccessful
+        protected virtual void OnNavigationSuccessful(EventArgs e)
+        {
+            this.NavigationSuccessful?.Invoke(this, e);
+        }
+        #endregion OnNavigationSuccessful
+
+        #region OnNavigationFailed
+        protected virtual void OnNavigationFailed(EventArgs e)
+        {
+            this.NavigationFailed?.Invoke(this, e);
+        }
+        #endregion OnNavigationFailed
+
+        public event EventHandler NavigationStarted;
+        public event EventHandler NavigationSuccessful;
+        public event EventHandler NavigationFailed;
+
+        #endregion Events
     }
 }

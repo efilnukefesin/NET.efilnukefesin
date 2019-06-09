@@ -1,10 +1,11 @@
-﻿using System;
+﻿using NET.efilnukefesin.Contracts.Base;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace NET.efilnukefesin.Contracts.Mvvm
 {
-    public interface IViewModelLocator
+    public interface IViewModelLocator : IBaseObject
     {
         #region Methods
         void Register(string name, object o);

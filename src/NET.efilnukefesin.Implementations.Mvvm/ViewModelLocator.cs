@@ -1,4 +1,5 @@
 ﻿using NET.efilnukefesin.Contracts.Mvvm;
+using NET.efilnukefesin.Implementations.Base;
 using NET.efilnukefesin.Implementations.DependencyInjection;
 using NET.efilnukefesin.Implementations.Mvvm.Attributes;
 using System;
@@ -8,7 +9,7 @@ using System.Text;
 
 namespace NET.efilnukefesin.Implementations.Mvvm
 {
-    public class ViewModelLocator : IViewModelLocator
+    public class ViewModelLocator : BaseObject, IViewModelLocator
     {
         #region Properties
 
@@ -93,6 +94,14 @@ namespace NET.efilnukefesin.Implementations.Mvvm
             }
         }
         #endregion findAndAddViewModelInstances
+
+        #region dispose
+        protected override void dispose()
+        {
+            this.registeredInstances.Clear();
+            this.registeredInstances = null;
+        }
+        #endregion dispose
 
         #endregion Methods
     }
