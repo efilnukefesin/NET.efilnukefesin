@@ -21,7 +21,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
 
         private HttpResponseMessage lastResponse = null;  //for debugging / lookup
         private string lastContent = string.Empty;  //for debugging / lookup
-
+        private object lastResult = null;  //for debugging / lookup
         #endregion Properties
 
         #region Construction
@@ -77,6 +77,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
                 string json = response.Content.ReadAsStringAsync().Result;
                 this.lastContent = json;
                 SimpleResult<T> requestResult = JsonConvert.DeserializeObject<SimpleResult<T>>(json);
+                this.lastResult = requestResult;
                 if (!requestResult.IsError)
                 {
                     result = requestResult.Payload;
@@ -97,6 +98,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
                 string json = response.Content.ReadAsStringAsync().Result;
                 this.lastContent = json;
                 SimpleResult<bool> requestResult = JsonConvert.DeserializeObject<SimpleResult<bool>>(json);
+                this.lastResult = requestResult;
                 if (!requestResult.IsError)
                 {
                     result = requestResult.Payload;
@@ -120,6 +122,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
                 string json = response.Content.ReadAsStringAsync().Result;
                 this.lastContent = json;
                 SimpleResult<bool> requestResult = JsonConvert.DeserializeObject<SimpleResult<bool>>(json);
+                this.lastResult = requestResult;
                 if (!requestResult.IsError)
                 {
                     result = requestResult.Payload;
