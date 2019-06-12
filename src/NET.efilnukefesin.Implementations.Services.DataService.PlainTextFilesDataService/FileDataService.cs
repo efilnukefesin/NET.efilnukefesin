@@ -24,7 +24,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
 
         #region Construction
 
-        public FileDataService(string BaseFolder, IEndpointRegister EndpointRegister, ILogger Logger)
+        public FileDataService(string BaseFolder, IEndpointRegister EndpointRegister, ILogger Logger = null)
         {
             this.EndpointRegister = EndpointRegister;
             this.baseFolder = BaseFolder;
@@ -50,32 +50,32 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
         #region CreateOrUpdateAsync
         public async Task<bool> CreateOrUpdateAsync<T>(string Action, T Value)
         {
-            this.logger.Log($"FileDataService.CreateOrUpdateAsync: entered");
+            this.logger?.Log($"FileDataService.CreateOrUpdateAsync: entered");
             bool result = false;
 
             string filename = this.getFilename(Action);
-            this.logger.Log($"FileDataService.CreateOrUpdateAsync: generated file name '{filename}'");
+            this.logger?.Log($"FileDataService.CreateOrUpdateAsync: generated file name '{filename}'");
             if (this.checkAndCreateDirs(filename))
             {
-                this.logger.Log($"FileDataService.CreateOrUpdateAsync: checked and created dirs successfully");
+                this.logger?.Log($"FileDataService.CreateOrUpdateAsync: checked and created dirs successfully");
                 if (File.Exists(filename))
                 {
                     try
                     {
-                        this.logger.Log($"FileDataService.CreateOrUpdateAsync: file exists");
+                        this.logger?.Log($"FileDataService.CreateOrUpdateAsync: file exists");
                         string text = await File.ReadAllTextAsync(filename, Encoding.UTF8);
                         var content = JsonConvert.DeserializeObject<IEnumerable<T>>(text);
                         if (content.ToList().Contains(Value))
                         {
                             //Update
                             content = content.Replace(content.ToList().IndexOf(Value), Value);
-                            this.logger.Log($"FileDataService.CreateOrUpdateAsync: updated content");
+                            this.logger?.Log($"FileDataService.CreateOrUpdateAsync: updated content");
                         }
                         else
                         {
                             //Append
                             content = content.Add(Value);
-                            this.logger.Log($"FileDataService.CreateOrUpdateAsync: added content");
+                            this.logger?.Log($"FileDataService.CreateOrUpdateAsync: added content");
                         }
                         var newContent = JsonConvert.SerializeObject(content);
                         await File.WriteAllTextAsync(filename, newContent);
@@ -84,19 +84,19 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
                     }
                     catch (Exception ex)
                     {
-                        this.logger.Log($"FileDataService.CreateOrUpdateAsync: raised exception '{ex.Message}' - '{ex.StackTrace}'", Contracts.Logger.Enums.LogLevel.Error);
+                        this.logger?.Log($"FileDataService.CreateOrUpdateAsync: raised exception '{ex.Message}' - '{ex.StackTrace}'", Contracts.Logger.Enums.LogLevel.Error);
                     }
                 }
                 else
                 {
-                    this.logger.Log($"FileDataService.CreateOrUpdateAsync: file does not exist", Contracts.Logger.Enums.LogLevel.Error);
+                    this.logger?.Log($"FileDataService.CreateOrUpdateAsync: file does not exist", Contracts.Logger.Enums.LogLevel.Error);
                 }
             }
             else
             {
-                this.logger.Log($"FileDataService.CreateOrUpdateAsync: could not check and create dirs", Contracts.Logger.Enums.LogLevel.Error);
+                this.logger?.Log($"FileDataService.CreateOrUpdateAsync: could not check and create dirs", Contracts.Logger.Enums.LogLevel.Error);
             }
-            this.logger.Log($"FileDataService.CreateOrUpdateAsync: exited, result '{result}'");
+            this.logger?.Log($"FileDataService.CreateOrUpdateAsync: exited, result '{result}'");
             return result;
         }
         #endregion CreateOrUpdateAsync
