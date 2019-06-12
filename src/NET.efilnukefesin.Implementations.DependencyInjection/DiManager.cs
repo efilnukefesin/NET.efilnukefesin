@@ -225,9 +225,28 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         #endregion RegisterTarget
 
         #region RegisterTarget
+        /// <summary>
+        /// registers a target for detailed parameter delivery
+        /// </summary>
+        /// <typeparam name="T">the target type</typeparam>
+        /// <param name="Lifetime">the lifetime of the target</param>
+        public void RegisterTarget<T>(Lifetime Lifetime) where T : class
+        {
+            this.RegisterTarget<T, T>(Lifetime);
+        }
+        #endregion RegisterTarget
+
+        #region RegisterTarget
         public void RegisterTarget<I, T>(IEnumerable<ParameterInfoObject> parameters) where I : class where T : class, I
         {
             this.RegisterTarget<I, T>(Lifetime.NewInstanceEveryTime, parameters);
+        }
+        #endregion RegisterTarget
+
+        #region RegisterTarget
+        public void RegisterTarget<I, T>(Lifetime Lifetime) where I : class where T : class, I
+        {
+            this.RegisterTarget<I, T>(Lifetime, null);
         }
         #endregion RegisterTarget
 
