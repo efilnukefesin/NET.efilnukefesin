@@ -104,6 +104,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
         #region DeleteAsync
         public async Task<bool> DeleteAsync<T>(string Action, params object[] Parameters)
         {
+            //TODO: add logging
             bool result = false;
 
             string filename = this.getFilename(Action);
@@ -140,6 +141,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
         #region GetAsync
         public async Task<T> GetAsync<T>(string Action, params object[] Parameters)
         {
+            //TODO: add logging
             T result = default;
 
             string filename = this.getFilename(Action);
@@ -165,6 +167,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
         #region checkAndCreateDirs
         private bool checkAndCreateDirs(string Filename)
         {
+            //TODO: add logging
             bool result = false;
 
             string path = Path.GetDirectoryName(Filename);
