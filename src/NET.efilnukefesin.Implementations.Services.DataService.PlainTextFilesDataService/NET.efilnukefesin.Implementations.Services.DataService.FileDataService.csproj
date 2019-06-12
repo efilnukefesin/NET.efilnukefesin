@@ -4,9 +4,9 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
     <Description>IDataService implementation working with JSON based text files</Description>
-    <PackageReleaseNotes>added directory exist check</PackageReleaseNotes>
+    <PackageReleaseNotes>added debug info</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NET.efilnukefesin.Contracts.Logger\NET.efilnukefesin.Contracts.Logger.csproj" />
     <ProjectReference Include="..\NET.efilnukefesin.Contracts.Services.DataService\NET.efilnukefesin.Contracts.Services.DataService.csproj" />
     <ProjectReference Include="..\NET.efilnukefesin.Extensions\NET.efilnukefesin.Extensions.csproj" />
     <ProjectReference Include="..\NET.efilnukefesin.Implementations.Base\NET.efilnukefesin.Implementations.Base.csproj" />
