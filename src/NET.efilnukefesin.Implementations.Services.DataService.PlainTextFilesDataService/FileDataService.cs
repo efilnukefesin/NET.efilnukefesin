@@ -50,24 +50,27 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
 
             string filename = this.getFilename(Action);
 
-            if (File.Exists(filename))
-            {
-                string text = await File.ReadAllTextAsync(filename, Encoding.UTF8);
-                var content = JsonConvert.DeserializeObject<IEnumerable<T>>(text);
-                if (content.ToList().Contains(Value))
+            if (this.checkAndCreateDirs(filename))
+            { 
+                if (File.Exists(filename))
                 {
-                    //Update
-                    content = content.Replace(content.ToList().IndexOf(Value), Value);
+                    string text = await File.ReadAllTextAsync(filename, Encoding.UTF8);
+                    var content = JsonConvert.DeserializeObject<IEnumerable<T>>(text);
+                    if (content.ToList().Contains(Value))
+                    {
+                        //Update
+                        content = content.Replace(content.ToList().IndexOf(Value), Value);
+                    }
+                    else
+                    {
+                        //Append
+                        content = content.Add(Value);
+                    }
+                    var newContent = JsonConvert.SerializeObject(content);
+                    await File.WriteAllTextAsync(filename, newContent);
+
+                    result = true;
                 }
-                else
-                {
-                    //Append
-                    content = content.Add(Value);
-                }
-                var newContent = JsonConvert.SerializeObject(content);
-                await File.WriteAllTextAsync(filename, newContent);
-                
-                result = true;
             }
 
             return result;
@@ -134,6 +137,30 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
             return result;
         }
         #endregion getFilename
+
+        #region checkAndCreateDirs
+        private bool checkAndCreateDirs(string Filename)
+        {
+            bool result = false;
+
+            string path = Path.GetDirectoryName(Filename);
+
+            if (Directory.Exists(path))
+            {
+                result = true;
+            }
+            else
+            {
+                var info = Directory.CreateDirectory(path);
+                if (info.Exists)
+                {
+                    result = true;
+                }
+            }
+
+            return result;
+        }
+        #endregion checkAndCreateDirs
 
         #region dispose
         protected override void dispose()
