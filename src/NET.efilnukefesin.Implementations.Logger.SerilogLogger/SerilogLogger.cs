@@ -11,6 +11,7 @@ namespace NET.efilnukefesin.Implementations.Logger.SerilogLogger
         #region Properties
 
         public string Target { get; set; }
+        public string LastEntry { get; set; }
 
         private Serilog.Core.Logger logger;
 
@@ -42,6 +43,7 @@ namespace NET.efilnukefesin.Implementations.Logger.SerilogLogger
         #region Log
         public void Log(string Text, LogLevel Severity = LogLevel.Info)
         {
+            this.LastEntry = Text;
             switch (Severity)
             {
                 case LogLevel.Debug:

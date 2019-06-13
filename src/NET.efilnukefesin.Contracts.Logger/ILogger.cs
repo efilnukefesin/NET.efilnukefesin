@@ -9,6 +9,7 @@ namespace NET.efilnukefesin.Contracts.Logger
         #region Properties
 
         string Target { get; set; }
+        string LastEntry { get; set; }
 
         #endregion Properties
 
