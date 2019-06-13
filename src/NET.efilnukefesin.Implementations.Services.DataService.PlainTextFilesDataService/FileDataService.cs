@@ -89,7 +89,13 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
                 }
                 else
                 {
-                    this.logger?.Log($"FileDataService.CreateOrUpdateAsync: file does not exist", Contracts.Logger.Enums.LogLevel.Error);
+                    //Create File, append
+                    this.logger?.Log($"FileDataService.CreateOrUpdateAsync: file does not exist", Contracts.Logger.Enums.LogLevel.Warning);
+                    File.CreateText(filename);
+                    this.logger?.Log($"FileDataService.CreateOrUpdateAsync: file created");
+                    string content = JsonConvert.SerializeObject(new List<T>() { Value });
+                    await File.WriteAllTextAsync(filename, content);
+                    this.logger?.Log($"FileDataService.CreateOrUpdateAsync: file filled");
                 }
             }
             else
