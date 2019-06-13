@@ -104,36 +104,50 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
         #region DeleteAsync
         public async Task<bool> DeleteAsync<T>(string Action, params object[] Parameters)
         {
-            //TODO: add logging
+            this.logger?.Log($"FileDataService.DeleteAsync: entered");
             bool result = false;
 
             string filename = this.getFilename(Action);
+            this.logger?.Log($"FileDataService.DeleteAsync: generated file name '{filename}'");
 
             if (File.Exists(filename))
             {
-                string text = await File.ReadAllTextAsync(filename, Encoding.UTF8);
-                var content = JsonConvert.DeserializeObject<IEnumerable<T>>(text);
-
-                int index = -1;
-
-                foreach (T item in content)
+                try
                 {
-                    index++;
-                    string itemText = JsonConvert.SerializeObject(item);
-                    if (itemText.Contains(Parameters[0].ToString()))
+                    this.logger?.Log($"FileDataService.DeleteAsync: file exists");
+                    string text = await File.ReadAllTextAsync(filename, Encoding.UTF8);
+                    var content = JsonConvert.DeserializeObject<IEnumerable<T>>(text);
+
+                    int index = -1;
+
+                    foreach (T item in content)
                     {
-                        break;  //TODO: think of logic here, focussing on id, perhaps a beginswith is better
+                        index++;
+                        string itemText = JsonConvert.SerializeObject(item);
+                        if (itemText.Contains(Parameters[0].ToString()))
+                        {
+                            break;  //TODO: think of logic here, focussing on id, perhaps a beginswith is better
+                        }
                     }
+
+                    content = content.Remove(index);
+
+                    var newContent = JsonConvert.SerializeObject(content);
+                    await File.WriteAllTextAsync(filename, newContent);
+
+                    result = true;
                 }
-
-                content = content.Remove(index);
-
-                var newContent = JsonConvert.SerializeObject(content);
-                await File.WriteAllTextAsync(filename, newContent);
-
-                result = true;
+                catch (Exception ex)
+                {
+                    this.logger?.Log($"FileDataService.DeleteAsync: raised exception '{ex.Message}' - '{ex.StackTrace}'", Contracts.Logger.Enums.LogLevel.Error);
+                }
+            }
+            else
+            {
+                this.logger?.Log($"FileDataService.DeleteAsync: file does not exist", Contracts.Logger.Enums.LogLevel.Error);
             }
 
+            this.logger?.Log($"FileDataService.DeleteAsync: exited, result '{result}'");
             return result;
         }
         #endregion DeleteAsync
@@ -141,17 +155,31 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
         #region GetAsync
         public async Task<T> GetAsync<T>(string Action, params object[] Parameters)
         {
-            //TODO: add logging
+            this.logger?.Log($"FileDataService.GetAsync: entered");
             T result = default;
 
             string filename = this.getFilename(Action);
+            this.logger?.Log($"FileDataService.GetAsync: generated file name '{filename}'");
 
             if (File.Exists(filename))
             {
-                string text = File.ReadAllText(filename, Encoding.UTF8);
-                result = JsonConvert.DeserializeObject<T>(text);
+                try
+                {
+                    this.logger?.Log($"FileDataService.GetAsync: file exists");
+                    string text = File.ReadAllText(filename, Encoding.UTF8);
+                    result = JsonConvert.DeserializeObject<T>(text);
+                }
+                catch (Exception ex)
+                {
+                    this.logger?.Log($"FileDataService.GetAsync: raised exception '{ex.Message}' - '{ex.StackTrace}'", Contracts.Logger.Enums.LogLevel.Error);
+                }
+            }
+            else
+            {
+                this.logger?.Log($"FileDataService.GetAsync: file does not exist", Contracts.Logger.Enums.LogLevel.Error);
             }
 
+            this.logger?.Log($"FileDataService.GetAsync: exited, result '{result}'");
             return result;
         }
         #endregion GetAsync
