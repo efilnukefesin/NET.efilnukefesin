@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
-    <Version>1.1.5</Version>
+    <Version>1.1.6</Version>
     <Description>IDataService implementation working with JSON based text files</Description>
     <PackageReleaseNotes>added a bugfix for file creation</PackageReleaseNotes>
   </PropertyGroup>

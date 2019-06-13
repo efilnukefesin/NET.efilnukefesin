@@ -105,6 +105,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
                         await swFile.WriteAsync(content);
                     }
                     this.logger?.Log($"FileDataService.CreateOrUpdateAsync: file filled");
+                    result = true;
                 }
             }
             else
