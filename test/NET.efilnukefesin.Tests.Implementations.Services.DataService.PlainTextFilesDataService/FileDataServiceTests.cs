@@ -92,6 +92,21 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.FileDataS
             }
             #endregion CreateOrUpdateAsyncUpdate
 
+            #region CreateOrUpdateAsyncCreateNew
+            [TestMethod]
+            public void CreateOrUpdateAsyncCreateNew()
+            {
+                DiSetup.FileDataServiceTests();
+                DiSetup.InitializeFileEndpoints();
+
+                IDataService dataService = DiHelper.GetService<IDataService>(this.testPath);
+
+                bool result = dataService.CreateOrUpdateAsync<string>("CreateOrUpdateAsyncTest3Action", "TestString").GetAwaiter().GetResult();
+
+                Assert.AreEqual(true, result);
+            }
+            #endregion CreateOrUpdateAsyncCreateNew
+
             #region DeleteAsync
             [TestMethod]
             public void DeleteAsync()

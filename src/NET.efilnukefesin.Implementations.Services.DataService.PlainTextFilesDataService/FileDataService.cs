@@ -65,17 +65,24 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
                         this.logger?.Log($"FileDataService.CreateOrUpdateAsync: file exists");
                         string text = await File.ReadAllTextAsync(filename, Encoding.UTF8);
                         var content = JsonConvert.DeserializeObject<IEnumerable<T>>(text);
-                        if (content.ToList().Contains(Value))
+                        if (content != null)
                         {
-                            //Update
-                            content = content.Replace(content.ToList().IndexOf(Value), Value);
-                            this.logger?.Log($"FileDataService.CreateOrUpdateAsync: updated content");
+                            if (content.ToList().Contains(Value))
+                            {
+                                //Update
+                                content = content.Replace(content.ToList().IndexOf(Value), Value);
+                                this.logger?.Log($"FileDataService.CreateOrUpdateAsync: updated content");
+                            }
+                            else
+                            {
+                                //Append
+                                content = content.Add(Value);
+                                this.logger?.Log($"FileDataService.CreateOrUpdateAsync: added content");
+                            }
                         }
                         else
                         {
-                            //Append
-                            content = content.Add(Value);
-                            this.logger?.Log($"FileDataService.CreateOrUpdateAsync: added content");
+                            content = new List<T>() { Value };
                         }
                         var newContent = JsonConvert.SerializeObject(content);
                         await File.WriteAllTextAsync(filename, newContent);
@@ -91,10 +98,12 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
                 {
                     //Create File, append
                     this.logger?.Log($"FileDataService.CreateOrUpdateAsync: file does not exist", Contracts.Logger.Enums.LogLevel.Warning);
-                    File.CreateText(filename);
-                    this.logger?.Log($"FileDataService.CreateOrUpdateAsync: file created");
-                    string content = JsonConvert.SerializeObject(new List<T>() { Value });
-                    await File.WriteAllTextAsync(filename, content);
+                    using (StreamWriter swFile = File.CreateText(filename))
+                    {
+                        this.logger?.Log($"FileDataService.CreateOrUpdateAsync: file created");
+                        string content = JsonConvert.SerializeObject(new List<T>() { Value });
+                        await swFile.WriteAsync(content);
+                    }
                     this.logger?.Log($"FileDataService.CreateOrUpdateAsync: file filled");
                 }
             }
