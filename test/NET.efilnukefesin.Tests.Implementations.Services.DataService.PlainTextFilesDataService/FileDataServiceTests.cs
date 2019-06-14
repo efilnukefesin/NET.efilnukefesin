@@ -107,6 +107,22 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.FileDataS
             }
             #endregion CreateOrUpdateAsyncCreateNew
 
+            #region CreateOrUpdateAsyncCreateNewWithLists
+            [TestMethod]
+            public void CreateOrUpdateAsyncCreateNewWithLists()
+            {
+                DiSetup.FileDataServiceTests();
+                DiSetup.InitializeFileEndpoints();
+
+                IDataService dataService = DiHelper.GetService<IDataService>(this.testPath);
+                List<string> strings = new List<string>() { "a", "b", "c"};
+
+                bool result = dataService.CreateOrUpdateAsync<string>("CreateOrUpdateAsyncTest4Action", strings).GetAwaiter().GetResult();
+
+                Assert.AreEqual(true, result);
+            }
+            #endregion CreateOrUpdateAsyncCreateNewWithLists
+
             #region DeleteAsync
             [TestMethod]
             public void DeleteAsync()
