@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>0.7.1</Version>
+    <Version>1.2.0</Version>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <PackageProjectUrl></PackageProjectUrl>
     <Copyright>efilnukefesin.NET</Copyright>
     <Description>Implementation of a REST Data Service</Description>
-    <PackageReleaseNotes>added more debug fields like 'lastResult'</PackageReleaseNotes>
+    <PackageReleaseNotes>added bulk creation override</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>0.6.2</Version>
+    <Version>1.2.0</Version>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Description>Interface for accessing Data, e.g. via REST or SQL</Description>
     <Copyright>efilnukefesin.NET</Copyright>
-    <PackageReleaseNotes>added some CRUD methods</PackageReleaseNotes>
+    <PackageReleaseNotes>added bulk creation override</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

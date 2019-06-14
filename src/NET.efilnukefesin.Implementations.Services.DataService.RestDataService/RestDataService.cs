@@ -108,6 +108,19 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
         }
         #endregion CreateOrUpdateAsync
 
+        #region CreateOrUpdateAsync
+        public async Task<bool> CreateOrUpdateAsync<T>(string Action, IEnumerable<T> Values)
+        {
+            bool result = false;
+            //TODO: optimize
+            foreach (T item in Values)
+            {
+                result &= await this.CreateOrUpdateAsync<T>(Action, item);
+            }
+            return result;
+        }
+        #endregion CreateOrUpdateAsync
+
         #region DeleteAsync
         public async Task<bool> DeleteAsync<T>(string Action, params object[] Parameters)
         {
