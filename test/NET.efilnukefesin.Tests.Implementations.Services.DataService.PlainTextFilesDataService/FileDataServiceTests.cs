@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NET.efilnukefesin.BaseClasses.Test;
 using NET.efilnukefesin.Contracts.Services.DataService;
+using NET.efilnukefesin.Implementations.Base;
 using NET.efilnukefesin.Tests.BootStrapper;
 using System;
 using System.Collections.Generic;
@@ -53,10 +54,10 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.FileDataS
 
                 IDataService dataService = DiHelper.GetService<IDataService>(this.testPath);
 
-                var result = dataService.GetAsync<int>("GetAsyncTest1Action").GetAwaiter().GetResult();
+                var result = dataService.GetAsync<ValueObject<int>>("GetAsyncTest1Action").GetAwaiter().GetResult();
 
                 Assert.IsNotNull(result);
-                Assert.AreEqual(123, result);
+                Assert.AreEqual(123, result.Value);
             }
             #endregion GetAsyncInt
 
@@ -71,7 +72,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.FileDataS
 
                 IDataService dataService = DiHelper.GetService<IDataService>(this.testPath);
 
-                bool result = dataService.CreateOrUpdateAsync<string>("CreateOrUpdateAsyncTest1Action", "TestString").GetAwaiter().GetResult();
+                bool result = dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest1Action", new ValueObject<string>("TestString")).GetAwaiter().GetResult();
 
                 Assert.AreEqual(true, result);
             }
@@ -86,7 +87,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.FileDataS
 
                 IDataService dataService = DiHelper.GetService<IDataService>(this.testPath);
 
-                bool result = dataService.CreateOrUpdateAsync<string>("CreateOrUpdateAsyncTest2Action", "Opel").GetAwaiter().GetResult();
+                bool result = dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest2Action", new ValueObject<string>("Opel")).GetAwaiter().GetResult();
 
                 Assert.AreEqual(true, result);
             }
@@ -101,7 +102,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.FileDataS
 
                 IDataService dataService = DiHelper.GetService<IDataService>(this.testPath);
 
-                bool result = dataService.CreateOrUpdateAsync<string>("CreateOrUpdateAsyncTest3Action", "TestString").GetAwaiter().GetResult();
+                bool result = dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest3Action", new ValueObject<string>("TestString")).GetAwaiter().GetResult();
 
                 Assert.AreEqual(true, result);
             }
@@ -115,9 +116,9 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.FileDataS
                 DiSetup.InitializeFileEndpoints();
 
                 IDataService dataService = DiHelper.GetService<IDataService>(this.testPath);
-                List<string> strings = new List<string>() { "a", "b", "c"};
+                List<ValueObject<string>> stringList = new List<ValueObject<string>>() { new ValueObject<string>("a"), new ValueObject<string>("b"), new ValueObject<string>("c") };
 
-                bool result = dataService.CreateOrUpdateAsync<string>("CreateOrUpdateAsyncTest4Action", strings).GetAwaiter().GetResult();
+                bool result = dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest4Action", stringList).GetAwaiter().GetResult();
 
                 Assert.AreEqual(true, result);
             }
@@ -132,7 +133,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.FileDataS
 
                 IDataService dataService = DiHelper.GetService<IDataService>(this.testPath);
 
-                bool result = dataService.DeleteAsync<string>("DeleteAsyncTest1Action", "Opel").GetAwaiter().GetResult();
+                bool result = dataService.DeleteAsync<ValueObject<string>>("DeleteAsyncTest1Action", "Opel").GetAwaiter().GetResult();
 
                 Assert.AreEqual(true, result);
             }

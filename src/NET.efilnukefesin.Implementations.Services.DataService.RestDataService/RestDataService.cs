@@ -1,4 +1,5 @@
-﻿using NET.efilnukefesin.Contracts.Services.DataService;
+﻿using NET.efilnukefesin.Contracts.Base;
+using NET.efilnukefesin.Contracts.Services.DataService;
 using NET.efilnukefesin.Implementations.Base;
 using Newtonsoft.Json;
 using System;
@@ -64,7 +65,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
         #endregion addAuthenticationHeader
 
         #region GetAsync
-        public async Task<T> GetAsync<T>(string Action, params object[] Parameters)
+        public async Task<T> GetAsync<T>(string Action, params object[] Parameters) where T : IBaseObject
         {
             T result = default(T);
 
@@ -88,7 +89,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
         #endregion GetAsync
 
         #region CreateOrUpdateAsync
-        public async Task<bool> CreateOrUpdateAsync<T>(string Action, T Value)
+        public async Task<bool> CreateOrUpdateAsync<T>(string Action, T Value) where T : IBaseObject
         {
             bool result = false;
             HttpResponseMessage response = await this.httpClient.PostAsync(this.EndpointRegister.GetEndpoint(Action), new StringContent(JsonConvert.SerializeObject(Value)));
@@ -97,11 +98,11 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
             {
                 string json = response.Content.ReadAsStringAsync().Result;
                 this.lastContent = json;
-                SimpleResult<bool> requestResult = JsonConvert.DeserializeObject<SimpleResult<bool>>(json);
+                SimpleResult<ValueObject<bool>> requestResult = JsonConvert.DeserializeObject<SimpleResult<ValueObject<bool>>>(json);
                 this.lastResult = requestResult;
                 if (!requestResult.IsError)
                 {
-                    result = requestResult.Payload;
+                    result = requestResult.Payload.Value;
                 }
             }
             return result;
@@ -109,7 +110,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
         #endregion CreateOrUpdateAsync
 
         #region CreateOrUpdateAsync
-        public async Task<bool> CreateOrUpdateAsync<T>(string Action, IEnumerable<T> Values)
+        public async Task<bool> CreateOrUpdateAsync<T>(string Action, IEnumerable<T> Values) where T : IBaseObject
         {
             bool result = false;
             //TODO: optimize
@@ -122,7 +123,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
         #endregion CreateOrUpdateAsync
 
         #region DeleteAsync
-        public async Task<bool> DeleteAsync<T>(string Action, params object[] Parameters)
+        public async Task<bool> DeleteAsync<T>(string Action, params object[] Parameters) where T : IBaseObject
         {
             bool result = false;
 

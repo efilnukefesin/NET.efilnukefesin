@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>1.2.0</Version>
+    <Version>1.3.0</Version>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Description>Interface for accessing Data, e.g. via REST or SQL</Description>
     <Copyright>efilnukefesin.NET</Copyright>
-    <PackageReleaseNotes>added bulk creation override</PackageReleaseNotes>
+    <PackageReleaseNotes>added IBaseObject requirement and use</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

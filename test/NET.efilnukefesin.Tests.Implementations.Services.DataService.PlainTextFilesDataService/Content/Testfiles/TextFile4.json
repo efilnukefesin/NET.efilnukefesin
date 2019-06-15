@@ -1,1 +1,14 @@
-﻿[ "Ford", "BMW", "Fiat" ]
+﻿[
+  {
+    "Value": "Ford",
+    "Id": "3486b171-ad0d-476c-b91f-1cdadb3c3c6c"
+  },
+  {
+    "Value": "BMW",
+    "Id": "3486b171-ad0d-476c-b91f-1cdadb3c3c6d"
+  },
+  {
+    "Value": "Fiat",
+    "Id": "3486b171-ad0d-476c-b91f-1cdadb3c3c6e"
+  }
+]

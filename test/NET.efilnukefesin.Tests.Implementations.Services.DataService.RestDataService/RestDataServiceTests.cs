@@ -73,13 +73,13 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.RestDataS
                    .ReturnsAsync(new HttpResponseMessage()
                    {
                        StatusCode = HttpStatusCode.OK,
-                       Content = new StringContent(JsonConvert.SerializeObject(new SimpleResult<bool>(true))),
+                       Content = new StringContent(JsonConvert.SerializeObject(new SimpleResult<ValueObject<bool>>(new ValueObject<bool>(true)))),
                    })
                    .Verifiable();
 
                 IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://baseUri"), "someToken", handlerMock.Object);
 
-                bool result = dataService.GetAsync<bool>("SomeAction").GetAwaiter().GetResult();
+                bool result = dataService.GetAsync<ValueObject<bool>>("SomeAction").GetAwaiter().GetResult().Value;
 
                 Assert.AreEqual(true, result);
             }
@@ -105,13 +105,13 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.RestDataS
                    .ReturnsAsync(new HttpResponseMessage()
                    {
                        StatusCode = HttpStatusCode.OK,
-                       Content = new StringContent(JsonConvert.SerializeObject(new SimpleResult<bool>(true))),
+                       Content = new StringContent(JsonConvert.SerializeObject(new SimpleResult<ValueObject<bool>>(new ValueObject<bool>(true)))),
                    })
                    .Verifiable();
 
                 IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://localhost"), "someToken25", handlerMock.Object);
 
-                bool result = dataService.CreateOrUpdateAsync<bool>("SomeOtherAction", true).GetAwaiter().GetResult();
+                bool result = dataService.CreateOrUpdateAsync<ValueObject<bool>>("SomeOtherAction", new ValueObject<bool>(true)).GetAwaiter().GetResult();
 
                 Assert.AreEqual(true, result);
             }

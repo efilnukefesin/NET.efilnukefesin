@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>1.7.2</Version>
+    <Version>1.8.0</Version>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
-    <PackageReleaseNotes>added a null check</PackageReleaseNotes>
+    <PackageReleaseNotes>added ValueObject for carrying base types and stuff</PackageReleaseNotes>
     <Description>Base class implementations</Description>
   </PropertyGroup>
 

@@ -1,4 +1,5 @@
-﻿using NET.efilnukefesin.Contracts.Logger;
+﻿using NET.efilnukefesin.Contracts.Base;
+using NET.efilnukefesin.Contracts.Logger;
 using NET.efilnukefesin.Contracts.Services.DataService;
 using NET.efilnukefesin.Extensions;
 using NET.efilnukefesin.Implementations.Base;
@@ -48,7 +49,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
         #endregion AddOrReplaceAuthentication
 
         #region CreateOrUpdateAsync
-        public async Task<bool> CreateOrUpdateAsync<T>(string Action, T Value)
+        public async Task<bool> CreateOrUpdateAsync<T>(string Action, T Value) where T : IBaseObject
         {
             this.logger?.Log($"FileDataService.CreateOrUpdateAsync: entered");
             bool result = false;
@@ -118,7 +119,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
         #endregion CreateOrUpdateAsync
 
         #region CreateOrUpdateAsync
-        public async Task<bool> CreateOrUpdateAsync<T>(string Action, IEnumerable<T> Values)
+        public async Task<bool> CreateOrUpdateAsync<T>(string Action, IEnumerable<T> Values) where T : IBaseObject
         {
             bool result = true;
             //TODO: optimize
@@ -131,7 +132,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
         #endregion CreateOrUpdateAsync
 
         #region DeleteAsync
-        public async Task<bool> DeleteAsync<T>(string Action, params object[] Parameters)
+        public async Task<bool> DeleteAsync<T>(string Action, params object[] Parameters) where T : IBaseObject
         {
             this.logger?.Log($"FileDataService.DeleteAsync: entered");
             bool result = false;
@@ -152,8 +153,9 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
                     foreach (T item in content)
                     {
                         index++;
-                        string itemText = JsonConvert.SerializeObject(item);
-                        if (itemText.Contains(Parameters[0].ToString()))
+
+                        //given: Parameters[0] id the ID
+                        if (item.Id.Equals(Parameters[0].ToString()))
                         {
                             break;  //TODO: think of logic here, focussing on id, perhaps a beginswith is better
                         }
@@ -182,7 +184,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
         #endregion DeleteAsync
 
         #region GetAsync
-        public async Task<T> GetAsync<T>(string Action, params object[] Parameters)
+        public async Task<T> GetAsync<T>(string Action, params object[] Parameters) where T : IBaseObject
         {
             this.logger?.Log($"FileDataService.GetAsync: entered");
             T result = default;
@@ -190,6 +192,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
             string filename = this.getFilename(Action);
             this.logger?.Log($"FileDataService.GetAsync: generated file name '{filename}'");
 
+            //TODO: think about, we are having issues when rturning a list of something / working with a list of something
             if (File.Exists(filename))
             {
                 try
