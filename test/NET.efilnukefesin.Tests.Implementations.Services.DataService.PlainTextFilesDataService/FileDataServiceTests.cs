@@ -5,6 +5,7 @@ using NET.efilnukefesin.Implementations.Base;
 using NET.efilnukefesin.Tests.BootStrapper;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.FileDataService
@@ -60,6 +61,22 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.FileDataS
                 Assert.AreEqual(123, result.Value);
             }
             #endregion GetAsyncInt
+
+            #region GetAllAsyncInt
+            [TestMethod]
+            public void GetAllAsyncInt()
+            {
+                DiSetup.FileDataServiceTests();
+                DiSetup.InitializeFileEndpoints();
+
+                IDataService dataService = DiHelper.GetService<IDataService>(this.testPath);
+
+                var result = dataService.GetAllAsync<ValueObject<int>>("GetAsyncTest4Action").GetAwaiter().GetResult();
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual(123, result.ToList()[0].Value);
+            }
+            #endregion GetAllAsyncInt
 
             //TODO: add more complex objects and lists here, continue with TextFile2 and 3
 

@@ -8,6 +8,7 @@ using NET.efilnukefesin.Tests.BootStrapper;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -84,6 +85,40 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.RestDataS
                 Assert.AreEqual(true, result);
             }
             #endregion GetAsync
+
+            #region GetAllAsync
+            [TestMethod]
+            public void GetAllAsync()
+            {
+                DiSetup.RestDataServiceTests();
+                DiSetup.InitializeRestEndpoints();
+
+                // https://gingter.org/2018/07/26/how-to-mock-httpclient-in-your-net-c-unit-tests/
+                // ARRANGE
+                var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
+                handlerMock
+                   .Protected()
+                   // Setup the PROTECTED method to mock
+                   .Setup<Task<HttpResponseMessage>>(
+                      "SendAsync",
+                      ItExpr.IsAny<HttpRequestMessage>(),
+                      ItExpr.IsAny<CancellationToken>()
+                   )
+                   // prepare the expected response of the mocked http call
+                   .ReturnsAsync(new HttpResponseMessage()
+                   {
+                       StatusCode = HttpStatusCode.OK,
+                       Content = new StringContent(JsonConvert.SerializeObject(new SimpleResult<IEnumerable<ValueObject<bool>>>(new List<ValueObject<bool>>( new List<ValueObject<bool>>() { new ValueObject<bool>(true), new ValueObject<bool>(false), new ValueObject<bool>(true) })))),
+                   })
+                   .Verifiable();
+
+                IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://baseUri"), "someToken", handlerMock.Object);
+
+                List<ValueObject<bool>> result = dataService.GetAllAsync<ValueObject<bool>>("SomeAction").GetAwaiter().GetResult().ToList();
+
+                Assert.AreEqual(true, result[0].Value);
+            }
+            #endregion GetAllAsync
 
             #region CreateOrUpdateAsync
             [TestMethod]

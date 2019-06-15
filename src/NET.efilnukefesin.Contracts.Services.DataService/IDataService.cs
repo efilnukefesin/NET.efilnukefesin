@@ -19,6 +19,7 @@ namespace NET.efilnukefesin.Contracts.Services.DataService
         void AddOrReplaceAuthentication(string Authenticationstring);
 
         Task<T> GetAsync<T>(string Action, params object[] Parameters) where T : IBaseObject;
+        Task<IEnumerable<T>> GetAllAsync<T>(string Action, params object[] Parameters) where T : IBaseObject;
         Task<bool> CreateOrUpdateAsync<T>(string Action, T Value) where T : IBaseObject;
         Task<bool> CreateOrUpdateAsync<T>(string Action, IEnumerable<T> Values) where T : IBaseObject;
         Task<bool> DeleteAsync<T>(string Action, params object[] Parameters) where T : IBaseObject;

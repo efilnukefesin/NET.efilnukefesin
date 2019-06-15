@@ -67,7 +67,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
         #region GetAsync
         public async Task<T> GetAsync<T>(string Action, params object[] Parameters) where T : IBaseObject
         {
-            T result = default(T);
+            T result = default;
 
             string parameters = this.convertParameters(Parameters);
 
@@ -87,6 +87,30 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
             return result;
         }
         #endregion GetAsync
+
+        #region GetAllAsync
+        public async Task<IEnumerable<T>> GetAllAsync<T>(string Action, params object[] Parameters) where T : IBaseObject
+        {
+            IEnumerable<T> result = default;
+
+            string parameters = this.convertParameters(Parameters);
+
+            HttpResponseMessage response = await this.httpClient.GetAsync(this.EndpointRegister.GetEndpoint(Action) + parameters);
+            this.lastResponse = response;
+            if (response.IsSuccessStatusCode)
+            {
+                string json = response.Content.ReadAsStringAsync().Result;
+                this.lastContent = json;
+                SimpleResult<IEnumerable<T>> requestResult = JsonConvert.DeserializeObject<SimpleResult<IEnumerable<T>>>(json);
+                this.lastResult = requestResult;
+                if (!requestResult.IsError)
+                {
+                    result = requestResult.Payload;
+                }
+            }
+            return result;
+        }
+        #endregion GetAllAsync
 
         #region CreateOrUpdateAsync
         public async Task<bool> CreateOrUpdateAsync<T>(string Action, T Value) where T : IBaseObject

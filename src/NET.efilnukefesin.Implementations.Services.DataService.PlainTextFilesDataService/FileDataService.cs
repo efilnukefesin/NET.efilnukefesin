@@ -199,7 +199,24 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
                 {
                     this.logger?.Log($"FileDataService.GetAsync: file exists");
                     string text = File.ReadAllText(filename, Encoding.UTF8);
-                    result = JsonConvert.DeserializeObject<T>(text);
+                    List<T> listOfAllAndEverything = JsonConvert.DeserializeObject<IEnumerable<T>>(text).ToList();
+                    if (listOfAllAndEverything.Count() == 0)
+                    {
+                        //found nothing
+                    }
+                    else if (listOfAllAndEverything.Count() == 1)
+                    {
+                        result = listOfAllAndEverything[0];
+                    }
+                    else if (listOfAllAndEverything.Count() > 1)
+                    {
+                        result = listOfAllAndEverything.Where(x => x.Id.Equals(Parameters[0].ToString())).FirstOrDefault();
+                    }
+                    else
+                    {
+                        //won't work out here
+                        this.logger?.Log($"FileDataService.GetAsync: found less than zero entries");
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -215,6 +232,39 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
             return result;
         }
         #endregion GetAsync
+
+        #region GetAllAsync
+        public async Task<IEnumerable<T>> GetAllAsync<T>(string Action, params object[] Parameters) where T : IBaseObject
+        {
+            this.logger?.Log($"FileDataService.GetAllAsync: entered");
+            IEnumerable<T> result = default;
+
+            string filename = this.getFilename(Action);
+            this.logger?.Log($"FileDataService.GetAllAsync: generated file name '{filename}'");
+
+            //TODO: think about, we are having issues when rturning a list of something / working with a list of something
+            if (File.Exists(filename))
+            {
+                try
+                {
+                    this.logger?.Log($"FileDataService.GetAllAsync: file exists");
+                    string text = File.ReadAllText(filename, Encoding.UTF8);
+                    result = JsonConvert.DeserializeObject<IEnumerable<T>>(text);
+                }
+                catch (Exception ex)
+                {
+                    this.logger?.Log($"FileDataService.GetAllAsync: raised exception '{ex.Message}' - '{ex.StackTrace}'", Contracts.Logger.Enums.LogLevel.Error);
+                }
+            }
+            else
+            {
+                this.logger?.Log($"FileDataService.GetAllAsync: file does not exist", Contracts.Logger.Enums.LogLevel.Error);
+            }
+
+            this.logger?.Log($"FileDataService.GetAllAsync: exited, result '{result}'");
+            return result;
+        }
+        #endregion GetAllAsync
 
         #region getFilename
         private string getFilename(string Action)

@@ -1,4 +1,6 @@
-﻿{
-  "Value": 123,
-  "Id": "3486b171-ad0d-476c-b91f-1cdadb3c3c6c"
-}
+﻿[
+  {
+    "Value": 123,
+    "Id": "3486b171-ad0d-476c-b91f-1cdadb3c3c6c"
+  }
+]

@@ -67,6 +67,7 @@ namespace NET.efilnukefesin.Tests.BootStrapper
             if (endpointRegister != null)
             {
                 endpointRegister.AddEndpoint("GetAsyncTest1Action", "TextFile1.json");
+                endpointRegister.AddEndpoint("GetAsyncTest4Action", "TextFile7.json");
                 endpointRegister.AddEndpoint("GetAsyncTest2Action", "TextFile2.json");
                 endpointRegister.AddEndpoint("GetAsyncTest3Action", "TextFile3.json");
                 endpointRegister.AddEndpoint("CreateOrUpdateAsyncTest1Action", "TextFile4.json");
