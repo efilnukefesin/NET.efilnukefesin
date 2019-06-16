@@ -2,6 +2,7 @@
 using NET.efilnukefesin.Contracts.Logger;
 using NET.efilnukefesin.Contracts.Services.DataService;
 using NET.efilnukefesin.Extensions;
+using NET.efilnukefesin.Helpers;
 using NET.efilnukefesin.Implementations.Base;
 using Newtonsoft.Json;
 using System;
@@ -269,7 +270,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
         #region getFilename
         private string getFilename(string Action)
         {
-            string result = Path.Join(Directory.GetCurrentDirectory(), Path.Join(this.baseFolder, this.EndpointRegister.GetEndpoint(Action)));
+            string result = Path.Join(PathHelper.GetProgramPath(), Path.Join(this.baseFolder, this.EndpointRegister.GetEndpoint(Action))).ToLower().Replace("file:\\", "");
             return result;
         }
         #endregion getFilename
