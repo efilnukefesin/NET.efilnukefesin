@@ -1,5 +1,10 @@
-﻿using NET.efilnukefesin.Contracts.Services.DataService;
+﻿using NET.efilnukefesin.Contracts.DependencyInjection.Enums;
+using NET.efilnukefesin.Contracts.FeatureToggling;
+using NET.efilnukefesin.Contracts.Logger;
+using NET.efilnukefesin.Contracts.Services.DataService;
 using NET.efilnukefesin.Implementations.DependencyInjection;
+using NET.efilnukefesin.Implementations.FeatureToggling;
+using NET.efilnukefesin.Implementations.Logger.SerilogLogger;
 using NET.efilnukefesin.Implementations.Services.DataService.RestDataService;
 using System;
 using System.Collections.Generic;
@@ -30,10 +35,19 @@ namespace NET.efilnukefesin.Tests.BootStrapper
         }
         #endregion FileDataServiceTests
 
+        #region Tests
+        public static void Tests()
+        {
+            DiSetup.@base();
+        }
+        #endregion Tests
+
         #region base
         private static void @base()
         {
-            DiManager.GetInstance().RegisterType<IEndpointRegister, NET.efilnukefesin.Implementations.Services.DataService.EndpointRegister.EndpointRegister>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);  //where is all the data coming from?
+            DiManager.GetInstance().RegisterType<IEndpointRegister, NET.efilnukefesin.Implementations.Services.DataService.EndpointRegister.EndpointRegister>(Lifetime.Singleton);  //where is all the data coming from?
+            DiManager.GetInstance().RegisterType<IFeatureToggleManager, FeatureToggleManager>(Lifetime.Singleton);
+            DiManager.GetInstance().RegisterType<ILogger, SerilogLogger>();
 
             //DiManager.GetInstance().RegisterTarget<PermissionServer.SDK.Client>(new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), new Uri("http://localhost:6008")) });
             //DiManager.GetInstance().RegisterTarget<SuperHotFeatureServer.SDK.Client>(new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), new Uri("http://localhost:6010")) });

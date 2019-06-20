@@ -5,8 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\NET.efilnukefesin.Contracts.FeatureToggling\NET.efilnukefesin.Contracts.FeatureToggling.csproj" />
+    <ProjectReference Include="..\..\NET.efilnukefesin.Implementations.FeatureToggling\NET.efilnukefesin.Implementations.FeatureToggling.csproj" />
     <ProjectReference Include="..\..\src\NET.efilnukefesin.Contracts.Services.DataService\NET.efilnukefesin.Contracts.Services.DataService.csproj" />
     <ProjectReference Include="..\..\src\NET.efilnukefesin.Implementations.DependencyInjection\NET.efilnukefesin.Implementations.DependencyInjection.csproj" />
+    <ProjectReference Include="..\..\src\NET.efilnukefesin.Implementations.Logger.SerilogLogger\NET.efilnukefesin.Implementations.Logger.SerilogLogger.csproj" />
     <ProjectReference Include="..\..\src\NET.efilnukefesin.Implementations.Services.DataService.EndpointRegister\NET.efilnukefesin.Implementations.Services.DataService.EndpointRegister.csproj" />
     <ProjectReference Include="..\..\src\NET.efilnukefesin.Implementations.Services.DataService.PlainTextFilesDataService\NET.efilnukefesin.Implementations.Services.DataService.FileDataService.csproj" />
     <ProjectReference Include="..\..\src\NET.efilnukefesin.Implementations.Services.DataService.RestDataService\NET.efilnukefesin.Implementations.Services.DataService.RestDataService.csproj" />
