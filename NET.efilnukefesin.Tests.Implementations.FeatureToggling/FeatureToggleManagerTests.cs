@@ -60,6 +60,36 @@ namespace NET.efilnukefesin.Tests.Implementations.FeatureToggling
                 Assert.AreEqual(false, featureToggleManager.GetValue("TestFeature2"));
             }
             #endregion AddStaticFeatureToggle
+
+            #region AddTimebasedFeatureToggle
+            [TestMethod]
+            public void AddTimebasedFeatureToggle()
+            {
+                DiSetup.Tests();
+
+                IFeatureToggleManager featureToggleManager = DiHelper.GetService<IFeatureToggleManager>();
+                featureToggleManager.Add(new TimebasedFeatureToggle("TestFeature", true));
+                featureToggleManager.Add(new TimebasedFeatureToggle("TestFeature2", false));
+
+                Assert.AreEqual(true, featureToggleManager.GetValue("TestFeature"));
+                Assert.AreEqual(false, featureToggleManager.GetValue("TestFeature2"));
+            }
+            #endregion AddTimebasedFeatureToggle
+
+            #region AddVersionbasedFeatureToggle
+            [TestMethod]
+            public void AddVersionbasedFeatureToggle()
+            {
+                DiSetup.Tests();
+
+                IFeatureToggleManager featureToggleManager = DiHelper.GetService<IFeatureToggleManager>();
+                featureToggleManager.Add(new VersionbasedFeatureToggle("TestFeature", true));
+                featureToggleManager.Add(new VersionbasedFeatureToggle("TestFeature2", false));
+
+                Assert.AreEqual(true, featureToggleManager.GetValue("TestFeature"));
+                Assert.AreEqual(false, featureToggleManager.GetValue("TestFeature2"));
+            }
+            #endregion AddVersionbasedFeatureToggle
         }
         #endregion FeatureToggleManagerMethods
     }
