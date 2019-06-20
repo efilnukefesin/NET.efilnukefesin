@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\NET.efilnukefesin.BaseClasses.Test\NET.efilnukefesin.BaseClasses.Test.csproj" />
-    <ProjectReference Include="..\test\NET.efilnukefesin.Tests.BootStrapper\NET.efilnukefesin.Tests.BootStrapper.csproj" />
+    <ProjectReference Include="..\..\src\NET.efilnukefesin.BaseClasses.Test\NET.efilnukefesin.BaseClasses.Test.csproj" />
+    <ProjectReference Include="..\NET.efilnukefesin.Tests.BootStrapper\NET.efilnukefesin.Tests.BootStrapper.csproj" />
   </ItemGroup>
 
 </Project>
