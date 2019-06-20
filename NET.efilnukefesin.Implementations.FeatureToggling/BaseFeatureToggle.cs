@@ -9,6 +9,27 @@ namespace NET.efilnukefesin.Implementations.FeatureToggling
     public abstract class BaseFeatureToggle : BaseObject, IFeatureToggle
     {
         public string Name { get; set; }
-        public bool IsActive { get; set; }
+
+        #region Constants
+
+        #endregion Constants
+
+        #region Properties
+
+        #endregion Properties
+
+        #region Construction
+
+        #endregion Construction
+
+        #region Methods
+
+        public abstract bool GetIsActive();
+
+        #endregion Methods
+
+        #region Events
+
+        #endregion Events
     }
 }

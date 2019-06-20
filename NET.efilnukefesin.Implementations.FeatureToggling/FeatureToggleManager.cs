@@ -43,7 +43,7 @@ namespace NET.efilnukefesin.Implementations.FeatureToggling
 
             if (this.Exists(Name))
             {
-                result = this.toggles.Where(x => x.Name.Equals(Name)).FirstOrDefault().IsActive;
+                result = this.toggles.Where(x => x.Name.Equals(Name)).FirstOrDefault().GetIsActive();
             }
 
             return result;
@@ -56,6 +56,13 @@ namespace NET.efilnukefesin.Implementations.FeatureToggling
             return this.toggles.Any(x => x.Name.Equals(Name));
         }
         #endregion Exists
+
+        #region Clear
+        public void Clear()
+        {
+            this.toggles.Clear();
+        }
+        #endregion Clear
 
         #region dispose
         protected override void dispose()

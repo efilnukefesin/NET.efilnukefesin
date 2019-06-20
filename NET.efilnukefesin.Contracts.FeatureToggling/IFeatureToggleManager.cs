@@ -11,6 +11,7 @@ namespace NET.efilnukefesin.Contracts.FeatureToggling
         void Add(IFeatureToggle FeatureToggle);
         bool GetValue(string Name);
         bool Exists(string Name);
+        void Clear();
 
         #endregion Methods
     }

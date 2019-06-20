@@ -9,8 +9,13 @@ namespace NET.efilnukefesin.Contracts.FeatureToggling
         #region Properties
 
         public string Name { get; set; }
-        public bool IsActive { get; set; }
 
         #endregion Properties
+
+        #region Methods
+
+        bool GetIsActive();
+
+        #endregion Methods
     }
 }

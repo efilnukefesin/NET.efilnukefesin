@@ -6,6 +6,7 @@ using NET.efilnukefesin.Tests.BootStrapper;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace NET.efilnukefesin.Tests.Implementations.FeatureToggling
 {
@@ -39,6 +40,7 @@ namespace NET.efilnukefesin.Tests.Implementations.FeatureToggling
                 DiSetup.Tests();
 
                 IFeatureToggleManager featureToggleManager = DiHelper.GetService<IFeatureToggleManager>();
+                featureToggleManager.Clear();
                 featureToggleManager.Add(new StaticFeatureToggle("TestFeature", true));
 
                 Assert.AreEqual(true, featureToggleManager.Exists("TestFeature"));
@@ -53,6 +55,7 @@ namespace NET.efilnukefesin.Tests.Implementations.FeatureToggling
                 DiSetup.Tests();
 
                 IFeatureToggleManager featureToggleManager = DiHelper.GetService<IFeatureToggleManager>();
+                featureToggleManager.Clear();
                 featureToggleManager.Add(new StaticFeatureToggle("TestFeature", true));
                 featureToggleManager.Add(new StaticFeatureToggle("TestFeature2", false));
 
@@ -68,8 +71,11 @@ namespace NET.efilnukefesin.Tests.Implementations.FeatureToggling
                 DiSetup.Tests();
 
                 IFeatureToggleManager featureToggleManager = DiHelper.GetService<IFeatureToggleManager>();
-                featureToggleManager.Add(new TimebasedFeatureToggle("TestFeature", true));
-                featureToggleManager.Add(new TimebasedFeatureToggle("TestFeature2", false));
+                featureToggleManager.Clear();
+                featureToggleManager.Add(new TimebasedFeatureToggle("TestFeature", DateTimeOffset.Now + TimeSpan.FromMilliseconds(10)));
+                featureToggleManager.Add(new TimebasedFeatureToggle("TestFeature2", DateTimeOffset.Now + TimeSpan.FromDays(1)));
+
+                Thread.Sleep(20);
 
                 Assert.AreEqual(true, featureToggleManager.GetValue("TestFeature"));
                 Assert.AreEqual(false, featureToggleManager.GetValue("TestFeature2"));
@@ -83,8 +89,9 @@ namespace NET.efilnukefesin.Tests.Implementations.FeatureToggling
                 DiSetup.Tests();
 
                 IFeatureToggleManager featureToggleManager = DiHelper.GetService<IFeatureToggleManager>();
-                featureToggleManager.Add(new VersionbasedFeatureToggle("TestFeature", true));
-                featureToggleManager.Add(new VersionbasedFeatureToggle("TestFeature2", false));
+                featureToggleManager.Clear();
+                featureToggleManager.Add(new VersionbasedFeatureToggle("TestFeature"));
+                featureToggleManager.Add(new VersionbasedFeatureToggle("TestFeature2"));
 
                 Assert.AreEqual(true, featureToggleManager.GetValue("TestFeature"));
                 Assert.AreEqual(false, featureToggleManager.GetValue("TestFeature2"));
