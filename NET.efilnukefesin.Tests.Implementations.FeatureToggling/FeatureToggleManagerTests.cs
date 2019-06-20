@@ -90,8 +90,8 @@ namespace NET.efilnukefesin.Tests.Implementations.FeatureToggling
 
                 IFeatureToggleManager featureToggleManager = DiHelper.GetService<IFeatureToggleManager>();
                 featureToggleManager.Clear();
-                featureToggleManager.Add(new VersionbasedFeatureToggle("TestFeature"));
-                featureToggleManager.Add(new VersionbasedFeatureToggle("TestFeature2"));
+                featureToggleManager.Add(new VersionbasedFeatureToggle("TestFeature", new Version(0, 8), this.GetType()));
+                featureToggleManager.Add(new VersionbasedFeatureToggle("TestFeature2", new Version(1, 0), this.GetType()));
 
                 Assert.AreEqual(true, featureToggleManager.GetValue("TestFeature"));
                 Assert.AreEqual(false, featureToggleManager.GetValue("TestFeature2"));

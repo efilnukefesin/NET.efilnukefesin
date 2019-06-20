@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NET.efilnukefesin.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,13 +9,18 @@ namespace NET.efilnukefesin.Implementations.FeatureToggling
     {
         #region Properties
 
+        private Version targetVersion;
+        private Type whoseVersionToUse;
+
         #endregion Properties
 
         #region Construction
 
-        public VersionbasedFeatureToggle(string Name)
+        public VersionbasedFeatureToggle(string Name, Version TargetVersion, Type WhoseVersionToUse)
         {
             this.Name = Name;
+            this.targetVersion = TargetVersion;
+            this.whoseVersionToUse = WhoseVersionToUse;
         }
 
         #endregion Construction
@@ -24,7 +30,8 @@ namespace NET.efilnukefesin.Implementations.FeatureToggling
         #region GetIsActive
         public override bool GetIsActive()
         {
-            return false;
+            Version version = AssemblyHelper.GetAssemblyVersion(this.whoseVersionToUse);
+            return this.targetVersion <= version;
         }
         #endregion GetIsActive
 

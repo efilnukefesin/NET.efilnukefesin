@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\NET.efilnukefesin.Contracts.FeatureToggling\NET.efilnukefesin.Contracts.FeatureToggling.csproj" />
     <ProjectReference Include="..\src\NET.efilnukefesin.Contracts.Logger\NET.efilnukefesin.Contracts.Logger.csproj" />
+    <ProjectReference Include="..\src\NET.efilnukefesin.Helpers\NET.efilnukefesin.Helpers.csproj" />
     <ProjectReference Include="..\src\NET.efilnukefesin.Implementations.Base\NET.efilnukefesin.Implementations.Base.csproj" />
   </ItemGroup>
 

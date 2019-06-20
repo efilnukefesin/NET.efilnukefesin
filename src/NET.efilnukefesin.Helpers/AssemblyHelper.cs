@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace NET.efilnukefesin.Helpers
@@ -45,5 +46,12 @@ namespace NET.efilnukefesin.Helpers
             return result;
         }
         #endregion GetType
+
+        #region GetAssemblyVersion
+        public static Version GetAssemblyVersion(Type type)
+        {
+            return type.Assembly.GetName().Version;
+        }
+        #endregion GetAssemblyVersion
     }
 }
