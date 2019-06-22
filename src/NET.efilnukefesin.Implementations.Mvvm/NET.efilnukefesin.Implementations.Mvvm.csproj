@@ -4,13 +4,14 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <Company>efilnukefesin.NET</Company>
     <Description>Mvvm implementations</Description>
-    <Version>1.1.0</Version>
-    <PackageReleaseNotes>added some events</PackageReleaseNotes>
+    <Version>1.2.0</Version>
+    <PackageReleaseNotes>added history for navigation service and added optional logger</PackageReleaseNotes>
     <Copyright>efilnukefesin.NET</Copyright>
     <Authors>efilnukefesin</Authors>
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NET.efilnukefesin.Contracts.Logger\NET.efilnukefesin.Contracts.Logger.csproj" />
     <ProjectReference Include="..\NET.efilnukefesin.Contracts.Mvvm\NET.efilnukefesin.Contracts.Mvvm.csproj" />
     <ProjectReference Include="..\NET.efilnukefesin.Implementations.DependencyInjection\NET.efilnukefesin.Implementations.DependencyInjection.csproj" />
   </ItemGroup>

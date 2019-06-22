@@ -1,6 +1,8 @@
-﻿using NET.efilnukefesin.Contracts.Mvvm;
+﻿using NET.efilnukefesin.Contracts.Logger;
+using NET.efilnukefesin.Contracts.Mvvm;
 using NET.efilnukefesin.Implementations.Base;
 using NET.efilnukefesin.Implementations.Mvvm.Attributes;
+using NET.efilnukefesin.Implementations.Mvvm.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,15 +18,19 @@ namespace NET.efilnukefesin.Implementations.Mvvm
         private Dictionary<string, string> viewsAndViewModels;
 
         private INavigationPresenter navigationPresenter;
+        private List<NavigationInfo> history;
+        private ILogger logger;
 
         #endregion Properties
 
         #region Construction
 
-        public NavigationService(INavigationPresenter NavigationPresenter)
+        public NavigationService(INavigationPresenter NavigationPresenter, ILogger Logger = null)
         {
+            this.logger = Logger;
             this.navigationPresenter = NavigationPresenter;
             this.viewsAndViewModels = new Dictionary<string, string>();
+            this.history = new List<NavigationInfo>();
             this.findViewsAndViewModels();
         }
 
@@ -35,45 +41,56 @@ namespace NET.efilnukefesin.Implementations.Mvvm
         #region findViewsAndViewModels
         private void findViewsAndViewModels()
         {
+            this.logger.Log($"NavigationService.findViewsAndViewModels: entered");
             Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
             foreach (Assembly currentAssembly in assemblies)
             {
-                foreach (Type currentType in currentAssembly.GetTypes())
+                //this.logger.Log($"NavigationService.findViewsAndViewModels: iterating through Assemblies, currently: '{currentAssembly.FullName}'");
+                try
                 {
-                    ViewModelAttribute viewModelAttribute = null;
-                    ViewAttribute viewAttribute = null;
-                    foreach (object customAttribute in currentType.GetCustomAttributes(true))
+                    foreach (Type currentType in currentAssembly.GetTypes())
                     {
-                        if (customAttribute is ViewModelAttribute)
+                        //this.logger.Log($"NavigationService.findViewsAndViewModels: iterating through Types in Assembly '{currentAssembly.FullName}', currently: '{currentType.FullName}'");
+                        ViewModelAttribute viewModelAttribute = null;
+                        ViewAttribute viewAttribute = null;
+                        foreach (object customAttribute in currentType.GetCustomAttributes(true))
                         {
-                            viewModelAttribute = customAttribute as ViewModelAttribute;
-                        }
-                        else if (customAttribute is ViewAttribute)
-                        {
-                            viewAttribute = customAttribute as ViewAttribute;
-                        }
-                        if (viewModelAttribute != null && viewAttribute != null)
-                        {
-                            if (!this.viewsAndViewModels.ContainsValue(viewModelAttribute.ViewModelName))
+                            if (customAttribute is ViewModelAttribute)
                             {
-                                //object instance = DiManager.GetInstance().Resolve(currentType);
-                                //this.viewsAndViewModels.Add(viewModelAttribute.ViewModelName, instance);
-                                //this.viewsAndViewModels.Add(currentType, this.viewModelLocator.GetInstance(viewModelAttribute.ViewModelName));
-                                this.viewsAndViewModels.Add(viewAttribute.ViewUri, viewModelAttribute.ViewModelName);
+                                viewModelAttribute = customAttribute as ViewModelAttribute;
+                            }
+                            else if (customAttribute is ViewAttribute)
+                            {
+                                viewAttribute = customAttribute as ViewAttribute;
+                            }
+                            if (viewModelAttribute != null && viewAttribute != null)
+                            {
+                                this.logger.Log($"NavigationService.findViewsAndViewModels: successfully found a ViewModelAttribute AND a ViewAttribute in  Assembly '{currentAssembly.FullName}', Type: '{currentType.FullName}'");
+                                if (!this.viewsAndViewModels.ContainsValue(viewModelAttribute.ViewModelName))
+                                {
+                                    this.viewsAndViewModels.Add(viewAttribute.ViewUri, viewModelAttribute.ViewModelName);
+                                }
                             }
                         }
                     }
                 }
+                catch (Exception ex)
+                {
+                    this.logger.Log($"NavigationService.findViewsAndViewModels: iterating through Types in Assembly '{currentAssembly.FullName}', Exception: '{ex}, {ex.Message}'", Contracts.Logger.Enums.LogLevel.Error);
+                }
             }
+            this.logger.Log($"NavigationService.findViewsAndViewModels: exited");
         }
         #endregion findViewsAndViewModels
 
         #region Navigate
         public bool Navigate(string ViewModelName)
         {
+            this.logger.Log($"NavigationService.Navigate: entered for ViewModel '{ViewModelName}'");
             bool result = false;
             this.OnNavigationStarted(new EventArgs());
             string viewName = this.viewsAndViewModels.Where(x => x.Value.Equals(ViewModelName)).FirstOrDefault().Key;
+            this.logger.Log($"NavigationService.Navigate: ViewModel '{ViewModelName}' belongs to View '{viewName}'");
             result = this.navigationPresenter.Present(viewName, StaticViewModelLocator.Current.GetInstance(ViewModelName));
             if (result)
             {
@@ -83,6 +100,8 @@ namespace NET.efilnukefesin.Implementations.Mvvm
             {
                 this.OnNavigationFailed(new EventArgs());
             }
+            this.history.Add(new NavigationInfo(ViewModelName, viewName, result));
+            this.logger.Log($"NavigationService.Navigate: exited, result: '{result}'");
             return result;
         }
         #endregion Navigate
@@ -90,7 +109,11 @@ namespace NET.efilnukefesin.Implementations.Mvvm
         #region CanNavigate
         public bool CanNavigate(string ViewModelName)
         {
-            return this.viewsAndViewModels.Any(x => x.Value.Equals(ViewModelName));
+            bool result = false;
+            this.logger.Log($"NavigationService.CanNavigate: called for ViewModel '{ViewModelName}'");
+            result = this.viewsAndViewModels.Any(x => x.Value.Equals(ViewModelName));
+            this.logger.Log($"NavigationService.CanNavigate: exited with result '{result}' for ViewModel '{ViewModelName}'");
+            return result;
         }
         #endregion CanNavigate
 
