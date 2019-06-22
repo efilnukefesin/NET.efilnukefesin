@@ -66,7 +66,23 @@ namespace NET.efilnukefesin.Helpers
             T result = default;
             try
             {
-                result = (T)Activator.CreateInstance(typeof(T), args: Parameters);
+                result = (T)TypeHelper.CreateInstance(typeof(T), Parameters);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return result;
+        }
+        #endregion CreateInstance
+
+        #region CreateInstance
+        public static object CreateInstance(Type type, params object[] Parameters)
+        {
+            object result = default;
+            try
+            {
+                result = Activator.CreateInstance(type, args: Parameters);
             }
             catch (Exception ex)
             {
@@ -83,7 +99,7 @@ namespace NET.efilnukefesin.Helpers
             object result = default;
             try
             {
-                result = Activator.CreateInstance(type.GetType(), args: Parameters);
+                result = Activator.CreateInstance(type, args: Parameters);
             }
             catch (Exception ex)
             {
