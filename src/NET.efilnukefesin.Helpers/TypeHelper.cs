@@ -63,10 +63,27 @@ namespace NET.efilnukefesin.Helpers
         #region CreateInstance
         public static T CreateInstance<T>(params object[] Parameters)
         {
-            T result = default(T);
+            T result = default;
             try
             {
                 result = (T)Activator.CreateInstance(typeof(T), args: Parameters);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return result;
+        }
+        #endregion CreateInstance
+
+        #region CreateInstance
+        public static object CreateInstance(string TypeName, params object[] Parameters)
+        {
+            Type type = Type.GetType(TypeName);
+            object result = default;
+            try
+            {
+                result = Activator.CreateInstance(type.GetType(), args: Parameters);
             }
             catch (Exception ex)
             {
