@@ -99,7 +99,7 @@ namespace NET.efilnukefesin.Helpers
             object result = default;
             try
             {
-                result = Activator.CreateInstance(type, args: Parameters);
+                result = TypeHelper.CreateInstance(type, Parameters);
             }
             catch (Exception ex)
             {

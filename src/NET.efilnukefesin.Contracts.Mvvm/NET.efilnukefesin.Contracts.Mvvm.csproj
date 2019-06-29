@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>1.1.0</Version>
+    <Version>1.3.0</Version>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
     <Description>Interfaces providing Mvvm functionality</Description>
-    <PackageReleaseNotes>added some events</PackageReleaseNotes>
+    <PackageReleaseNotes>added Back() method</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

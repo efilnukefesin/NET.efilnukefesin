@@ -4,8 +4,8 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <Company>efilnukefesin.NET</Company>
     <Description>Mvvm implementations</Description>
-    <Version>1.2.0</Version>
-    <PackageReleaseNotes>added history for navigation service and added optional logger</PackageReleaseNotes>
+    <Version>1.3.0</Version>
+    <PackageReleaseNotes>added Back() method implemenation</PackageReleaseNotes>
     <Copyright>efilnukefesin.NET</Copyright>
     <Authors>efilnukefesin</Authors>
   </PropertyGroup>

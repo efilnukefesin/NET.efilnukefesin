@@ -9,6 +9,11 @@ namespace NET.efilnukefesin.Tests.Implementations.Mvvm.Assets
 {
     internal class DummyNavigationPresenter : BaseObject, INavigationPresenter
     {
+        public void Back()
+        {
+            //do nothing
+        }
+
         public bool Present(string ViewUri, object DataContext)
         {
             //throw new NotImplementedException();

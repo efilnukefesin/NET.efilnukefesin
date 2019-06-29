@@ -38,6 +38,13 @@ namespace NET.efilnukefesin.Implementations.Mvvm
 
         #region Methods
 
+        #region Back
+        public void Back()
+        {
+            this.navigationPresenter.Back();
+        }
+        #endregion Back
+
         #region findViewsAndViewModels
         private void findViewsAndViewModels()
         {

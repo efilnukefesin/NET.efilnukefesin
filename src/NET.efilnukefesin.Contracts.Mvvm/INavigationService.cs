@@ -11,6 +11,7 @@ namespace NET.efilnukefesin.Contracts.Mvvm
 
         bool CanNavigate(string ViewModelName);
         bool Navigate(string ViewModelName);
+        void Back();
 
         #endregion Methods
 

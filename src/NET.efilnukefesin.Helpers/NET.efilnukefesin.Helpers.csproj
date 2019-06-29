@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>1.4.0</Version>
+    <Version>1.4.1</Version>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
     <Description>Various Helper classes</Description>
-    <PackageReleaseNotes>Added TypeHelper method to create a type from a type</PackageReleaseNotes>
+    <PackageReleaseNotes>centralized CreateInstance calls</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>
