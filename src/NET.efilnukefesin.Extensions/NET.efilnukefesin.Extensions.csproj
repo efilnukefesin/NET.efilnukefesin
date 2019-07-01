@@ -5,9 +5,10 @@
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
-    <Version>1.4.2</Version>
-    <PackageReleaseNotes>Added IEnumerableExtensions</PackageReleaseNotes>
+    <Version>1.5.0</Version>
+    <PackageReleaseNotes>Added Object Clone extension Method</PackageReleaseNotes>
     <Description>Byte- string- and other extensions to keep the flow up!</Description>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
