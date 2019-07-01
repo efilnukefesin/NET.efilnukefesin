@@ -24,9 +24,6 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
         private HttpResponseMessage lastResponse = null;  //for debugging / lookup
         private string lastContent = string.Empty;  //for debugging / lookup
         private object lastResult = null;  //for debugging / lookup
-
-        //private string dateTimeFormat = "dd.MM.yyyy HH:mm:ss zzz";
-        //private JsonConverter dateTimeConverter;
         #endregion Properties
 
         #region Construction
@@ -48,8 +45,6 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
             {
                 this.addAuthenticationHeader(BearerToken);
             }
-
-            //this.dateTimeConverter = new IsoDateTimeConverter { DateTimeFormat = this.dateTimeFormat };
         }
 
         #endregion Construction
