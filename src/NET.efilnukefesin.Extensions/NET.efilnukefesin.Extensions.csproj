@@ -5,7 +5,7 @@
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
-    <Version>1.4.1</Version>
+    <Version>1.4.2</Version>
     <PackageReleaseNotes>Added IEnumerableExtensions</PackageReleaseNotes>
     <Description>Byte- string- and other extensions to keep the flow up!</Description>
   </PropertyGroup>
