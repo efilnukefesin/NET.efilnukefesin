@@ -5,9 +5,13 @@
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
-    <Version>1.4.0</Version>
+    <Version>1.4.1</Version>
     <PackageReleaseNotes>Added IEnumerableExtensions</PackageReleaseNotes>
     <Description>Byte- string- and other extensions to keep the flow up!</Description>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NET.efilnukefesin.Contracts.Base\NET.efilnukefesin.Contracts.Base.csproj" />
+  </ItemGroup>
 
 </Project>

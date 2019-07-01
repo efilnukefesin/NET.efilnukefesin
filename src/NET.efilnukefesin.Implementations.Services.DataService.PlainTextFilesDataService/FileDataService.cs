@@ -69,10 +69,10 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
                         var content = JsonConvert.DeserializeObject<IEnumerable<T>>(text);
                         if (content != null)
                         {
-                            if (content.ToList().Contains(Value))
+                            if (content.Any(x => x.Id.Equals(Value.Id)))
                             {
                                 //Update
-                                content = content.Replace(content.ToList().IndexOf(Value), Value);
+                                content = content.Replace(Value.Id, Value);
                                 this.logger?.Log($"FileDataService.CreateOrUpdateAsync: updated content");
                             }
                             else

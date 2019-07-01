@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NET.efilnukefesin.Contracts.Base;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -50,6 +51,21 @@ namespace NET.efilnukefesin.Extensions
             {
                 yield return current == index ? value : item;
                 current++;
+            }
+        }
+        #endregion Replace
+
+        #region Replace
+        public static IEnumerable<T> Replace<T>(this IEnumerable<T> source, string Id, T newValue) where T : IBaseObject
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            foreach (var item in source)
+            {
+                yield return item.Id.Equals(Id) ? newValue : item;
             }
         }
         #endregion Replace
