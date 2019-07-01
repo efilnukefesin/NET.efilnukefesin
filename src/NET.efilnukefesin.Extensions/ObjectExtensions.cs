@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -51,5 +52,14 @@ namespace NET.efilnukefesin.Extensions
             eventField.SetValue(obj, null);
         }
         #endregion ClearEventInvocations
+
+        #region Clone
+        public static T Clone<T>(this T obj)
+        {
+            string serializedString = JsonConvert.SerializeObject(obj);
+            T result = JsonConvert.DeserializeObject<T>(serializedString);
+            return result;
+        }
+        #endregion Clone
     }
 }
