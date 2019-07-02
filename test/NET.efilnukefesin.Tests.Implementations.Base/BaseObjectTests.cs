@@ -42,6 +42,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Base
         [TestClass]
         public class BaseObjectMethods : BaseObjectTests
         {
+            #region SaveAndRestore
             [TestMethod]
             public void SaveAndRestore()
             {
@@ -53,6 +54,24 @@ namespace NET.efilnukefesin.Tests.Implementations.Base
 
                 Assert.AreEqual("Hello World", x.TestString);
             }
+            #endregion SaveAndRestore
+
+            #region DiffersFromMemory
+            [TestMethod]
+            public void DiffersFromMemory()
+            {
+                SomeBaseObjectClass x = new SomeBaseObjectClass();
+
+                x.Save();
+                x.TestString = "123";
+                bool isDifferent = x.DiffersFromMemory();
+                x.Restore();
+                bool isEqual= x.DiffersFromMemory();
+
+                Assert.AreEqual(true, isDifferent);
+                Assert.AreEqual(false, isEqual);
+            }
+            #endregion DiffersFromMemory
         }
         #endregion BaseObjectMethods
     }

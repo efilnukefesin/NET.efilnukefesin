@@ -100,6 +100,13 @@ namespace NET.efilnukefesin.Implementations.Base
         }
         #endregion Restore
 
+        #region DiffersFromMemory
+        public bool DiffersFromMemory()
+        {
+            return this.memory.IsDifferent(this);
+        }
+        #endregion DiffersFromMemory
+
         #endregion Methods
     }
 }

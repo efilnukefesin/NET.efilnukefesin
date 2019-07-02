@@ -43,6 +43,19 @@ namespace NET.efilnukefesin.Implementations.Base.Classes
         }
         #endregion Remember
 
+        #region IsDifferent
+        internal bool IsDifferent(BaseObject baseObject)
+        {
+            bool result = false;
+            string newValue = JsonConvert.SerializeObject(baseObject);
+            if (!string.IsNullOrEmpty(this.serializedString))
+            {
+                result = !this.serializedString.Equals(newValue);
+            }
+            return result;
+        }
+        #endregion IsDifferent
+
         #endregion Methods
 
         #region Events

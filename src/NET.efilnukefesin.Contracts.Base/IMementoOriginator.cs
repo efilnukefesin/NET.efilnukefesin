@@ -8,5 +8,6 @@ namespace NET.efilnukefesin.Contracts.Base
     {
         void Save();
         void Restore();
+        bool DiffersFromMemory();
     }
 }
