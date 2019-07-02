@@ -85,6 +85,13 @@ namespace NET.efilnukefesin.Extensions
         }
         #endregion Remove
 
+        #region Clear
+        public static IEnumerable<T> Clear<T>(this IEnumerable<T> enumerable)
+        {
+            yield return default;
+        }
+        #endregion Clear
+
         #endregion Methods
     }
 }
