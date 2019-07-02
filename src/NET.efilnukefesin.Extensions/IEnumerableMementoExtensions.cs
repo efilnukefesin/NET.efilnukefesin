@@ -32,7 +32,7 @@ namespace NET.efilnukefesin.Extensions
         #endregion Save
 
         #region Restore
-        public static void Restore<T>(this List<T> list, string name)
+        public static void Restore<T>(this IList<T> list, string name)
         {
             string nameOfList = name;
             if (IEnumerableMementoExtensions.memory.ContainsKey(nameOfList))
