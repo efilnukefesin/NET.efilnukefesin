@@ -2,13 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>1.8.0</Version>
+    <Version>1.9.0</Version>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
-    <PackageReleaseNotes>added ValueObject for carrying base types and stuff</PackageReleaseNotes>
+    <PackageReleaseNotes>implemented Memento Pattern on BaseObject</PackageReleaseNotes>
     <Description>Base class implementations</Description>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\NET.efilnukefesin.Contracts.Base\NET.efilnukefesin.Contracts.Base.csproj" />

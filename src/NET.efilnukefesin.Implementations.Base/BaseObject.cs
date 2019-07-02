@@ -1,4 +1,5 @@
 ﻿using NET.efilnukefesin.Contracts.Base;
+using NET.efilnukefesin.Implementations.Base.Classes;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -40,6 +41,10 @@ namespace NET.efilnukefesin.Implementations.Base
         [XmlIgnore]
         private static IBaseObject lastCreatedBaseObject = default;
 
+        [IgnoreDataMember]
+        [XmlIgnore]
+        private MementoMemory memory;
+
         #endregion Properties
 
         #region Construction
@@ -47,6 +52,7 @@ namespace NET.efilnukefesin.Implementations.Base
         public BaseObject()
         {
             this.CreationDate = DateTimeOffset.Now;
+            this.memory = new MementoMemory();
             //this.Id = Guid.NewGuid();
             this.Id = Guid.NewGuid().ToString();
             this.CreationIndex = BaseObject.highestCreationIndex;
@@ -67,5 +73,33 @@ namespace NET.efilnukefesin.Implementations.Base
         }
 
         #endregion Construction
+
+        #region Methods
+
+        #region Save
+        public void Save()
+        {
+            this.memory.Memorize(this);
+        }
+        #endregion Save
+
+        #region Restore
+        public void Restore()
+        {
+            var oldThing = this.memory.Remember();
+            if (oldThing != null)
+            {
+                foreach (var property in this.GetType().GetProperties())
+                {
+                    if (property.GetCustomAttributes(typeof(XmlIgnoreAttribute), false).GetLength(0) == 0)
+                    {
+                        property.SetValue(this, property.GetValue(oldThing, null), null);
+                    }
+                }
+            }
+        }
+        #endregion Restore
+
+        #endregion Methods
     }
 }

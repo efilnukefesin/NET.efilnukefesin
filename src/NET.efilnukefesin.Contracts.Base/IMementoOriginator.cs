@@ -4,8 +4,9 @@ using System.Text;
 
 namespace NET.efilnukefesin.Contracts.Base
 {
-    public interface IBaseObject : IId, ICreationDate, ICreationIndex, ICreationSiblings, IMementoOriginator
+    public interface IMementoOriginator
     {
-        
+        void Save();
+        void Restore();
     }
 }

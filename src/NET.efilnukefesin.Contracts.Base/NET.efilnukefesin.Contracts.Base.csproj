@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>1.8.0</Version>
+    <Version>1.9.0</Version>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
     <Description>Base Contracts</Description>
-    <PackageReleaseNotes>added IInitalize interface</PackageReleaseNotes>
+    <PackageReleaseNotes>added IMemento interface</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>

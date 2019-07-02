@@ -42,7 +42,17 @@ namespace NET.efilnukefesin.Tests.Implementations.Base
         [TestClass]
         public class BaseObjectMethods : BaseObjectTests
         {
-            
+            [TestMethod]
+            public void SaveAndRestore()
+            {
+                SomeBaseObjectClass x = new SomeBaseObjectClass();
+
+                x.Save();
+                x.TestString = "123";
+                x.Restore();
+
+                Assert.AreEqual("Hello World", x.TestString);
+            }
         }
         #endregion BaseObjectMethods
     }
