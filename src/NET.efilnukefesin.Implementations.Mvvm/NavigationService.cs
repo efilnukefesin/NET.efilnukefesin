@@ -21,6 +21,8 @@ namespace NET.efilnukefesin.Implementations.Mvvm
         private List<NavigationInfo> history;
         private ILogger logger;
 
+        private string lastViewModel = string.Empty;
+
         #endregion Properties
 
         #region Construction
@@ -95,19 +97,28 @@ namespace NET.efilnukefesin.Implementations.Mvvm
         {
             this.logger.Log($"NavigationService.Navigate: entered for ViewModel '{ViewModelName}'");
             bool result = false;
-            this.OnNavigationStarted(new EventArgs());
-            string viewName = this.viewsAndViewModels.Where(x => x.Value.Equals(ViewModelName)).FirstOrDefault().Key;
-            this.logger.Log($"NavigationService.Navigate: ViewModel '{ViewModelName}' belongs to View '{viewName}'");
-            result = this.navigationPresenter.Present(viewName, StaticViewModelLocator.Current.GetInstance(ViewModelName));
-            if (result)
+            if (!this.lastViewModel.Equals(ViewModelName))
             {
-                this.OnNavigationSuccessful(new EventArgs());
+                this.OnNavigationStarted(new EventArgs());
+                string viewName = this.viewsAndViewModels.Where(x => x.Value.Equals(ViewModelName)).FirstOrDefault().Key;
+                this.logger.Log($"NavigationService.Navigate: ViewModel '{ViewModelName}' belongs to View '{viewName}'");
+                result = this.navigationPresenter.Present(viewName, StaticViewModelLocator.Current.GetInstance(ViewModelName));
+                if (result)
+                {
+                    this.OnNavigationSuccessful(new EventArgs());
+                }
+                else
+                {
+                    this.OnNavigationFailed(new EventArgs());
+                }
+                this.history.Add(new NavigationInfo(ViewModelName, viewName, result));
+                this.lastViewModel = ViewModelName;
             }
             else
             {
-                this.OnNavigationFailed(new EventArgs());
+                this.logger.Log($"NavigationService.Navigate: did nothing, already at ViewModel: '{ViewModelName}', this.lastViewModel: '{this.lastViewModel}'");
             }
-            this.history.Add(new NavigationInfo(ViewModelName, viewName, result));
+            
             this.logger.Log($"NavigationService.Navigate: exited, result: '{result}'");
             return result;
         }
