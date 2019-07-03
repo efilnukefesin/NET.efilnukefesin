@@ -6,7 +6,7 @@
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
     <Description>Interfaces for NodeManager and Nodes itself</Description>
-    <Version>1.1.1</Version>
+    <VersionPrefix>1.1.1</VersionPrefix>
   </PropertyGroup>
 
   <ItemGroup>

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>1.6.0</Version>
+    <VersionPrefix>1.6.0</VersionPrefix>
     <PackageReleaseNotes>Added interface type to RegisterTarget method without params</PackageReleaseNotes>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>

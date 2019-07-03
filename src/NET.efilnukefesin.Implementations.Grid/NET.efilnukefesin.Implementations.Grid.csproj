@@ -5,7 +5,7 @@
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
-    <Version>1.2.2</Version>
+    <VersionPrefix>1.2.2</VersionPrefix>
     <PackageReleaseNotes>Updated packages</PackageReleaseNotes>
     <Description>Implementation of IGrid - a class capable of storing any Type in a 2D array-like</Description>
   </PropertyGroup>

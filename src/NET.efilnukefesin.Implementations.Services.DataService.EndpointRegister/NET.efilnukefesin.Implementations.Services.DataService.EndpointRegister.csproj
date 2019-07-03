@@ -5,7 +5,7 @@
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
-    <Version>0.8.0</Version>
+    <VersionPrefix>0.8.0</VersionPrefix>
   </PropertyGroup>
 
   <ItemGroup>

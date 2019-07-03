@@ -35,17 +35,37 @@ namespace Builder
         static void Main(string[] args)
         {
             var app = new CommandLineApplication(throwOnUnexpectedArg: false);
+            var modeOption = app.Option<string>("--mode", "determining if beta or not", CommandOptionType.SingleValue);
 
             cleanArtifacts();
 
             app.OnExecute(() =>
             {
+                bool isBeta = false;
+                string modeValue = modeOption.Value();
+                if (!string.IsNullOrEmpty(modeValue))
+                {
+
+                    if (modeValue.ToLower().Equals("beta"))
+                    {
+                        //value "beta"
+                        isBeta = true;
+                    }
+                    else
+                    {
+                        //value something else than "beta"
+                    }
+                }
+                else
+                {
+                    //no mode value
+                }
+
                 Target(build, () =>
                 {
                     System.Console.WriteLine($"{build}: Looking for SLN...");
                     //var s = Path.GetFullPath(SrcPath);
                     var solution = Directory.GetFiles(slnPath, "*.sln", SearchOption.TopDirectoryOnly).First();
-
                     Run("dotnet", $"build {solution} -c Release");
                 });
                 Target(test, DependsOn(build), () =>
@@ -78,7 +98,17 @@ namespace Builder
                     foreach (var project in projects)
                     {
                         System.Console.WriteLine($"{pack}: Adding Project '{project}'");
-                        Run("dotnet", $"pack {project} -c Release -o {artifactsPath} --no-build");  //TODO: check syntax - what am I doing here?
+                        
+                        if (!isBeta)
+                        {
+                            Run("dotnet", $"pack {project} -c Release -o {artifactsPath} --no-build");  //TODO: check syntax - what am I doing here?
+                        }
+                        else
+                        {
+                            //do the beta pack
+                            //--version-suffix is only working when you don't use Version in your csproj but VersionPrefix
+                            Run("dotnet", $"pack {project} -c Release -o {artifactsPath} --no-build --version-suffix beta");  //TODO: check syntax - what am I doing here?
+                        }
                     }
                 });
                 Target(@default, DependsOn(test, pack));

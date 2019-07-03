@@ -5,7 +5,7 @@
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
-    <Version>1.2.0</Version>
+    <VersionPrefix>1.2.0</VersionPrefix>
     <Description>Logging contract</Description>
     <PackageReleaseNotes>added LastEntry field</PackageReleaseNotes>
   </PropertyGroup>

@@ -5,7 +5,7 @@
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Description>Interfaces for Xml persistance</Description>
-    <Version>1.0.1</Version>
+    <VersionPrefix>1.0.1</VersionPrefix>
   </PropertyGroup>
 
 </Project>

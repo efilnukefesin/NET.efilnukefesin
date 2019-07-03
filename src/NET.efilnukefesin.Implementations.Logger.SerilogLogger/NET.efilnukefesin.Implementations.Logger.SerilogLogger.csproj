@@ -5,7 +5,7 @@
     <Authors>efilnukefesin</Authors>
     <Copyright>efilnukefesin.NET</Copyright>
     <Company>efilnukefesin.NET</Company>
-    <Version>1.2.0</Version>
+    <VersionPrefix>1.2.0</VersionPrefix>
     <PackageReleaseNotes>added LastEntry field</PackageReleaseNotes>
     <Description>Logger implementation using Serilogger</Description>
   </PropertyGroup>

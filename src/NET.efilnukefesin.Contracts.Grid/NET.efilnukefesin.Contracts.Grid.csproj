@@ -5,7 +5,7 @@
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
-    <Version>1.2.1</Version>
+    <VersionPrefix>1.2.1</VersionPrefix>
     <PackageReleaseNotes>Added some useful methods</PackageReleaseNotes>
   </PropertyGroup>
 
