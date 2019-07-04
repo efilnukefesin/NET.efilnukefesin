@@ -35,12 +35,13 @@ namespace Builder
         static void Main(string[] args)
         {
             var app = new CommandLineApplication(throwOnUnexpectedArg: false);
-            var modeOption = app.Option<string>("--mode", "determining if beta or not", CommandOptionType.SingleValue);
+            var modeOption = app.Option<string>("--mode", "determining if alpha, beta or not", CommandOptionType.SingleValue);
 
             cleanArtifacts();
 
             app.OnExecute(() =>
             {
+                bool isAlpha = false;
                 bool isBeta = false;
                 string modeValue = modeOption.Value();
                 if (!string.IsNullOrEmpty(modeValue))
@@ -50,6 +51,13 @@ namespace Builder
                     {
                         //value "beta"
                         isBeta = true;
+                        isAlpha = false;
+                    }
+                    else if (modeValue.ToLower().Equals("alpha"))
+                    {
+                        //value "alpha"
+                        isAlpha = true;
+                        isBeta = false;
                     }
                     else
                     {
@@ -99,15 +107,21 @@ namespace Builder
                     {
                         System.Console.WriteLine($"{pack}: Adding Project '{project}'");
                         
-                        if (!isBeta)
-                        {
-                            Run("dotnet", $"pack {project} -c Release -o {artifactsPath} --no-build");  //TODO: check syntax - what am I doing here?
-                        }
-                        else
+                        if (isBeta)
                         {
                             //do the beta pack
                             //--version-suffix is only working when you don't use Version in your csproj but VersionPrefix
                             Run("dotnet", $"pack {project} -c Release -o {artifactsPath} --no-build --version-suffix beta");  //TODO: check syntax - what am I doing here?
+                        }
+                        else if (isAlpha)
+                        {
+                            //do the alpha pack
+                            //--version-suffix is only working when you don't use Version in your csproj but VersionPrefix
+                            Run("dotnet", $"pack {project} -c Release -o {artifactsPath} --no-build --version-suffix alpha");  //TODO: check syntax - what am I doing here?
+                        }
+                        else
+                        {
+                            Run("dotnet", $"pack {project} -c Release -o {artifactsPath} --no-build");  //TODO: check syntax - what am I doing here?
                         }
                     }
                 });
