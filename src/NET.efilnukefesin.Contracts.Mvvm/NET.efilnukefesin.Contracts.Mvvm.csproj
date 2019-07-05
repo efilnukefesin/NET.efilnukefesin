@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <VersionPrefix>1.3.0</VersionPrefix>
+    <VersionPrefix>1.3.1</VersionPrefix>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
     <Description>Interfaces providing Mvvm functionality</Description>
-    <PackageReleaseNotes>added Back() method</PackageReleaseNotes>
+    <PackageReleaseNotes>Added Property to INavigationPresenter: IsPresenterRegistered</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
