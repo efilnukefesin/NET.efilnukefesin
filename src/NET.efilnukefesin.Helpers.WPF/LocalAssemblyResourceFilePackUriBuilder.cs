@@ -6,15 +6,24 @@ namespace NET.efilnukefesin.Helpers.WPF
 {
     public class LocalAssemblyResourceFilePackUriBuilder : PackUriBuilder
     {
-        public LocalAssemblyResourceFilePackUriBuilder(string path)
-    : base(path) { }
+        #region Properties
 
+        #region AbsolutePath
         public override string AbsolutePath
         {
             get
             {
-                return $"{Scheme}://application:,,,{RelativePath}";
+                return $"{this.Scheme}://application:,,,{this.RelativePath}";
             }
         }
+        #endregion AbsolutePath
+
+        #endregion Properties
+
+        #region Construction
+
+        public LocalAssemblyResourceFilePackUriBuilder(string path) : base(path) { }
+
+        #endregion Construction
     }
 }

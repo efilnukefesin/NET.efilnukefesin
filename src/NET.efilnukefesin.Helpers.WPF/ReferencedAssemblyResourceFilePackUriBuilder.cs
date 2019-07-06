@@ -6,36 +6,53 @@ namespace NET.efilnukefesin.Helpers.WPF
 {
     public class ReferencedAssemblyResourceFilePackUriBuilder : PackUriBuilder
     {
-        private string _assemblyShortName;
-        private string _version;
-        private string _publicKey;
+        #region Properties
 
-        public ReferencedAssemblyResourceFilePackUriBuilder(string path, string assemblyShortName)
-        : base(path)
-        {
-            _assemblyShortName = assemblyShortName;
-        }
+        private string assemblyShortName;
+        private string version;
+        private string publicKey;
 
-        public ReferencedAssemblyResourceFilePackUriBuilder Version(string version)
-        {
-            _version = version;
-            return this;
-        }
-
-        public ReferencedAssemblyResourceFilePackUriBuilder PublicKey(string publicKey)
-        {
-            _publicKey = publicKey;
-            return this;
-        }
-
+        #region AbsolutePath
         public override string AbsolutePath
         {
             get
             {
-                var version = string.IsNullOrEmpty(_version) ? string.Empty : $";{_version}";
-                var publicKey = string.IsNullOrEmpty(_publicKey) ? string.Empty : $";{_publicKey}";
-                return $"{Scheme}://application:,,,/{_assemblyShortName}{version}{publicKey};component{RelativePath}";
+                string version = string.IsNullOrEmpty(this.version) ? string.Empty : $";{this.version}";
+                string publicKey = string.IsNullOrEmpty(this.publicKey) ? string.Empty : $";{this.publicKey}";
+                return $"{this.Scheme}://application:,,,/{this.assemblyShortName}{version}{publicKey};component{this.RelativePath}";
             }
         }
+        #endregion AbsolutePath
+
+        #endregion Properties
+
+        #region Construction
+
+        public ReferencedAssemblyResourceFilePackUriBuilder(string path, string assemblyShortName) : base(path)
+        {
+            this.assemblyShortName = assemblyShortName;
+        }
+
+        #endregion Construction
+
+        #region Methods
+
+        #region Version
+        public ReferencedAssemblyResourceFilePackUriBuilder Version(string version)
+        {
+            this.version = version;
+            return this;
+        }
+        #endregion Version
+
+        #region PublicKey
+        public ReferencedAssemblyResourceFilePackUriBuilder PublicKey(string publicKey)
+        {
+            this.publicKey = publicKey;
+            return this;
+        }
+        #endregion PublicKey
+
+        #endregion Methods
     }
 }

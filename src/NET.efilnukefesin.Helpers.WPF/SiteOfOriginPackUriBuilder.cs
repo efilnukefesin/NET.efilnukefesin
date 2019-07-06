@@ -6,15 +6,24 @@ namespace NET.efilnukefesin.Helpers.WPF
 {
     public class SiteOfOriginPackUriBuilder : PackUriBuilder
     {
-        public SiteOfOriginPackUriBuilder(string path)
-    : base(path) { }
+        #region Properties
 
+        #region AbsolutePath
         public override string AbsolutePath
         {
             get
             {
-                return $"{Scheme}://siteoforigin:,,,{RelativePath}";
+                return $"{this.Scheme}://siteoforigin:,,,{this.RelativePath}";
             }
         }
+        #endregion AbsolutePath
+
+        #endregion Properties
+
+        #region Construction
+
+        public SiteOfOriginPackUriBuilder(string path) : base(path) { }
+
+        #endregion Construction
     }
 }
