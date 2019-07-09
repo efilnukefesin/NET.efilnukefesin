@@ -116,6 +116,8 @@ namespace NET.efilnukefesin.Implementations.Mvvm.WPF
                         if (windowType != null)
                         {
                             this.logger?.Log($"BaseWpfNavigationPresenter.Present(): successfully determined window type second time: '{windowType.GetType()}'");
+                            //TODO: move up or what?
+                            ***
                             //TODO: do the same as above
                         }
                         else
