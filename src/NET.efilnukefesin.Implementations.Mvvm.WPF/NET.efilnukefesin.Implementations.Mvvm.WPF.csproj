@@ -3,10 +3,12 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
-    <VersionPrefix>0.8.1</VersionPrefix>
+    <VersionPrefix>0.8.2</VersionPrefix>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
+    <Description>Adding WPF specific implementations to Mvvm methods, like a BaseNavigationPresenter.</Description>
+    <PackageReleaseNotes>extensive logging</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
