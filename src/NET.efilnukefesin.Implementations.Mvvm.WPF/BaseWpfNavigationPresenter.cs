@@ -110,7 +110,18 @@ namespace NET.efilnukefesin.Implementations.Mvvm.WPF
                     }
                     else
                     {
-                        this.logger?.Log($"BaseWpfNavigationPresenter.Present(): unsuccessfully determined window type", Contracts.Logger.Enums.LogLevel.Error);
+                        this.logger?.Log($"BaseWpfNavigationPresenter.Present(): unsuccessfully determined window type first time", Contracts.Logger.Enums.LogLevel.Error);
+                        //TODO: determine type from all loaded assemblies
+                        windowType = AssemblyHelper.GetType(typeName);
+                        if (windowType != null)
+                        {
+                            this.logger?.Log($"BaseWpfNavigationPresenter.Present(): successfully determined window type second time: '{windowType.GetType()}'");
+                            //TODO: do the same as above
+                        }
+                        else
+                        {
+                            this.logger?.Log($"BaseWpfNavigationPresenter.Present(): unsuccessfully determined window type last time", Contracts.Logger.Enums.LogLevel.Error);
+                        }
                     }
                 }
                 else
