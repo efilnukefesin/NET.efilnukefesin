@@ -82,6 +82,15 @@ namespace NET.efilnukefesin.Implementations.Mvvm.WPF
                     string typeName = ViewUri.Replace(".xaml", "");
                     this.logger?.Log($"BaseWpfNavigationPresenter.Present(): typeName: '{typeName}', fully: '{this.typePrefix + typeName}'");
                     Type windowType = Type.GetType(this.typePrefix + typeName);
+
+                    if (windowType == null)
+                    {
+                        this.logger?.Log($"BaseWpfNavigationPresenter.Present(): unsuccessfully determined window type first time", Contracts.Logger.Enums.LogLevel.Error);
+                        //TODO: determine type from all loaded assemblies
+                        windowType = AssemblyHelper.GetType(typeName);
+                        this.logger?.Log($"BaseWpfNavigationPresenter.Present(): AssemblyHelper.GetType returned '{windowType}'", Contracts.Logger.Enums.LogLevel.Error);
+                    }
+
                     if (windowType != null)
                     {
                         this.logger?.Log($"BaseWpfNavigationPresenter.Present(): successfully determined window type: '{windowType}'");
@@ -110,20 +119,7 @@ namespace NET.efilnukefesin.Implementations.Mvvm.WPF
                     }
                     else
                     {
-                        this.logger?.Log($"BaseWpfNavigationPresenter.Present(): unsuccessfully determined window type first time", Contracts.Logger.Enums.LogLevel.Error);
-                        //TODO: determine type from all loaded assemblies
-                        windowType = AssemblyHelper.GetType(typeName);
-                        if (windowType != null)
-                        {
-                            this.logger?.Log($"BaseWpfNavigationPresenter.Present(): successfully determined window type second time: '{windowType.GetType()}'");
-                            //TODO: move up or what?
-                            ***
-                            //TODO: do the same as above
-                        }
-                        else
-                        {
-                            this.logger?.Log($"BaseWpfNavigationPresenter.Present(): unsuccessfully determined window type last time", Contracts.Logger.Enums.LogLevel.Error);
-                        }
+                        this.logger?.Log($"BaseWpfNavigationPresenter.Present(): unsuccessfully determined window type twice", Contracts.Logger.Enums.LogLevel.Error);
                     }
                 }
                 else
