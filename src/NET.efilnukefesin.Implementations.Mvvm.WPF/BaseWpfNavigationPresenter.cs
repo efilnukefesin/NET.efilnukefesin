@@ -85,10 +85,10 @@ namespace NET.efilnukefesin.Implementations.Mvvm.WPF
 
                     if (windowType == null)
                     {
-                        this.logger?.Log($"BaseWpfNavigationPresenter.Present(): unsuccessfully determined window type first time", Contracts.Logger.Enums.LogLevel.Error);
+                        this.logger?.Log($"BaseWpfNavigationPresenter.Present(): unsuccessfully determined window type first time", Contracts.Logger.Enums.LogLevel.Warning);
                         //TODO: determine type from all loaded assemblies
                         windowType = AssemblyHelper.GetType(typeName);
-                        this.logger?.Log($"BaseWpfNavigationPresenter.Present(): AssemblyHelper.GetType returned '{windowType}'", Contracts.Logger.Enums.LogLevel.Error);
+                        this.logger?.Log($"BaseWpfNavigationPresenter.Present(): AssemblyHelper.GetType returned '{windowType}'");
                     }
 
                     if (windowType != null)
