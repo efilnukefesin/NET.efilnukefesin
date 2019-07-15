@@ -37,6 +37,15 @@ namespace NET.efilnukefesin.Tests.BootStrapper
         }
         #endregion FileDataServiceTests
 
+        #region InMemoryDataServiceTests
+        public static void InMemoryDataServiceTests()
+        {
+            DiSetup.@base();
+            DiManager.GetInstance().RegisterType<IDataService, NET.efilnukefesin.Implementations.Services.DataService.InMemoryDataService.InMemoryDataService>();  //TODO: switch per test
+            DiManager.GetInstance().AddTypeTranslation("HttpMessageHandlerProxy", typeof(HttpMessageHandler));
+        }
+        #endregion InMemoryDataServiceTests
+
         #region Tests
         public static void Tests()
         {

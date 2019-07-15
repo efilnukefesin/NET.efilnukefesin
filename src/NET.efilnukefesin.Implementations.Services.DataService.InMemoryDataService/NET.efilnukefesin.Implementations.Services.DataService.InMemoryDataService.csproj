@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Authors>efilnukefesin</Authors>
+    <Company>efilnukefesin.NET</Company>
+    <VersionPrefix>0.9.0</VersionPrefix>
+    <Description>IDataService implementation working with JSON based memory stuff</Description>
+    <PackageReleaseNotes>initial release</PackageReleaseNotes>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NET.efilnukefesin.Contracts.Logger\NET.efilnukefesin.Contracts.Logger.csproj" />
+    <ProjectReference Include="..\NET.efilnukefesin.Contracts.Services.DataService\NET.efilnukefesin.Contracts.Services.DataService.csproj" />
+    <ProjectReference Include="..\NET.efilnukefesin.Extensions\NET.efilnukefesin.Extensions.csproj" />
+    <ProjectReference Include="..\NET.efilnukefesin.Helpers\NET.efilnukefesin.Helpers.csproj" />
+    <ProjectReference Include="..\NET.efilnukefesin.Implementations.Base\NET.efilnukefesin.Implementations.Base.csproj" />
+  </ItemGroup>
+
+</Project>
