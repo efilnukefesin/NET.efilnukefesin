@@ -5,8 +5,8 @@
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
-    <VersionPrefix>1.6.1</VersionPrefix>
-    <PackageReleaseNotes>Added List Memento extensions</PackageReleaseNotes>
+    <VersionPrefix>1.7.0</VersionPrefix>
+    <PackageReleaseNotes>Added IEnumerable ToList()</PackageReleaseNotes>
     <Description>Byte- string- and other extensions to keep the flow up!</Description>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>

@@ -105,6 +105,26 @@ namespace NET.efilnukefesin.Tests.BootStrapper
         }
         #endregion InitializeFileEndpoints
 
+        #region InitializeInMemoryEndpoints
+        //TODO: migrate later on somewhere else, when making a generic Bootstrapper
+        public static void InitializeInMemoryEndpoints()
+        {
+            IEndpointRegister endpointRegister = DiHelper.GetService<IEndpointRegister>();
+            if (endpointRegister != null)
+            {
+                endpointRegister.AddEndpoint("GetAsyncTest1Action", "GetAsyncTest1");
+                endpointRegister.AddEndpoint("GetAsyncTest4Action", "GetAsyncTest4");
+                endpointRegister.AddEndpoint("GetAsyncTest2Action", "GetAsyncTest2");
+                endpointRegister.AddEndpoint("GetAsyncTest3Action", "GetAsyncTest3");
+                endpointRegister.AddEndpoint("CreateOrUpdateAsyncTest1Action", "CreateOrUpdateAsyncTest1");
+                endpointRegister.AddEndpoint("CreateOrUpdateAsyncTest2Action", "CreateOrUpdateAsyncTest2");
+                endpointRegister.AddEndpoint("CreateOrUpdateAsyncTest3Action", "CreateOrUpdateAsyncTest3");
+                endpointRegister.AddEndpoint("CreateOrUpdateAsyncTest4Action", "CreateOrUpdateAsyncTest4");
+                endpointRegister.AddEndpoint("DeleteAsyncTest1Action", "DeleteAsyncTest1");
+            }
+        }
+        #endregion InitializeInMemoryEndpoints
+
         #endregion Methods
     }
 }

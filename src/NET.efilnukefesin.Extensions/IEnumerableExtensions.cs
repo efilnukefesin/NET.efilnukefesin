@@ -85,6 +85,21 @@ namespace NET.efilnukefesin.Extensions
         }
         #endregion Remove
 
+        #region RemoveAll
+        public static IEnumerable<T> RemoveAll<T>(this IEnumerable<T> enumerable, Func<T, bool> Filter)
+        {
+            int current = 0;
+            foreach (T item in enumerable)
+            {
+                if (!Filter(item))
+                {
+                    yield return item;
+                }
+                current++;
+            }
+        }
+        #endregion RemoveAll
+
         #region Clear
         public static IEnumerable<T> Clear<T>(this IEnumerable<T> enumerable)
         {
