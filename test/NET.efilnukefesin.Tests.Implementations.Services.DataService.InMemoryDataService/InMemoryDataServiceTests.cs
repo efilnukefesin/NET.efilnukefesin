@@ -53,6 +53,26 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.InMemoryD
             }
             #endregion GetAllAsync
 
+            #region GetAsync
+            [TestMethod]
+            public void GetAsync()
+            {
+                DiSetup.InMemoryDataServiceTests();
+                DiSetup.InitializeInMemoryEndpoints();
+                IDataService dataService = DiHelper.GetService<IDataService>();
+                ValueObject<string> testObject2 = new ValueObject<string>("TestString2");
+                dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest2Action", new ValueObject<string>("TestString1")).GetAwaiter().GetResult();
+                dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest2Action", testObject2).GetAwaiter().GetResult();
+                dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest2Action", new ValueObject<string>("TestString3")).GetAwaiter().GetResult();
+                dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest2Action", new ValueObject<string>("TestString4")).GetAwaiter().GetResult();
+
+                var result = dataService.GetAsync<ValueObject<string>>("CreateOrUpdateAsyncTest2Action", testObject2.Id).GetAwaiter().GetResult();
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual("TestString2", result.Value);
+            }
+            #endregion GetAsync
+
             #region CreateOrUpdateAsyncAppend
             [TestMethod]
             public void CreateOrUpdateAsyncAppend()
@@ -67,6 +87,47 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.InMemoryD
                 Assert.AreEqual(true, result);
             }
             #endregion CreateOrUpdateAsyncAppend
+
+            #region CreateOrUpdateAsyncList
+            [TestMethod]
+            public void CreateOrUpdateAsyncList()
+            {
+                DiSetup.InMemoryDataServiceTests();
+                DiSetup.InitializeInMemoryEndpoints();
+
+                IDataService dataService = DiHelper.GetService<IDataService>();
+                List<ValueObject<string>> items = new List<ValueObject<string>>();
+                items.Add(new ValueObject<string>("TestString1"));
+                items.Add(new ValueObject<string>("TestString2"));
+                items.Add(new ValueObject<string>("TestString3"));
+                items.Add(new ValueObject<string>("TestString4"));
+
+                bool result = dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest1Action", items).GetAwaiter().GetResult();
+
+                Assert.AreEqual(true, result);
+            }
+            #endregion CreateOrUpdateAsyncList
+
+            #region DeleteAsync
+            [TestMethod]
+            public void DeleteAsync()
+            {
+                DiSetup.InMemoryDataServiceTests();
+                DiSetup.InitializeInMemoryEndpoints();
+
+                IDataService dataService = DiHelper.GetService<IDataService>();
+                List<ValueObject<string>> items = new List<ValueObject<string>>();
+                items.Add(new ValueObject<string>("TestString1"));
+                items.Add(new ValueObject<string>("TestString2"));
+                items.Add(new ValueObject<string>("TestString3"));
+                items.Add(new ValueObject<string>("TestString4"));
+
+                dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest1Action", items).GetAwaiter().GetResult();
+                bool result = dataService.DeleteAsync<ValueObject<string>>("CreateOrUpdateAsyncTest1Action", items[1].Id).GetAwaiter().GetResult();
+
+                Assert.AreEqual(true, result);
+            }
+            #endregion DeleteAsync
         }
         #endregion InMemoryDataServiceMethods
     }

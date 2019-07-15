@@ -76,15 +76,38 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.InMemoryDataSer
         }
         #endregion CreateOrUpdateAsync
 
+        #region CreateOrUpdateAsync
         public async Task<bool> CreateOrUpdateAsync<T>(string Action, IEnumerable<T> Values) where T : IBaseObject
         {
-            throw new NotImplementedException();
-        }
+            bool result = true;
 
+            foreach (T value in Values)
+            {
+                result &= await this.CreateOrUpdateAsync<T>(Action, value);
+            }
+
+            return result;
+        }
+        #endregion CreateOrUpdateAsync
+
+        #region DeleteAsync
         public async Task<bool> DeleteAsync<T>(string Action, params object[] Parameters) where T : IBaseObject
         {
-            throw new NotImplementedException();
+            bool result = false;
+
+            if (this.items.ContainsKey(Action))
+            {
+                string idToRemove = Parameters[0].ToString();
+                if (this.items[Action].Any(x => x.Id.Equals(idToRemove)))
+                {
+                    this.items[Action].RemoveAll(x => x.Id.Equals(idToRemove));
+                    result = true;
+                }
+            }
+
+            return result;
         }
+        #endregion DeleteAsync
 
         #region GetAllAsync
         public async Task<IEnumerable<T>> GetAllAsync<T>(string Action, params object[] Parameters) where T : IBaseObject
@@ -104,10 +127,19 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.InMemoryDataSer
         }
         #endregion GetAllAsync
 
+        #region GetAsync
         public async Task<T> GetAsync<T>(string Action, params object[] Parameters) where T : IBaseObject
         {
-            throw new NotImplementedException();
+            T result = default;
+
+            if (this.items.ContainsKey(Action))
+            {
+                result = (T)this.items[Action].Where(x => x.Id.Equals(Parameters[0].ToString())).FirstOrDefault();
+            }
+            
+            return result;
         }
+        #endregion GetAsync
 
         #region dispose
         protected override void dispose()
