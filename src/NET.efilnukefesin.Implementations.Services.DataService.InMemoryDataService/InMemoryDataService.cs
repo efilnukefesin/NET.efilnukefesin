@@ -47,28 +47,28 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.InMemoryDataSer
         {
             bool result = false;
 
-            if (this.items.ContainsKey(Action))
+            if (this.items.ContainsKey(this.EndpointRegister.GetEndpoint(Action)))
             {
                 //create or update
-                if (this.items[Action].Any(x => x.Id.Equals(Value.Id)))
+                if (this.items[this.EndpointRegister.GetEndpoint(Action)].Any(x => x.Id.Equals(Value.Id)))
                 {
                     //update
-                    this.items[Action].RemoveAll(x => x.Id.Equals(Value.Id));
-                    this.items[Action].Add(Value);
+                    this.items[this.EndpointRegister.GetEndpoint(Action)].RemoveAll(x => x.Id.Equals(Value.Id));
+                    this.items[this.EndpointRegister.GetEndpoint(Action)].Add(Value);
                     result = true;
                 }
                 else
                 {
                     //create
-                    this.items[Action].Add(Value);
+                    this.items[this.EndpointRegister.GetEndpoint(Action)].Add(Value);
                     result = true;
                 }
             }
             else
             {
                 //add new
-                this.items.Add(Action, new List<IBaseObject>());
-                this.items[Action].Add(Value);
+                this.items.Add(this.EndpointRegister.GetEndpoint(Action), new List<IBaseObject>());
+                this.items[this.EndpointRegister.GetEndpoint(Action)].Add(Value);
                 result = true;
             }
 
@@ -83,7 +83,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.InMemoryDataSer
 
             foreach (T value in Values)
             {
-                result &= await this.CreateOrUpdateAsync<T>(Action, value);
+                result &= await this.CreateOrUpdateAsync<T>(this.EndpointRegister.GetEndpoint(Action), value);
             }
 
             return result;
@@ -95,12 +95,12 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.InMemoryDataSer
         {
             bool result = false;
 
-            if (this.items.ContainsKey(Action))
+            if (this.items.ContainsKey(this.EndpointRegister.GetEndpoint(Action)))
             {
                 string idToRemove = Parameters[0].ToString();
-                if (this.items[Action].Any(x => x.Id.Equals(idToRemove)))
+                if (this.items[this.EndpointRegister.GetEndpoint(Action)].Any(x => x.Id.Equals(idToRemove)))
                 {
-                    this.items[Action].RemoveAll(x => x.Id.Equals(idToRemove));
+                    this.items[this.EndpointRegister.GetEndpoint(Action)].RemoveAll(x => x.Id.Equals(idToRemove));
                     result = true;
                 }
             }
@@ -114,10 +114,10 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.InMemoryDataSer
         {
             IEnumerable<T> result = default;
 
-            if (this.items.ContainsKey(Action))
+            if (this.items.ContainsKey(this.EndpointRegister.GetEndpoint(Action)))
             {
                 result = new List<T>();
-                foreach (IBaseObject src in this.items[Action])
+                foreach (IBaseObject src in this.items[this.EndpointRegister.GetEndpoint(Action)])
                 {
                     result = result.Add((T)src);
                 }
@@ -132,9 +132,9 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.InMemoryDataSer
         {
             T result = default;
 
-            if (this.items.ContainsKey(Action))
+            if (this.items.ContainsKey(this.EndpointRegister.GetEndpoint(Action)))
             {
-                result = (T)this.items[Action].Where(x => x.Id.Equals(Parameters[0].ToString())).FirstOrDefault();
+                result = (T)this.items[this.EndpointRegister.GetEndpoint(Action)].Where(x => x.Id.Equals(Parameters[0].ToString())).FirstOrDefault();
             }
             
             return result;
