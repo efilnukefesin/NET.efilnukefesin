@@ -102,7 +102,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.InMemoryD
                 items.Add(new ValueObject<string>("TestString3"));
                 items.Add(new ValueObject<string>("TestString4"));
 
-                bool result = dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest1Action", items).GetAwaiter().GetResult();
+                bool result = dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest2Action", items).GetAwaiter().GetResult();
 
                 Assert.AreEqual(true, result);
             }
@@ -122,8 +122,8 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.InMemoryD
                 items.Add(new ValueObject<string>("TestString3"));
                 items.Add(new ValueObject<string>("TestString4"));
 
-                dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest1Action", items).GetAwaiter().GetResult();
-                bool result = dataService.DeleteAsync<ValueObject<string>>("CreateOrUpdateAsyncTest1Action", items[1].Id).GetAwaiter().GetResult();
+                dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest3Action", items).GetAwaiter().GetResult();
+                bool result = dataService.DeleteAsync<ValueObject<string>>("CreateOrUpdateAsyncTest3Action", items[1].Id).GetAwaiter().GetResult();
 
                 Assert.AreEqual(true, result);
             }
