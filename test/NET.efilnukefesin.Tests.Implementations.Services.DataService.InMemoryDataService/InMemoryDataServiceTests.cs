@@ -88,6 +88,8 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.InMemoryD
             }
             #endregion CreateOrUpdateAsyncAppend
 
+            
+
             #region CreateOrUpdateAsyncList
             [TestMethod]
             public void CreateOrUpdateAsyncList()
@@ -128,6 +130,54 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.InMemoryD
                 Assert.AreEqual(true, result);
             }
             #endregion DeleteAsync
+
+            #region CreateOrUpdateAsyncWithDelegate
+            [TestMethod]
+            public void CreateOrUpdateAsyncWithDelegate()
+            {
+                DiSetup.InMemoryDataServiceTests();
+                DiSetup.InitializeInMemoryEndpoints();
+
+                IDataService dataService = DiHelper.GetService<IDataService>();
+                List<ValueObject<string>> items = new List<ValueObject<string>>();
+                items.Add(new ValueObject<string>("TestString1"));
+                items.Add(new ValueObject<string>("TestString2"));
+                items.Add(new ValueObject<string>("TestString3"));
+                items.Add(new ValueObject<string>("TestString4"));
+
+                dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest3Action", items).GetAwaiter().GetResult();
+
+                bool resultAdd = dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest1Action", new ValueObject<string>("TestString"), x => x.Value.Equals("DunnoYet")).GetAwaiter().GetResult();
+                bool resultUpdate = dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest1Action", new ValueObject<string>("TestString"), x => x.Value.Equals("TestString4")).GetAwaiter().GetResult();
+
+                int numberafterwards = dataService.GetAllAsync<ValueObject<string>>("CreateOrUpdateAsyncTest1Action").GetAwaiter().GetResult().Count();
+
+                Assert.AreEqual(true, resultAdd);
+                Assert.AreEqual(true, resultUpdate);
+                Assert.AreEqual(5, numberafterwards);
+            }
+            #endregion CreateOrUpdateAsyncWithDelegate
+
+            #region DeleteAsyncWithDelegate
+            [TestMethod]
+            public void DeleteAsyncWithDelegate()
+            {
+                DiSetup.InMemoryDataServiceTests();
+                DiSetup.InitializeInMemoryEndpoints();
+
+                IDataService dataService = DiHelper.GetService<IDataService>();
+                List<ValueObject<string>> items = new List<ValueObject<string>>();
+                items.Add(new ValueObject<string>("TestString1"));
+                items.Add(new ValueObject<string>("TestString2"));
+                items.Add(new ValueObject<string>("TestString3"));
+                items.Add(new ValueObject<string>("TestString4"));
+
+                dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest3Action", items).GetAwaiter().GetResult();
+                bool result = dataService.DeleteAsync<ValueObject<string>>("CreateOrUpdateAsyncTest3Action", x => x.Value.Equals("TestString3")).GetAwaiter().GetResult();
+
+                Assert.AreEqual(true, result);
+            }
+            #endregion DeleteAsyncWithDelegate
         }
         #endregion InMemoryDataServiceMethods
     }

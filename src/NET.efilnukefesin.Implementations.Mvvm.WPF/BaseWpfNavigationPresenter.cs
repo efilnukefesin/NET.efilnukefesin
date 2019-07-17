@@ -103,6 +103,10 @@ namespace NET.efilnukefesin.Implementations.Mvvm.WPF
                                 this.logger?.Log($"BaseWpfNavigationPresenter.Present(): '{windowType}' is a Window");
                                 this.currentWindow = (window as Window);
                                 this.currentPage = null;
+                                //TODO: handle error when calling the second time
+                                //1) add debug output
+                                //2) fugure out, why
+                                ***
                                 (window as Window).Owner = Application.Current.MainWindow;
                                 (window as Window).DataContext = this.currentDataContext;
                                 (window as Window).ShowDialog();

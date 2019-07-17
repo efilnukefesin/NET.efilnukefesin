@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <VersionPrefix>1.3.2</VersionPrefix>
+    <VersionPrefix>1.4.0</VersionPrefix>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
     <Description>Implementation of a REST Data Service</Description>
-    <PackageReleaseNotes>added bulk fetch method</PackageReleaseNotes>
+    <PackageReleaseNotes>implemented overloads for create and delete methods</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

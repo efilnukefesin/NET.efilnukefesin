@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <VersionPrefix>1.3.1</VersionPrefix>
+    <VersionPrefix>1.4.0</VersionPrefix>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Description>Interface for accessing Data, e.g. via REST or SQL</Description>
     <Copyright>efilnukefesin.NET</Copyright>
-    <PackageReleaseNotes>added bulk fetch method</PackageReleaseNotes>
+    <PackageReleaseNotes>added relevant overloads for filtering CreateOrUpdate and Delete by lambda expression</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

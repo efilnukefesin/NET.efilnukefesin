@@ -4,9 +4,9 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
-    <VersionPrefix>1.3.3</VersionPrefix>
+    <VersionPrefix>1.4.0</VersionPrefix>
     <Description>IDataService implementation working with JSON based text files</Description>
-    <PackageReleaseNotes>fixed replace bug</PackageReleaseNotes>
+    <PackageReleaseNotes>added delegate overloads</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 

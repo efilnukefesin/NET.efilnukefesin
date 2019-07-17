@@ -192,6 +192,20 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
         }
         #endregion convertParameters
 
+        #region CreateOrUpdateAsync
+        public async Task<bool> CreateOrUpdateAsync<T>(string Action, T Value, Func<T, bool> FilterMethod) where T : IBaseObject
+        {
+            throw new NotImplementedException();
+        }
+        #endregion CreateOrUpdateAsync
+
+        #region DeleteAsync
+        public async Task<bool> DeleteAsync<T>(string Action, Func<T, bool> FilterMethod) where T : IBaseObject
+        {
+            throw new NotImplementedException();
+        }
+        #endregion DeleteAsync
+
         #region dispose
         protected override void dispose()
         {
