@@ -6,7 +6,7 @@
     <Company>efilnukefesin.NET</Company>
     <VersionPrefix>1.4.0</VersionPrefix>
     <Description>IDataService implementation working with JSON based memory stuff</Description>
-    <PackageReleaseNotes>added delegate overloads</PackageReleaseNotes>
+    <PackageReleaseNotes>added delegate overloads and extensive logging</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
