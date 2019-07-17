@@ -163,23 +163,25 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.FileDataS
                 DiSetup.FileDataServiceTests();
                 DiSetup.InitializeFileEndpoints();
 
-                IDataService dataService = DiHelper.GetService<IDataService>();
+                IDataService dataService = DiHelper.GetService<IDataService>(this.testPath);
+                int numberBefore = dataService.GetAllAsync<ValueObject<string>>("CreateOrUpdateAsyncTest5Action").GetAwaiter().GetResult().Count();
+
                 List<ValueObject<string>> items = new List<ValueObject<string>>();
                 items.Add(new ValueObject<string>("TestString1"));
                 items.Add(new ValueObject<string>("TestString2"));
                 items.Add(new ValueObject<string>("TestString3"));
                 items.Add(new ValueObject<string>("TestString4"));
 
-                dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest3Action", items).GetAwaiter().GetResult();
+                dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest5Action", items).GetAwaiter().GetResult();
 
-                bool resultAdd = dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest1Action", new ValueObject<string>("TestString"), x => x.Value.Equals("DunnoYet")).GetAwaiter().GetResult();
-                bool resultUpdate = dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest1Action", new ValueObject<string>("TestString"), x => x.Value.Equals("TestString4")).GetAwaiter().GetResult();
+                bool resultAdd = dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest5Action", new ValueObject<string>("TestString"), x => x.Value.Equals("DunnoYet")).GetAwaiter().GetResult();
+                bool resultUpdate = dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest5Action", new ValueObject<string>("TestString"), x => x.Value.Equals("TestString4")).GetAwaiter().GetResult();
 
-                int numberafterwards = dataService.GetAllAsync<ValueObject<string>>("CreateOrUpdateAsyncTest1Action").GetAwaiter().GetResult().Count();
+                int numberAfterwards = dataService.GetAllAsync<ValueObject<string>>("CreateOrUpdateAsyncTest5Action").GetAwaiter().GetResult().Count();
 
                 Assert.AreEqual(true, resultAdd);
                 Assert.AreEqual(true, resultUpdate);
-                Assert.AreEqual(5, numberafterwards);
+                Assert.AreEqual(5, numberAfterwards - numberBefore);
             }
             #endregion CreateOrUpdateAsyncWithDelegate
 
@@ -190,7 +192,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.FileDataS
                 DiSetup.FileDataServiceTests();
                 DiSetup.InitializeFileEndpoints();
 
-                IDataService dataService = DiHelper.GetService<IDataService>();
+                IDataService dataService = DiHelper.GetService<IDataService>(this.testPath);
                 List<ValueObject<string>> items = new List<ValueObject<string>>();
                 items.Add(new ValueObject<string>("TestString1"));
                 items.Add(new ValueObject<string>("TestString2"));

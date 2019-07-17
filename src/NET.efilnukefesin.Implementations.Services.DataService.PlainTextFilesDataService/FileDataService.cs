@@ -55,66 +55,9 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
             this.logger?.Log($"FileDataService.CreateOrUpdateAsync: entered");
             bool result = false;
 
-            string filename = this.getFilename(Action);
-            this.logger?.Log($"FileDataService.CreateOrUpdateAsync: generated file name '{filename}'");
-            if (this.checkAndCreateDirs(filename))
-            {
-                this.logger?.Log($"FileDataService.CreateOrUpdateAsync: checked and created dirs successfully");
-                if (File.Exists(filename))
-                {
-                    try
-                    {
-                        this.logger?.Log($"FileDataService.CreateOrUpdateAsync: file exists");
-                        string text = await File.ReadAllTextAsync(filename, Encoding.UTF8);
-                        var content = JsonConvert.DeserializeObject<IEnumerable<T>>(text);
-                        if (content != null)
-                        {
-                            if (content.Any(x => x.Id.Equals(Value.Id)))
-                            {
-                                //Update
-                                content = content.Replace(Value.Id, Value);
-                                this.logger?.Log($"FileDataService.CreateOrUpdateAsync: updated content");
-                            }
-                            else
-                            {
-                                //Append
-                                content = content.Add(Value);
-                                this.logger?.Log($"FileDataService.CreateOrUpdateAsync: added content");
-                            }
-                        }
-                        else
-                        {
-                            content = new List<T>() { Value };
-                        }
-                        var newContent = JsonConvert.SerializeObject(content);
-                        await File.WriteAllTextAsync(filename, newContent);
+            result = await this.CreateOrUpdateAsync<T>(Action, Value, x => x.Id.Equals(Value.Id));
 
-                        result = true;
-                    }
-                    catch (Exception ex)
-                    {
-                        this.logger?.Log($"FileDataService.CreateOrUpdateAsync: raised exception '{ex.Message}' - '{ex.StackTrace}'", Contracts.Logger.Enums.LogLevel.Error);
-                    }
-                }
-                else
-                {
-                    //Create File, append
-                    this.logger?.Log($"FileDataService.CreateOrUpdateAsync: file does not exist", Contracts.Logger.Enums.LogLevel.Warning);
-                    using (StreamWriter swFile = File.CreateText(filename))
-                    {
-                        this.logger?.Log($"FileDataService.CreateOrUpdateAsync: file created");
-                        string content = JsonConvert.SerializeObject(new List<T>() { Value });
-                        await swFile.WriteAsync(content);
-                    }
-                    this.logger?.Log($"FileDataService.CreateOrUpdateAsync: file filled");
-                    result = true;
-                }
-            }
-            else
-            {
-                this.logger?.Log($"FileDataService.CreateOrUpdateAsync: could not check and create dirs", Contracts.Logger.Enums.LogLevel.Error);
-            }
-            this.logger?.Log($"FileDataService.CreateOrUpdateAsync: exited, result '{result}'");
+            this.logger?.Log($"FileDataService.CreateOrUpdateAsync: exited with result '{result}'");
             return result;
         }
         #endregion CreateOrUpdateAsync
@@ -303,14 +246,81 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
         #region CreateOrUpdateAsync
         public async Task<bool> CreateOrUpdateAsync<T>(string Action, T Value, Func<T, bool> FilterMethod) where T : IBaseObject
         {
-            throw new NotImplementedException();
+            this.logger?.Log($"FileDataService.CreateOrUpdateAsync (delegate): entered");
+            bool result = false;
+
+            string filename = this.getFilename(Action);
+            this.logger?.Log($"FileDataService.CreateOrUpdateAsync (delegate): generated file name '{filename}'");
+            if (this.checkAndCreateDirs(filename))
+            {
+                this.logger?.Log($"FileDataService.CreateOrUpdateAsync (delegate): checked and created dirs successfully");
+                if (File.Exists(filename))
+                {
+                    try
+                    {
+                        this.logger?.Log($"FileDataService.CreateOrUpdateAsync (delegate): file exists");
+                        string text = await File.ReadAllTextAsync(filename, Encoding.UTF8);
+                        var content = JsonConvert.DeserializeObject<IEnumerable<T>>(text);
+                        if (content != null)
+                        {
+                            if (content.Any(FilterMethod))
+                            {
+                                //Update
+                                content = content.Replace(Value.Id, Value);
+                                this.logger?.Log($"FileDataService.CreateOrUpdateAsync (delegate): updated content");
+                            }
+                            else
+                            {
+                                //Append
+                                content = content.Add(Value);
+                                this.logger?.Log($"FileDataService.CreateOrUpdateAsync (delegate): added content");
+                            }
+                        }
+                        else
+                        {
+                            content = new List<T>() { Value };
+                        }
+                        var newContent = JsonConvert.SerializeObject(content);
+                        await File.WriteAllTextAsync(filename, newContent);
+
+                        result = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        this.logger?.Log($"FileDataService.CreateOrUpdateAsync (delegate): raised exception '{ex.Message}' - '{ex.StackTrace}'", Contracts.Logger.Enums.LogLevel.Error);
+                    }
+                }
+                else
+                {
+                    //Create File, append
+                    this.logger?.Log($"FileDataService.CreateOrUpdateAsync (delegate): file does not exist", Contracts.Logger.Enums.LogLevel.Warning);
+                    using (StreamWriter swFile = File.CreateText(filename))
+                    {
+                        this.logger?.Log($"FileDataService.CreateOrUpdateAsync (delegate): file created");
+                        string content = JsonConvert.SerializeObject(new List<T>() { Value });
+                        await swFile.WriteAsync(content);
+                    }
+                    this.logger?.Log($"FileDataService.CreateOrUpdateAsync (delegate): file filled");
+                    result = true;
+                }
+            }
+            else
+            {
+                this.logger?.Log($"FileDataService.CreateOrUpdateAsync (delegate): could not check and create dirs", Contracts.Logger.Enums.LogLevel.Error);
+            }
+            this.logger?.Log($"FileDataService.CreateOrUpdateAsync (delegate): exited, result '{result}'");
+            return result;
         }
         #endregion CreateOrUpdateAsync
 
         #region DeleteAsync
         public async Task<bool> DeleteAsync<T>(string Action, Func<T, bool> FilterMethod) where T : IBaseObject
         {
-            throw new NotImplementedException();
+            this.logger?.Log($"FileDataService.DeleteAsync: entered");
+            bool result = false;
+
+            this.logger?.Log($"FileDataService.DeleteAsync: exited, result '{result}'");
+            return result;
         }
         #endregion DeleteAsync
 
