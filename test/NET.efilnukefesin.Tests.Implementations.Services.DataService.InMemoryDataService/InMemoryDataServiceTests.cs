@@ -88,8 +88,6 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.InMemoryD
             }
             #endregion CreateOrUpdateAsyncAppend
 
-            
-
             #region CreateOrUpdateAsyncList
             [TestMethod]
             public void CreateOrUpdateAsyncList()
@@ -147,10 +145,10 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.InMemoryD
 
                 dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest3Action", items).GetAwaiter().GetResult();
 
-                bool resultAdd = dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest1Action", new ValueObject<string>("TestString"), x => x.Value.Equals("DunnoYet")).GetAwaiter().GetResult();
-                bool resultUpdate = dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest1Action", new ValueObject<string>("TestString"), x => x.Value.Equals("TestString4")).GetAwaiter().GetResult();
+                bool resultAdd = dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest3Action", new ValueObject<string>("TestString"), x => x.Value.Equals("DunnoYet")).GetAwaiter().GetResult();
+                bool resultUpdate = dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest3Action", new ValueObject<string>("TestString"), x => x.Value.Equals("TestString4")).GetAwaiter().GetResult();
 
-                int numberafterwards = dataService.GetAllAsync<ValueObject<string>>("CreateOrUpdateAsyncTest1Action").GetAwaiter().GetResult().Count();
+                int numberafterwards = dataService.GetAllAsync<ValueObject<string>>("CreateOrUpdateAsyncTest3Action").GetAwaiter().GetResult().Count();
 
                 Assert.AreEqual(true, resultAdd);
                 Assert.AreEqual(true, resultUpdate);
