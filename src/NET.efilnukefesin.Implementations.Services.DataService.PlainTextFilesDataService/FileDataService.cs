@@ -81,46 +81,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
             this.logger?.Log($"FileDataService.DeleteAsync: entered");
             bool result = false;
 
-            string filename = this.getFilename(Action);
-            this.logger?.Log($"FileDataService.DeleteAsync: generated file name '{filename}'");
-
-            if (File.Exists(filename))
-            {
-                try
-                {
-                    this.logger?.Log($"FileDataService.DeleteAsync: file exists");
-                    string text = await File.ReadAllTextAsync(filename, Encoding.UTF8);
-                    var content = JsonConvert.DeserializeObject<IEnumerable<T>>(text);
-
-                    int index = -1;
-
-                    foreach (T item in content)
-                    {
-                        index++;
-
-                        //given: Parameters[0] id the ID
-                        if (item.Id.Equals(Parameters[0].ToString()))
-                        {
-                            break;  //TODO: think of logic here, focussing on id, perhaps a beginswith is better
-                        }
-                    }
-
-                    content = content.Remove(index);
-
-                    var newContent = JsonConvert.SerializeObject(content);
-                    await File.WriteAllTextAsync(filename, newContent);
-
-                    result = true;
-                }
-                catch (Exception ex)
-                {
-                    this.logger?.Log($"FileDataService.DeleteAsync: raised exception '{ex.Message}' - '{ex.StackTrace}'", Contracts.Logger.Enums.LogLevel.Error);
-                }
-            }
-            else
-            {
-                this.logger?.Log($"FileDataService.DeleteAsync: file does not exist", Contracts.Logger.Enums.LogLevel.Error);
-            }
+            result = await this.DeleteAsync<T>(Action, x => x.Id.Equals(Parameters[0].ToString()));
 
             this.logger?.Log($"FileDataService.DeleteAsync: exited, result '{result}'");
             return result;
@@ -316,10 +277,51 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
         #region DeleteAsync
         public async Task<bool> DeleteAsync<T>(string Action, Func<T, bool> FilterMethod) where T : IBaseObject
         {
-            this.logger?.Log($"FileDataService.DeleteAsync: entered");
+            this.logger?.Log($"FileDataService.DeleteAsync (delegate): entered");
             bool result = false;
 
-            this.logger?.Log($"FileDataService.DeleteAsync: exited, result '{result}'");
+            string filename = this.getFilename(Action);
+            this.logger?.Log($"FileDataService.DeleteAsync (delegate): generated file name '{filename}'");
+
+            if (File.Exists(filename))
+            {
+                try
+                {
+                    this.logger?.Log($"FileDataService.DeleteAsync (delegate): file exists");
+                    string text = await File.ReadAllTextAsync(filename, Encoding.UTF8);
+                    var content = JsonConvert.DeserializeObject<IEnumerable<T>>(text);
+
+                    int index = -1;
+
+                    foreach (T item in content)
+                    {
+                        index++;
+
+                        //given: Parameters[0] id the ID
+                        if (FilterMethod.Invoke(item))
+                        {
+                            break;  //TODO: think of logic here, focussing on id, perhaps a beginswith is better
+                        }
+                    }
+
+                    content = content.Remove(index);
+
+                    var newContent = JsonConvert.SerializeObject(content);
+                    await File.WriteAllTextAsync(filename, newContent);
+
+                    result = true;
+                }
+                catch (Exception ex)
+                {
+                    this.logger?.Log($"FileDataService.DeleteAsync (delegate): raised exception '{ex.Message}' - '{ex.StackTrace}'", Contracts.Logger.Enums.LogLevel.Error);
+                }
+            }
+            else
+            {
+                this.logger?.Log($"FileDataService.DeleteAsync (delegate): file does not exist", Contracts.Logger.Enums.LogLevel.Error);
+            }
+
+            this.logger?.Log($"FileDataService.DeleteAsync (delegate): exited, result '{result}'");
             return result;
         }
         #endregion DeleteAsync

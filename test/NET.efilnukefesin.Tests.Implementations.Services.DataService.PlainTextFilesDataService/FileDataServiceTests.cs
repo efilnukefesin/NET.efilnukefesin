@@ -199,8 +199,8 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.FileDataS
                 items.Add(new ValueObject<string>("TestString3"));
                 items.Add(new ValueObject<string>("TestString4"));
 
-                dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest3Action", items).GetAwaiter().GetResult();
-                bool result = dataService.DeleteAsync<ValueObject<string>>("CreateOrUpdateAsyncTest3Action", x => x.Value.Equals("TestString3")).GetAwaiter().GetResult();
+                dataService.CreateOrUpdateAsync<ValueObject<string>>("DeleteAsyncTest2Action", items).GetAwaiter().GetResult();
+                bool result = dataService.DeleteAsync<ValueObject<string>>("DeleteAsyncTest2Action", x => x.Value.Equals("TestString3")).GetAwaiter().GetResult();
 
                 Assert.AreEqual(true, result);
             }
