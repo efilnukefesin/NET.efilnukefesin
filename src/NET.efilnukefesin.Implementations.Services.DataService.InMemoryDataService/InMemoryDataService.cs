@@ -270,9 +270,55 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.InMemoryDataSer
         #region DeleteAsync
         public async Task<bool> DeleteAsync<T>(string Action, Func<T, bool> FilterMethod) where T : IBaseObject
         {
+            bool result = false;
             this.logger?.Log($"InMemoryDataService.DeleteAsync (delegate): started with Action '{Action}'");
-            throw new NotImplementedException();
-            //this.logger?.Log($"InMemoryDataService.DeleteAsync: ended with result '{result}'");
+
+            string mappedAction = this.EndpointRegister.GetEndpoint(Action);
+            if (mappedAction != null)
+            {
+                this.logger?.Log($"InMemoryDataService.DeleteAsync (delegate): mappedAction is '{mappedAction}'");
+                if (this.items.ContainsKey(mappedAction))
+                {
+                    //TODO: double check doubled code with above method
+                    this.logger?.Log($"InMemoryDataService.DeleteAsync (delegate): items containing key, so looking for it is valuable");
+                    List<string> IdsToRemove = new List<string>();
+                    foreach (IBaseObject item in this.items[mappedAction])
+                    {
+                        if (FilterMethod.Invoke((T)item))
+                        {
+                            this.logger?.Log($"InMemoryDataService.DeleteAsync (delegate): found a match with Id '{item.Id}'");
+                            IdsToRemove.Add(item.Id);
+                        }
+                    }
+
+                    this.logger?.Log($"InMemoryDataService.DeleteAsync (delegate): IdsToRemove has {IdsToRemove.Count} entries");
+                    if (IdsToRemove.Count > 0)
+                    {
+                        this.logger?.Log($"InMemoryDataService.DeleteAsync (delegate): starting removal");
+                        foreach (string Id in IdsToRemove)
+                        {
+                            this.logger?.Log($"InMemoryDataService.DeleteAsync (delegate): removing '{Id}'");
+                            this.items[mappedAction].RemoveAll(x => x.Id.Equals(Id));
+                        }
+                        result = true;
+                    }
+                    else
+                    {
+                        this.logger?.Log($"InMemoryDataService.CreateOrUpdateAsync (delegate): nothing to remove");
+                    }
+                }
+                else
+                {
+                    this.logger?.Log($"InMemoryDataService.DeleteAsync (delegate): items are not containing the mapped action, so no need to search", Contracts.Logger.Enums.LogLevel.Warning);
+                }
+            }
+            else
+            {
+                this.logger?.Log($"InMemoryDataService.DeleteAsync (delegate): mappedAction is null, doing nothing", Contracts.Logger.Enums.LogLevel.Error);
+            }
+
+            this.logger?.Log($"InMemoryDataService.DeleteAsync: ended with result '{result}'");
+            return result;
         }
         #endregion DeleteAsync
 
