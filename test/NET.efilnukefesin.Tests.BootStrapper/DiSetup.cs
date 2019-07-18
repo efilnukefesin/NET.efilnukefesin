@@ -22,27 +22,24 @@ namespace NET.efilnukefesin.Tests.BootStrapper
         #region RestDataServiceTestsTests
         public static void RestDataServiceTests()
         {
-            DiSetup.@base();
+            DiSetup.Tests();
             DiManager.GetInstance().RegisterType<IDataService, NET.efilnukefesin.Implementations.Services.DataService.RestDataService.RestDataService>();  //TODO: switch per test
-            DiManager.GetInstance().AddTypeTranslation("HttpMessageHandlerProxy", typeof(HttpMessageHandler));
         }
         #endregion RestDataServiceTestsTests
 
         #region FileDataServiceTests
         public static void FileDataServiceTests()
         {
-            DiSetup.@base();
+            DiSetup.Tests();
             DiManager.GetInstance().RegisterType<IDataService, NET.efilnukefesin.Implementations.Services.DataService.FileDataService.FileDataService>();  //TODO: switch per test
-            DiManager.GetInstance().AddTypeTranslation("HttpMessageHandlerProxy", typeof(HttpMessageHandler));
         }
         #endregion FileDataServiceTests
 
         #region InMemoryDataServiceTests
         public static void InMemoryDataServiceTests()
         {
-            DiSetup.@base();
+            DiSetup.Tests();
             DiManager.GetInstance().RegisterType<IDataService, NET.efilnukefesin.Implementations.Services.DataService.InMemoryDataService.InMemoryDataService>();  //TODO: switch per test
-            DiManager.GetInstance().AddTypeTranslation("HttpMessageHandlerProxy", typeof(HttpMessageHandler));
         }
         #endregion InMemoryDataServiceTests
 
@@ -50,6 +47,7 @@ namespace NET.efilnukefesin.Tests.BootStrapper
         public static void Tests()
         {
             DiSetup.@base();
+            DiManager.GetInstance().AddTypeTranslation("HttpMessageHandlerProxy", typeof(HttpMessageHandler));
         }
         #endregion Tests
 

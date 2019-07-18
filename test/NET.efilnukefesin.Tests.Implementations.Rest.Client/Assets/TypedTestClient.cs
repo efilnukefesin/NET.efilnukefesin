@@ -3,6 +3,7 @@ using NET.efilnukefesin.Implementations.Base;
 using NET.efilnukefesin.Implementations.Rest.Client;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 
 namespace NET.efilnukefesin.Tests.Implementations.Rest.Client.Assets
@@ -15,7 +16,8 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Client.Assets
 
         #region Construction
 
-        public TypedTestClient(ILogger Logger) : base(Logger)
+        public TypedTestClient(Uri BaseUri, ILogger Logger, HttpMessageHandler OverrideMessageHandler = null) 
+            : base(BaseUri, Logger, OverrideMessageHandler = null)
         {
 
         }

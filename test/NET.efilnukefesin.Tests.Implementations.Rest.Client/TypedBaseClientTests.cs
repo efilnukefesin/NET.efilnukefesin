@@ -6,6 +6,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using NET.efilnukefesin.Tests.Implementations.Rest.Client.Assets;
+using Moq;
+using Moq.Protected;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Threading;
+using System.Net;
 
 namespace NET.efilnukefesin.Tests.Implementations.Rest.Client
 {
@@ -58,7 +64,26 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Client
             public void Get()
             {
                 DiSetup.Tests();
-                TypedTestClient client = DiHelper.GetService<TypedTestClient>();
+
+                var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
+                handlerMock
+                   .Protected()
+                   // Setup the PROTECTED method to mock
+                   .Setup<Task<HttpResponseMessage>>(
+                      "SendAsync",
+                      ItExpr.IsAny<HttpRequestMessage>(),
+                      ItExpr.IsAny<CancellationToken>()
+                   )
+                   // prepare the expected response of the mocked http call
+                   .ReturnsAsync(new HttpResponseMessage()
+                   {
+                       StatusCode = HttpStatusCode.OK,
+                       //Content = new StringContent(JsonConvert.SerializeObject(new SimpleResult<ValueObject<bool>>(new ValueObject<bool>(true)))),
+                       Content = new StringContent("Hello World"),
+                   }) 
+                   .Verifiable();
+
+                TypedTestClient client = DiHelper.GetService<TypedTestClient>(new Uri("http://baseUri"), handlerMock.Object);
 
                 throw new NotImplementedException();
             }

@@ -1,7 +1,10 @@
 ﻿using NET.efilnukefesin.Contracts.Logger;
 using NET.efilnukefesin.Implementations.Base;
+using NET.efilnukefesin.Implementations.Rest.Client.Classes;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace NET.efilnukefesin.Implementations.Rest.Client
@@ -11,14 +14,26 @@ namespace NET.efilnukefesin.Implementations.Rest.Client
         #region Properties
 
         protected ILogger logger;
+        protected HttpClient httpClient;
+        protected RequestInfo requestInfo;
 
         #endregion Properties
 
         #region Construction
 
-        public BaseClient(ILogger Logger)
+        public BaseClient(Uri BaseUri, ILogger Logger, HttpMessageHandler OverrideMessageHandler = null)
         {
             this.logger = Logger;
+            if (OverrideMessageHandler != null)
+            {
+                this.httpClient = new HttpClient(OverrideMessageHandler);
+            }
+            else
+            {
+                this.httpClient = new HttpClient();
+            }
+            this.httpClient.BaseAddress = BaseUri;
+            this.httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         #endregion Construction

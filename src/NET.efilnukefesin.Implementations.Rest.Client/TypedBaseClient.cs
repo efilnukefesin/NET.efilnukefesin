@@ -2,6 +2,7 @@
 using NET.efilnukefesin.Contracts.Logger;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 
 namespace NET.efilnukefesin.Implementations.Rest.Client
@@ -14,8 +15,8 @@ namespace NET.efilnukefesin.Implementations.Rest.Client
 
         #region Construction
 
-        public TypedBaseClient(ILogger Logger)
-            : base(Logger)
+        public TypedBaseClient(Uri BaseUri, ILogger Logger, HttpMessageHandler OverrideMessageHandler = null)
+            : base(BaseUri, Logger, OverrideMessageHandler = null)
         {
 
         }
