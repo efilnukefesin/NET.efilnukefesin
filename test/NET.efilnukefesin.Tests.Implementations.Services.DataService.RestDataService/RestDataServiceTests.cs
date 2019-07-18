@@ -156,7 +156,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.RestDataS
             [TestMethod]
             public void CreateOrUpdateAsyncWithDelegate()
             {
-                //throw new NotImplementedException();
+                throw new NotImplementedException();
                 //DiSetup.RestDataServiceTests();
                 //DiSetup.InitializeRestEndpoints();
 
@@ -184,7 +184,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.RestDataS
             [TestMethod]
             public void DeleteAsyncWithDelegate()
             {
-                //throw new NotImplementedException();
+                throw new NotImplementedException();
                 //DiSetup.RestDataServiceTests();
                 //DiSetup.InitializeRestEndpoints();
 
