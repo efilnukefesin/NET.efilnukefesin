@@ -51,6 +51,8 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
 
         #region Methods
 
+        //TODO: add method to add and or find an appropriate client
+
         #region AddOrReplaceAuthentication
         public void AddOrReplaceAuthentication(string BearerToken)
         {
