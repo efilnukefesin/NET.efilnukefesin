@@ -21,7 +21,7 @@ namespace NET.efilnukefesin.Implementations.Rest.Client
 
         #region Construction
 
-        public BaseClient(Uri BaseUri, ILogger Logger, HttpMessageHandler OverrideMessageHandler = null)
+        public BaseClient(Uri ResourceUri, ILogger Logger, HttpMessageHandler OverrideMessageHandler = null)
         {
             this.logger = Logger;
             if (OverrideMessageHandler != null)
@@ -32,7 +32,7 @@ namespace NET.efilnukefesin.Implementations.Rest.Client
             {
                 this.httpClient = new HttpClient();
             }
-            this.httpClient.BaseAddress = BaseUri;
+            this.httpClient.BaseAddress = ResourceUri;
             this.httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 

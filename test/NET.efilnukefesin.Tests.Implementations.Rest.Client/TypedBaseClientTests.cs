@@ -12,6 +12,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Net;
+using NET.efilnukefesin.Implementations.Base;
+using Newtonsoft.Json;
 
 namespace NET.efilnukefesin.Tests.Implementations.Rest.Client
 {
@@ -79,11 +81,12 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Client
                    {
                        StatusCode = HttpStatusCode.OK,
                        //Content = new StringContent(JsonConvert.SerializeObject(new SimpleResult<ValueObject<bool>>(new ValueObject<bool>(true)))),
-                       Content = new StringContent("Hello World"),
+                       Content = new StringContent(JsonConvert.SerializeObject(new ValueObject<string>("Hello World"))),
                    }) 
                    .Verifiable();
 
                 TypedTestClient client = DiHelper.GetService<TypedTestClient>(new Uri("http://baseUri"), handlerMock.Object);
+                ValueObject<string> result = client.Get(1);
 
                 throw new NotImplementedException();
             }

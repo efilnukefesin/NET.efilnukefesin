@@ -15,8 +15,8 @@ namespace NET.efilnukefesin.Implementations.Rest.Client
 
         #region Construction
 
-        public TypedBaseClient(Uri BaseUri, ILogger Logger, HttpMessageHandler OverrideMessageHandler = null)
-            : base(BaseUri, Logger, OverrideMessageHandler = null)
+        public TypedBaseClient(Uri ResourceUri, ILogger Logger, HttpMessageHandler OverrideMessageHandler = null)
+            : base(ResourceUri, Logger, OverrideMessageHandler = null)
         {
 
         }
@@ -24,6 +24,13 @@ namespace NET.efilnukefesin.Implementations.Rest.Client
         #endregion Construction
 
         #region Methods
+
+        #region Get
+        public T Get(params object[] Parameters)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion Get
 
         #endregion Methods
 
