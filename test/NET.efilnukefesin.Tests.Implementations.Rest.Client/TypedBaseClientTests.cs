@@ -46,6 +46,9 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Client
             [TestMethod]
             public void GetAll()
             {
+                DiSetup.Tests();
+                TypedTestClient client = DiHelper.GetService<TypedTestClient>();
+
                 throw new NotImplementedException();
             }
             #endregion GetAll
@@ -54,6 +57,9 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Client
             [TestMethod]
             public void Get()
             {
+                DiSetup.Tests();
+                TypedTestClient client = DiHelper.GetService<TypedTestClient>();
+
                 throw new NotImplementedException();
             }
             #endregion Get
@@ -62,6 +68,9 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Client
             [TestMethod]
             public void Delete()
             {
+                DiSetup.Tests();
+                TypedTestClient client = DiHelper.GetService<TypedTestClient>();
+
                 throw new NotImplementedException();
             }
             #endregion Delete
@@ -70,6 +79,9 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Client
             [TestMethod]
             public void Exists()
             {
+                DiSetup.Tests();
+                TypedTestClient client = DiHelper.GetService<TypedTestClient>();
+
                 throw new NotImplementedException();
             }
             #endregion Exists
@@ -78,6 +90,9 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Client
             [TestMethod]
             public void Create()
             {
+                DiSetup.Tests();
+                TypedTestClient client = DiHelper.GetService<TypedTestClient>();
+
                 throw new NotImplementedException();
             }
             #endregion Create
@@ -86,6 +101,9 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Client
             [TestMethod]
             public void Update()
             {
+                DiSetup.Tests();
+                TypedTestClient client = DiHelper.GetService<TypedTestClient>();
+
                 throw new NotImplementedException();
             }
             #endregion Update

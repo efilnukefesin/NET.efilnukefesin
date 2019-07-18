@@ -42,6 +42,8 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Server
             [TestMethod]
             public void GetAll()
             {
+                TypedTestController controller = new TypedTestController();
+
                 throw new NotImplementedException();
             }
             #endregion GetAll
@@ -50,6 +52,8 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Server
             [TestMethod]
             public void Get()
             {
+                TypedTestController controller = new TypedTestController();
+
                 throw new NotImplementedException();
             }
             #endregion Get
@@ -58,6 +62,8 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Server
             [TestMethod]
             public void Delete()
             {
+                TypedTestController controller = new TypedTestController();
+
                 throw new NotImplementedException();
             }
             #endregion Delete
@@ -66,6 +72,8 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Server
             [TestMethod]
             public void Exists()
             {
+                TypedTestController controller = new TypedTestController();
+
                 throw new NotImplementedException();
             }
             #endregion Exists
@@ -74,6 +82,8 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Server
             [TestMethod]
             public void Create()
             {
+                TypedTestController controller = new TypedTestController();
+
                 throw new NotImplementedException();
             }
             #endregion Create
@@ -82,6 +92,8 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Server
             [TestMethod]
             public void Update()
             {
+                TypedTestController controller = new TypedTestController();
+
                 throw new NotImplementedException();
             }
             #endregion Update
