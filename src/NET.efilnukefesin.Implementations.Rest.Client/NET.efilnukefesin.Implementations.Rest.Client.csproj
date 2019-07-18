@@ -11,6 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NET.efilnukefesin.Contracts.Logger\NET.efilnukefesin.Contracts.Logger.csproj" />
     <ProjectReference Include="..\NET.efilnukefesin.Implementations.Base\NET.efilnukefesin.Implementations.Base.csproj" />
   </ItemGroup>
 

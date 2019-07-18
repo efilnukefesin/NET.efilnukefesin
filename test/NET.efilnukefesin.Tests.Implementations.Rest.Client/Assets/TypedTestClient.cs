@@ -1,29 +1,35 @@
 ﻿using NET.efilnukefesin.Contracts.Logger;
 using NET.efilnukefesin.Implementations.Base;
+using NET.efilnukefesin.Implementations.Rest.Client;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NET.efilnukefesin.Implementations.Rest.Client
+namespace NET.efilnukefesin.Tests.Implementations.Rest.Client.Assets
 {
-    public abstract class BaseClient : BaseObject
+    internal class TypedTestClient : TypedBaseClient<ValueObject<string>>
     {
         #region Properties
-
-        protected ILogger logger;
 
         #endregion Properties
 
         #region Construction
 
-        public BaseClient(ILogger Logger)
+        public TypedTestClient(ILogger Logger) : base(Logger)
         {
-            this.logger = Logger;
+
         }
 
         #endregion Construction
 
         #region Methods
+
+        #region dispose
+        protected override void dispose()
+        {
+            
+        }
+        #endregion dispose
 
         #endregion Methods
 

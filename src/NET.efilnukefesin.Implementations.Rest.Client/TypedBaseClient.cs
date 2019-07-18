@@ -1,4 +1,5 @@
 ﻿using NET.efilnukefesin.Contracts.Base;
+using NET.efilnukefesin.Contracts.Logger;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,6 +13,12 @@ namespace NET.efilnukefesin.Implementations.Rest.Client
         #endregion Properties
 
         #region Construction
+
+        public TypedBaseClient(ILogger Logger)
+            : base(Logger)
+        {
+
+        }
 
         #endregion Construction
 
