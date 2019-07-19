@@ -84,6 +84,11 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Client
             }
             #endregion convertToSerializedResult
 
+            private HttpContent getContent<T>(T Value)
+            {
+                return new StringContent(this.convertToSerializedResult<T>(Value));
+            }
+
             #region GetAll
             [TestMethod]
             public void GetAll()
@@ -104,7 +109,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Client
                 var handlerMock = this.messageHandlerMockFaker(new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.OK,
-                    Content = new StringContent(this.convertToSerializedResult<ValueObject<string>>(new ValueObject<string>("Hello World"))),
+                    Content = this.getContent<ValueObject<string>>(new ValueObject<string>("Hello World")),
                 });
 
                 TypedTestClient client = DiHelper.GetService<TypedTestClient>(new Uri("http://baseUri"), handlerMock.Object);

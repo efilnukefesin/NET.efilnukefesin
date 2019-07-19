@@ -108,5 +108,18 @@ namespace NET.efilnukefesin.Helpers
             return result;
         }
         #endregion CreateInstance
+
+        #region HasAttribute
+        public static bool HasAttribute<AttributeType>(Type typeToLookat) where AttributeType : Attribute //TODO: do equivalent for methods
+        {
+            bool result = false;
+            var customAttribute = typeToLookat.GetCustomAttributes(typeof(AttributeType), true).FirstOrDefault() as AttributeType;
+            if (customAttribute != null)
+            {
+                result = true;
+            }
+            return result;
+        }
+        #endregion HasAttribute
     }
 }

@@ -14,6 +14,12 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Server.Assets
 
         #region Construction
 
+        public TypedTestController() : base()
+        { }
+
+        public TypedTestController(IEnumerable<ValueObject<string>> initialItems) : base(initialItems)
+        { }
+
         #endregion Construction
 
         #region Methods

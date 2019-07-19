@@ -5,6 +5,8 @@ using System.Text;
 
 namespace NET.efilnukefesin.Implementations.Rest.Server
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public abstract class BaseController : ControllerBase
     {
         #region Properties

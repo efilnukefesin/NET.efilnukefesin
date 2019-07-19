@@ -1,8 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NET.efilnukefesin.BaseClasses.Test;
+using NET.efilnukefesin.Helpers;
+using NET.efilnukefesin.Implementations.Base;
 using NET.efilnukefesin.Tests.Implementations.Rest.Server.Assets;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace NET.efilnukefesin.Tests.Implementations.Rest.Server
@@ -28,7 +32,12 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Server
             {
                 TypedTestController controller = new TypedTestController();
 
+                bool hasApiControllerAttribute = TypeHelper.HasAttribute<ApiControllerAttribute>(typeof(TypedTestController));
+                bool hasRouteAttribute = TypeHelper.HasAttribute<RouteAttribute>(typeof(TypedTestController));
+
                 Assert.IsNotNull(controller);
+                Assert.IsTrue(hasApiControllerAttribute);
+                Assert.IsTrue(hasRouteAttribute);
             }
             #endregion Create
         }
@@ -38,6 +47,20 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Server
         [TestClass]
         public class TypedBaseControllerMethods : TypedBaseControllerTests
         {
+            #region generateTestItems
+            private List<ValueObject<string>> generateTestItems()
+            {
+                List<ValueObject<string>> result = new List<ValueObject<string>>();
+                ValueObject<string> item1 = new ValueObject<string>("item1");
+                ValueObject<string> item2 = new ValueObject<string>("item2");
+                ValueObject<string> item3 = new ValueObject<string>("item3");
+                result.Add(item1);
+                result.Add(item2);
+                result.Add(item3);
+                return result;
+            }
+            #endregion generateTestItems
+
             #region GetAll
             [TestMethod]
             public void GetAll()
@@ -52,11 +75,39 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Server
             [TestMethod]
             public void Get()
             {
-                TypedTestController controller = new TypedTestController();
+                List<ValueObject<string>> items = this.generateTestItems();
+                TypedTestController controller = new TypedTestController(items);
 
-                throw new NotImplementedException();
+                //bool hasHttpGetAttribute = this.hasAttribute<HttpGetAttribute>(typeof(TypedTestController));
+                var result = controller.Get(items[1].Id).Value;
+
+                Assert.IsNotNull(result);
+                //Assert.IsTrue(hasHttpGetAttribute);
+                Assert.IsInstanceOfType(result, typeof(SimpleResult<ValueObject<string>>));
+                Assert.AreEqual(false, result.IsError);
+                Assert.IsNotNull(result.Payload);
+                Assert.IsNull(result.Error);
+                Assert.AreEqual("item2", result.Payload.Value);
             }
             #endregion Get
+
+            #region GetNotFound
+            [TestMethod]
+            public void GetNotFound()
+            {
+                List<ValueObject<string>> items = this.generateTestItems();
+                TypedTestController controller = new TypedTestController(items);
+
+                var result = controller.Get("SomeUnknownId").Value;
+
+                Assert.IsNotNull(result);
+                Assert.IsInstanceOfType(result, typeof(SimpleResult<ValueObject<string>>));
+                Assert.AreEqual(true, result.IsError);
+                Assert.IsNull(result.Payload);
+                Assert.IsNotNull(result.Error);
+                Assert.AreEqual(1, result.Error.ErrorId);
+            }
+            #endregion GetNotFound
 
             #region Delete
             [TestMethod]

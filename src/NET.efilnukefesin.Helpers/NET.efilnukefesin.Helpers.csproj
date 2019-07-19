@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <VersionPrefix>1.5.0</VersionPrefix>
+    <VersionPrefix>1.5.1</VersionPrefix>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
     <Description>Various Helper classes</Description>
-    <PackageReleaseNotes>added ObjectHelper</PackageReleaseNotes>
+    <PackageReleaseNotes>added HasAttribute method</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>
