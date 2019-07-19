@@ -34,6 +34,8 @@ namespace NET.efilnukefesin.Implementations.Rest.Client
             }
             this.httpClient.BaseAddress = ResourceUri;
             this.httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            this.requestInfo = new RequestInfo();
         }
 
         #endregion Construction

@@ -17,7 +17,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Client.Assets
         #region Construction
 
         public TypedTestClient(Uri BaseUri, ILogger Logger, HttpMessageHandler OverrideMessageHandler = null) 
-            : base(BaseUri, Logger, OverrideMessageHandler = null)
+            : base(BaseUri, Logger, OverrideMessageHandler)
         {
 
         }

@@ -38,7 +38,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Client
             {
                 DiSetup.Tests();
 
-                TypedTestClient client = DiHelper.GetService<TypedTestClient>();
+                TypedTestClient client = DiHelper.GetService<TypedTestClient>(new Uri("http://baseUri"));
 
                 Assert.IsNotNull(client);
             }
@@ -50,6 +50,40 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Client
         [TestClass]
         public class TypedBaseClientMethods : TypedBaseClientTests
         {
+            #region messageHandlerMockFaker: creates a fake response for a faked http handler
+            /// <summary>
+            /// creates a fake response for a faked http handler
+            /// </summary>
+            /// <param name="response">the response to deliver</param>
+            /// <returns>the mock object</returns>
+            private Mock<HttpMessageHandler> messageHandlerMockFaker(HttpResponseMessage response)
+            {
+                Mock<HttpMessageHandler> result;
+
+                result = new Mock<HttpMessageHandler>(MockBehavior.Strict);
+                result
+                   .Protected()
+                   // Setup the PROTECTED method to mock
+                   .Setup<Task<HttpResponseMessage>>(
+                      "SendAsync",
+                      ItExpr.IsAny<HttpRequestMessage>(),
+                      ItExpr.IsAny<CancellationToken>()
+                   )
+                   // prepare the expected response of the mocked http call
+                   .ReturnsAsync(response)
+                   .Verifiable();
+
+                return result;
+            }
+            #endregion messageHandlerMockFaker
+
+            #region convertToSerializedResult
+            private string convertToSerializedResult<T>(T Value)
+            {
+                return JsonConvert.SerializeObject(new SimpleResult<T>(Value));
+            }
+            #endregion convertToSerializedResult
+
             #region GetAll
             [TestMethod]
             public void GetAll()
@@ -67,28 +101,17 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Client
             {
                 DiSetup.Tests();
 
-                var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
-                handlerMock
-                   .Protected()
-                   // Setup the PROTECTED method to mock
-                   .Setup<Task<HttpResponseMessage>>(
-                      "SendAsync",
-                      ItExpr.IsAny<HttpRequestMessage>(),
-                      ItExpr.IsAny<CancellationToken>()
-                   )
-                   // prepare the expected response of the mocked http call
-                   .ReturnsAsync(new HttpResponseMessage()
-                   {
-                       StatusCode = HttpStatusCode.OK,
-                       //Content = new StringContent(JsonConvert.SerializeObject(new SimpleResult<ValueObject<bool>>(new ValueObject<bool>(true)))),
-                       Content = new StringContent(JsonConvert.SerializeObject(new ValueObject<string>("Hello World"))),
-                   }) 
-                   .Verifiable();
+                var handlerMock = this.messageHandlerMockFaker(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.OK,
+                    Content = new StringContent(this.convertToSerializedResult<ValueObject<string>>(new ValueObject<string>("Hello World"))),
+                });
 
                 TypedTestClient client = DiHelper.GetService<TypedTestClient>(new Uri("http://baseUri"), handlerMock.Object);
-                ValueObject<string> result = client.Get(1);
+                ValueObject<string> result = client.GetAsync(1).GetAwaiter().GetResult();
 
-                throw new NotImplementedException();
+                Assert.IsNotNull(result);
+                Assert.AreEqual("Hello World", result.Value);
             }
             #endregion Get
 
