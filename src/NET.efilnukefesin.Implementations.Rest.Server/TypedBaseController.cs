@@ -34,6 +34,25 @@ namespace NET.efilnukefesin.Implementations.Rest.Server
 
         #region Methods
 
+        #region GetAll
+        [HttpGet]
+        public ActionResult<SimpleResult<IEnumerable<T>>> GetAll()
+        {
+            SimpleResult<IEnumerable<T>> result = default;
+
+            if (this.items.Count > 0)
+            {
+                result = new SimpleResult<IEnumerable<T>>(this.items);
+            }
+            else
+            {
+                result = new SimpleResult<IEnumerable<T>>(new ErrorInfo(2, "No items", $"The list you are trying to get has no items."));
+            }
+
+            return result;
+        }
+        #endregion GetAll
+
         #region Get
         [HttpGet("{Id}")]
         public ActionResult<SimpleResult<T>> Get(string Id)  //TODO: replace by Guid

@@ -68,15 +68,50 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Server
             }
             #endregion generateTestItems
 
+            #region GetAllHasRightAttributes
+            [TestMethod]
+            public void GetAllHasRightAttributes()
+            {
+                bool hasHttpGetAttribute = MethodHelper.HasAttribute<HttpGetAttribute>(typeof(TypedTestController), "GetAll");
+
+                Assert.IsTrue(hasHttpGetAttribute);
+            }
+            #endregion GetAllHasRightAttributes
+
             #region GetAll
             [TestMethod]
             public void GetAll()
             {
-                TypedTestController controller = new TypedTestController();
+                List<ValueObject<string>> items = this.generateTestItems();
+                TypedTestController controller = new TypedTestController(items);
 
-                throw new NotImplementedException();
+                var result = controller.GetAll().Value;
+
+                Assert.IsNotNull(result);
+                Assert.IsInstanceOfType(result, typeof(SimpleResult<IEnumerable<ValueObject<string>>>));
+                Assert.AreEqual(false, result.IsError);
+                Assert.IsNotNull(result.Payload);
+                Assert.IsNull(result.Error);
+                Assert.AreEqual(3, result.Payload.Count());
             }
             #endregion GetAll
+
+            #region GetAllEmpty
+            [TestMethod]
+            public void GetAllEmpty()
+            {
+                TypedTestController controller = new TypedTestController();
+
+                var result = controller.GetAll().Value;
+
+                Assert.IsNotNull(result);
+                Assert.IsInstanceOfType(result, typeof(SimpleResult<IEnumerable<ValueObject<string>>>));
+                Assert.AreEqual(true, result.IsError);
+                Assert.IsNull(result.Payload);
+                Assert.IsNotNull(result.Error);
+                Assert.AreEqual(2, result.Error.ErrorId);
+            }
+            #endregion GetAllEmpty
 
             #region GetHasRightAttributes
             [TestMethod]
@@ -95,11 +130,9 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Server
                 List<ValueObject<string>> items = this.generateTestItems();
                 TypedTestController controller = new TypedTestController(items);
 
-                bool hasHttpGetAttribute = MethodHelper.HasAttribute<HttpGetAttribute>(typeof(TypedTestController), "Get");
                 var result = controller.Get(items[1].Id).Value;
 
                 Assert.IsNotNull(result);
-                Assert.IsTrue(hasHttpGetAttribute);
                 Assert.IsInstanceOfType(result, typeof(SimpleResult<ValueObject<string>>));
                 Assert.AreEqual(false, result.IsError);
                 Assert.IsNotNull(result.Payload);
