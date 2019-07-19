@@ -32,14 +32,21 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Server
             {
                 TypedTestController controller = new TypedTestController();
 
+                Assert.IsNotNull(controller);
+            }
+            #endregion Create
+
+            #region ControllerHasRightAttributes
+            [TestMethod]
+            public void ControllerHasRightAttributes()
+            {
                 bool hasApiControllerAttribute = TypeHelper.HasAttribute<ApiControllerAttribute>(typeof(TypedTestController));
                 bool hasRouteAttribute = TypeHelper.HasAttribute<RouteAttribute>(typeof(TypedTestController));
 
-                Assert.IsNotNull(controller);
                 Assert.IsTrue(hasApiControllerAttribute);
                 Assert.IsTrue(hasRouteAttribute);
             }
-            #endregion Create
+            #endregion ControllerHasRightAttributes
         }
         #endregion TypedBaseControllerConstruction
 
@@ -71,6 +78,16 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Server
             }
             #endregion GetAll
 
+            #region GetHasRightAttributes
+            [TestMethod]
+            public void GetHasRightAttributes()
+            {
+                bool hasHttpGetAttribute = MethodHelper.HasAttribute<HttpGetAttribute>(typeof(TypedTestController), "Get");
+
+                Assert.IsTrue(hasHttpGetAttribute);
+            }
+            #endregion GetHasRightAttributes
+
             #region Get
             [TestMethod]
             public void Get()
@@ -78,11 +95,11 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Server
                 List<ValueObject<string>> items = this.generateTestItems();
                 TypedTestController controller = new TypedTestController(items);
 
-                //bool hasHttpGetAttribute = this.hasAttribute<HttpGetAttribute>(typeof(TypedTestController));
+                bool hasHttpGetAttribute = MethodHelper.HasAttribute<HttpGetAttribute>(typeof(TypedTestController), "Get");
                 var result = controller.Get(items[1].Id).Value;
 
                 Assert.IsNotNull(result);
-                //Assert.IsTrue(hasHttpGetAttribute);
+                Assert.IsTrue(hasHttpGetAttribute);
                 Assert.IsInstanceOfType(result, typeof(SimpleResult<ValueObject<string>>));
                 Assert.AreEqual(false, result.IsError);
                 Assert.IsNotNull(result.Payload);
