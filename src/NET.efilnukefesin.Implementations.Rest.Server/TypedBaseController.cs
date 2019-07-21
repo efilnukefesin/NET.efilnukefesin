@@ -91,6 +91,29 @@ namespace NET.efilnukefesin.Implementations.Rest.Server
         }
         #endregion Head
 
+        #region Delete
+        [HttpDelete("{Id}")]
+        public ActionResult Delete(string Id)  //TODO: replace by Guid
+        {
+            ActionResult result = default;
+
+            if (this.items.Any(x => x.Id.Equals(Id)))
+            {
+                int numberOfRemovedItems = this.items.RemoveAll(x => x.Id.Equals(Id));
+                if (numberOfRemovedItems > 0)
+                {
+                    result = Ok();
+                }
+            }
+            else
+            {
+                result = NotFound();
+            }
+
+            return result;
+        }
+        #endregion Delete
+
         // Controller tests: https://docs.microsoft.com/de-de/aspnet/web-api/overview/testing-and-debugging/unit-testing-with-aspnet-web-api
 
         //TODO: implement CRUD methods

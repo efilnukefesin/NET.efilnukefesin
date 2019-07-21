@@ -197,15 +197,43 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Server
             }
             #endregion HeadNotFound
 
+            #region DeleteHasRightAttributes
+            [TestMethod]
+            public void DeleteHasRightAttributes()
+            {
+                bool hasHttpDeleteAttribute = MethodHelper.HasAttribute<HttpDeleteAttribute>(typeof(TypedTestController), "Delete");
+
+                Assert.IsTrue(hasHttpDeleteAttribute);
+            }
+            #endregion DeleteHasRightAttributes
+
             #region Delete
             [TestMethod]
             public void Delete()
             {
-                TypedTestController controller = new TypedTestController();
+                List<ValueObject<string>> items = this.generateTestItems();
+                TypedTestController controller = new TypedTestController(items);
 
-                throw new NotImplementedException();
+                var result = controller.Delete(items[1].Id);
+
+                Assert.IsNotNull(result);
+                Assert.IsInstanceOfType(result, typeof(Microsoft.AspNetCore.Mvc.OkResult));
             }
             #endregion Delete
+
+            #region DeleteNotFound
+            [TestMethod]
+            public void DeleteNotFound()
+            {
+                List<ValueObject<string>> items = this.generateTestItems();
+                TypedTestController controller = new TypedTestController(items);
+
+                var result = controller.Delete("SomeRandomAndNotExistingId");
+
+                Assert.IsNotNull(result);
+                Assert.IsInstanceOfType(result, typeof(Microsoft.AspNetCore.Mvc.NotFoundResult));
+            }
+            #endregion DeleteNotFound
 
             #region Exists
             [TestMethod]

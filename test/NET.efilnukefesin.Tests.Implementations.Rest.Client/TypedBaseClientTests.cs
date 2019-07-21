@@ -139,6 +139,25 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Client
             }
             #endregion ExistsAsync
 
+            #region ExistsAsyncNotFound
+            [TestMethod]
+            public void ExistsAsyncNotFound()
+            {
+                DiSetup.Tests();
+
+                var handlerMock = this.messageHandlerMockFaker(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.NotFound
+                });
+
+                TypedTestClient client = DiHelper.GetService<TypedTestClient>(new Uri("http://baseUri"), handlerMock.Object);
+                bool result = client.ExistsAsync(1).GetAwaiter().GetResult();
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual(false, result);
+            }
+            #endregion ExistsAsyncNotFound
+
             #region Delete
             [TestMethod]
             public void Delete()
