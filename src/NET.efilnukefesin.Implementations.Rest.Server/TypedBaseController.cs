@@ -72,6 +72,25 @@ namespace NET.efilnukefesin.Implementations.Rest.Server
         }
         #endregion Get
 
+        #region Head
+        [HttpHead("{Id}")]
+        public ActionResult Head(string Id)  //TODO: replace by Guid
+        {
+            ActionResult result = default;
+
+            if (this.items.Any(x => x.Id.Equals(Id)))
+            {
+                result = Ok();
+            }
+            else
+            {
+                result = NotFound();
+            }
+
+            return result;
+        }
+        #endregion Head
+
         // Controller tests: https://docs.microsoft.com/de-de/aspnet/web-api/overview/testing-and-debugging/unit-testing-with-aspnet-web-api
 
         //TODO: implement CRUD methods

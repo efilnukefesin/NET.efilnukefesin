@@ -159,6 +159,44 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Server
             }
             #endregion GetNotFound
 
+            #region HeadHasRightAttributes
+            [TestMethod]
+            public void HeadHasRightAttributes()
+            {
+                bool hasHttpHeadAttribute = MethodHelper.HasAttribute<HttpHeadAttribute>(typeof(TypedTestController), "Head");
+
+                Assert.IsTrue(hasHttpHeadAttribute);
+            }
+            #endregion HeadHasRightAttributes
+
+            #region Head
+            [TestMethod]
+            public void Head()
+            {
+                List<ValueObject<string>> items = this.generateTestItems();
+                TypedTestController controller = new TypedTestController(items);
+
+                var result = controller.Head(items[1].Id);
+
+                Assert.IsNotNull(result);
+                Assert.IsInstanceOfType(result, typeof(Microsoft.AspNetCore.Mvc.OkResult));
+            }
+            #endregion Head
+
+            #region HeadNotFound
+            [TestMethod]
+            public void HeadNotFound()
+            {
+                List<ValueObject<string>> items = this.generateTestItems();
+                TypedTestController controller = new TypedTestController(items);
+
+                var result = controller.Head("SomeUnknownId");
+
+                Assert.IsNotNull(result);
+                Assert.IsInstanceOfType(result, typeof(Microsoft.AspNetCore.Mvc.NotFoundResult));
+            }
+            #endregion HeadNotFound
+
             #region Delete
             [TestMethod]
             public void Delete()
