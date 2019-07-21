@@ -30,7 +30,7 @@ namespace NET.efilnukefesin.Implementations.Rest.Client
 
         #region Methods
 
-        #region Get
+        #region GetAsync
         public async Task<T> GetAsync(params object[] Parameters)
         {
             T result = default;
@@ -64,7 +64,7 @@ namespace NET.efilnukefesin.Implementations.Rest.Client
             this.logger?.Log($"TypedBaseClient<{typeof(T)}>.GetAsync({logParameters}): exited with result '{result}'");
             return result;
         }
-        #endregion Get
+        #endregion GetAsync
 
         #region ExistsAsync
         public async Task<bool> ExistsAsync(params object[] Parameters)
@@ -98,6 +98,39 @@ namespace NET.efilnukefesin.Implementations.Rest.Client
             return result;
         }
         #endregion ExistsAsync
+
+        #region DeleteAsync
+        public async Task<bool> DeleteAsync(params object[] Parameters)
+        {
+            bool result = false;
+
+            string logParameters = ObjectHelper.ConvertArrayToString(Parameters);
+            this.logger?.Log($"TypedBaseClient<{typeof(T)}>.DeleteAsync({logParameters}): entered");
+            string uriParameters = this.convertParameters(Parameters);
+
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Delete, uriParameters);
+            HttpResponseMessage response = await this.httpClient.SendAsync(request);
+            this.requestInfo.LastResponse = response;
+            if (response.IsSuccessStatusCode)
+            {
+                result = true;
+            }
+            else
+            {
+                if (response.StatusCode != System.Net.HttpStatusCode.NotFound)
+                {
+                    this.logger?.Log($"TypedBaseClient<{typeof(T)}>.DeleteAsync({logParameters}): error in request response '{response.StatusCode}: {response.ReasonPhrase}'", Contracts.Logger.Enums.LogLevel.Error);
+                }
+                else
+                {
+                    result = false;  //not found - this is ok with delete
+                }
+            }
+
+            this.logger?.Log($"TypedBaseClient<{typeof(T)}>.DeleteAsync({logParameters}): exited with result '{result}'");
+            return result;
+        }
+        #endregion DeleteAsync
 
         #region convertParameters: converts the given parameters to a string delimited with '/'
         /// <summary>

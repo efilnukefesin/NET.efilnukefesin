@@ -158,27 +158,43 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Client
             }
             #endregion ExistsAsyncNotFound
 
-            #region Delete
+            #region DeleteAsync
             [TestMethod]
-            public void Delete()
+            public void DeleteAsync()
             {
                 DiSetup.Tests();
-                TypedTestClient client = DiHelper.GetService<TypedTestClient>();
 
-                throw new NotImplementedException();
+                var handlerMock = this.messageHandlerMockFaker(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.OK
+                });
+
+                TypedTestClient client = DiHelper.GetService<TypedTestClient>(new Uri("http://baseUri"), handlerMock.Object);
+                bool result = client.DeleteAsync(1).GetAwaiter().GetResult();
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual(true, result);
             }
-            #endregion Delete
+            #endregion DeleteAsync
 
-            #region Exists
+            #region DeleteAsyncNotFound
             [TestMethod]
-            public void Exists()
+            public void DeleteAsyncNotFound()
             {
                 DiSetup.Tests();
-                TypedTestClient client = DiHelper.GetService<TypedTestClient>();
 
-                throw new NotImplementedException();
+                var handlerMock = this.messageHandlerMockFaker(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.NotFound
+                });
+
+                TypedTestClient client = DiHelper.GetService<TypedTestClient>(new Uri("http://baseUri"), handlerMock.Object);
+                bool result = client.DeleteAsync(1).GetAwaiter().GetResult();
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual(false, result);
             }
-            #endregion Exists
+            #endregion DeleteAsyncNotFound
 
             #region Create
             [TestMethod]
