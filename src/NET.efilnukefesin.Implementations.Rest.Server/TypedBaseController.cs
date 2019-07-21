@@ -140,12 +140,12 @@ namespace NET.efilnukefesin.Implementations.Rest.Server
             if (this.items.Any(x => x.Id.Equals(Id)))
             {
                 //TODO: replace content BUT NOT id!
-
-                throw new NotImplementedException();
-                //return url of the resource
-                
-                result = AcceptedAtAction(this.Get);
-                
+                var unUpdatedItem = this.items.FirstOrDefault(x => x.Id.Equals(Id));
+                var oldId = unUpdatedItem.Id;
+                updatedContent.Id = oldId;
+                this.items.RemoveAll(x => x.Id.Equals(Id));
+                this.items.Add(updatedContent);
+                result = AcceptedAtAction(nameof(this.Get), new { id = updatedContent.Id }, updatedContent);
             }
             else
             {

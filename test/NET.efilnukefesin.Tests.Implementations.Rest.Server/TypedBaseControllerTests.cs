@@ -256,7 +256,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Server
                 var result = controller.Post(newItem);
 
                 Assert.IsNotNull(result);
-                Assert.IsInstanceOfType(result, typeof(Microsoft.AspNetCore.Mvc.OkResult));
+                Assert.IsInstanceOfType(result, typeof(Microsoft.AspNetCore.Mvc.CreatedAtActionResult));
             }
             #endregion Post
 
@@ -281,7 +281,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Server
                 var result = controller.Put(items[1].Id, contentToUpdate);
 
                 Assert.IsNotNull(result);
-                Assert.IsInstanceOfType(result, typeof(Microsoft.AspNetCore.Mvc.OkResult));
+                Assert.IsInstanceOfType(result, typeof(Microsoft.AspNetCore.Mvc.AcceptedAtActionResult));
             }
             #endregion Put
 
