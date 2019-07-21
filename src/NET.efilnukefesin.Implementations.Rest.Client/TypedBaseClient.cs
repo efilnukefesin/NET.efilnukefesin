@@ -132,6 +132,8 @@ namespace NET.efilnukefesin.Implementations.Rest.Client
         }
         #endregion DeleteAsync
 
+        //TODO: CreateOrUpdate = Exists, if yes Update, if not Create
+
         #region convertParameters: converts the given parameters to a string delimited with '/'
         /// <summary>
         /// converts the given parameters to a string delimited with '/'

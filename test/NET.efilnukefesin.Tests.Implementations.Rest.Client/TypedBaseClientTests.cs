@@ -196,27 +196,68 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Client
             }
             #endregion DeleteAsyncNotFound
 
-            #region Create
+            #region CreateAsync
             [TestMethod]
-            public void Create()
+            public void CreateAsync()
             {
                 DiSetup.Tests();
-                TypedTestClient client = DiHelper.GetService<TypedTestClient>();
 
-                throw new NotImplementedException();
+                var handlerMock = this.messageHandlerMockFaker(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.Accepted
+                });
+
+                var newItem = new ValueObject<string>("SomeThing");
+
+                TypedTestClient client = DiHelper.GetService<TypedTestClient>(new Uri("http://baseUri"), handlerMock.Object);
+                bool result = client.CreateAsync(newItem).GetAwaiter().GetResult();
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual(true, result);
             }
-            #endregion Create
+            #endregion CreateAsync
 
-            #region Update
+            #region UpdateAsync
             [TestMethod]
-            public void Update()
+            public void UpdateAsync()
             {
                 DiSetup.Tests();
-                TypedTestClient client = DiHelper.GetService<TypedTestClient>();
 
-                throw new NotImplementedException();
+                var handlerMock = this.messageHandlerMockFaker(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.Accepted
+                });
+
+                var newItem = new ValueObject<string>("SomeThing");
+
+                TypedTestClient client = DiHelper.GetService<TypedTestClient>(new Uri("http://baseUri"), handlerMock.Object);
+                bool result = client.UpdateAsync(1, newItem).GetAwaiter().GetResult();
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual(true, result);
             }
-            #endregion Update
+            #endregion UpdateAsync
+
+            #region CreateOrUpdateAsync
+            [TestMethod]
+            public void CreateOrUpdateAsync()
+            {
+                DiSetup.Tests();
+
+                var handlerMock = this.messageHandlerMockFaker(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.Accepted
+                });
+
+                var newItem = new ValueObject<string>("SomeThing");
+
+                TypedTestClient client = DiHelper.GetService<TypedTestClient>(new Uri("http://baseUri"), handlerMock.Object);
+                bool result = client.CreateOrUpdateAsync(newItem).GetAwaiter().GetResult();
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual(true, result);
+            }
+            #endregion CreateOrUpdateAsync
         }
         #endregion TypedBaseClientMethods
     }
