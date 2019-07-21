@@ -36,7 +36,7 @@ namespace NET.efilnukefesin.Implementations.Rest.Client
             T result = default;
             
             string logParameters = ObjectHelper.ConvertArrayToString(Parameters);
-            this.logger?.Log($"TypedBaseClient<{typeof(T)}>.Get({logParameters}): entered");
+            this.logger?.Log($"TypedBaseClient<{typeof(T)}>.GetAsync({logParameters}): entered");
             string uriParameters = this.convertParameters(Parameters);
 
             HttpResponseMessage response = await this.httpClient.GetAsync(uriParameters);
@@ -53,18 +53,51 @@ namespace NET.efilnukefesin.Implementations.Rest.Client
                 }
                 else
                 {
-                    this.logger?.Log($"TypedBaseClient<{typeof(T)}>.Get({logParameters}): error in request result '{requestResult.Error.Id}: {requestResult.Error.Message}, {requestResult.Error.Ex}'");
+                    this.logger?.Log($"TypedBaseClient<{typeof(T)}>.GetAsync({logParameters}): error in request result '{requestResult.Error.Id}: {requestResult.Error.Message}, {requestResult.Error.Ex}'");
                 }
             }
             else
             {
-                this.logger?.Log($"TypedBaseClient<{typeof(T)}>.Get({logParameters}): error in request response '{response.StatusCode}: {response.ReasonPhrase}'");
+                this.logger?.Log($"TypedBaseClient<{typeof(T)}>.GetAsync({logParameters}): error in request response '{response.StatusCode}: {response.ReasonPhrase}'");
             }
 
-            this.logger?.Log($"TypedBaseClient<{typeof(T)}>.Get({logParameters}): exited with result '{result}'");
+            this.logger?.Log($"TypedBaseClient<{typeof(T)}>.GetAsync({logParameters}): exited with result '{result}'");
             return result;
         }
         #endregion Get
+
+        #region ExistsAsync
+        public async Task<bool> ExistsAsync(params object[] Parameters)
+        {
+            bool result = false;
+
+            string logParameters = ObjectHelper.ConvertArrayToString(Parameters);
+            this.logger?.Log($"TypedBaseClient<{typeof(T)}>.ExistsAsync({logParameters}): entered");
+            string uriParameters = this.convertParameters(Parameters);
+
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Head, uriParameters);
+            HttpResponseMessage response = await this.httpClient.SendAsync(request);
+            this.requestInfo.LastResponse = response;
+            if (response.IsSuccessStatusCode)
+            {
+                result = true;
+            }
+            else
+            {
+                if (response.StatusCode != System.Net.HttpStatusCode.NotFound)
+                {
+                    this.logger?.Log($"TypedBaseClient<{typeof(T)}>.ExistsAsync({logParameters}): error in request response '{response.StatusCode}: {response.ReasonPhrase}'", Contracts.Logger.Enums.LogLevel.Error);
+                }
+                else
+                {
+                    result = false;  //not found - this is ok with head
+                }
+            }
+
+            this.logger?.Log($"TypedBaseClient<{typeof(T)}>.ExistsAsync({logParameters}): exited with result '{result}'");
+            return result;
+        }
+        #endregion ExistsAsync
 
         #region convertParameters: converts the given parameters to a string delimited with '/'
         /// <summary>

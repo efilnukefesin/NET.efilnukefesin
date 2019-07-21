@@ -100,9 +100,9 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Client
             }
             #endregion GetAll
 
-            #region Get
+            #region GetAsync
             [TestMethod]
-            public void Get()
+            public void GetAsync()
             {
                 DiSetup.Tests();
 
@@ -118,7 +118,26 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Client
                 Assert.IsNotNull(result);
                 Assert.AreEqual("Hello World", result.Value);
             }
-            #endregion Get
+            #endregion GetAsync
+
+            #region ExistsAsync
+            [TestMethod]
+            public void ExistsAsync()
+            {
+                DiSetup.Tests();
+
+                var handlerMock = this.messageHandlerMockFaker(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.OK
+                });
+
+                TypedTestClient client = DiHelper.GetService<TypedTestClient>(new Uri("http://baseUri"), handlerMock.Object);
+                bool result = client.ExistsAsync(1).GetAwaiter().GetResult();
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual(true, result);
+            }
+            #endregion ExistsAsync
 
             #region Delete
             [TestMethod]
