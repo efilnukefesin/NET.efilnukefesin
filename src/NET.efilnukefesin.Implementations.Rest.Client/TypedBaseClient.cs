@@ -132,6 +132,36 @@ namespace NET.efilnukefesin.Implementations.Rest.Client
         }
         #endregion DeleteAsync
 
+        #region CreateAsync
+        public async Task<bool> CreateAsync(T newItem)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion CreateAsync
+
+        #region UpdateAsync
+        public async Task<bool> UpdateAsync(T newItem, params object[] Parameters)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion UpdateAsync
+
+        #region CreateOrUpdateAsync
+        public async Task<bool> CreateOrUpdateAsync(T Value)
+        {
+            bool result = false;
+            if (await this.ExistsAsync(Value.Id))
+            {
+                result = await this.UpdateAsync(Value, Value.Id);
+            }
+            else
+            {
+                result = await this.CreateAsync(Value);
+            }
+            return result;
+        }
+        #endregion CreateOrUpdateAsync
+
         //TODO: CreateOrUpdate = Exists, if yes Update, if not Create
 
         #region convertParameters: converts the given parameters to a string delimited with '/'

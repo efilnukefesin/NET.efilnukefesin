@@ -231,7 +231,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Client
                 var newItem = new ValueObject<string>("SomeThing");
 
                 TypedTestClient client = DiHelper.GetService<TypedTestClient>(new Uri("http://baseUri"), handlerMock.Object);
-                bool result = client.UpdateAsync(1, newItem).GetAwaiter().GetResult();
+                bool result = client.UpdateAsync(newItem, 1).GetAwaiter().GetResult();
 
                 Assert.IsNotNull(result);
                 Assert.AreEqual(true, result);
