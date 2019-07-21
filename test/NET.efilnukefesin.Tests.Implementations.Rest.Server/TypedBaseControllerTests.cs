@@ -235,35 +235,49 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Server
             }
             #endregion DeleteNotFound
 
-            #region Exists
+            #region PostHasRightAttributes
             [TestMethod]
-            public void Exists()
+            public void PostHasRightAttributes()
             {
-                TypedTestController controller = new TypedTestController();
+                bool hasHttpPostAttribute = MethodHelper.HasAttribute<HttpPostAttribute>(typeof(TypedTestController), "Post");
 
+                Assert.IsTrue(hasHttpPostAttribute);
+            }
+            #endregion PostHasRightAttributes
+
+            #region Post
+            [TestMethod]
+            public void Post()
+            {
                 throw new NotImplementedException();
             }
-            #endregion Exists
+            #endregion Post
 
-            #region Create
+            #region PutHasRightAttributes
             [TestMethod]
-            public void Create()
+            public void PutHasRightAttributes()
             {
-                TypedTestController controller = new TypedTestController();
+                bool hasHttpPutAttribute = MethodHelper.HasAttribute<HttpPutAttribute>(typeof(TypedTestController), "Put");
 
+                Assert.IsTrue(hasHttpPutAttribute);
+            }
+            #endregion PutHasRightAttributes
+
+            #region Put
+            [TestMethod]
+            public void Put()
+            {
                 throw new NotImplementedException();
             }
-            #endregion Create
+            #endregion Put
 
-            #region Update
+            #region PutNotFound
             [TestMethod]
-            public void Update()
+            public void PutNotFound()
             {
-                TypedTestController controller = new TypedTestController();
-
                 throw new NotImplementedException();
             }
-            #endregion Update
+            #endregion PutNotFound
         }
         #endregion TypedBaseControllerMethods
     }
