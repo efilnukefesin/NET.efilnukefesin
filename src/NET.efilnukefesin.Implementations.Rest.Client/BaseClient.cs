@@ -45,13 +45,13 @@ namespace NET.efilnukefesin.Implementations.Rest.Client
 
         #region Methods
 
-        #region AddHeader
+        #region AddAuthenticationHeader
         public void AddAuthenticationHeader(string Value)
         {
             string type = "Bearer";
             this.httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(type, Value);
         }
-        #endregion AddHeader
+        #endregion AddAuthenticationHeader
 
         #endregion Methods
 

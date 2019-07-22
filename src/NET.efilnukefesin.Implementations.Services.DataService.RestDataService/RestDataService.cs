@@ -20,14 +20,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
     {
         #region Properties
 
-        protected HttpClient httpClient;
-
         public IEndpointRegister EndpointRegister { get; private set; }
-
-        private HttpResponseMessage lastResponse = null;  //for debugging / lookup
-        private string lastContent = string.Empty;  //for debugging / lookup
-        private object lastResult = null;  //for debugging / lookup
-
 
         //TODO: Use BaseTypedClient dict or create TypedClient by request?
         // https://blogs.msdn.microsoft.com/shacorn/2016/10/21/best-practices-for-using-httpclient-on-services/
@@ -48,19 +41,10 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
             this.logger = Logger;
             this.baseUri = BaseUri;
             this.EndpointRegister = EndpointRegister;
-            if (OverrideMessageHandler != null)
-            {
-                this.httpClient = new HttpClient(OverrideMessageHandler);
-            }
-            else
-            {
-                this.httpClient = new HttpClient();
-            }
-            this.httpClient.BaseAddress = BaseUri;
-            this.httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            
             if (BearerToken != null)
             {
-                this.addAuthenticationHeader(BearerToken);
+                this.AddOrReplaceAuthentication(BearerToken);
             }
         }
 
@@ -91,6 +75,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
                 }
                 this.logger?.Log($"RestDataService.getClient(): whole Uri is '{url}'");
                 TypedBaseClient<T> client = new TypedBaseClient<T>(new Uri(url), this.logger, this.overrideMessageHandler);
+                client.AddAuthenticationHeader(this.authenticationString);
                 this.clients.Add(typeof(T), client); //TODO: add Uri;  //TODO: make less specific
             }
             else
@@ -108,17 +93,13 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
         #region AddOrReplaceAuthentication
         public void AddOrReplaceAuthentication(string BearerToken)
         {
-            this.addAuthenticationHeader(BearerToken);
             this.authenticationString = BearerToken;
+            foreach (KeyValuePair<Type, BaseClient> kvp in this.clients)
+            {
+                kvp.Value.AddAuthenticationHeader(this.authenticationString);
+            }
         }
         #endregion AddOrReplaceAuthentication
-
-        #region addAuthenticationHeader
-        private void addAuthenticationHeader(string value, string type = "Bearer")
-        {
-            this.httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(type, value);
-        }
-        #endregion addAuthenticationHeader
 
         #region GetAsync
         public async Task<T> GetAsync<T>(string Action, params object[] Parameters) where T : IBaseObject
@@ -270,7 +251,8 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
         #region dispose
         protected override void dispose()
         {
-            this.httpClient = null;
+            this.clients.Clear();
+            this.clients = null;
         }
         #endregion dispose
 
