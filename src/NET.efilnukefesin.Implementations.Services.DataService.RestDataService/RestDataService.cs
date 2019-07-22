@@ -12,6 +12,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Flurl;
 
 namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
 {
@@ -69,14 +70,15 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
 
         //TODO: add method to add and or find an appropriate client
         #region getClient
-        private TypedBaseClient<T> getClient<T>() where T: IBaseObject
+        private TypedBaseClient<T> getClient<T>(string ResourceUri) where T: IBaseObject
         {
             TypedBaseClient<T> result = default;
 
             if (!this.clients.ContainsKey(typeof(T)))
             {
                 //create new one
-                TypedBaseClient<T> client = new TypedBaseClient<T>(this.baseUri, this.logger, this.overrideMessageHandler);
+                var url = this.baseUri.ToString().AppendPathSegment(ResourceUri);
+                TypedBaseClient<T> client = new TypedBaseClient<T>(new Uri(url), this.logger, this.overrideMessageHandler);
                 this.clients.Add(typeof(T), client); //TODO: add Uri;  //TODO: make less specific
             }
 
@@ -105,13 +107,11 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
         public async Task<T> GetAsync<T>(string Action, params object[] Parameters) where T : IBaseObject
         {
             T result = default;
-
+            this.logger?.Log($"RestDataService.GetAsync(): entered");
             string parameters = this.convertParameters(Parameters);
-
-            TypedBaseClient<T> client = this.getClient<T>();
-
+            TypedBaseClient<T> client = this.getClient<T>(this.EndpointRegister.GetEndpoint(Action));
             result = await client.GetAsync(this.EndpointRegister.GetEndpoint(Action) + parameters);
-            
+            this.logger?.Log($"RestDataService.GetAsync(): exited with result '{result}'");
             return result;
         }
         #endregion GetAsync
@@ -120,22 +120,11 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
         public async Task<IEnumerable<T>> GetAllAsync<T>(string Action, params object[] Parameters) where T : IBaseObject
         {
             IEnumerable<T> result = default;
-
+            this.logger?.Log($"RestDataService.GetAllAsync(): entered");
             string parameters = this.convertParameters(Parameters);
-
-            HttpResponseMessage response = await this.httpClient.GetAsync(this.EndpointRegister.GetEndpoint(Action) + parameters);
-            this.lastResponse = response;
-            if (response.IsSuccessStatusCode)
-            {
-                string json = response.Content.ReadAsStringAsync().Result;
-                this.lastContent = json;
-                SimpleResult<IEnumerable<T>> requestResult = JsonConvert.DeserializeObject<SimpleResult<IEnumerable<T>>>(json);
-                this.lastResult = requestResult;
-                if (!requestResult.IsError)
-                {
-                    result = requestResult.Payload;
-                }
-            }
+            TypedBaseClient<T> client = this.getClient<T>(this.EndpointRegister.GetEndpoint(Action));
+            result = await client.GetAllAsync();
+            this.logger?.Log($"RestDataService.GetAllAsync(): exited with result '{result}'");
             return result;
         }
         #endregion GetAllAsync

@@ -94,7 +94,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.RestDataS
 
                 IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://baseUri"), "someToken", handlerMock.Object);
 
-                bool result = dataService.GetAsync<ValueObject<bool>>("SomeAction").GetAwaiter().GetResult().Value;
+                bool result = dataService.GetAsync<ValueObject<bool>>("TestResourceLocation").GetAwaiter().GetResult().Value;
 
                 Assert.AreEqual(true, result);
             }
@@ -115,7 +115,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.RestDataS
 
                 IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://baseUri"), "someToken", handlerMock.Object);
 
-                List<ValueObject<bool>> result = dataService.GetAllAsync<ValueObject<bool>>("SomeAction").GetAwaiter().GetResult().ToList();
+                List<ValueObject<bool>> result = dataService.GetAllAsync<ValueObject<bool>>("TestResourceLocation").GetAwaiter().GetResult().ToList();
 
                 Assert.AreEqual(true, result[0].Value);
             }

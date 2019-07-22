@@ -79,6 +79,7 @@ namespace NET.efilnukefesin.Tests.BootStrapper
                 endpointRegister.AddEndpoint("PermissionServer.SDK.Client.GetUserAsync", "api/permissions");
                 endpointRegister.AddEndpoint("PermissionServer.SDK.Client.CheckPermissionAsync", "api/permissions/check");
                 endpointRegister.AddEndpoint("PermissionServer.Client.BaseClient.GetGivenPermissionsAsync", "api/permissions/givenpermissions");
+                endpointRegister.AddEndpoint("TestResourceLocation", "api/permissions/");
             }
         }
         #endregion InitializeRestEndpoints
