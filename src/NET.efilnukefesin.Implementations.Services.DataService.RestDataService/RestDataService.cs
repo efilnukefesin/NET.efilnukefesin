@@ -149,7 +149,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
         #region GetAllAsync
         public async Task<IEnumerable<T>> GetAllAsync<T>(string Action, Func<T, bool> FilterMethod) where T : IBaseObject
         {
-            IEnumerable<T> result = new List<T>();
+            List<T> result = new List<T>();
             foreach (T value in await this.GetAllAsync<T>(Action))
             {
                 if (FilterMethod(value))
@@ -193,19 +193,10 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
 
             string parameters = this.convertParameters(Parameters);
 
-            HttpResponseMessage response = await this.httpClient.DeleteAsync(this.EndpointRegister.GetEndpoint(Action) + parameters);
-            this.lastResponse = response;
-            if (response.IsSuccessStatusCode)
-            {
-                string json = response.Content.ReadAsStringAsync().Result;
-                this.lastContent = json;
-                SimpleResult<bool> requestResult = JsonConvert.DeserializeObject<SimpleResult<bool>>(json);
-                this.lastResult = requestResult;
-                if (!requestResult.IsError)
-                {
-                    result = requestResult.Payload;
-                }
-            }
+            this.logger?.Log($"RestDataService.DeleteAsync(): entered");
+            TypedBaseClient<T> client = this.getClient<T>(this.EndpointRegister.GetEndpoint(Action) + parameters);
+            result = await client.DeleteAsync(Parameters[0]);
+            this.logger?.Log($"RestDataService.DeleteAsync(): exited with result '{result}'");
             return result;
         }
         #endregion DeleteAsync
@@ -234,14 +225,45 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
         #region CreateOrUpdateAsync
         public async Task<bool> CreateOrUpdateAsync<T>(string Action, T Value, Func<T, bool> FilterMethod) where T : IBaseObject
         {
-            throw new NotImplementedException();
+            bool result = false;
+
+            //1. get all entries & 2. apply filter
+            IEnumerable<T> allRelevantItems = await this.GetAllAsync<T>(Action, FilterMethod);
+
+            //3 delete all where filter returns true
+            if (allRelevantItems != null && allRelevantItems.Count() > 0)
+            {
+                foreach (T item in allRelevantItems)
+                {
+                    Value.Id = item.Id;  //TODO: check when not sleepy any more
+                    var intermediateResult = await this.CreateOrUpdateAsync<T>(Action, Value);
+                }
+                result = true;
+            }
+
+            return result;
         }
         #endregion CreateOrUpdateAsync
 
         #region DeleteAsync
         public async Task<bool> DeleteAsync<T>(string Action, Func<T, bool> FilterMethod) where T : IBaseObject
         {
-            throw new NotImplementedException();
+            bool result = false;
+
+            //1. get all entries & 2. apply filter
+            IEnumerable<T> allRelevantItems = await this.GetAllAsync<T>(Action, FilterMethod);
+
+            //3 delete all where filter returns true
+            if (allRelevantItems != null && allRelevantItems.Count() > 0)
+            {
+                foreach (T item in allRelevantItems)
+                {
+                    var intermediateResult = await this.DeleteAsync<T>(Action, item.Id);
+                }
+                result = true;
+            }
+
+            return result;
         }
         #endregion DeleteAsync
 

@@ -152,7 +152,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.RestDataS
                 var handlerMock = this.messageHandlerMockFaker(new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.OK,
-                    Content = new StringContent(JsonConvert.SerializeObject(new SimpleResult<ValueObject<bool>>(new ValueObject<bool>(true)))),
+                    Content = new StringContent(JsonConvert.SerializeObject(new SimpleResult<IEnumerable<ValueObject<bool>>>(new List<ValueObject<bool>>(new List<ValueObject<bool>>() { new ValueObject<bool>(true), new ValueObject<bool>(false), new ValueObject<bool>(true) })))),
                 });
 
                 IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://localhost"), "someToken25", handlerMock.Object);
@@ -160,26 +160,6 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.RestDataS
                 bool result = dataService.CreateOrUpdateAsync<ValueObject<bool>>("TestResourceLocation", new ValueObject<bool>(true), x => x.Value.Equals(false)).GetAwaiter().GetResult();
 
                 Assert.AreEqual(true, result);
-
-                throw new NotImplementedException();
-
-                //IDataService dataService = DiHelper.GetService<IDataService>();
-                //List<ValueObject<string>> items = new List<ValueObject<string>>();
-                //items.Add(new ValueObject<string>("TestString1"));
-                //items.Add(new ValueObject<string>("TestString2"));
-                //items.Add(new ValueObject<string>("TestString3"));
-                //items.Add(new ValueObject<string>("TestString4"));
-
-                //dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest3Action", items).GetAwaiter().GetResult();
-
-                //bool resultAdd = dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest1Action", new ValueObject<string>("TestString"), x => x.Value.Equals("DunnoYet")).GetAwaiter().GetResult();
-                //bool resultUpdate = dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest1Action", new ValueObject<string>("TestString"), x => x.Value.Equals("TestString4")).GetAwaiter().GetResult();
-
-                //int numberafterwards = dataService.GetAllAsync<ValueObject<string>>("CreateOrUpdateAsyncTest1Action").GetAwaiter().GetResult().Count();
-
-                //Assert.AreEqual(true, resultAdd);
-                //Assert.AreEqual(true, resultUpdate);
-                //Assert.AreEqual(5, numberafterwards);
             }
             #endregion CreateOrUpdateAsyncWithDelegate
 
@@ -193,7 +173,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.RestDataS
                 var handlerMock = this.messageHandlerMockFaker(new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.OK,
-                    Content = new StringContent(JsonConvert.SerializeObject(new SimpleResult<ValueObject<bool>>(new ValueObject<bool>(true)))),
+                    Content = new StringContent(JsonConvert.SerializeObject(new SimpleResult<IEnumerable<ValueObject<bool>>>(new List<ValueObject<bool>>(new List<ValueObject<bool>>() { new ValueObject<bool>(true), new ValueObject<bool>(false), new ValueObject<bool>(true) })))),
                 });
 
                 IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://localhost"), "someToken25", handlerMock.Object);
@@ -201,20 +181,6 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.RestDataS
                 bool result = dataService.DeleteAsync<ValueObject<bool>>("TestResourceLocation", x => x.Value.Equals(true)).GetAwaiter().GetResult();
 
                 Assert.AreEqual(true, result);
-
-                throw new NotImplementedException();
-
-                //IDataService dataService = DiHelper.GetService<IDataService>();
-                //List<ValueObject<string>> items = new List<ValueObject<string>>();
-                //items.Add(new ValueObject<string>("TestString1"));
-                //items.Add(new ValueObject<string>("TestString2"));
-                //items.Add(new ValueObject<string>("TestString3"));
-                //items.Add(new ValueObject<string>("TestString4"));
-
-                //dataService.CreateOrUpdateAsync<ValueObject<string>>("CreateOrUpdateAsyncTest3Action", items).GetAwaiter().GetResult();
-                //bool result = dataService.DeleteAsync<ValueObject<string>>("CreateOrUpdateAsyncTest3Action", x => x.Value.Equals("TestString3")).GetAwaiter().GetResult();
-
-                //Assert.AreEqual(true, result);
             }
             #endregion DeleteAsyncWithDelegate
         }
