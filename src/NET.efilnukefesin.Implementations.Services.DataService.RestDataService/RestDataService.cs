@@ -1,6 +1,8 @@
 ﻿using NET.efilnukefesin.Contracts.Base;
+using NET.efilnukefesin.Contracts.Logger;
 using NET.efilnukefesin.Contracts.Services.DataService;
 using NET.efilnukefesin.Implementations.Base;
+using NET.efilnukefesin.Implementations.Rest.Client;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
@@ -29,15 +31,21 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
         //TODO: Use BaseTypedClient dict or create TypedClient by request?
         // https://blogs.msdn.microsoft.com/shacorn/2016/10/21/best-practices-for-using-httpclient-on-services/
 
-
+        private Uri baseUri;
         private string authenticationString = string.Empty;
+        private Dictionary<Type, BaseClient> clients = new Dictionary<Type, BaseClient>();
+        private ILogger logger;
+        private HttpMessageHandler overrideMessageHandler;
 
         #endregion Properties
 
         #region Construction
 
-        public RestDataService(Uri BaseUri, IEndpointRegister EndpointRegister, string BearerToken = null, HttpMessageHandler OverrideMessageHandler = null)
+        public RestDataService(Uri BaseUri, IEndpointRegister EndpointRegister, ILogger Logger, string BearerToken = null, HttpMessageHandler OverrideMessageHandler = null)
         {
+            this.overrideMessageHandler = OverrideMessageHandler;
+            this.logger = Logger;
+            this.baseUri = BaseUri;
             this.EndpointRegister = EndpointRegister;
             if (OverrideMessageHandler != null)
             {
@@ -60,6 +68,23 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
         #region Methods
 
         //TODO: add method to add and or find an appropriate client
+        #region getClient
+        private TypedBaseClient<T> getClient<T>() where T: IBaseObject
+        {
+            TypedBaseClient<T> result = default;
+
+            if (!this.clients.ContainsKey(typeof(T)))
+            {
+                //create new one
+                TypedBaseClient<T> client = new TypedBaseClient<T>(this.baseUri, this.logger, this.overrideMessageHandler);
+                this.clients.Add(typeof(T), client); //TODO: add Uri;  //TODO: make less specific
+            }
+
+            result = (TypedBaseClient<T>)this.clients[typeof(T)];
+
+            return result;
+        }
+        #endregion getClient
 
         #region AddOrReplaceAuthentication
         public void AddOrReplaceAuthentication(string BearerToken)
@@ -83,19 +108,10 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
 
             string parameters = this.convertParameters(Parameters);
 
-            HttpResponseMessage response = await this.httpClient.GetAsync(this.EndpointRegister.GetEndpoint(Action) + parameters);
-            this.lastResponse = response;
-            if (response.IsSuccessStatusCode)
-            {
-                string json = response.Content.ReadAsStringAsync().Result;
-                this.lastContent = json;
-                SimpleResult<T> requestResult = JsonConvert.DeserializeObject<SimpleResult<T>>(json);
-                this.lastResult = requestResult;
-                if (!requestResult.IsError)
-                {
-                    result = requestResult.Payload;
-                }
-            }
+            TypedBaseClient<T> client = this.getClient<T>();
+
+            result = await client.GetAsync(this.EndpointRegister.GetEndpoint(Action) + parameters);
+            
             return result;
         }
         #endregion GetAsync

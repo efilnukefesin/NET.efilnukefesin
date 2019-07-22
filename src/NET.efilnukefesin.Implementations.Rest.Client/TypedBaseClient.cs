@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace NET.efilnukefesin.Implementations.Rest.Client
 {
-    public abstract class TypedBaseClient<T> : BaseClient where T : IBaseObject
+    public class TypedBaseClient<T> : BaseClient where T : IBaseObject
     {
         #region Properties
 
@@ -266,6 +266,13 @@ namespace NET.efilnukefesin.Implementations.Rest.Client
             return parameters;
         }
         #endregion convertParameters
+
+        #region dispose
+        protected override void dispose()
+        {
+            
+        }
+        #endregion dispose
 
         #endregion Methods
 
