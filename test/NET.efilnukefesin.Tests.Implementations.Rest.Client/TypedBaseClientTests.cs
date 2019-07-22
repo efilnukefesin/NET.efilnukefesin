@@ -14,6 +14,7 @@ using System.Threading;
 using System.Net;
 using NET.efilnukefesin.Implementations.Base;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace NET.efilnukefesin.Tests.Implementations.Rest.Client
 {
@@ -94,9 +95,18 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Client
             public void GetAll()
             {
                 DiSetup.Tests();
-                TypedTestClient client = DiHelper.GetService<TypedTestClient>();
 
-                throw new NotImplementedException();
+                var handlerMock = this.messageHandlerMockFaker(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.OK,
+                    Content = this.getContent<List<ValueObject<string>>>(new List<ValueObject<string>>() { new ValueObject<string>("Hello World"), new ValueObject<string>("Hello World"), new ValueObject<string>("Hello World") }),
+                });
+
+                TypedTestClient client = DiHelper.GetService<TypedTestClient>(new Uri("http://baseUri"), handlerMock.Object);
+                var result = client.GetAllAsync().GetAwaiter().GetResult();
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual(3, result.Count());
             }
             #endregion GetAll
 

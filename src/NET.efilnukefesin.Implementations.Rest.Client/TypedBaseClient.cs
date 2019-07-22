@@ -66,6 +66,40 @@ namespace NET.efilnukefesin.Implementations.Rest.Client
         }
         #endregion GetAsync
 
+        #region GetAllAsync
+        public async Task<IEnumerable<T>> GetAllAsync()
+        {
+            IEnumerable<T> result = default;
+
+            this.logger?.Log($"TypedBaseClient<{typeof(T)}>.GetAllAsync(): entered");
+
+            HttpResponseMessage response = await this.httpClient.GetAsync(string.Empty);
+            this.requestInfo.LastResponse = response;
+            if (response.IsSuccessStatusCode)
+            {
+                string json = response.Content.ReadAsStringAsync().Result;
+                this.requestInfo.LastContent = json;
+                SimpleResult<IEnumerable<T>> requestResult = JsonConvert.DeserializeObject<SimpleResult<IEnumerable<T>>>(json);
+                this.requestInfo.LastResult = requestResult;
+                if (!requestResult.IsError)
+                {
+                    result = requestResult.Payload;
+                }
+                else
+                {
+                    this.logger?.Log($"TypedBaseClient<{typeof(T)}>.GetAllAsync(): error in request result '{requestResult.Error.Id}: {requestResult.Error.Message}, {requestResult.Error.Ex}'");
+                }
+            }
+            else
+            {
+                this.logger?.Log($"TypedBaseClient<{typeof(T)}>.GetAllAsync(): error in request response '{response.StatusCode}: {response.ReasonPhrase}'");
+            }
+
+            this.logger?.Log($"TypedBaseClient<{typeof(T)}>.GetAllAsync(): exited with result '{result}'");
+            return result;
+        }
+        #endregion GetAllAsync
+
         #region ExistsAsync
         public async Task<bool> ExistsAsync(params object[] Parameters)
         {
