@@ -52,17 +52,18 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.RestDataS
         [TestClass]
         public class RestDataServiceMethods : RestDataServiceTests
         {
-            #region GetAsync
-            [TestMethod]
-            public void GetAsync()
+            #region messageHandlerMockFaker: creates a fake response for a faked http handler
+            /// <summary>
+            /// creates a fake response for a faked http handler
+            /// </summary>
+            /// <param name="response">the response to deliver</param>
+            /// <returns>the mock object</returns>
+            private Mock<HttpMessageHandler> messageHandlerMockFaker(HttpResponseMessage response)
             {
-                DiSetup.RestDataServiceTests();
-                DiSetup.InitializeRestEndpoints();
+                Mock<HttpMessageHandler> result;
 
-                // https://gingter.org/2018/07/26/how-to-mock-httpclient-in-your-net-c-unit-tests/
-                // ARRANGE
-                var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
-                handlerMock
+                result = new Mock<HttpMessageHandler>(MockBehavior.Strict);
+                result
                    .Protected()
                    // Setup the PROTECTED method to mock
                    .Setup<Task<HttpResponseMessage>>(
@@ -71,12 +72,25 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.RestDataS
                       ItExpr.IsAny<CancellationToken>()
                    )
                    // prepare the expected response of the mocked http call
-                   .ReturnsAsync(new HttpResponseMessage()
-                   {
-                       StatusCode = HttpStatusCode.OK,
-                       Content = new StringContent(JsonConvert.SerializeObject(new SimpleResult<ValueObject<bool>>(new ValueObject<bool>(true)))),
-                   })
+                   .ReturnsAsync(response)
                    .Verifiable();
+
+                return result;
+            }
+            #endregion messageHandlerMockFaker
+
+            #region GetAsync
+            [TestMethod]
+            public void GetAsync()
+            {
+                DiSetup.RestDataServiceTests();
+                DiSetup.InitializeRestEndpoints();
+
+                var handlerMock = this.messageHandlerMockFaker(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.OK,
+                    Content = new StringContent(JsonConvert.SerializeObject(new SimpleResult<ValueObject<bool>>(new ValueObject<bool>(true)))),
+                });
 
                 IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://baseUri"), "someToken", handlerMock.Object);
 
@@ -93,24 +107,11 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.RestDataS
                 DiSetup.RestDataServiceTests();
                 DiSetup.InitializeRestEndpoints();
 
-                // https://gingter.org/2018/07/26/how-to-mock-httpclient-in-your-net-c-unit-tests/
-                // ARRANGE
-                var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
-                handlerMock
-                   .Protected()
-                   // Setup the PROTECTED method to mock
-                   .Setup<Task<HttpResponseMessage>>(
-                      "SendAsync",
-                      ItExpr.IsAny<HttpRequestMessage>(),
-                      ItExpr.IsAny<CancellationToken>()
-                   )
-                   // prepare the expected response of the mocked http call
-                   .ReturnsAsync(new HttpResponseMessage()
-                   {
-                       StatusCode = HttpStatusCode.OK,
-                       Content = new StringContent(JsonConvert.SerializeObject(new SimpleResult<IEnumerable<ValueObject<bool>>>(new List<ValueObject<bool>>( new List<ValueObject<bool>>() { new ValueObject<bool>(true), new ValueObject<bool>(false), new ValueObject<bool>(true) })))),
-                   })
-                   .Verifiable();
+                var handlerMock = this.messageHandlerMockFaker(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.OK,
+                    Content = new StringContent(JsonConvert.SerializeObject(new SimpleResult<IEnumerable<ValueObject<bool>>>(new List<ValueObject<bool>>(new List<ValueObject<bool>>() { new ValueObject<bool>(true), new ValueObject<bool>(false), new ValueObject<bool>(true) })))),
+                });
 
                 IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://baseUri"), "someToken", handlerMock.Object);
 
@@ -127,22 +128,11 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.RestDataS
                 DiSetup.RestDataServiceTests();
                 DiSetup.InitializeRestEndpoints();
 
-                var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
-                handlerMock
-                   .Protected()
-                   // Setup the PROTECTED method to mock
-                   .Setup<Task<HttpResponseMessage>>(
-                      "SendAsync",
-                      ItExpr.IsAny<HttpRequestMessage>(),
-                      ItExpr.IsAny<CancellationToken>()
-                   )
-                   // prepare the expected response of the mocked http call
-                   .ReturnsAsync(new HttpResponseMessage()
-                   {
-                       StatusCode = HttpStatusCode.OK,
-                       Content = new StringContent(JsonConvert.SerializeObject(new SimpleResult<ValueObject<bool>>(new ValueObject<bool>(true)))),
-                   })
-                   .Verifiable();
+                var handlerMock = this.messageHandlerMockFaker(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.OK,
+                    Content = new StringContent(JsonConvert.SerializeObject(new SimpleResult<ValueObject<bool>>(new ValueObject<bool>(true)))),
+                });
 
                 IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://localhost"), "someToken25", handlerMock.Object);
 
