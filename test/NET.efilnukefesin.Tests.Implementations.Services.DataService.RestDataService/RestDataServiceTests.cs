@@ -136,7 +136,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.RestDataS
 
                 IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://localhost"), "someToken25", handlerMock.Object);
 
-                bool result = dataService.CreateOrUpdateAsync<ValueObject<bool>>("SomeOtherAction", new ValueObject<bool>(true)).GetAwaiter().GetResult();
+                bool result = dataService.CreateOrUpdateAsync<ValueObject<bool>>("TestResourceLocation", new ValueObject<bool>(true)).GetAwaiter().GetResult();
 
                 Assert.AreEqual(true, result);
             }

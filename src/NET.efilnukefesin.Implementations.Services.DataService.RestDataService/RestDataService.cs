@@ -72,18 +72,35 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
         #region getClient
         private TypedBaseClient<T> getClient<T>(string ResourceUri) where T: IBaseObject
         {
+            this.logger?.Log($"RestDataService.getClient(): entered");
             TypedBaseClient<T> result = default;
 
             if (!this.clients.ContainsKey(typeof(T)))
             {
-                //create new one
-                var url = this.baseUri.ToString().AppendPathSegment(ResourceUri);
+                this.logger?.Log($"RestDataService.getClient(): client resource has to be created");
+                string url = string.Empty;
+                if (ResourceUri != null)
+                {
+                    this.logger?.Log($"RestDataService.getClient(): resource Uri not empty: '{ResourceUri}'");
+                    url = this.baseUri.ToString().AppendPathSegment(ResourceUri);
+                }
+                else
+                {
+                    this.logger?.Log($"RestDataService.getClient(): resource Uri empty", Contracts.Logger.Enums.LogLevel.Warning);
+                    url = this.baseUri.ToString();
+                }
+                this.logger?.Log($"RestDataService.getClient(): whole Uri is '{url}'");
                 TypedBaseClient<T> client = new TypedBaseClient<T>(new Uri(url), this.logger, this.overrideMessageHandler);
                 this.clients.Add(typeof(T), client); //TODO: add Uri;  //TODO: make less specific
+            }
+            else
+            {
+                this.logger?.Log($"RestDataService.getClient(): client for Type '{typeof(T)}' is buffered.");
             }
 
             result = (TypedBaseClient<T>)this.clients[typeof(T)];
 
+            this.logger?.Log($"RestDataService.getClient(): exited with result '{result}'");
             return result;
         }
         #endregion getClient
@@ -133,19 +150,10 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
         public async Task<bool> CreateOrUpdateAsync<T>(string Action, T Value) where T : IBaseObject
         {
             bool result = false;
-            HttpResponseMessage response = await this.httpClient.PostAsync(this.EndpointRegister.GetEndpoint(Action), new StringContent(JsonConvert.SerializeObject(Value)));
-            this.lastResponse = response;
-            if (response.IsSuccessStatusCode)
-            {
-                string json = response.Content.ReadAsStringAsync().Result;
-                this.lastContent = json;
-                SimpleResult<ValueObject<bool>> requestResult = JsonConvert.DeserializeObject<SimpleResult<ValueObject<bool>>>(json);
-                this.lastResult = requestResult;
-                if (!requestResult.IsError)
-                {
-                    result = requestResult.Payload.Value;
-                }
-            }
+            this.logger?.Log($"RestDataService.CreateOrUpdateAsync(): entered");
+            TypedBaseClient<T> client = this.getClient<T>(this.EndpointRegister.GetEndpoint(Action));
+            result = await client.CreateOrUpdateAsync(Value);
+            this.logger?.Log($"RestDataService.CreateOrUpdateAsync(): exited with result '{result}'");
             return result;
         }
         #endregion CreateOrUpdateAsync
