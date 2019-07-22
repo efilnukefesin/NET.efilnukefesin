@@ -24,6 +24,14 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
         private HttpResponseMessage lastResponse = null;  //for debugging / lookup
         private string lastContent = string.Empty;  //for debugging / lookup
         private object lastResult = null;  //for debugging / lookup
+
+
+        //TODO: Use BaseTypedClient dict or create TypedClient by request?
+        // https://blogs.msdn.microsoft.com/shacorn/2016/10/21/best-practices-for-using-httpclient-on-services/
+
+
+        private string authenticationString = string.Empty;
+
         #endregion Properties
 
         #region Construction
@@ -57,6 +65,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
         public void AddOrReplaceAuthentication(string BearerToken)
         {
             this.addAuthenticationHeader(BearerToken);
+            this.authenticationString = BearerToken;
         }
         #endregion AddOrReplaceAuthentication
 
