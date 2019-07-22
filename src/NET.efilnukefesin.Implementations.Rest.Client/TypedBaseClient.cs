@@ -167,16 +167,64 @@ namespace NET.efilnukefesin.Implementations.Rest.Client
         #endregion DeleteAsync
 
         #region CreateAsync
-        public async Task<bool> CreateAsync(T newItem)
+        public async Task<bool> CreateAsync(T Value)
         {
-            throw new NotImplementedException();
+            bool result = false;
+
+            this.logger?.Log($"TypedBaseClient<{typeof(T)}>.CreateAsync(): entered");
+
+            HttpResponseMessage response = await this.httpClient.PostAsync(string.Empty, new StringContent(JsonConvert.SerializeObject(Value)));
+            this.requestInfo.LastResponse = response;
+            if (response.IsSuccessStatusCode)
+            {
+                result = true;
+            }
+            else
+            {
+                if (response.StatusCode != System.Net.HttpStatusCode.NotFound)
+                {
+                    this.logger?.Log($"TypedBaseClient<{typeof(T)}>.CreateAsync(): error in request response '{response.StatusCode}: {response.ReasonPhrase}'", Contracts.Logger.Enums.LogLevel.Error);
+                }
+                else
+                {
+                    result = false;  //not found - this is ok with head
+                }
+            }
+
+            this.logger?.Log($"TypedBaseClient<{typeof(T)}>.CreateAsync(): exited with result '{result}'");
+            return result;
         }
         #endregion CreateAsync
 
         #region UpdateAsync
-        public async Task<bool> UpdateAsync(T newItem, params object[] Parameters)
+        public async Task<bool> UpdateAsync(T Value, params object[] Parameters)
         {
-            throw new NotImplementedException();
+            bool result = false;
+
+            string logParameters = ObjectHelper.ConvertArrayToString(Parameters);
+            this.logger?.Log($"TypedBaseClient<{typeof(T)}>.UpdateAsync({logParameters}): entered");
+            string uriParameters = this.convertParameters(Parameters);
+
+            HttpResponseMessage response = await this.httpClient.PutAsync(uriParameters, new StringContent(JsonConvert.SerializeObject(Value)));
+            this.requestInfo.LastResponse = response;
+            if (response.IsSuccessStatusCode)
+            {
+                result = true;
+            }
+            else
+            {
+                if (response.StatusCode != System.Net.HttpStatusCode.NotFound)
+                {
+                    this.logger?.Log($"TypedBaseClient<{typeof(T)}>.UpdateAsync({logParameters}): error in request response '{response.StatusCode}: {response.ReasonPhrase}'", Contracts.Logger.Enums.LogLevel.Error);
+                }
+                else
+                {
+                    result = false;  //not found - this is ok with head
+                }
+            }
+
+            this.logger?.Log($"TypedBaseClient<{typeof(T)}>.UpdateAsync({logParameters}): exited with result '{result}'");
+            return result;
         }
         #endregion UpdateAsync
 
