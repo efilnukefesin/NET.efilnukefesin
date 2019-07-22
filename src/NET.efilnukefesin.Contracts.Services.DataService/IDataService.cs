@@ -20,6 +20,7 @@ namespace NET.efilnukefesin.Contracts.Services.DataService
 
         Task<T> GetAsync<T>(string Action, params object[] Parameters) where T : IBaseObject;
         Task<IEnumerable<T>> GetAllAsync<T>(string Action, params object[] Parameters) where T : IBaseObject;
+        Task<IEnumerable<T>> GetAllAsync<T>(string Action, Func<T, bool> FilterMethod) where T : IBaseObject;
         Task<bool> CreateOrUpdateAsync<T>(string Action, T Value) where T : IBaseObject;
         Task<bool> CreateOrUpdateAsync<T>(string Action, T Value, Func<T, bool> FilterMethod) where T : IBaseObject;
         Task<bool> CreateOrUpdateAsync<T>(string Action, IEnumerable<T> Values) where T : IBaseObject;

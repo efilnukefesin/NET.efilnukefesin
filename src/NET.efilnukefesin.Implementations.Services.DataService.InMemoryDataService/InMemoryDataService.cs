@@ -187,6 +187,21 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.InMemoryDataSer
         }
         #endregion GetAllAsync
 
+        #region GetAllAsync
+        public async Task<IEnumerable<T>> GetAllAsync<T>(string Action, Func<T, bool> FilterMethod) where T : IBaseObject
+        {
+            IEnumerable<T> result = new List<T>();
+            foreach (T value in await this.GetAllAsync<T>(Action))
+            {
+                if (FilterMethod(value))
+                {
+                    result.Add(value);
+                }
+            }
+            return result;
+        }
+        #endregion GetAllAsync
+
         #region GetAsync
         public async Task<T> GetAsync<T>(string Action, params object[] Parameters) where T : IBaseObject
         {

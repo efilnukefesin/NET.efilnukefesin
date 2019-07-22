@@ -146,9 +146,22 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.RestDataS
             [TestMethod]
             public void CreateOrUpdateAsyncWithDelegate()
             {
+                DiSetup.RestDataServiceTests();
+                DiSetup.InitializeRestEndpoints();
+
+                var handlerMock = this.messageHandlerMockFaker(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.OK,
+                    Content = new StringContent(JsonConvert.SerializeObject(new SimpleResult<ValueObject<bool>>(new ValueObject<bool>(true)))),
+                });
+
+                IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://localhost"), "someToken25", handlerMock.Object);
+
+                bool result = dataService.CreateOrUpdateAsync<ValueObject<bool>>("TestResourceLocation", new ValueObject<bool>(true), x => x.Value.Equals(false)).GetAwaiter().GetResult();
+
+                Assert.AreEqual(true, result);
+
                 throw new NotImplementedException();
-                //DiSetup.RestDataServiceTests();
-                //DiSetup.InitializeRestEndpoints();
 
                 //IDataService dataService = DiHelper.GetService<IDataService>();
                 //List<ValueObject<string>> items = new List<ValueObject<string>>();
@@ -174,9 +187,22 @@ namespace NET.efilnukefesin.Tests.Implementations.Services.DataService.RestDataS
             [TestMethod]
             public void DeleteAsyncWithDelegate()
             {
+                DiSetup.RestDataServiceTests();
+                DiSetup.InitializeRestEndpoints();
+
+                var handlerMock = this.messageHandlerMockFaker(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.OK,
+                    Content = new StringContent(JsonConvert.SerializeObject(new SimpleResult<ValueObject<bool>>(new ValueObject<bool>(true)))),
+                });
+
+                IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://localhost"), "someToken25", handlerMock.Object);
+
+                bool result = dataService.DeleteAsync<ValueObject<bool>>("TestResourceLocation", x => x.Value.Equals(true)).GetAwaiter().GetResult();
+
+                Assert.AreEqual(true, result);
+
                 throw new NotImplementedException();
-                //DiSetup.RestDataServiceTests();
-                //DiSetup.InitializeRestEndpoints();
 
                 //IDataService dataService = DiHelper.GetService<IDataService>();
                 //List<ValueObject<string>> items = new List<ValueObject<string>>();
