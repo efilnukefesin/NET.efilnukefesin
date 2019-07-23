@@ -66,7 +66,7 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest
             var x = this.webApplicationFactory.Server.BaseAddress;
 
             // Arrange
-//            var client = this.webApplicationFactory.CreateClient();
+            var client = this.webApplicationFactory.CreateClient();
 
             // Act
             //var response = await this.webApplicationFactory.GetAsync("/");
