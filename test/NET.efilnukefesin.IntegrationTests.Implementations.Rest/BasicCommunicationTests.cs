@@ -59,6 +59,8 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest
 
             IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://localhost:5000"), "someToken");
 
+            // https://stackoverflow.com/questions/36526128/system-net-http-httprequestexception-occurred-in-mscorlib-dll-but-was-not-hand
+
             var x = await dataService.GetAllAsync<ValueObject<string>>("ValueStore");
         }
         #endregion Create
