@@ -10,6 +10,10 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest.Project.Contro
 {
     public class ValuesController : TypedBaseController<ValueObject<string>>
     {
-
+        public ValuesController()
+        {
+            List<ValueObject<string>> initialItems = new List<ValueObject<string>>() { new ValueObject<string>("Item1"), new ValueObject<string>("Item2"), new ValueObject<string>("Item3") };
+            this.addItems(initialItems);
+        }
     }
 }

@@ -35,6 +35,13 @@ namespace NET.efilnukefesin.Implementations.Rest.Server
 
         #region Methods
 
+        #region addItems
+        protected void addItems(IEnumerable<T> newItems)
+        {
+            this.items.AddRange(newItems);
+        }
+        #endregion addItems
+
         #region GetAll
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
