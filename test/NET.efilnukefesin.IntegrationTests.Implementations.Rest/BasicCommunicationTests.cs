@@ -55,23 +55,11 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest
             DiSetup.RestDataServiceTests();
             DiSetup.InitializeRestEndpoints();
 
-            try
-            {
-                var client = this.webApplicationFactory.CreateClient();  //needed for getting up the server
-            }
-            catch (Exception ex)
-            {
+            var client = this.webApplicationFactory.CreateClient();  //needed for getting up the server
 
-            }
-            var x = this.webApplicationFactory.Server.BaseAddress;
+            IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://localhost:5000"), "someToken");
 
-            // Act
-            //var response = await this.webApplicationFactory.GetAsync("/");
-
-            List<ValueObject<string>> items = this.generateTestItems();
-            TypedBaseController<ValueObject<string>> controller = new TypedBaseController<ValueObject<string>>(items);
-
-            IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://localhost"), "someToken");
+            var x = await dataService.GetAllAsync<ValueObject<string>>("ValueStore");
         }
         #endregion Create
 
