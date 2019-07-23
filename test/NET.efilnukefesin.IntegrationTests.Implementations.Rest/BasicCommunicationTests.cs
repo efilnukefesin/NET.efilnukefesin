@@ -45,9 +45,26 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest
         }
         #endregion generateTestItems
 
-        #region Create
+        #region SimpleCallWithStandardClient
         [TestMethod]
-        public async Task Create()
+        public async Task SimpleCallWithStandardClient()
+        {
+            // https://fullstackmark.com/post/20/painless-integration-testing-with-aspnet-core-web-api
+            // https://docs.microsoft.com/de-de/aspnet/core/test/integration-tests?view=aspnetcore-2.2
+            // https://github.com/willj/aspnet-core-mstest-integration-sample/blob/master/MSUnitTestProject1/UnitTest1.cs
+            // https://www.codeproject.com/Articles/1197462/Using-MS-Test-with-NET-Core-API
+            var client = this.webApplicationFactory.CreateClient();  //needed for getting up the server
+
+            var result = await client.GetAsync("/api/values");
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(true, result.IsSuccessStatusCode);
+        }
+        #endregion SimpleCallWithStandardClient
+
+        #region SimpleCallWithDataService
+        [TestMethod]
+        public async Task SimpleCallWithDataService()
         {
             // https://fullstackmark.com/post/20/painless-integration-testing-with-aspnet-core-web-api
             // https://docs.microsoft.com/de-de/aspnet/core/test/integration-tests?view=aspnetcore-2.2
@@ -64,15 +81,13 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest
                 var info = "Listening on the following addresses: " + string.Join(", ", serverAddressesFeature.Addresses);
             }
 
-            var y = await client.GetAsync("/api/values");
-
             IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://localhost/"), "someToken");
 
             // https://stackoverflow.com/questions/36526128/system-net-http-httprequestexception-occurred-in-mscorlib-dll-but-was-not-hand
 
             var x = await dataService.GetAllAsync<ValueObject<string>>("ValueStore");
         }
-        #endregion Create
+        #endregion SimpleCallWithDataService
 
         #endregion Methods
     }
