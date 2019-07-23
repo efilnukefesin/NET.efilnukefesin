@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NET.efilnukefesin.BaseClasses.Test;
 using NET.efilnukefesin.Contracts.Services.DataService;
@@ -56,8 +57,16 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest
             DiSetup.InitializeRestEndpoints();
 
             var client = this.webApplicationFactory.CreateClient();  //needed for getting up the server
+            var serverAddressesFeature = this.webApplicationFactory.Server.Features.Get<IServerAddressesFeature>();
+            //var serverAddressesFeature = app.ServerFeatures.Get<IServerAddressesFeature>();
+            if (serverAddressesFeature != null)
+            {
+                var info = "Listening on the following addresses: " + string.Join(", ", serverAddressesFeature.Addresses);
+            }
 
-            IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://localhost:5000"), "someToken");
+            var y = await client.GetAsync("/api/values");
+
+            IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://localhost/"), "someToken");
 
             // https://stackoverflow.com/questions/36526128/system-net-http-httprequestexception-occurred-in-mscorlib-dll-but-was-not-hand
 
