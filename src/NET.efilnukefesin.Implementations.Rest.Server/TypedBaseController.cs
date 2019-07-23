@@ -9,7 +9,7 @@ using System.Text;
 
 namespace NET.efilnukefesin.Implementations.Rest.Server
 {
-    public abstract class TypedBaseController<T> : BaseController where T : IBaseObject
+    public class TypedBaseController<T> : BaseController where T : IBaseObject
     {
         #region Properties
 
