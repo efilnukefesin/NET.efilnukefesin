@@ -9,6 +9,7 @@ using NET.efilnukefesin.IntegrationTests.Implementations.Rest.Classes;
 using NET.efilnukefesin.Tests.BootStrapper;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest
@@ -19,6 +20,7 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest
         #region Properties
 
         private readonly CustomWebApplicationFactory<NET.efilnukefesin.IntegrationTests.Implementations.Rest.Project.Startup> webApplicationFactory;
+        private Uri localServerUri = new Uri("http://localhost/");
 
         #endregion Properties
 
@@ -45,6 +47,30 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest
         }
         #endregion generateTestItems
 
+        #region getHttpClientHandler: creates the handler for integration testing
+        /// <summary>
+        /// creates the handler for integration testing
+        /// </summary>
+        /// <returns>the handler to override the httpClient default handler with</returns>
+        private Microsoft.AspNetCore.Mvc.Testing.Handlers.RedirectHandler getHttpClientHandler()
+        {
+            Microsoft.AspNetCore.Mvc.Testing.Handlers.RedirectHandler result = new Microsoft.AspNetCore.Mvc.Testing.Handlers.RedirectHandler(7);
+            Microsoft.AspNetCore.Mvc.Testing.Handlers.CookieContainerHandler innerHandler1 = new Microsoft.AspNetCore.Mvc.Testing.Handlers.CookieContainerHandler();
+            Microsoft.AspNetCore.TestHost.ClientHandler innerHandler2 = (Microsoft.AspNetCore.TestHost.ClientHandler)this.webApplicationFactory.Server.CreateHandler();
+            innerHandler1.InnerHandler = innerHandler2;
+            result.InnerHandler = innerHandler1;
+
+            return result;
+        }
+        #endregion getHttpClientHandler
+
+        #region startLocalServer
+        private void startLocalServer()
+        {
+            this.webApplicationFactory.CreateClient();  //needed for getting up the server
+        }
+        #endregion startLocalServer
+
         #region SimpleCallWithStandardClient
         [TestMethod]
         public async Task SimpleCallWithStandardClient()
@@ -53,7 +79,9 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest
             // https://docs.microsoft.com/de-de/aspnet/core/test/integration-tests?view=aspnetcore-2.2
             // https://github.com/willj/aspnet-core-mstest-integration-sample/blob/master/MSUnitTestProject1/UnitTest1.cs
             // https://www.codeproject.com/Articles/1197462/Using-MS-Test-with-NET-Core-API
-            var client = this.webApplicationFactory.CreateClient();  //needed for getting up the server
+            this.startLocalServer();
+
+            var client = this.webApplicationFactory.CreateClient();
 
             var result = await client.GetAsync("/api/values");
 
@@ -73,19 +101,14 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest
             DiSetup.RestDataServiceTests();
             DiSetup.InitializeRestEndpoints();
 
-            var client = this.webApplicationFactory.CreateClient();  //needed for getting up the server
+            this.startLocalServer();
 
-            Microsoft.AspNetCore.Mvc.Testing.Handlers.RedirectHandler handler = new Microsoft.AspNetCore.Mvc.Testing.Handlers.RedirectHandler(7);
-            Microsoft.AspNetCore.Mvc.Testing.Handlers.CookieContainerHandler innerHandler1 = new Microsoft.AspNetCore.Mvc.Testing.Handlers.CookieContainerHandler();
-            Microsoft.AspNetCore.TestHost.ClientHandler innerHandler2 = (Microsoft.AspNetCore.TestHost.ClientHandler)this.webApplicationFactory.Server.CreateHandler();
-            innerHandler1.InnerHandler = innerHandler2;
-            handler.InnerHandler = innerHandler1;
+            IDataService dataService = DiHelper.GetService<IDataService>(this.localServerUri, this.getHttpClientHandler());
 
-            IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://localhost/")/*, "someToken"*/, handler);
+            var result = await dataService.GetAllAsync<ValueObject<string>>("ValueStore");
 
-            // https://stackoverflow.com/questions/36526128/system-net-http-httprequestexception-occurred-in-mscorlib-dll-but-was-not-hand
-
-            var x = await dataService.GetAllAsync<ValueObject<string>>("ValueStore");
+            Assert.IsNotNull(result);
+            Assert.AreEqual(3, result.Count());
         }
         #endregion SimpleCallWithDataService
 

@@ -72,15 +72,7 @@ namespace NET.efilnukefesin.Implementations.Rest.Client
             IEnumerable<T> result = default;
 
             this.logger?.Log($"TypedBaseClient<{typeof(T)}>.GetAllAsync(): entered");
-            HttpResponseMessage response = null;
-            try
-            {
-                response = await this.httpClient.GetAsync(string.Empty);
-            }
-            catch (Exception ex)
-            {
-
-            }
+            HttpResponseMessage response = await this.httpClient.GetAsync(string.Empty);
             this.requestInfo.LastResponse = response;
             if (response.IsSuccessStatusCode)
             {
