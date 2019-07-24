@@ -48,6 +48,8 @@ namespace NET.efilnukefesin.Tests.BootStrapper
         {
             DiSetup.@base();
             DiManager.GetInstance().AddTypeTranslation("HttpMessageHandlerProxy", typeof(HttpMessageHandler));
+            DiManager.GetInstance().AddTypeTranslation("Microsoft.AspNetCore.Mvc.Testing.Handlers.RedirectHandler", typeof(HttpMessageHandler));
+            DiManager.GetInstance().AddTypeTranslation("RedirectHandler", typeof(HttpMessageHandler));
         }
         #endregion Tests
 

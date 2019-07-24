@@ -17,6 +17,7 @@ namespace NET.efilnukefesin.Implementations.Rest.Client
         protected ILogger logger;
         protected HttpClient httpClient;
         protected RequestInfo requestInfo;
+        private Uri resourceUri;
 
         #endregion Properties
 
@@ -25,6 +26,7 @@ namespace NET.efilnukefesin.Implementations.Rest.Client
         public BaseClient(Uri ResourceUri, ILogger Logger, HttpMessageHandler OverrideMessageHandler = null)
         {
             this.logger = Logger;
+            this.resourceUri = ResourceUri;
             if (OverrideMessageHandler != null)
             {
                 this.httpClient = new HttpClient(OverrideMessageHandler);
@@ -33,11 +35,11 @@ namespace NET.efilnukefesin.Implementations.Rest.Client
             {
                 this.httpClient = new HttpClient();
             }
-            this.httpClient.BaseAddress = ResourceUri;
+            this.httpClient.BaseAddress = this.resourceUri;
             this.httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             this.httpClient.DefaultRequestHeaders.ConnectionClose = false;  //keep open as long as possible: https://blogs.msdn.microsoft.com/shacorn/2016/10/21/best-practices-for-using-httpclient-on-services/
             //TODO: make configurable / Test:
-            ServicePointManager.FindServicePoint(ResourceUri).ConnectionLeaseTimeout = 60 * 100;  //in miliseconds
+            ServicePointManager.FindServicePoint(this.resourceUri).ConnectionLeaseTimeout = 60 * 100;  //in miliseconds
             this.requestInfo = new RequestInfo();
         }
 
@@ -49,7 +51,10 @@ namespace NET.efilnukefesin.Implementations.Rest.Client
         public void AddAuthenticationHeader(string Value)
         {
             string type = "Bearer";
-            this.httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(type, Value);
+            if (!string.IsNullOrEmpty(Value))
+            {
+                this.httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(type, Value);
+            }
         }
         #endregion AddAuthenticationHeader
 

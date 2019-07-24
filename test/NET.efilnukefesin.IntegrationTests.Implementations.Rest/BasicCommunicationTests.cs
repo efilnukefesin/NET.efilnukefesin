@@ -74,14 +74,14 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest
             DiSetup.InitializeRestEndpoints();
 
             var client = this.webApplicationFactory.CreateClient();  //needed for getting up the server
-            var serverAddressesFeature = this.webApplicationFactory.Server.Features.Get<IServerAddressesFeature>();
-            //var serverAddressesFeature = app.ServerFeatures.Get<IServerAddressesFeature>();
-            if (serverAddressesFeature != null)
-            {
-                var info = "Listening on the following addresses: " + string.Join(", ", serverAddressesFeature.Addresses);
-            }
 
-            IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://localhost/"), "someToken");
+            Microsoft.AspNetCore.Mvc.Testing.Handlers.RedirectHandler handler = new Microsoft.AspNetCore.Mvc.Testing.Handlers.RedirectHandler(7);
+            Microsoft.AspNetCore.Mvc.Testing.Handlers.CookieContainerHandler innerHandler1 = new Microsoft.AspNetCore.Mvc.Testing.Handlers.CookieContainerHandler();
+            Microsoft.AspNetCore.TestHost.ClientHandler innerHandler2 = (Microsoft.AspNetCore.TestHost.ClientHandler)this.webApplicationFactory.Server.CreateHandler();
+            innerHandler1.InnerHandler = innerHandler2;
+            handler.InnerHandler = innerHandler1;
+
+            IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://localhost/")/*, "someToken"*/, handler);
 
             // https://stackoverflow.com/questions/36526128/system-net-http-httprequestexception-occurred-in-mscorlib-dll-but-was-not-hand
 
