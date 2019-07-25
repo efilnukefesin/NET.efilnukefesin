@@ -185,20 +185,6 @@ namespace NET.efilnukefesin.Implementations.Rest.Server
         }
         #endregion Post
 
-        // Controller tests: https://docs.microsoft.com/de-de/aspnet/web-api/overview/testing-and-debugging/unit-testing-with-aspnet-web-api
-
-        //TODO: implement CRUD methods
-        //GET -> return list -> SDK.GetAllAsync
-        //GET/Id -> return item -> SDK.GetAsync
-        // DELETE/Id -> delete item -> SDK.DeleteAsync
-        // HEAD/Id -> does items exist (200) or not (400) -> SDK.existsAsync
-        // POST -> create item -> SDK.createAsync
-        // PUT/Id -> update item -> SDK.updateAsync
-        // merge put and post and head in  -> SDK.CreateOrUpdateAsync
-        // https://stackoverflow.com/questions/9265286/including-id-in-uri-for-put-requests
-        // https://www.restapitutorial.com/lessons/httpmethods.html
-        //TODO: make BaseSDK
-
         #endregion Methods
     }
 }
