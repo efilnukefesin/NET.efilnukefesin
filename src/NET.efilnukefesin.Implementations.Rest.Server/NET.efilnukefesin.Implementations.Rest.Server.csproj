@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <VersionPrefix>0.1.0</VersionPrefix>
+    <VersionPrefix>0.2.0</VersionPrefix>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NET.efilnukefesin.Contracts.Base\NET.efilnukefesin.Contracts.Base.csproj" />
+    <ProjectReference Include="..\NET.efilnukefesin.Contracts.Services.DataService\NET.efilnukefesin.Contracts.Services.DataService.csproj" />
     <ProjectReference Include="..\NET.efilnukefesin.Implementations.Base\NET.efilnukefesin.Implementations.Base.csproj" />
   </ItemGroup>
 
