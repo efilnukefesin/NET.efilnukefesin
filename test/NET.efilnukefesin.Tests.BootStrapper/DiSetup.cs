@@ -83,6 +83,7 @@ namespace NET.efilnukefesin.Tests.BootStrapper
                 endpointRegister.AddEndpoint("PermissionServer.Client.BaseClient.GetGivenPermissionsAsync", "api/permissions/givenpermissions");
                 endpointRegister.AddEndpoint("TestResourceLocation", "api/permissions/");
                 endpointRegister.AddEndpoint("ValueStore", "api/values/");
+                endpointRegister.AddEndpoint("SpecialValueStore", "api/specialvalues/");
             }
         }
         #endregion InitializeRestEndpoints

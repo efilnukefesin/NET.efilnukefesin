@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NET.efilnukefesin.Implementations.Base;
 using NET.efilnukefesin.Implementations.Rest.Server;
@@ -40,6 +41,29 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest.Project.Contro
         #endregion generateTestItems
 
         //TODO: add special end point
+        #region Get
+        [HttpGet("{Id}/{Message}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<SimpleResult<ValueObject<bool>>> GetSpecial(string Id, string Message)  //TODO: replace by Guid
+        {
+            SimpleResult<ValueObject<bool>> result = default;
+
+            //if (this.items.Any(x => x.Id.Equals(Id)))
+            //{
+            //    result = new SimpleResult<T>(this.items.Where(x => x.Id.Equals(Id)).FirstOrDefault());
+            //    //result = new OkObjectResult(new SimpleResult<T>(this.items.Where(x => x.Id.Equals(Id)).FirstOrDefault()));
+            //}
+            //else
+            //{
+            //    result = new SimpleResult<T>(new ErrorInfo(1, "Not found", $"The item you were looking for is not known, please add first an item with Id '{Id}'"));
+            //    //TODO: add notfound?
+            //    //result = NotFound();
+            //}
+
+            return result;
+        }
+        #endregion Get
 
         #endregion Methods
     }
