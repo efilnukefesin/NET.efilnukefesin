@@ -12,6 +12,26 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest
     [TestClass]
     public class SpecialCommunicationsTests : BaseHttpTest
     {
+        #region RegularGets
+        [TestMethod]
+        public async Task RegularGets()
+        {
+            DiSetup.RestDataServiceTests();
+            DiSetup.InitializeRestEndpoints();
+
+            this.startLocalServer();
+
+            IDataService dataService = DiHelper.GetService<IDataService>(this.localServerUri, this.getHttpClientHandler());
+
+            var result = await dataService.GetAllAsync<ValueObject<string>>("SpecialValueStore");
+            var resultItem = await dataService.GetAsync<ValueObject<string>>("SpecialValueStore", result.ToList()[1].Id);  //TODO: check, why ids do not match
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(resultItem);
+            Assert.AreEqual(3, result.Count());
+        }
+        #endregion RegularGets
+
         #region AskSpecialEndpoint
         [TestMethod]
         public async Task AskSpecialEndpoint()
@@ -22,13 +42,11 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest
             this.startLocalServer();
 
             IDataService dataService = DiHelper.GetService<IDataService>(this.localServerUri, this.getHttpClientHandler());
-            // TypedBaseClient<NET.efilnukefesin.Implementations.Base.ValueObject`1[System.Boolean]>.GetAsync(api/specialvalues//1/Hello World): entered
 
             var result = await dataService.GetAsync<ValueObject<bool>>("SpecialValueStore", "1", "Hello World");
-            //TODO: ask an end point with a pecial function which does not appear under the Store concept
 
             Assert.IsNotNull(result);
-            //Assert.AreEqual(3, result.Count());
+            Assert.AreEqual(true, result);
         }
         #endregion AskSpecialEndpoint
     }

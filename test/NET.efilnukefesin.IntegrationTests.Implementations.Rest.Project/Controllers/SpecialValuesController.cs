@@ -61,6 +61,8 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest.Project.Contro
             //    //result = NotFound();
             //}
 
+            result = new SimpleResult<ValueObject<bool>>(new ValueObject<bool>(true));
+
             return result;
         }
         #endregion Get

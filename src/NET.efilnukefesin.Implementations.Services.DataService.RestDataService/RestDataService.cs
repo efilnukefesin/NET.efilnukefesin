@@ -108,7 +108,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
             this.logger?.Log($"RestDataService.GetAsync(): entered");
             string parameters = this.convertParameters(Parameters);
             TypedBaseClient<T> client = this.getClient<T>(this.EndpointRegister.GetEndpoint(Action));
-            result = await client.GetAsync(this.EndpointRegister.GetEndpoint(Action) + parameters);
+            result = await client.GetAsync(this.EndpointRegister.GetEndpoint(Action).AppendPathSegment(parameters));
             this.logger?.Log($"RestDataService.GetAsync(): exited with result '{result}'");
             return result;
         }
@@ -175,7 +175,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
             string parameters = this.convertParameters(Parameters);
 
             this.logger?.Log($"RestDataService.DeleteAsync(): entered");
-            TypedBaseClient<T> client = this.getClient<T>(this.EndpointRegister.GetEndpoint(Action) + parameters);
+            TypedBaseClient<T> client = this.getClient<T>(this.EndpointRegister.GetEndpoint(Action) + parameters);  //TODO: parameters here?!?
             result = await client.DeleteAsync(Parameters[0]);
             this.logger?.Log($"RestDataService.DeleteAsync(): exited with result '{result}'");
             return result;
