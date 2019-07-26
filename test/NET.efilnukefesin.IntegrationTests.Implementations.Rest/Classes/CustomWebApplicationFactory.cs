@@ -8,7 +8,7 @@ using System.Text;
 
 namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest.Classes
 {
-    internal class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<NET.efilnukefesin.IntegrationTests.Implementations.Rest.Project.Startup>
+    public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<NET.efilnukefesin.IntegrationTests.Implementations.Rest.Project.Startup>
     {
         protected override TestServer CreateServer(IWebHostBuilder builder)
         {
