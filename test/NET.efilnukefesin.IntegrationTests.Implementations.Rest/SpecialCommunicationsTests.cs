@@ -24,6 +24,7 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest
             IDataService dataService = DiHelper.GetService<IDataService>(this.localServerUri, this.getHttpClientHandler());
 
             var result = await dataService.GetAllAsync<ValueObject<string>>("ValueStore");
+            //TODO: ask an end point with a pecial function which does not appear under the Store concept
 
             Assert.IsNotNull(result);
             Assert.AreEqual(3, result.Count());
