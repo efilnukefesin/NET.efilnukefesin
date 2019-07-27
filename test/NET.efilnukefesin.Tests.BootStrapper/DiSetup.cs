@@ -79,7 +79,7 @@ namespace NET.efilnukefesin.Tests.BootStrapper
         #region Initialize
         public static void Initialize()
         {
-
+            DiSetup.InitializeInMemoryEndpoints();
         }
         #endregion Initialize
 
@@ -141,6 +141,8 @@ namespace NET.efilnukefesin.Tests.BootStrapper
                 endpointRegister.AddEndpoint("CreateOrUpdateAsyncTest3Action", "CreateOrUpdateAsyncTest3");
                 endpointRegister.AddEndpoint("CreateOrUpdateAsyncTest4Action", "CreateOrUpdateAsyncTest4");
                 endpointRegister.AddEndpoint("DeleteAsyncTest1Action", "DeleteAsyncTest1");
+                endpointRegister.AddEndpoint("Values", "Values");
+                endpointRegister.AddEndpoint("SpecialValues", "SpecialValues");
             }
         }
         #endregion InitializeInMemoryEndpoints

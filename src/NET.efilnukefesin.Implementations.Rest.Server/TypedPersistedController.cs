@@ -30,9 +30,10 @@ namespace NET.efilnukefesin.Implementations.Rest.Server
         #region Methods
 
         #region addItems
-        protected override void addItems(IEnumerable<T> newItems)
+        protected async override void addItems(IEnumerable<T> newItems)
         {
-            this.dataService.CreateOrUpdateAsync<T>(this.storeName, newItems);
+            await this.dataService.CreateOrUpdateAsync<T>(this.storeName, newItems);
+            base.addItems(await this.dataService.GetAllAsync<T>(this.storeName));
         }
         #endregion addItems
 
