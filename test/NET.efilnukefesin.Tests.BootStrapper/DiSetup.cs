@@ -12,12 +12,20 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using Microsoft.Extensions.DependencyInjection;
+using NET.efilnukefesin.Implementations.Services.DataService.InMemoryDataService;
 
 namespace NET.efilnukefesin.Tests.BootStrapper
 {
     public static class DiSetup
     {
         #region Methods
+
+        public static void AddToAspNetCore(IServiceCollection services)
+        {
+            services.AddSingleton<IDataService>(s => DiHelper.GetService<InMemoryDataService>("Data"));
+            DiSetup.Initialize();
+        }
 
         #region RestDataServiceTestsTests
         public static void RestDataServiceTests()
@@ -67,6 +75,13 @@ namespace NET.efilnukefesin.Tests.BootStrapper
             //TODO: use config values
         }
         #endregion base
+
+        #region Initialize
+        public static void Initialize()
+        {
+
+        }
+        #endregion Initialize
 
         #region InitializeRestEndpoints
         //TODO: migrate later on somewhere else, when making a generic Bootstrapper

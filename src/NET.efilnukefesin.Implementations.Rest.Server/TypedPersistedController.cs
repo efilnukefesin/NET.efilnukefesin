@@ -13,19 +13,28 @@ namespace NET.efilnukefesin.Implementations.Rest.Server
         #region Properties
 
         private IDataService dataService;
+        private string storeName;
 
         #endregion Properties
 
         #region Construction
 
-        public TypedPersistedController(IDataService DataService)
+        public TypedPersistedController(IDataService DataService, string StoreName)
         {
             this.dataService = DataService;
+            this.storeName = StoreName;
         }
 
         #endregion Construction
 
         #region Methods
+
+        #region addItems
+        protected override void addItems(IEnumerable<T> newItems)
+        {
+            this.dataService.CreateOrUpdateAsync<T>(this.storeName, newItems);
+        }
+        #endregion addItems
 
         public override ActionResult Delete(Guid Id)
         {

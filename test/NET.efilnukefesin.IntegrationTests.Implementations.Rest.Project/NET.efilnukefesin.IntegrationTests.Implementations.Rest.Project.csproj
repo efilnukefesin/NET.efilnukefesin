@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\NET.efilnukefesin.Implementations.Base\NET.efilnukefesin.Implementations.Base.csproj" />
     <ProjectReference Include="..\..\src\NET.efilnukefesin.Implementations.Rest.Server\NET.efilnukefesin.Implementations.Rest.Server.csproj" />
+    <ProjectReference Include="..\NET.efilnukefesin.Tests.BootStrapper\NET.efilnukefesin.Tests.BootStrapper.csproj" />
   </ItemGroup>
 
 </Project>

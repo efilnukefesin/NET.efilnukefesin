@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NET.efilnukefesin.Tests.BootStrapper;
 
 namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest.Project
 {
@@ -26,6 +27,7 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest.Project
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            DiSetup.AddToAspNetCore(services);
             services.AddControllers()
                 .AddNewtonsoftJson();
         }

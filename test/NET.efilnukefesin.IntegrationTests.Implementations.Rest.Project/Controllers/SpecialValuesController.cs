@@ -4,12 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NET.efilnukefesin.Contracts.Services.DataService;
 using NET.efilnukefesin.Implementations.Base;
 using NET.efilnukefesin.Implementations.Rest.Server;
 
 namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest.Project.Controllers
 {
-    public class SpecialValuesController : TypedBaseController<ValueObject<string>>
+    public class SpecialValuesController : TypedPersistedController<ValueObject<string>>
     {
         #region Properties
 
@@ -17,7 +18,8 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest.Project.Contro
 
         #region Construction
 
-        public SpecialValuesController()
+        public SpecialValuesController(IDataService dataService)
+            : base(dataService, "SpecialValues")
         {
             this.addItems(this.generateTestItems());
         }

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using NET.efilnukefesin.Contracts.Services.DataService;
 using NET.efilnukefesin.Implementations.Base;
 using NET.efilnukefesin.Implementations.Rest.Server;
 
 namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest.Project.Controllers
 {
-    public class ValuesController : TypedBaseController<ValueObject<string>>
+    public class ValuesController : TypedPersistedController<ValueObject<string>>
     {
         #region Properties
 
@@ -16,7 +17,8 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest.Project.Contro
 
         #region Construction
 
-        public ValuesController()
+        public ValuesController(IDataService dataService)
+            : base(dataService, "Values")
         {
             this.addItems(this.generateTestItems());
         }
