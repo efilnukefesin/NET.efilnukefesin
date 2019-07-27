@@ -23,7 +23,7 @@ namespace NET.efilnukefesin.Tests.BootStrapper
 
         public static void AddToAspNetCore(IServiceCollection services)
         {
-            DiSetup.@base();
+            DiManager.GetInstance().RegisterType<IEndpointRegister, NET.efilnukefesin.Implementations.Services.DataService.EndpointRegister.EndpointRegister>(Lifetime.Singleton);  //where is all the data coming from?
             services.AddSingleton<IDataService>(s => DiHelper.GetService<InMemoryDataService>("Data"));
             DiSetup.Initialize();
         }
