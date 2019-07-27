@@ -123,7 +123,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.InMemoryDataSer
                 if (this.items.ContainsKey(mappedAction))
                 {
                     this.logger?.Log($"InMemoryDataService.DeleteAsync: items are containing the key, so let's start matching");
-                    string idToRemove = Parameters[0].ToString();
+                    var idToRemove = Parameters[0];
                     if (this.items[mappedAction].Any(x => x.Id.Equals(idToRemove)))
                     {
                         this.logger?.Log($"InMemoryDataService.DeleteAsync: found item with Id '{idToRemove}'");
@@ -216,7 +216,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.InMemoryDataSer
                 if (this.items.ContainsKey(this.EndpointRegister.GetEndpoint(Action)))
                 {
                     this.logger?.Log($"InMemoryDataService.GetAllAsync: items containing the mapped action");
-                    result = (T)this.items[this.EndpointRegister.GetEndpoint(Action)].Where(x => x.Id.Equals(Parameters[0].ToString())).FirstOrDefault();
+                    result = (T)this.items[this.EndpointRegister.GetEndpoint(Action)].Where(x => x.Id.Equals(Parameters[0])).FirstOrDefault();
                 }
                 else
                 {
@@ -243,7 +243,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.InMemoryDataSer
             if (mappedAction != null)
             {
                 this.logger?.Log($"InMemoryDataService.CreateOrUpdateAsync (delegate): mappedAction is '{mappedAction}'");
-                List<string> IdsToRemove = new List<string>();
+                List<Guid> IdsToRemove = new List<Guid>();
                 foreach (IBaseObject item in this.items[mappedAction])
                 {
                     if (FilterMethod.Invoke((T)item))
@@ -257,7 +257,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.InMemoryDataSer
                 if (IdsToRemove.Count > 0)
                 {
                     this.logger?.Log($"InMemoryDataService.CreateOrUpdateAsync (delegate): starting removal");
-                    foreach (string Id in IdsToRemove)
+                    foreach (Guid Id in IdsToRemove)
                     {
                         this.logger?.Log($"InMemoryDataService.CreateOrUpdateAsync (delegate): removing '{Id}'");
                         this.items[mappedAction].RemoveAll(x => x.Id.Equals(Id));
@@ -296,7 +296,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.InMemoryDataSer
                 {
                     //TODO: double check doubled code with above method
                     this.logger?.Log($"InMemoryDataService.DeleteAsync (delegate): items containing key, so looking for it is valuable");
-                    List<string> IdsToRemove = new List<string>();
+                    List<Guid> IdsToRemove = new List<Guid>();
                     foreach (IBaseObject item in this.items[mappedAction])
                     {
                         if (FilterMethod.Invoke((T)item))
@@ -310,7 +310,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.InMemoryDataSer
                     if (IdsToRemove.Count > 0)
                     {
                         this.logger?.Log($"InMemoryDataService.DeleteAsync (delegate): starting removal");
-                        foreach (string Id in IdsToRemove)
+                        foreach (Guid Id in IdsToRemove)
                         {
                             this.logger?.Log($"InMemoryDataService.DeleteAsync (delegate): removing '{Id}'");
                             this.items[mappedAction].RemoveAll(x => x.Id.Equals(Id));

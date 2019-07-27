@@ -148,7 +148,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Server
                 List<ValueObject<string>> items = this.generateTestItems();
                 TypedTestController controller = new TypedTestController(items);
 
-                var result = controller.Get("SomeUnknownId").Value;
+                var result = controller.Get(Guid.NewGuid()).Value;
 
                 Assert.IsNotNull(result);
                 Assert.IsInstanceOfType(result, typeof(SimpleResult<ValueObject<string>>));
@@ -190,7 +190,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Server
                 List<ValueObject<string>> items = this.generateTestItems();
                 TypedTestController controller = new TypedTestController(items);
 
-                var result = controller.Head("SomeUnknownId");
+                var result = controller.Head(Guid.NewGuid());
 
                 Assert.IsNotNull(result);
                 Assert.IsInstanceOfType(result, typeof(Microsoft.AspNetCore.Mvc.NotFoundResult));
@@ -228,7 +228,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Server
                 List<ValueObject<string>> items = this.generateTestItems();
                 TypedTestController controller = new TypedTestController(items);
 
-                var result = controller.Delete("SomeRandomAndNotExistingId");
+                var result = controller.Delete(Guid.NewGuid());
 
                 Assert.IsNotNull(result);
                 Assert.IsInstanceOfType(result, typeof(Microsoft.AspNetCore.Mvc.NotFoundResult));
@@ -293,7 +293,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Rest.Server
                 TypedTestController controller = new TypedTestController(items);
                 ValueObject<string> contentToUpdate = new ValueObject<string>("SomeOtherString");
 
-                var result = controller.Put("SomeRandomAndNotExistingId", contentToUpdate);
+                var result = controller.Put(Guid.NewGuid(), contentToUpdate);
 
                 Assert.IsNotNull(result);
                 Assert.IsInstanceOfType(result, typeof(Microsoft.AspNetCore.Mvc.NotFoundResult));

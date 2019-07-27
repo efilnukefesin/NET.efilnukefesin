@@ -27,13 +27,13 @@ namespace NET.efilnukefesin.Implementations.Rest.Server
 
         #region Methods
 
-        public override ActionResult Delete(string Id)
+        public override ActionResult Delete(Guid Id)
         {
             //TODO: add persistance
             return base.Delete(Id);
         }
 
-        public override ActionResult Put(string Id, [FromBody] T updatedContent)
+        public override ActionResult Put(Guid Id, [FromBody] T updatedContent)
         {
             //TODO: add persistance
             return base.Put(Id, updatedContent);

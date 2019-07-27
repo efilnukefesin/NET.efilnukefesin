@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
@@ -21,6 +22,13 @@ namespace NET.efilnukefesin.Implementations.Base
             : base()
         {
             this.Value = value;
+        }
+
+        [JsonConstructor]
+        public ValueObject(Guid Id)
+            : base(Id)
+        {
+            
         }
 
         #endregion Construction

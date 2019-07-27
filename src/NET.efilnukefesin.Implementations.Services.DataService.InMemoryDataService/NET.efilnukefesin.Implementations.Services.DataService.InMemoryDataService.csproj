@@ -4,9 +4,9 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
-    <VersionPrefix>1.5.0</VersionPrefix>
+    <VersionPrefix>1.5.1</VersionPrefix>
     <Description>IDataService implementation working with JSON based memory stuff</Description>
-    <PackageReleaseNotes>added delegate overloads and extensive logging</PackageReleaseNotes>
+    <PackageReleaseNotes>changed Id back to Guid</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 

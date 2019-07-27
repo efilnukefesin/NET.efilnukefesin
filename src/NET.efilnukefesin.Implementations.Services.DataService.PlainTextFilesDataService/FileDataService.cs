@@ -242,7 +242,25 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.FileDataService
                             if (content.Any(FilterMethod))
                             {
                                 //Update
-                                content = content.Replace(Value.Id, Value);
+                                List<Guid> idsToReplace = new List<Guid>();
+                                foreach (T value in content)
+                                {
+                                    if (FilterMethod(value))
+                                    {
+                                        idsToReplace.Add(value.Id);
+                                    }
+                                }
+
+                                if (idsToReplace.Count > 0)
+                                {
+                                    foreach (Guid idToReplace in idsToReplace)
+                                    {
+                                        content = content.RemoveAll(x => x.Id.Equals(idToReplace));
+                                    }
+                                }
+
+                                content = content.Add(Value);
+                                //TODO: check later
                                 this.logger?.Log($"FileDataService.CreateOrUpdateAsync (delegate): updated content");
                             }
                             else

@@ -70,7 +70,7 @@ namespace NET.efilnukefesin.Implementations.Rest.Server
         [HttpGet("{Id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public virtual ActionResult<SimpleResult<T>> Get(string Id)  //TODO: replace by Guid
+        public virtual ActionResult<SimpleResult<T>> Get(Guid Id)  //TODO: replace by Guid
         {
             SimpleResult<T> result = default;
 
@@ -94,7 +94,7 @@ namespace NET.efilnukefesin.Implementations.Rest.Server
         [HttpHead("{Id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public virtual ActionResult Head(string Id)  //TODO: replace by Guid
+        public virtual ActionResult Head(Guid Id)  //TODO: replace by Guid
         {
             ActionResult result = default;
 
@@ -115,7 +115,7 @@ namespace NET.efilnukefesin.Implementations.Rest.Server
         [HttpDelete("{Id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public virtual ActionResult Delete(string Id)  //TODO: replace by Guid
+        public virtual ActionResult Delete(Guid Id)  //TODO: replace by Guid
         {
             ActionResult result = default;
 
@@ -140,7 +140,7 @@ namespace NET.efilnukefesin.Implementations.Rest.Server
         [HttpPut("{Id}")]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public virtual ActionResult Put(string Id, [FromBody]T updatedContent)  //TODO: replace by Guid
+        public virtual ActionResult Put(Guid Id, [FromBody]T updatedContent)  //TODO: replace by Guid
         {
             ActionResult result = default;
 

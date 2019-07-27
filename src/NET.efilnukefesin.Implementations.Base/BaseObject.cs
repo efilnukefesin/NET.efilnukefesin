@@ -1,5 +1,6 @@
 ﻿using NET.efilnukefesin.Contracts.Base;
 using NET.efilnukefesin.Implementations.Base.Classes;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -14,8 +15,8 @@ namespace NET.efilnukefesin.Implementations.Base
         #region Properties
 
         [DataMember]
-        //public Guid Id { get; set; }
-        public string Id { get; set; }
+        public Guid Id { get; set; }
+        //public string Id { get; set; }
 
         [IgnoreDataMember]
         [XmlIgnore]
@@ -53,8 +54,8 @@ namespace NET.efilnukefesin.Implementations.Base
         {
             this.CreationDate = DateTimeOffset.Now;
             this.memory = new MementoMemory();
-            //this.Id = Guid.NewGuid();
-            this.Id = Guid.NewGuid().ToString();
+            this.Id = Guid.NewGuid();
+            //this.Id = Guid.NewGuid().ToString();
             this.CreationIndex = BaseObject.highestCreationIndex;
             BaseObject.highestCreationIndex++;
             this.CreationPredecessor = BaseObject.lastCreatedBaseObject;
@@ -65,11 +66,12 @@ namespace NET.efilnukefesin.Implementations.Base
             BaseObject.lastCreatedBaseObject = this;
         }
 
+        [JsonConstructor]
         public BaseObject(Guid Id)
         {
             this.CreationDate = DateTimeOffset.Now;
-            //this.Id = Id;
-            this.Id = Id.ToString();
+            //this.Id = Id.ToString();
+            this.Id = Id;
         }
 
         #endregion Construction
