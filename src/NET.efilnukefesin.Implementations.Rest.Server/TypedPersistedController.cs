@@ -4,6 +4,7 @@ using NET.efilnukefesin.Contracts.Services.DataService;
 using NET.efilnukefesin.Implementations.Base;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace NET.efilnukefesin.Implementations.Rest.Server
@@ -32,28 +33,46 @@ namespace NET.efilnukefesin.Implementations.Rest.Server
         #region addItems
         protected async override void addItems(IEnumerable<T> newItems)
         {
-            await this.dataService.CreateOrUpdateAsync<T>(this.storeName, newItems);
-            base.addItems(await this.dataService.GetAllAsync<T>(this.storeName));
+            var alreadyExistingItems = await this.dataService.GetAllAsync<T>(this.storeName);
+
+            if (alreadyExistingItems == null)
+            {
+                await this.dataService.CreateOrUpdateAsync<T>(this.storeName, newItems);
+                base.addItems(await this.dataService.GetAllAsync<T>(this.storeName));
+            }
+            else
+            {
+                this.items = new List<T>(alreadyExistingItems);
+            }
         }
         #endregion addItems
 
+        #region Delete
         public override ActionResult Delete(Guid Id)
         {
-            //TODO: add persistance
-            return base.Delete(Id);
+            var result = base.Delete(Id);
+            this.dataService.DeleteAsync<T>(this.storeName, Id);
+            return result;
         }
+        #endregion Delete
 
+        #region Put
         public override ActionResult Put(Guid Id, [FromBody] T updatedContent)
         {
-            //TODO: add persistance
-            return base.Put(Id, updatedContent);
+            var result = base.Put(Id, updatedContent);
+            this.dataService.CreateOrUpdateAsync<T>(this.storeName, updatedContent);
+            return result;
         }
+        #endregion Put
 
+        #region Post
         public override ActionResult Post([FromBody] T newContent)
         {
-            //TODO: add persistance
-            return base.Post(newContent);
+            var result = base.Post(newContent);
+            this.dataService.CreateOrUpdateAsync<T>(this.storeName, newContent);
+            return result;
         }
+        #endregion Post
 
         #endregion Methods
 
