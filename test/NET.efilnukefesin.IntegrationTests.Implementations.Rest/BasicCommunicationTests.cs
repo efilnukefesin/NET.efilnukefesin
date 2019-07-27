@@ -40,7 +40,7 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest
         #endregion SimpleCallWithStandardClient
 
         #region SimpleCallWithDataService
-        [TestMethod]
+        //[TestMethod]
         public async Task SimpleCallWithDataService()
         {
             DiSetup.RestDataServiceTests();

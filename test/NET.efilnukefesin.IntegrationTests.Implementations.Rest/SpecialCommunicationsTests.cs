@@ -13,7 +13,7 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest
     public class SpecialCommunicationsTests : BaseHttpTest
     {
         #region RegularGets
-        [TestMethod]
+        //[TestMethod]
         public async Task RegularGets()
         {
             DiSetup.RestDataServiceTests();
@@ -33,7 +33,7 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest
         #endregion RegularGets
 
         #region AskSpecialEndpoint
-        [TestMethod]
+        //[TestMethod]
         public async Task AskSpecialEndpoint()
         {
             DiSetup.RestDataServiceTests();
