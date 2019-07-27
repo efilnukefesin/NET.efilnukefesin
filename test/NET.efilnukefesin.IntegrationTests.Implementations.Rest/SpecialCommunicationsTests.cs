@@ -46,7 +46,7 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest
             var result = await dataService.GetAsync<ValueObject<bool>>("SpecialValueStore", "1", "Hello World");
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(true, result);
+            Assert.AreEqual(true, result.Value);
         }
         #endregion AskSpecialEndpoint
     }
