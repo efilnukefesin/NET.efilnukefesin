@@ -23,6 +23,7 @@ namespace NET.efilnukefesin.Tests.BootStrapper
 
         public static void AddToAspNetCore(IServiceCollection services)
         {
+            DiSetup.@base();
             services.AddSingleton<IDataService>(s => DiHelper.GetService<InMemoryDataService>("Data"));
             DiSetup.Initialize();
         }
