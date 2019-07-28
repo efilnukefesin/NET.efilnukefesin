@@ -122,6 +122,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.Integrati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.IntegrationTests.Implementations.Rest.Project", "test\NET.efilnukefesin.IntegrationTests.Implementations.Rest.Project\NET.efilnukefesin.IntegrationTests.Implementations.Rest.Project.csproj", "{FE01F6E5-75AA-4816-B84E-4C2023185B33}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.efilnukefesin.BaseClasses.Test.Http", "src\NET.efilnukefesin.BaseClasses.Test.Http\NET.efilnukefesin.BaseClasses.Test.Http.csproj", "{33466720-CE73-4596-9C04-C49BF820E1F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -324,6 +326,10 @@ Global
 		{FE01F6E5-75AA-4816-B84E-4C2023185B33}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE01F6E5-75AA-4816-B84E-4C2023185B33}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE01F6E5-75AA-4816-B84E-4C2023185B33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33466720-CE73-4596-9C04-C49BF820E1F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33466720-CE73-4596-9C04-C49BF820E1F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33466720-CE73-4596-9C04-C49BF820E1F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33466720-CE73-4596-9C04-C49BF820E1F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -378,6 +384,7 @@ Global
 		{41E858F8-D9EC-42EF-8F0A-FE805C118DA6} = {34700DE2-8D2C-4F8B-9B5C-D55C86980A55}
 		{0F647387-E954-4D79-80E8-C0B23999D674} = {34700DE2-8D2C-4F8B-9B5C-D55C86980A55}
 		{FE01F6E5-75AA-4816-B84E-4C2023185B33} = {34700DE2-8D2C-4F8B-9B5C-D55C86980A55}
+		{33466720-CE73-4596-9C04-C49BF820E1F2} = {F9EE6468-8CD1-4428-AB9B-FC8F60644116}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {882C485C-819B-4BBA-9EDA-8A724F92F5AA}

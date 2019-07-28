@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NET.efilnukefesin.BaseClasses.Test.Http;
 using NET.efilnukefesin.Contracts.Services.DataService;
 using NET.efilnukefesin.Implementations.Base;
 using NET.efilnukefesin.Tests.BootStrapper;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest
 {
     [TestClass]
-    public class SpecialCommunicationsTests : BaseHttpTest
+    public class SpecialCommunicationsTests : BaseHttpTest<NET.efilnukefesin.IntegrationTests.Implementations.Rest.Project.Startup>
     {
         #region RegularGets
         //[TestMethod]

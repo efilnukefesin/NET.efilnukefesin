@@ -6,9 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest.Classes
+namespace NET.efilnukefesin.BaseClasses.Test.Http.Classes
 {
-    public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<NET.efilnukefesin.IntegrationTests.Implementations.Rest.Project.Startup>
+    public class CustomWebApplicationFactory<StartupType> : WebApplicationFactory<StartupType> where StartupType : class
     {
         protected override TestServer CreateServer(IWebHostBuilder builder)
         {
@@ -22,7 +22,7 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest.Classes
 
         protected override IWebHostBuilder CreateWebHostBuilder()
         {
-            return WebHost.CreateDefaultBuilder().UseStartup<NET.efilnukefesin.IntegrationTests.Implementations.Rest.Project.Startup>();
+            return WebHost.CreateDefaultBuilder().UseStartup<StartupType>();
         }
     }
 }

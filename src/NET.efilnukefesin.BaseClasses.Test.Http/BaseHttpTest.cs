@@ -1,19 +1,18 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NET.efilnukefesin.BaseClasses.Test;
-using NET.efilnukefesin.IntegrationTests.Implementations.Rest.Classes;
+using NET.efilnukefesin.BaseClasses.Test.Http.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest
+namespace NET.efilnukefesin.BaseClasses.Test.Http
 {
     [TestClass]
-    public class BaseHttpTest : BaseSimpleTest
+    public class BaseHttpTest<StartupType> : BaseSimpleTest where StartupType : class
     {
         #region Properties
 
-        protected readonly CustomWebApplicationFactory<NET.efilnukefesin.IntegrationTests.Implementations.Rest.Project.Startup> webApplicationFactory;
+        protected readonly CustomWebApplicationFactory<StartupType> webApplicationFactory;
         protected Uri localServerUri = new Uri("http://localhost/");
 
         #endregion Properties
@@ -21,7 +20,7 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest
         #region Construction
         public BaseHttpTest()
         {
-            this.webApplicationFactory = new CustomWebApplicationFactory<NET.efilnukefesin.IntegrationTests.Implementations.Rest.Project.Startup>();
+            this.webApplicationFactory = new CustomWebApplicationFactory<StartupType>();
         }
         #endregion Construction
 

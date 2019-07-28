@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NET.efilnukefesin.BaseClasses.Test;
+using NET.efilnukefesin.BaseClasses.Test.Http;
 using NET.efilnukefesin.Contracts.Services.DataService;
 using NET.efilnukefesin.Implementations.Base;
 using NET.efilnukefesin.Implementations.Rest.Server;
-using NET.efilnukefesin.IntegrationTests.Implementations.Rest.Classes;
 using NET.efilnukefesin.Tests.BootStrapper;
 using System;
 using System.Collections.Generic;
@@ -20,7 +20,7 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest
     // https://www.codeproject.com/Articles/1197462/Using-MS-Test-with-NET-Core-API
 
     [TestClass]
-    public class BasicCommunicationTests : BaseHttpTest
+    public class BasicCommunicationTests : BaseHttpTest<NET.efilnukefesin.IntegrationTests.Implementations.Rest.Project.Startup>
     {
         #region Methods
 
