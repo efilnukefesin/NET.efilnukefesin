@@ -18,9 +18,9 @@ namespace NET.efilnukefesin.BaseClasses.Test.Http
         #endregion Properties
 
         #region Construction
-        public BaseHttpTest()
+        public BaseHttpTest(string solutionRelativePath = null, string applicationBasePath = null, string solutionName = null)
         {
-            this.webApplicationFactory = new CustomWebApplicationFactory<StartupType>();
+            this.webApplicationFactory = new CustomWebApplicationFactory<StartupType>(solutionRelativePath, applicationBasePath, solutionName);
         }
         #endregion Construction
 

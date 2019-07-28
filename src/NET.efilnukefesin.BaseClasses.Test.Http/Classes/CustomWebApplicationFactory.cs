@@ -10,19 +10,61 @@ namespace NET.efilnukefesin.BaseClasses.Test.Http.Classes
 {
     public class CustomWebApplicationFactory<StartupType> : WebApplicationFactory<StartupType> where StartupType : class
     {
+        #region Properties
+
+        private string solutionRelativePath;
+        private string applicationBasePath;
+        private string solutionName;
+
+        #endregion Properties
+
+        #region Construction
+
+        public CustomWebApplicationFactory(string solutionRelativePath = null, string applicationBasePath = null, string solutionName = null)
+        {
+            this.solutionRelativePath = solutionRelativePath;
+            this.applicationBasePath = applicationBasePath;
+            this.solutionName = solutionName;
+        }
+
+        #endregion Construction
+
+        #region Methods
+
+        #region CreateServer
         protected override TestServer CreateServer(IWebHostBuilder builder)
         {
             return base.CreateServer(builder);
         }
+        #endregion CreateServer
 
+        #region ConfigureWebHost
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
+            if (!string.IsNullOrEmpty(this.solutionRelativePath) && !string.IsNullOrEmpty(this.applicationBasePath) && !string.IsNullOrEmpty(this.solutionName))
+            {
+                builder.UseSolutionRelativeContentRoot(this.solutionRelativePath, this.applicationBasePath, this.solutionName);
+            }
+            else if (!string.IsNullOrEmpty(this.solutionRelativePath) && !string.IsNullOrEmpty(this.solutionName))
+            {
+                builder.UseSolutionRelativeContentRoot(this.solutionRelativePath, this.solutionName);
+            }
+            else if (!string.IsNullOrEmpty(this.solutionRelativePath))
+            {
+                builder.UseSolutionRelativeContentRoot(this.solutionRelativePath);
+            }
             base.ConfigureWebHost(builder);
         }
+        #endregion ConfigureWebHost
 
+        #region CreateWebHostBuilder
         protected override IWebHostBuilder CreateWebHostBuilder()
         {
             return WebHost.CreateDefaultBuilder().UseStartup<StartupType>();
         }
+        #endregion CreateWebHostBuilder
+
+        #endregion Methods
+
     }
 }
