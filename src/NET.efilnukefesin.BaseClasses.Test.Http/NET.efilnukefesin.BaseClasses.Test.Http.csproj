@@ -8,6 +8,9 @@
     <VersionPrefix>0.5.0</VersionPrefix>
     <Description>Test http base class</Description>
     <PackageReleaseNotes>Integrated BaseHttpTest</PackageReleaseNotes>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
   </PropertyGroup>
 
   <ItemGroup>
