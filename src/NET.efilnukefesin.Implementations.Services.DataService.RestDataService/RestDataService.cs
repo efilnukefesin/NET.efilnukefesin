@@ -35,10 +35,12 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
 
         #region Construction
 
-        public RestDataService(Uri BaseUri, IEndpointRegister EndpointRegister, ILogger Logger, string BearerToken = null, HttpMessageHandler OverrideMessageHandler = null)
+        public RestDataService(Uri BaseUri, IEndpointRegister EndpointRegister, ILogger Logger = null, string BearerToken = null, HttpMessageHandler OverrideMessageHandler = null)
         {
-            this.overrideMessageHandler = OverrideMessageHandler;
             this.logger = Logger;
+
+            this.logger?.Log($"RestDataService.ctor: entered with Parameters OverrideMessageHandler: '{overrideMessageHandler}' | BaseUri: '{BaseUri}' | EndpointRegister: '{EndpointRegister}' | BearerToken: '{BearerToken}'");
+            this.overrideMessageHandler = OverrideMessageHandler;
             this.baseUri = BaseUri;
             this.EndpointRegister = EndpointRegister;
             
@@ -46,6 +48,7 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
             {
                 this.AddOrReplaceAuthentication(BearerToken);
             }
+            this.logger?.Log($"RestDataService.ctor: exited");
         }
 
         #endregion Construction
@@ -74,9 +77,17 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
                     url = this.baseUri.ToString();
                 }
                 this.logger?.Log($"RestDataService.getClient(): whole Uri is '{url}'");
-                TypedBaseClient<T> client = new TypedBaseClient<T>(new Uri(url), this.logger, this.overrideMessageHandler);
-                client.AddAuthenticationHeader(this.authenticationString);
-                this.clients.Add(typeof(T), client); //TODO: add Uri;  //TODO: make less specific
+                try
+                {
+                    TypedBaseClient<T> client = new TypedBaseClient<T>(new Uri(url), this.logger, this.overrideMessageHandler);
+                    client.AddAuthenticationHeader(this.authenticationString);
+                    this.clients.Add(typeof(T), client); //TODO: add Uri;  //TODO: make less specific
+                    this.logger?.Log($"RestDataService.getClient(): Client successfully created and added");
+                }
+                catch (Exception ex)
+                {
+                    this.logger?.Log($"RestDataService.getClient(): Client creation failed with Exception: '{ex.Message}'", Contracts.Logger.Enums.LogLevel.Error);
+                }
             }
             else
             {
