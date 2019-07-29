@@ -247,27 +247,35 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         #region RegisterTarget
         public void RegisterTarget<I, T>(IEnumerable<ParameterInfoObject> parameters) where I : class where T : class, I
         {
+            this.logger?.Log($"DiManager.RegisterTarget<I, T>(IEnumerable<ParameterInfoObject> parameters): entered");
             this.RegisterTarget<I, T>(Lifetime.NewInstanceEveryTime, parameters);
+            this.logger?.Log($"DiManager.RegisterTarget<I, T>(IEnumerable<ParameterInfoObject> parameters): exited");
         }
         #endregion RegisterTarget
 
         #region RegisterTarget
         public void RegisterTarget<I, T>(Lifetime Lifetime) where I : class where T : class, I
         {
+            this.logger?.Log($"DiManager.RegisterTarget<I, T>(Lifetime Lifetime): entered");
             this.RegisterTarget<I, T>(Lifetime, null);
+            this.logger?.Log($"DiManager.RegisterTarget<I, T>(Lifetime Lifetime): exited");
         }
         #endregion RegisterTarget
 
         #region RegisterTarget
         public void RegisterTarget<I, T>(Lifetime Lifetime, IEnumerable<ParameterInfoObject> parameters) where I : class where T : class, I
         {
+            this.logger?.Log($"DiManager.RegisterTarget<I, T>(Lifetime Lifetime, IEnumerable<ParameterInfoObject> parameters): entered");
             List<Parameter> paramsForBuilder = new List<Parameter>();
             if (parameters != null)
             {
+                this.logger?.Log($"DiManager.RegisterTarget<I, T>(Lifetime Lifetime, IEnumerable<ParameterInfoObject> parameters): Parameters is not null");
                 foreach (var parameterInfoObject in parameters)
                 {
+                    this.logger?.Log($"DiManager.RegisterTarget<I, T>(Lifetime Lifetime, IEnumerable<ParameterInfoObject> parameters): Iterating through parameters, current: '{parameterInfoObject.GetType()}'");
                     if (parameterInfoObject is TypeInstanceParameterInfoObject)
                     {
+                        this.logger?.Log($"DiManager.RegisterTarget<I, T>(Lifetime Lifetime, IEnumerable<ParameterInfoObject> parameters): parameterInfoObject is TypeInstanceParameterInfoObject");
                         TypeInstanceParameterInfoObject convertedParamaterInfoObject = parameterInfoObject as TypeInstanceParameterInfoObject;
                         Type parameterType = convertedParamaterInfoObject.Type;
                         if (this.typeTranslations.ContainsKey(parameterType.Name) || this.typeTranslations.ContainsKey(parameterType.FullName))
@@ -278,6 +286,7 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
                     }
                     else if (parameterInfoObject is DynamicParameterInfoObject)
                     {
+                        this.logger?.Log($"DiManager.RegisterTarget<I, T>(Lifetime Lifetime, IEnumerable<ParameterInfoObject> parameters): parameterInfoObject is DynamicParameterInfoObject");
                         DynamicParameterInfoObject convertedParameterInfoObject = parameterInfoObject as DynamicParameterInfoObject;
 
                         Func<ParameterInfo, IComponentContext, bool> predicate = null;
@@ -285,7 +294,11 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
 
                         if (convertedParameterInfoObject.Field == null)
                         {
+                            this.logger?.Log($"DiManager.RegisterTarget<I, T>(Lifetime Lifetime, IEnumerable<ParameterInfoObject> parameters): Field is null, just adding type param");
                             //resolve only type
+
+                            this.logger?.Log($"DiManager.RegisterTarget<I, T>(Lifetime Lifetime, IEnumerable<ParameterInfoObject> parameters): TypeToResolce is '{convertedParameterInfoObject.TypeToResolve}'");
+
                             predicate = (pi, ctx) => pi.ParameterType.Equals(convertedParameterInfoObject.ServiceInterface)/* && pi.Name == "configSectionName"*/;
                             valueAccessor = (pi, ctx) => ctx.Resolve(convertedParameterInfoObject.TypeToResolve, this.convertParameters(convertedParameterInfoObject.Parameters));
                         }
@@ -301,6 +314,10 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
                     }
                 }
             }
+            else
+            {
+                this.logger?.Log($"DiManager.RegisterTarget<I, T>(Lifetime Lifetime, IEnumerable<ParameterInfoObject> parameters): Parameters is null", LogLevel.Warning);
+            }
             switch (Lifetime)
             {
                 case Lifetime.Singleton:
@@ -314,6 +331,7 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
             }
 
             this.addToInternalRegister(typeof(I), typeof(T));
+            this.logger?.Log($"DiManager.RegisterTarget<I, T>(Lifetime Lifetime, IEnumerable<ParameterInfoObject> parameters): exited");
         }
         #endregion RegisterTarget
 
