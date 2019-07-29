@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <VersionPrefix>1.6.0</VersionPrefix>
-    <PackageReleaseNotes>Added interface type to RegisterTarget method without params</PackageReleaseNotes>
+    <VersionPrefix>1.6.1</VersionPrefix>
+    <PackageReleaseNotes>Added some logging to ease error finding</PackageReleaseNotes>
     <Description>Implementation of Inversion of Control.</Description>
     <PackageTags>Dependency Injection, Inversion of Control, IoC, DI</PackageTags>
     <Company>efilnukefesin.NET</Company>
@@ -16,6 +16,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NET.efilnukefesin.Contracts.DependencyInjection\NET.efilnukefesin.Contracts.DependencyInjection.csproj" />
+    <ProjectReference Include="..\NET.efilnukefesin.Contracts.Logger\NET.efilnukefesin.Contracts.Logger.csproj" />
+    <ProjectReference Include="..\NET.efilnukefesin.Implementations.Logger.SerilogLogger\NET.efilnukefesin.Implementations.Logger.SerilogLogger.csproj" />
   </ItemGroup>
 
   <ItemGroup>

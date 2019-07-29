@@ -4,6 +4,8 @@ using Autofac.Features.ResolveAnything;
 using NET.efilnukefesin.Contracts.DependencyInjection;
 using NET.efilnukefesin.Contracts.DependencyInjection.Classes;
 using NET.efilnukefesin.Contracts.DependencyInjection.Enums;
+using NET.efilnukefesin.Contracts.Logger;
+using NET.efilnukefesin.Contracts.Logger.Enums;
 using NET.efilnukefesin.Implementations.Base;
 using System;
 using System.Collections.Generic;
@@ -68,6 +70,8 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
 
         private Dictionary<string, Type> typeTranslations;
 
+        private ILogger logger = new Logger.SerilogLogger.SerilogLogger();
+
         #endregion Properties
 
         #region Construction
@@ -76,7 +80,9 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         /// </summary>
         protected DiManager()
         {
+            this.logger?.Log($"DiManager.ctor: entered");
             this.initialize();
+            this.logger?.Log($"DiManager.ctor: exited");
         }
 
         #endregion Construction
@@ -86,11 +92,13 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         #region initialize
         private void initialize()
         {
+            this.logger?.Log($"DiManager.initialize: entered");
             this.builder = new ContainerBuilder();
             this.builder.RegisterSource(new AnyConcreteTypeNotAlreadyRegisteredSource());
             this.container = null;  //create the container, easy
             this.registeredTypes = new Dictionary<Type, Type>();
             this.typeTranslations = new Dictionary<string, Type>();
+            this.logger?.Log($"DiManager.initialize: exited");
         }
         #endregion initialize
 
@@ -503,20 +511,36 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
         /// <returns>a list of AutoFac parameters</returns>
         private List<Parameter> convertParameters(object[] parameters)
         {
-            List<Parameter> tempParameters = new List<Parameter>();
+            this.logger?.Log($"DiManager.convertParameters: entered");
+            List<Parameter> result = new List<Parameter>();
             if (parameters != null)
             {
+                this.logger?.Log($"DiManager.convertParameters: parameters given.");
                 foreach (var parameter in parameters)
                 {
-                    Type parameterType = parameter.GetType();
-                    if (this.typeTranslations.ContainsKey(parameterType.Name) || this.typeTranslations.ContainsKey(parameterType.FullName))
+                    this.logger?.Log($"DiManager.convertParameters: processing parameter '{parameter}'");
+                    if (parameter != null)
                     {
-                        parameterType = this.typeTranslations.ContainsKey(parameterType.Name) ? this.typeTranslations[parameterType.Name] : this.typeTranslations[parameterType.FullName];
+                        this.logger?.Log($"DiManager.convertParameters: parameter '{parameter}' is not null");
+                        Type parameterType = parameter.GetType();
+                        this.logger?.Log($"DiManager.convertParameters: parameter '{parameter}' type is '{parameterType}'");
+                        if (this.typeTranslations.ContainsKey(parameterType.Name) || this.typeTranslations.ContainsKey(parameterType.FullName))
+                        {
+                            this.logger?.Log($"DiManager.convertParameters: doing Type translation");
+                            parameterType = this.typeTranslations.ContainsKey(parameterType.Name) ? this.typeTranslations[parameterType.Name] : this.typeTranslations[parameterType.FullName];
+                            this.logger?.Log($"DiManager.convertParameters: new parameter '{parameter}' type is '{parameterType}'");
+                        }
+                        result.Add(new TypedParameter(parameterType, parameter));
                     }
-                    tempParameters.Add(new TypedParameter(parameterType, parameter));
+                    else
+                    {
+                        this.logger?.Log($"DiManager.convertParameters: parameter '{parameter}' is null", LogLevel.Warning);
+                    }
                 }
             }
-            return tempParameters;
+
+            this.logger?.Log($"DiManager.convertParameters: entered");
+            return result;
         }
         #endregion convertParameters
 
