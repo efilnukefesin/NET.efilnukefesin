@@ -297,7 +297,7 @@ namespace NET.efilnukefesin.Implementations.DependencyInjection
                             this.logger?.Log($"DiManager.RegisterTarget<I, T>(Lifetime Lifetime, IEnumerable<ParameterInfoObject> parameters): Field is null, just adding type param");
                             //resolve only type
 
-                            this.logger?.Log($"DiManager.RegisterTarget<I, T>(Lifetime Lifetime, IEnumerable<ParameterInfoObject> parameters): TypeToResolce is '{convertedParameterInfoObject.TypeToResolve}'");
+                            this.logger?.Log($"DiManager.RegisterTarget<I, T>(Lifetime Lifetime, IEnumerable<ParameterInfoObject> parameters): TypeToResolve is '{convertedParameterInfoObject.TypeToResolve}'");
 
                             predicate = (pi, ctx) => pi.ParameterType.Equals(convertedParameterInfoObject.ServiceInterface)/* && pi.Name == "configSectionName"*/;
                             valueAccessor = (pi, ctx) => ctx.Resolve(convertedParameterInfoObject.TypeToResolve, this.convertParameters(convertedParameterInfoObject.Parameters));
