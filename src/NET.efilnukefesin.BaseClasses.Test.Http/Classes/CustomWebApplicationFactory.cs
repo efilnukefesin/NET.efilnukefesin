@@ -15,16 +15,18 @@ namespace NET.efilnukefesin.BaseClasses.Test.Http.Classes
         private string solutionRelativePath;
         private string applicationBasePath;
         private string solutionName;
+        private string environment;
 
         #endregion Properties
 
         #region Construction
 
-        public CustomWebApplicationFactory(string solutionRelativePath = null, string applicationBasePath = null, string solutionName = null)
+        public CustomWebApplicationFactory(string solutionRelativePath = null, string applicationBasePath = null, string solutionName = null, string Environment = "Development")
         {
             this.solutionRelativePath = solutionRelativePath;
             this.applicationBasePath = applicationBasePath;
             this.solutionName = solutionName;
+            this.environment = Environment;
         }
 
         #endregion Construction
@@ -53,6 +55,7 @@ namespace NET.efilnukefesin.BaseClasses.Test.Http.Classes
             {
                 builder.UseSolutionRelativeContentRoot(this.solutionRelativePath);
             }
+            builder.UseEnvironment(this.environment);
             base.ConfigureWebHost(builder);
         }
         #endregion ConfigureWebHost
