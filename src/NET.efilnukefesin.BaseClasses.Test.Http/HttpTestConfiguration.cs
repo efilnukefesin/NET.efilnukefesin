@@ -15,5 +15,17 @@ namespace NET.efilnukefesin.BaseClasses.Test.Http
         public string Environment { get; set; } = "Development";
 
         #endregion Properties
+
+        #region Construction
+
+        public HttpTestConfiguration(string solutionRelativePath = null, string applicationBasePath = null, string solutionName = null, string environment = "Development")
+        {
+            SolutionRelativePath = solutionRelativePath;
+            ApplicationBasePath = applicationBasePath;
+            SolutionName = solutionName;
+            Environment = environment;
+        }
+
+        #endregion Construction
     }
 }
