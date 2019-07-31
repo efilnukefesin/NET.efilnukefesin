@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <VersionPrefix>1.5.2</VersionPrefix>
+    <VersionPrefix>1.5.3</VersionPrefix>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
     <Description>Implementation of a REST Data Service</Description>
-    <PackageReleaseNotes>added some more logging</PackageReleaseNotes>
+    <PackageReleaseNotes>added threat safety</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

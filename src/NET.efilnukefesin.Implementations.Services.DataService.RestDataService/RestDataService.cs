@@ -31,6 +31,8 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
         private ILogger logger;
         private HttpMessageHandler overrideMessageHandler;
 
+        private object lockSync = new object();
+
         #endregion Properties
 
         #region Construction
@@ -62,40 +64,42 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
             this.logger?.Log($"RestDataService.getClient(): entered");
             TypedBaseClient<T> result = default;
 
-            if (!this.clients.ContainsKey(typeof(T)))
+            lock (this.lockSync)
             {
-                this.logger?.Log($"RestDataService.getClient(): client resource has to be created");
-                string url = string.Empty;
-                if (ResourceUri != null)
+                if (!this.clients.ContainsKey(typeof(T)))
                 {
-                    this.logger?.Log($"RestDataService.getClient(): resource Uri not empty: '{ResourceUri}'");
-                    url = this.baseUri.ToString().AppendPathSegment(ResourceUri);
+                    this.logger?.Log($"RestDataService.getClient(): client resource has to be created");
+                    string url = string.Empty;
+                    if (ResourceUri != null)
+                    {
+                        this.logger?.Log($"RestDataService.getClient(): resource Uri not empty: '{ResourceUri}'");
+                        url = this.baseUri.ToString().AppendPathSegment(ResourceUri);
+                    }
+                    else
+                    {
+                        this.logger?.Log($"RestDataService.getClient(): resource Uri empty", Contracts.Logger.Enums.LogLevel.Warning);
+                        url = this.baseUri.ToString();
+                    }
+                    this.logger?.Log($"RestDataService.getClient(): whole Uri is '{url}'");
+                    try
+                    {
+                        TypedBaseClient<T> client = new TypedBaseClient<T>(new Uri(url), this.logger, this.overrideMessageHandler);
+                        client.AddAuthenticationHeader(this.authenticationString);
+                        this.clients.Add(typeof(T), client); //TODO: add Uri;  //TODO: make less specific
+                        this.logger?.Log($"RestDataService.getClient(): Client successfully created and added");
+                    }
+                    catch (Exception ex)
+                    {
+                        this.logger?.Log($"RestDataService.getClient(): Client creation failed with Exception: '{ex.Message}'", Contracts.Logger.Enums.LogLevel.Error);
+                    }
                 }
                 else
                 {
-                    this.logger?.Log($"RestDataService.getClient(): resource Uri empty", Contracts.Logger.Enums.LogLevel.Warning);
-                    url = this.baseUri.ToString();
+                    this.logger?.Log($"RestDataService.getClient(): client for Type '{typeof(T)}' is buffered.");
                 }
-                this.logger?.Log($"RestDataService.getClient(): whole Uri is '{url}'");
-                try
-                {
-                    TypedBaseClient<T> client = new TypedBaseClient<T>(new Uri(url), this.logger, this.overrideMessageHandler);
-                    client.AddAuthenticationHeader(this.authenticationString);
-                    this.clients.Add(typeof(T), client); //TODO: add Uri;  //TODO: make less specific
-                    this.logger?.Log($"RestDataService.getClient(): Client successfully created and added");
-                }
-                catch (Exception ex)
-                {
-                    this.logger?.Log($"RestDataService.getClient(): Client creation failed with Exception: '{ex.Message}'", Contracts.Logger.Enums.LogLevel.Error);
-                }
-            }
-            else
-            {
-                this.logger?.Log($"RestDataService.getClient(): client for Type '{typeof(T)}' is buffered.");
-            }
 
-            result = (TypedBaseClient<T>)this.clients[typeof(T)];
-
+                result = (TypedBaseClient<T>)this.clients[typeof(T)];
+            }
             this.logger?.Log($"RestDataService.getClient(): exited with result '{result}'");
             return result;
         }
@@ -105,9 +109,12 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
         public void AddOrReplaceAuthentication(string BearerToken)
         {
             this.authenticationString = BearerToken;
-            foreach (KeyValuePair<Type, BaseClient> kvp in this.clients)
+            lock (this.lockSync)
             {
-                kvp.Value.AddAuthenticationHeader(this.authenticationString);
+                foreach (KeyValuePair<Type, BaseClient> kvp in this.clients)
+                {
+                    kvp.Value.AddAuthenticationHeader(this.authenticationString);
+                }
             }
         }
         #endregion AddOrReplaceAuthentication
