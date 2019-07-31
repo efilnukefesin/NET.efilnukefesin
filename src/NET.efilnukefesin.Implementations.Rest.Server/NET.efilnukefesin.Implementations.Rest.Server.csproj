@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <VersionPrefix>0.3.1</VersionPrefix>
+    <VersionPrefix>0.3.2</VersionPrefix>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
     <Description>Implementing Controller focused on standard REST calls</Description>
-    <PackageReleaseNotes>initial creation</PackageReleaseNotes>
+    <PackageReleaseNotes>added virtual method to fill initial data</PackageReleaseNotes>
   </PropertyGroup>
   
   <ItemGroup>

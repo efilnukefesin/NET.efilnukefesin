@@ -23,6 +23,7 @@ namespace NET.efilnukefesin.Implementations.Rest.Server
             : base()
         {
             this.items = new List<T>();
+            this.initializeData();
         }
 
         public TypedBaseController(IEnumerable<T> initialItems)
@@ -34,6 +35,16 @@ namespace NET.efilnukefesin.Implementations.Rest.Server
         #endregion Construction
 
         #region Methods
+
+        #region initializeData: use this method to load initial data
+        /// <summary>
+        /// use this method to load initial data
+        /// </summary>
+        protected virtual void initializeData()
+        {
+
+        }
+        #endregion initializeData
 
         #region addItems
         protected virtual void addItems(IEnumerable<T> newItems)
