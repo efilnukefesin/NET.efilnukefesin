@@ -62,6 +62,5 @@ namespace NET.efilnukefesin.BaseClasses.Test.Http.Classes
         #endregion CreateWebHostBuilder
 
         #endregion Methods
-
     }
 }

@@ -18,12 +18,16 @@ namespace NET.efilnukefesin.BaseClasses.Test.Http
         #endregion Properties
 
         #region Construction
-        public BaseHttpTest(HttpTestConfiguration httpTestConfiguration = null)
+        public BaseHttpTest(HttpTestConfiguration httpTestConfiguration = null, Uri OverrideBaseUri = null)
         {
             HttpTestConfiguration config = new HttpTestConfiguration();
             if (httpTestConfiguration != null)
             {
                 config = httpTestConfiguration;
+            }
+            if (OverrideBaseUri != null)
+            {
+                this.localServerUri = OverrideBaseUri;
             }
             this.webApplicationFactory = new CustomWebApplicationFactory<StartupType>(config);
         }

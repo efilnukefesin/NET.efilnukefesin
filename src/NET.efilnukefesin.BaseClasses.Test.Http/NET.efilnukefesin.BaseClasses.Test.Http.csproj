@@ -5,9 +5,9 @@
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
-    <VersionPrefix>0.6.2</VersionPrefix>
+    <VersionPrefix>0.6.3</VersionPrefix>
     <Description>Test http base class</Description>
-    <PackageReleaseNotes>Fixed a method name typo (startLocalServers)</PackageReleaseNotes>
+    <PackageReleaseNotes>added Uri override parameter</PackageReleaseNotes>
     <ApplicationIcon />
     <OutputType>Library</OutputType>
     <StartupObject />
