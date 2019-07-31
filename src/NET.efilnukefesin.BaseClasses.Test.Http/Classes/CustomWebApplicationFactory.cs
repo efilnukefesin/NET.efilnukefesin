@@ -12,21 +12,15 @@ namespace NET.efilnukefesin.BaseClasses.Test.Http.Classes
     {
         #region Properties
 
-        private string solutionRelativePath;
-        private string applicationBasePath;
-        private string solutionName;
-        private string environment;
+        HttpTestConfiguration httpTestConfiguration;
 
         #endregion Properties
 
         #region Construction
 
-        public CustomWebApplicationFactory(string solutionRelativePath = null, string applicationBasePath = null, string solutionName = null, string Environment = "Development")
+        public CustomWebApplicationFactory(HttpTestConfiguration HttpTestConfiguration)
         {
-            this.solutionRelativePath = solutionRelativePath;
-            this.applicationBasePath = applicationBasePath;
-            this.solutionName = solutionName;
-            this.environment = Environment;
+            this.httpTestConfiguration = HttpTestConfiguration;
         }
 
         #endregion Construction
@@ -43,19 +37,19 @@ namespace NET.efilnukefesin.BaseClasses.Test.Http.Classes
         #region ConfigureWebHost
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
-            if (!string.IsNullOrEmpty(this.solutionRelativePath) && !string.IsNullOrEmpty(this.applicationBasePath) && !string.IsNullOrEmpty(this.solutionName))
+            if (!string.IsNullOrEmpty(this.httpTestConfiguration.SolutionRelativePath) && !string.IsNullOrEmpty(this.httpTestConfiguration.ApplicationBasePath) && !string.IsNullOrEmpty(this.httpTestConfiguration.SolutionName))
             {
-                builder.UseSolutionRelativeContentRoot(this.solutionRelativePath, this.applicationBasePath, this.solutionName);
+                builder.UseSolutionRelativeContentRoot(this.httpTestConfiguration.SolutionRelativePath, this.httpTestConfiguration.ApplicationBasePath, this.httpTestConfiguration.SolutionName);
             }
-            else if (!string.IsNullOrEmpty(this.solutionRelativePath) && !string.IsNullOrEmpty(this.solutionName))
+            else if (!string.IsNullOrEmpty(this.httpTestConfiguration.SolutionRelativePath) && !string.IsNullOrEmpty(this.httpTestConfiguration.SolutionName))
             {
-                builder.UseSolutionRelativeContentRoot(this.solutionRelativePath, this.solutionName);
+                builder.UseSolutionRelativeContentRoot(this.httpTestConfiguration.SolutionRelativePath, this.httpTestConfiguration.SolutionName);
             }
-            else if (!string.IsNullOrEmpty(this.solutionRelativePath))
+            else if (!string.IsNullOrEmpty(this.httpTestConfiguration.SolutionRelativePath))
             {
-                builder.UseSolutionRelativeContentRoot(this.solutionRelativePath);
+                builder.UseSolutionRelativeContentRoot(this.httpTestConfiguration.SolutionRelativePath);
             }
-            builder.UseEnvironment(this.environment);
+            builder.UseEnvironment(this.httpTestConfiguration.Environment);
             base.ConfigureWebHost(builder);
         }
         #endregion ConfigureWebHost

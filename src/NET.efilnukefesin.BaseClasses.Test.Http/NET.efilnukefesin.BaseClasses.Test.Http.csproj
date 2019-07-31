@@ -5,9 +5,9 @@
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
-    <VersionPrefix>0.5.2</VersionPrefix>
+    <VersionPrefix>0.6.0</VersionPrefix>
     <Description>Test http base class</Description>
-    <PackageReleaseNotes>Add Environment</PackageReleaseNotes>
+    <PackageReleaseNotes>Added possibility to host two projects</PackageReleaseNotes>
     <ApplicationIcon />
     <OutputType>Library</OutputType>
     <StartupObject />
