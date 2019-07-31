@@ -20,16 +20,12 @@ namespace NET.efilnukefesin.BaseClasses.Test.Http
         #endregion Properties
 
         #region Construction
-        public BaseHttpTest(HttpTestConfiguration httpTestConfiguration = null, Uri OverrideBaseUri = null)
+        public BaseHttpTest(HttpTestConfiguration httpTestConfiguration = null)
         {
             HttpTestConfiguration config = new HttpTestConfiguration();
             if (httpTestConfiguration != null)
             {
                 config = httpTestConfiguration;
-            }
-            if (OverrideBaseUri != null)
-            {
-                this.localServerUri = OverrideBaseUri;
             }
             this.webApplicationFactory = new CustomWebApplicationFactory<StartupType>(config);
         }
@@ -58,6 +54,7 @@ namespace NET.efilnukefesin.BaseClasses.Test.Http
         protected void startLocalServer()
         {
             this.localClient = this.webApplicationFactory.CreateClient();  //needed for getting up the server
+            this.localServerUri = this.localClient.BaseAddress;
         }
         #endregion startLocalServer
 

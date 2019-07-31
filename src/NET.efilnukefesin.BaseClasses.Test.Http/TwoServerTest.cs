@@ -15,8 +15,8 @@ namespace NET.efilnukefesin.BaseClasses.Test.Http
 
         protected readonly CustomWebApplicationFactory<StartupType1> webApplicationFactory1;
         protected readonly CustomWebApplicationFactory<StartupType2> webApplicationFactory2;
-        protected Uri localServerUri1 = new Uri("http://localhost1/");
-        protected Uri localServerUri2 = new Uri("http://localhost2/");
+        protected Uri localServerUri1 = new Uri("http://localhost/");
+        protected Uri localServerUri2 = new Uri("http://localhost/");
         protected HttpClient localClient1;
         protected HttpClient localClient2;
 
@@ -42,12 +42,12 @@ namespace NET.efilnukefesin.BaseClasses.Test.Http
 
         #region Methods
 
-        #region getHttpClientHandler: creates the handler for integration testing
+        #region getHttpClientHandler1: creates the handler for integration testing
         /// <summary>
         /// creates the handler for integration testing
         /// </summary>
         /// <returns>the handler to override the httpClient default handler with</returns>
-        protected Microsoft.AspNetCore.Mvc.Testing.Handlers.RedirectHandler getHttpClientHandler()
+        protected Microsoft.AspNetCore.Mvc.Testing.Handlers.RedirectHandler getHttpClientHandler1()
         {
             Microsoft.AspNetCore.Mvc.Testing.Handlers.RedirectHandler result = new Microsoft.AspNetCore.Mvc.Testing.Handlers.RedirectHandler(7);
             Microsoft.AspNetCore.Mvc.Testing.Handlers.CookieContainerHandler innerHandler1 = new Microsoft.AspNetCore.Mvc.Testing.Handlers.CookieContainerHandler();
@@ -57,13 +57,32 @@ namespace NET.efilnukefesin.BaseClasses.Test.Http
 
             return result;
         }
-        #endregion getHttpClientHandler
+        #endregion getHttpClientHandler1
+
+        #region getHttpClientHandler2: creates the handler for integration testing
+        /// <summary>
+        /// creates the handler for integration testing
+        /// </summary>
+        /// <returns>the handler to override the httpClient default handler with</returns>
+        protected Microsoft.AspNetCore.Mvc.Testing.Handlers.RedirectHandler getHttpClientHandler2()
+        {
+            Microsoft.AspNetCore.Mvc.Testing.Handlers.RedirectHandler result = new Microsoft.AspNetCore.Mvc.Testing.Handlers.RedirectHandler(7);
+            Microsoft.AspNetCore.Mvc.Testing.Handlers.CookieContainerHandler innerHandler1 = new Microsoft.AspNetCore.Mvc.Testing.Handlers.CookieContainerHandler();
+            Microsoft.AspNetCore.TestHost.ClientHandler innerHandler2 = (Microsoft.AspNetCore.TestHost.ClientHandler)this.webApplicationFactory2.Server.CreateHandler();  //TODO: check if one client handler is valid for all redirects
+            innerHandler1.InnerHandler = innerHandler2;
+            result.InnerHandler = innerHandler1;
+
+            return result;
+        }
+        #endregion getHttpClientHandler2
 
         #region startLocalServers
         protected void startLocalServers()
         {
             this.localClient1 = this.webApplicationFactory1.CreateClient();  //needed for getting up the server
             this.localClient2 = this.webApplicationFactory2.CreateClient();  //needed for getting up the server
+            this.localServerUri1 = this.localClient1.BaseAddress;
+            this.localServerUri2 = this.localClient2.BaseAddress;
         }
         #endregion startLocalServers
 

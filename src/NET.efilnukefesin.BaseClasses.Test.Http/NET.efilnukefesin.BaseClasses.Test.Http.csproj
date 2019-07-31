@@ -5,9 +5,9 @@
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
-    <VersionPrefix>0.6.4</VersionPrefix>
+    <VersionPrefix>0.6.5</VersionPrefix>
     <Description>Test http base class</Description>
-    <PackageReleaseNotes>added local clients for Uro verfication</PackageReleaseNotes>
+    <PackageReleaseNotes>added two versions of getHandler()</PackageReleaseNotes>
     <ApplicationIcon />
     <OutputType>Library</OutputType>
     <StartupObject />
