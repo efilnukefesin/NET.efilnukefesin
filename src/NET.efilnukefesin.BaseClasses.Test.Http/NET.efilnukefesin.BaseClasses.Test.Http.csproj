@@ -5,9 +5,9 @@
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
-    <VersionPrefix>0.6.1</VersionPrefix>
+    <VersionPrefix>0.6.2</VersionPrefix>
     <Description>Test http base class</Description>
-    <PackageReleaseNotes>Added ctor params with HttpTestConfiguration class</PackageReleaseNotes>
+    <PackageReleaseNotes>Fixed a method name typo (startLocalServers)</PackageReleaseNotes>
     <ApplicationIcon />
     <OutputType>Library</OutputType>
     <StartupObject />

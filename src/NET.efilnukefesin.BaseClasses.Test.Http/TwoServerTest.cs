@@ -56,13 +56,13 @@ namespace NET.efilnukefesin.BaseClasses.Test.Http
         }
         #endregion getHttpClientHandler
 
-        #region startLocalServer
-        protected void startLocalServer()
+        #region startLocalServers
+        protected void startLocalServers()
         {
             this.webApplicationFactory1.CreateClient();  //needed for getting up the server
             this.webApplicationFactory2.CreateClient();  //needed for getting up the server
         }
-        #endregion startLocalServer
+        #endregion startLocalServers
 
         #endregion Methods
     }
