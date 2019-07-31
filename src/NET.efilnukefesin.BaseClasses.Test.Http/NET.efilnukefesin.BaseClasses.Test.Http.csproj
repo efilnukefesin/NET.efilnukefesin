@@ -5,9 +5,9 @@
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
-    <VersionPrefix>0.6.3</VersionPrefix>
+    <VersionPrefix>0.6.4</VersionPrefix>
     <Description>Test http base class</Description>
-    <PackageReleaseNotes>added Uri override parameter</PackageReleaseNotes>
+    <PackageReleaseNotes>added local clients for Uro verfication</PackageReleaseNotes>
     <ApplicationIcon />
     <OutputType>Library</OutputType>
     <StartupObject />

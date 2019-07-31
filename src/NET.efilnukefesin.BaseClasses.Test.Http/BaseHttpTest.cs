@@ -3,6 +3,7 @@ using NET.efilnukefesin.BaseClasses.Test.Http.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace NET.efilnukefesin.BaseClasses.Test.Http
@@ -14,6 +15,7 @@ namespace NET.efilnukefesin.BaseClasses.Test.Http
 
         protected readonly CustomWebApplicationFactory<StartupType> webApplicationFactory;
         protected Uri localServerUri = new Uri("http://localhost/");
+        protected HttpClient localClient;
 
         #endregion Properties
 
@@ -55,7 +57,7 @@ namespace NET.efilnukefesin.BaseClasses.Test.Http
         #region startLocalServer
         protected void startLocalServer()
         {
-            this.webApplicationFactory.CreateClient();  //needed for getting up the server
+            this.localClient = this.webApplicationFactory.CreateClient();  //needed for getting up the server
         }
         #endregion startLocalServer
 
