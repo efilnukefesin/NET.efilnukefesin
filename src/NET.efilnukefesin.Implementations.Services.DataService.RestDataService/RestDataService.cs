@@ -83,8 +83,11 @@ namespace NET.efilnukefesin.Implementations.Services.DataService.RestDataService
                     this.logger?.Log($"RestDataService.getClient(): whole Uri is '{url}'");
                     try
                     {
+                        this.logger?.Log($"RestDataService.getClient(): Attempting to create a client: 'new TypedBaseClient<T>(new Uri({url}), {this.logger}, {this.overrideMessageHandler});'");
                         TypedBaseClient<T> client = new TypedBaseClient<T>(new Uri(url), this.logger, this.overrideMessageHandler);
+                        this.logger?.Log($"RestDataService.getClient(): client created successfully, adding authentication header");
                         client.AddAuthenticationHeader(this.authenticationString);
+                        this.logger?.Log($"RestDataService.getClient(): authentication header added, next up: add to clients dict");
                         this.clients.Add(typeof(T), client); //TODO: add Uri;  //TODO: make less specific
                         this.logger?.Log($"RestDataService.getClient(): Client successfully created and added");
                     }

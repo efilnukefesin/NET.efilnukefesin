@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <VersionPrefix>0.2.0</VersionPrefix>
+    <VersionPrefix>0.3.0</VersionPrefix>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
     <Description>Implementing HttpClient focused on standard REST calls</Description>
-    <PackageReleaseNotes>worked on Authentication</PackageReleaseNotes>
+    <PackageReleaseNotes>changed ctor params</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

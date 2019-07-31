@@ -23,7 +23,7 @@ namespace NET.efilnukefesin.Implementations.Rest.Client
 
         #region Construction
 
-        public BaseClient(Uri ResourceUri, ILogger Logger, HttpMessageHandler OverrideMessageHandler = null)
+        public BaseClient(Uri ResourceUri, ILogger Logger = null, HttpMessageHandler OverrideMessageHandler = null)
         {
             this.logger = Logger;
             this.resourceUri = ResourceUri;

@@ -20,7 +20,7 @@ namespace NET.efilnukefesin.Implementations.Rest.Client
 
         #region Construction
 
-        public TypedBaseClient(Uri ResourceUri, ILogger Logger, HttpMessageHandler OverrideMessageHandler = null)
+        public TypedBaseClient(Uri ResourceUri, ILogger Logger = null, HttpMessageHandler OverrideMessageHandler = null)
             : base(ResourceUri, Logger, OverrideMessageHandler)
         {
 
