@@ -80,6 +80,20 @@ namespace NET.efilnukefesin.BaseClasses.Test.Http
         }
         #endregion startLocalServer
 
+        #region getStartupType
+        protected Type getStartupType(Guid ServerId)
+        {
+            Type result = default;
+
+            if (this.startups.ContainsKey(ServerId))
+            {
+                result = this.startups[ServerId];
+            }
+
+            return result;
+        }
+        #endregion getStartupType
+
         #endregion Methods
     }
 }

@@ -9,7 +9,16 @@ namespace NET.efilnukefesin.BaseClasses.Test.Http.Interfaces
 {
     public interface ICustomWebApplicationFactory
     {
+        #region Properties
+
+        #endregion Properties
+
+        #region Methods
+
         TestServer GetServer();
         HttpClient GetClient();
+        Type GetStartupType();
+
+        #endregion Methods
     }
 }

@@ -77,6 +77,13 @@ namespace NET.efilnukefesin.BaseClasses.Test.Http.Classes
         }
         #endregion GetClient
 
+        #region GetStartupType
+        public Type GetStartupType()
+        {
+            return typeof(StartupType);
+        }
+        #endregion GetStartupType
+
         #endregion Methods
     }
 }
