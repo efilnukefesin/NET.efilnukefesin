@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace NET.efilnukefesin.BaseClasses.Test.Http
 {
     [TestClass]
+    [Obsolete]
     public class TwoServerTest<StartupType1, StartupType2> : BaseSimpleTest where StartupType1 : class where StartupType2 : class
     {
         #region Properties

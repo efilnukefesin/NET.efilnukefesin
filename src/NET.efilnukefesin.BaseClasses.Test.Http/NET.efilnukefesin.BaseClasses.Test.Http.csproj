@@ -5,9 +5,9 @@
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
-    <VersionPrefix>0.7.0</VersionPrefix>
+    <VersionPrefix>0.7.1</VersionPrefix>
     <Description>Test http base class</Description>
-    <PackageReleaseNotes>Added possibility to add multiple http servers</PackageReleaseNotes>
+    <PackageReleaseNotes>amrked future obsolete classes</PackageReleaseNotes>
     <ApplicationIcon />
     <OutputType>Library</OutputType>
     <StartupObject />
