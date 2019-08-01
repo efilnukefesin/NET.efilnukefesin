@@ -5,9 +5,9 @@
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
-    <VersionPrefix>0.6.5</VersionPrefix>
+    <VersionPrefix>0.7.0</VersionPrefix>
     <Description>Test http base class</Description>
-    <PackageReleaseNotes>added two versions of getHandler()</PackageReleaseNotes>
+    <PackageReleaseNotes>Added possibility to add multiple http servers</PackageReleaseNotes>
     <ApplicationIcon />
     <OutputType>Library</OutputType>
     <StartupObject />

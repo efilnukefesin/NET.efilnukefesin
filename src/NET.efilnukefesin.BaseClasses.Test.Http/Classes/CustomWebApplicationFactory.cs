@@ -2,13 +2,15 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
+using NET.efilnukefesin.BaseClasses.Test.Http.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 
 namespace NET.efilnukefesin.BaseClasses.Test.Http.Classes
 {
-    public class CustomWebApplicationFactory<StartupType> : WebApplicationFactory<StartupType> where StartupType : class
+    public class CustomWebApplicationFactory<StartupType> : WebApplicationFactory<StartupType>, ICustomWebApplicationFactory where StartupType : class
     {
         #region Properties
 
@@ -60,6 +62,20 @@ namespace NET.efilnukefesin.BaseClasses.Test.Http.Classes
             return WebHost.CreateDefaultBuilder().UseStartup<StartupType>();
         }
         #endregion CreateWebHostBuilder
+
+        #region GetServer
+        public TestServer GetServer()
+        {
+            return this.Server;
+        }
+        #endregion GetServer
+
+        #region GetClient
+        public HttpClient GetClient()
+        {
+            return this.CreateClient();
+        }
+        #endregion GetClient
 
         #endregion Methods
     }
