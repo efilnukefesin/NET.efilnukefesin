@@ -90,25 +90,32 @@ namespace NET.efilnukefesin.Implementations.Mvvm
                 {
                     foreach (Type currentType in currentAssembly.GetTypes())
                     {
-                        foreach (object customAttribute in currentType.GetCustomAttributes(true))
+                        try
                         {
-                            try
+                            foreach (object customAttribute in currentType.GetCustomAttributes(true))
                             {
-                                LocatorAttribute locatorAttribute = customAttribute as LocatorAttribute;
-                                if (locatorAttribute != null)
+                                try
                                 {
-                                    if (!this.registeredInstances.ContainsKey(locatorAttribute.Name))
+                                    LocatorAttribute locatorAttribute = customAttribute as LocatorAttribute;
+                                    if (locatorAttribute != null)
                                     {
-                                        object instance = DiManager.GetInstance().Resolve(currentType);  //TODO: just add type, let resolving be done by using app
-                                        this.registeredInstances.Add(locatorAttribute.Name, instance);
+                                        if (!this.registeredInstances.ContainsKey(locatorAttribute.Name))
+                                        {
+                                            object instance = DiManager.GetInstance().Resolve(currentType);  //TODO: just add type, let resolving be done by using app
+                                            this.registeredInstances.Add(locatorAttribute.Name, instance);
+                                        }
                                     }
-                                }
                                 
+                                }
+                                catch (Exception ex)
+                                {
+                                    this.logger?.Log($"ViewModelLocator.findAndAddViewModelInstances(): Exception caught with Attributes: '{ex.Message}'", Contracts.Logger.Enums.LogLevel.Warning);
+                                }
                             }
-                            catch (Exception ex)
-                            {
-                                this.logger?.Log($"ViewModelLocator.findAndAddViewModelInstances(): Exception caught: '{ex.Message}'", Contracts.Logger.Enums.LogLevel.Warning);
-                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            this.logger?.Log($"ViewModelLocator.findAndAddViewModelInstances(): Exception caught with Types: '{ex.Message}'", Contracts.Logger.Enums.LogLevel.Warning);
                         }
                     }
                 }
