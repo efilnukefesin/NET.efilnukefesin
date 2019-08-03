@@ -92,11 +92,7 @@ namespace NET.efilnukefesin.Implementations.Mvvm
                     {
                         foreach (object customAttribute in currentType.GetCustomAttributes(true))
                         {
-                            if (customAttribute.GetType().FullName.Contains("CompilerServices"))
-                            {
-                                this.logger?.Log($"ViewModelLocator.findAndAddViewModelInstances(): skipped Attribute '{customAttribute.GetType().FullName}'");
-                            }
-                            else
+                            try
                             {
                                 LocatorAttribute locatorAttribute = customAttribute as LocatorAttribute;
                                 if (locatorAttribute != null)
@@ -107,6 +103,11 @@ namespace NET.efilnukefesin.Implementations.Mvvm
                                         this.registeredInstances.Add(locatorAttribute.Name, instance);
                                     }
                                 }
+                                
+                            }
+                            catch (Exception ex)
+                            {
+                                this.logger?.Log($"ViewModelLocator.findAndAddViewModelInstances(): Exception caught: '{ex.Message}'", Contracts.Logger.Enums.LogLevel.Warning);
                             }
                         }
                     }

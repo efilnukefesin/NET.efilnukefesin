@@ -4,8 +4,8 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <Company>efilnukefesin.NET</Company>
     <Description>Mvvm implementations</Description>
-    <VersionPrefix>1.3.3</VersionPrefix>
-    <PackageReleaseNotes>added some exceptions</PackageReleaseNotes>
+    <VersionPrefix>1.3.4</VersionPrefix>
+    <PackageReleaseNotes>changed type loading behaviour</PackageReleaseNotes>
     <Copyright>efilnukefesin.NET</Copyright>
     <Authors>efilnukefesin</Authors>
   </PropertyGroup>
