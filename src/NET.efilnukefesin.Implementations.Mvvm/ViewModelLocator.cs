@@ -1,6 +1,8 @@
-﻿using NET.efilnukefesin.Contracts.Mvvm;
+﻿using NET.efilnukefesin.Contracts.Logger;
+using NET.efilnukefesin.Contracts.Mvvm;
 using NET.efilnukefesin.Implementations.Base;
 using NET.efilnukefesin.Implementations.DependencyInjection;
+using NET.efilnukefesin.Implementations.Logger.SerilogLogger;
 using NET.efilnukefesin.Implementations.Mvvm.Attributes;
 using System;
 using System.Collections.Generic;
@@ -14,6 +16,7 @@ namespace NET.efilnukefesin.Implementations.Mvvm
         #region Properties
 
         private Dictionary<string, object> registeredInstances = new Dictionary<string, object>();
+        private ILogger logger;
 
         #endregion Properties
 
@@ -21,7 +24,9 @@ namespace NET.efilnukefesin.Implementations.Mvvm
 
         public ViewModelLocator()
         {
+            this.logger = new SerilogLogger();  //TODO: replace by Di
             this.findAndAddViewModelInstances();
+
         }
 
         #endregion Construction
@@ -73,25 +78,34 @@ namespace NET.efilnukefesin.Implementations.Mvvm
         #region findAndAddViewModelInstances
         private void findAndAddViewModelInstances()
         {
+            this.logger?.Log($"ViewModelLocator.findAndAddViewModelInstances(): entered");
             Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
             foreach (Assembly currentAssembly in assemblies)
             {
-                foreach (Type currentType in currentAssembly.GetTypes())
+                if (currentAssembly.FullName.Contains("System.Runtime"))
                 {
-                    foreach (object customAttribute in currentType.GetCustomAttributes(true))
+                    this.logger?.Log($"ViewModelLocator.findAndAddViewModelInstances(): skipped '{currentAssembly.FullName}'");
+                }
+                else
+                {
+                    foreach (Type currentType in currentAssembly.GetTypes())
                     {
-                        LocatorAttribute locatorAttribute = customAttribute as LocatorAttribute;
-                        if (locatorAttribute != null)
+                        foreach (object customAttribute in currentType.GetCustomAttributes(true))
                         {
-                            if (!this.registeredInstances.ContainsKey(locatorAttribute.Name))
+                            LocatorAttribute locatorAttribute = customAttribute as LocatorAttribute;
+                            if (locatorAttribute != null)
                             {
-                                object instance = DiManager.GetInstance().Resolve(currentType);  //TODO: just add type, let resolving be done by using app
-                                this.registeredInstances.Add(locatorAttribute.Name, instance);
+                                if (!this.registeredInstances.ContainsKey(locatorAttribute.Name))
+                                {
+                                    object instance = DiManager.GetInstance().Resolve(currentType);  //TODO: just add type, let resolving be done by using app
+                                    this.registeredInstances.Add(locatorAttribute.Name, instance);
+                                }
                             }
                         }
                     }
                 }
             }
+            this.logger?.Log($"ViewModelLocator.findAndAddViewModelInstances(): exited");
         }
         #endregion findAndAddViewModelInstances
 
