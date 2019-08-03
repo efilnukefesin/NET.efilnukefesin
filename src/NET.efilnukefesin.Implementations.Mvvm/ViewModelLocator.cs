@@ -84,7 +84,7 @@ namespace NET.efilnukefesin.Implementations.Mvvm
             {
                 if (currentAssembly.FullName.Contains("System.Runtime"))
                 {
-                    this.logger?.Log($"ViewModelLocator.findAndAddViewModelInstances(): skipped '{currentAssembly.FullName}'");
+                    this.logger?.Log($"ViewModelLocator.findAndAddViewModelInstances(): skipped Assembly '{currentAssembly.FullName}'");
                 }
                 else
                 {
@@ -92,13 +92,20 @@ namespace NET.efilnukefesin.Implementations.Mvvm
                     {
                         foreach (object customAttribute in currentType.GetCustomAttributes(true))
                         {
-                            LocatorAttribute locatorAttribute = customAttribute as LocatorAttribute;
-                            if (locatorAttribute != null)
+                            if (customAttribute.GetType().FullName.Contains("CompilerServices"))
                             {
-                                if (!this.registeredInstances.ContainsKey(locatorAttribute.Name))
+                                this.logger?.Log($"ViewModelLocator.findAndAddViewModelInstances(): skipped Attribute '{customAttribute.GetType().FullName}'");
+                            }
+                            else
+                            {
+                                LocatorAttribute locatorAttribute = customAttribute as LocatorAttribute;
+                                if (locatorAttribute != null)
                                 {
-                                    object instance = DiManager.GetInstance().Resolve(currentType);  //TODO: just add type, let resolving be done by using app
-                                    this.registeredInstances.Add(locatorAttribute.Name, instance);
+                                    if (!this.registeredInstances.ContainsKey(locatorAttribute.Name))
+                                    {
+                                        object instance = DiManager.GetInstance().Resolve(currentType);  //TODO: just add type, let resolving be done by using app
+                                        this.registeredInstances.Add(locatorAttribute.Name, instance);
+                                    }
                                 }
                             }
                         }
