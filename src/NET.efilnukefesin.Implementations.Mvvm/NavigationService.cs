@@ -45,7 +45,7 @@ namespace NET.efilnukefesin.Implementations.Mvvm
         private void navigationPresenter_BackFinished(object sender, EventArgs e)
         {
             this.logger?.Log($"NavigationService.navigationPresenter_BackFinished(): entered");
-            newLastViewModel = string.Empty;  //override -> 'invalidate'
+            this.lastViewModel = string.Empty;  //override -> 'invalidate'
             this.logger?.Log($"NavigationService.navigationPresenter_BackFinished(): exited");
         }
         #endregion navigationPresenter_BackFinished
