@@ -29,18 +29,16 @@ namespace NET.efilnukefesin.Implementations.Mvvm.WPF
         public bool IsPresenterRegistered { get; private set; } = false;
 
         private ILogger logger;
-        private INavigationService parent;
 
         #endregion Properties
 
         #region Construction
 
-        public BaseWpfNavigationPresenter(string packPrefix, string typePrefix, INavigationService Parent, ILogger logger = null) : base()
+        public BaseWpfNavigationPresenter(string packPrefix, string typePrefix, ILogger logger = null) : base()
         {
             this.packPrefix = packPrefix ?? throw new ArgumentNullException(nameof(packPrefix));
             this.typePrefix = typePrefix ?? throw new ArgumentNullException(nameof(typePrefix));
             this.logger = logger;
-            this.parent = Parent;
             this.logger?.Log($"BaseWpfNavigationPresenter.ctor(): called with params packPrefix: '{packPrefix}' and typePrefix: '{typePrefix}'");
         }
 
@@ -63,6 +61,7 @@ namespace NET.efilnukefesin.Implementations.Mvvm.WPF
                 this.logger?.Log($"BaseWpfNavigationPresenter.Back(): currentPage is not null, currentWindow is, so attempting to go back here.");
                 this.presentationFrame.GoBack();
             }
+            this.OnBackFinished(new EventArgs());
             this.logger?.Log($"BaseWpfNavigationPresenter.Back(): Exited");
         }
         #endregion Back
@@ -178,11 +177,7 @@ namespace NET.efilnukefesin.Implementations.Mvvm.WPF
         private void window_Closed(object sender, EventArgs e)
         {
             this.logger?.Log($"BaseWpfNavigationPresenter.window_Closed(): Entered");
-            if (this.parent != null)
-            {
-                this.logger?.Log($"BaseWpfNavigationPresenter.window_Closed(): calling Back() method on parent");
-                this.parent.Back();
-            }
+            this.Back();
             this.logger?.Log($"BaseWpfNavigationPresenter.window_Closed(): Exited");
         }
         #endregion window_Closed
@@ -238,6 +233,19 @@ namespace NET.efilnukefesin.Implementations.Mvvm.WPF
         }
         #endregion dispose
 
-        #endregion Methods    
+        #endregion Methods  
+
+        #region Events
+
+        #region OnBackFinished
+        protected virtual void OnBackFinished(EventArgs e)
+        {
+            this.BackFinished?.Invoke(this, e);
+        }
+        #endregion OnBackFinished
+
+        public event EventHandler BackFinished;
+
+        #endregion Events
     }
 }

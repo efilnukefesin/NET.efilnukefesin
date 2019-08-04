@@ -46,5 +46,11 @@ namespace NET.efilnukefesin.Contracts.Mvvm
         #endregion Back
 
         #endregion Methods
+
+        #region Events
+
+        event EventHandler BackFinished;
+
+        #endregion Events
     }
 }

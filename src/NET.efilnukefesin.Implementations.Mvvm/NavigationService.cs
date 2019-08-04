@@ -31,6 +31,7 @@ namespace NET.efilnukefesin.Implementations.Mvvm
         {
             this.logger = Logger;
             this.navigationPresenter = NavigationPresenter;
+            this.navigationPresenter.BackFinished += this.navigationPresenter_BackFinished;
             this.viewsAndViewModels = new Dictionary<string, string>();
             this.history = new List<NavigationInfo>();
             this.findViewsAndViewModels();
@@ -39,6 +40,15 @@ namespace NET.efilnukefesin.Implementations.Mvvm
         #endregion Construction
 
         #region Methods
+
+        #region navigationPresenter_BackFinished
+        private void navigationPresenter_BackFinished(object sender, EventArgs e)
+        {
+            this.logger?.Log($"NavigationService.navigationPresenter_BackFinished(): entered");
+            newLastViewModel = string.Empty;  //override -> 'invalidate'
+            this.logger?.Log($"NavigationService.navigationPresenter_BackFinished(): exited");
+        }
+        #endregion navigationPresenter_BackFinished
 
         #region Back
         public void Back()
