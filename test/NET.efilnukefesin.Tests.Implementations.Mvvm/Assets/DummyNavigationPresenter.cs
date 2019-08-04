@@ -9,7 +9,9 @@ namespace NET.efilnukefesin.Tests.Implementations.Mvvm.Assets
 {
     internal class DummyNavigationPresenter : BaseObject, INavigationPresenter
     {
-        public bool IsPresenterRegistered => throw new NotImplementedException();
+        public bool IsPresenterRegistered { get; set; }
+
+        public event EventHandler BackFinished;
 
         public void Back()
         {
