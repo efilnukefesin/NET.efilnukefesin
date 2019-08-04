@@ -29,16 +29,18 @@ namespace NET.efilnukefesin.Implementations.Mvvm.WPF
         public bool IsPresenterRegistered { get; private set; } = false;
 
         private ILogger logger;
+        private INavigationService parent;
 
         #endregion Properties
 
         #region Construction
 
-        public BaseWpfNavigationPresenter(string packPrefix, string typePrefix, ILogger logger = null) : base()
+        public BaseWpfNavigationPresenter(string packPrefix, string typePrefix, INavigationService Parent, ILogger logger = null) : base()
         {
             this.packPrefix = packPrefix ?? throw new ArgumentNullException(nameof(packPrefix));
             this.typePrefix = typePrefix ?? throw new ArgumentNullException(nameof(typePrefix));
             this.logger = logger;
+            this.parent = Parent;
             this.logger?.Log($"BaseWpfNavigationPresenter.ctor(): called with params packPrefix: '{packPrefix}' and typePrefix: '{typePrefix}'");
         }
 
@@ -105,11 +107,10 @@ namespace NET.efilnukefesin.Implementations.Mvvm.WPF
                                 {
                                     this.currentWindow = (window as Window);
                                     this.currentPage = null;
-                                    //TODO: handle error when calling the second time
-                                    //1) add debug output
-                                    //2) figure out, why
+                                    //TODO: add handler for closed event -> navigation.Back()
                                     (window as Window).Owner = Application.Current.MainWindow;
                                     (window as Window).DataContext = this.currentDataContext;
+                                    (window as Window).Closed += this.window_Closed;
                                     (window as Window).ShowDialog();
                                 }
                                 catch (Exception ex)
@@ -171,6 +172,20 @@ namespace NET.efilnukefesin.Implementations.Mvvm.WPF
             return result;
         }
         #endregion Present
+
+
+        #region window_Closed
+        private void window_Closed(object sender, EventArgs e)
+        {
+            this.logger?.Log($"BaseWpfNavigationPresenter.window_Closed(): Entered");
+            if (this.parent != null)
+            {
+                this.logger?.Log($"BaseWpfNavigationPresenter.window_Closed(): calling Back() method on parent");
+                this.parent.Back();
+            }
+            this.logger?.Log($"BaseWpfNavigationPresenter.window_Closed(): Exited");
+        }
+        #endregion window_Closed
 
         #region RegisterPresenter
         public void RegisterPresenter(object Presenter)

@@ -3,12 +3,12 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
-    <VersionPrefix>1.0.1</VersionPrefix>
+    <VersionPrefix>1.1.0</VersionPrefix>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
     <Description>Adding WPF specific implementations to Mvvm methods, like a BaseNavigationPresenter.</Description>
-    <PackageReleaseNotes>refined log level classification</PackageReleaseNotes>
+    <PackageReleaseNotes>wired back() method to closed event for windows</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
