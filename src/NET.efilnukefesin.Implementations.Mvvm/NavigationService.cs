@@ -49,8 +49,13 @@ namespace NET.efilnukefesin.Implementations.Mvvm
             {
                 string oldLastViewModel = this.lastViewModel;
                 string newLastViewModel = this.history[this.history.Count - 2].ViewmodelName;
+                newLastViewModel = string.Empty;  //override -> 'invalidate'
                 this.lastViewModel = newLastViewModel;
                 this.logger?.Log($"NavigationService.Back(): changed lastViewmodel from '{oldLastViewModel}' to '{newLastViewModel}'");
+            }
+            else
+            {
+                this.logger?.Log($"NavigationService.Back(): this.history.Count is '{this.history.Count}' too low");
             }
             this.logger?.Log($"NavigationService.Back(): exited"); 
         }
