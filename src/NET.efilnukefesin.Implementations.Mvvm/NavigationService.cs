@@ -43,7 +43,16 @@ namespace NET.efilnukefesin.Implementations.Mvvm
         #region Back
         public void Back()
         {
+            this.logger?.Log($"NavigationService.Back(): entered");
             this.navigationPresenter.Back();
+            if (this.history.Count - 2 > 0)
+            {
+                string oldLastViewModel = this.lastViewModel;
+                string newLastViewModel = this.history[this.history.Count - 2].ViewmodelName;
+                this.lastViewModel = newLastViewModel;
+                this.logger?.Log($"NavigationService.Back(): changed lastViewmodel from '{oldLastViewModel}' to '{newLastViewModel}'");
+            }
+            this.logger?.Log($"NavigationService.Back(): exited"); 
         }
         #endregion Back
 
