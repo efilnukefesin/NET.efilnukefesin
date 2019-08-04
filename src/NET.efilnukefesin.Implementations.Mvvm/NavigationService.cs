@@ -116,7 +116,10 @@ namespace NET.efilnukefesin.Implementations.Mvvm
                 this.OnNavigationStarted(new EventArgs());
                 string viewName = this.viewsAndViewModels.Where(x => x.Value.Equals(ViewModelName)).FirstOrDefault().Key;
                 this.logger.Log($"NavigationService.Navigate: ViewModel '{ViewModelName}' belongs to View '{viewName}'");
-                result = this.navigationPresenter.Present(viewName, StaticViewModelLocator.Current.GetInstance(ViewModelName));
+                this.history.Add(new NavigationInfo(ViewModelName, viewName, result));
+                this.logger.Log($"NavigationService.Navigate: setting this.lastViewModel from '{this.lastViewModel}' to '{ViewModelName}'");
+                this.lastViewModel = ViewModelName;
+                result = this.navigationPresenter.Present(viewName, StaticViewModelLocator.Current.GetInstance(ViewModelName));  //waiting, if view is a window
                 if (result)
                 {
                     this.OnNavigationSuccessful(new EventArgs());
@@ -125,8 +128,6 @@ namespace NET.efilnukefesin.Implementations.Mvvm
                 {
                     this.OnNavigationFailed(new EventArgs());
                 }
-                this.history.Add(new NavigationInfo(ViewModelName, viewName, result));
-                this.lastViewModel = ViewModelName;
             }
             else
             {
