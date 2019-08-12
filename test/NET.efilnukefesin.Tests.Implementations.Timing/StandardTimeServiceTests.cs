@@ -11,15 +11,15 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
     [TestClass]
     public class StandardTimeServiceTests : BaseSimpleTest
     {
-        #region DataServiceProperties
+        #region StandardTimeServiceProperties
         [TestClass]
         public class StandardTimeServiceProperties : StandardTimeServiceTests
         {
 
         }
-        #endregion DataServiceProperties
+        #endregion StandardTimeServiceProperties
 
-        #region DataServiceConstruction
+        #region StandardTimeServiceConstruction
         [TestClass]
         public class StandardTimeServiceConstruction : StandardTimeServiceTests
         {
@@ -36,9 +36,9 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
             }
             #endregion IsNotNull
         }
-        #endregion DataServiceConstruction
+        #endregion StandardTimeServiceConstruction
 
-        #region DataServiceMethods
+        #region StandardTimeServiceMethods
         [TestClass]
         public class StandardTimeServiceMethods : StandardTimeServiceTests
         {
@@ -50,6 +50,6 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
             }
             #endregion PublishBlocker
         }
-        #endregion DataServiceMethods
+        #endregion StandardTimeServiceMethods
     }
 }
