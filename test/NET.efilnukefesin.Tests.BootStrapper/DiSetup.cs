@@ -14,6 +14,8 @@ using System.Net.Http;
 using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using NET.efilnukefesin.Implementations.Services.DataService.InMemoryDataService;
+using NET.efilnukefesin.Contracts.Timing;
+using NET.efilnukefesin.Implementations.Timing;
 
 namespace NET.efilnukefesin.Tests.BootStrapper
 {
@@ -69,6 +71,7 @@ namespace NET.efilnukefesin.Tests.BootStrapper
             DiManager.GetInstance().RegisterType<IFeatureToggleManager, FeatureToggleManager>(Lifetime.Singleton);
             DiManager.GetInstance().RegisterType<ILogger, SerilogLogger>();
             DiManager.GetInstance().RegisterType<INavigationService, NavigationService>(Lifetime.Singleton);
+            DiManager.GetInstance().RegisterType<ITimeService, StandardTimeService>(Lifetime.Singleton);
         }
         #endregion base
 

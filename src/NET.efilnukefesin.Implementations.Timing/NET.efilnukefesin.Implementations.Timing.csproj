@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <VersionPrefix>0.1.0</VersionPrefix>
+    <Authors>efilnukefesin</Authors>
+    <Company>efilnukefesin.NET</Company>
+    <Description>implementation for a time service allowing the control of app time</Description>
+    <Copyright>efilnukefesin.NET</Copyright>
+    <PackageReleaseNotes>initial commit</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NET.efilnukefesin.Contracts.Timing\NET.efilnukefesin.Contracts.Timing.csproj" />
+    <ProjectReference Include="..\NET.efilnukefesin.Implementations.Base\NET.efilnukefesin.Implementations.Base.csproj" />
+  </ItemGroup>
+
+</Project>
