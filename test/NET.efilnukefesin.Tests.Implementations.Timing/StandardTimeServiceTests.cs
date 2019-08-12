@@ -73,13 +73,13 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
         [TestClass]
         public class StandardTimeServiceMethods : StandardTimeServiceTests
         {
-            //#region PublishBlocker
-            //[TestMethod]
-            //public void PublishBlocker()
-            //{
-            //    throw new NotImplementedException();
-            //}
-            //#endregion PublishBlocker
+            #region PublishBlocker
+            [TestMethod]
+            public void PublishBlocker()
+            {
+                throw new NotImplementedException();
+            }
+            #endregion PublishBlocker
         }
         #endregion StandardTimeServiceMethods
     }
