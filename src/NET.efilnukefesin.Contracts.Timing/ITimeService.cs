@@ -9,6 +9,20 @@ namespace NET.efilnukefesin.Contracts.Timing
     {
         #region Properties
 
+        #region ElapsedTimeAbsolute: the time which has been elapsed in the real world since creation of this Service
+        /// <summary>
+        /// the time which has been elapsed in the real world since creation of this Service
+        /// </summary>
+        TimeSpan ElapsedTimeAbsolute { get; set; }
+        #endregion ElapsedTimeAbsolute
+
+        #region ElapsedTimeRelative: the time which has been passed by developer interaction using this Service; starts aligned with ElapsedTimeAbsolute
+        /// <summary>
+        /// the time which has been passed by developer interaction using this Service; starts aligned with <seealso cref="ElapsedTimeAbsolute"/>
+        /// </summary>
+        TimeSpan ElapsedTimeRelative { get; set; }
+        #endregion ElapsedTimeRelative
+
         #endregion Properties
 
         #region Methods
