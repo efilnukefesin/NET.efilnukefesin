@@ -29,13 +29,17 @@ namespace NET.efilnukefesin.Implementations.Timing
         public double DeltaTime { get; private set; }
         #endregion DeltaTime: 
 
+        private int updateIntervalInMilliseconds = 1;
+
         #endregion Properties
 
         #region Construction
 
-        public StandardTimeService()
+        public StandardTimeService(int UpdateIntervalInMilliseconds = 1)
         {
             Debug.Assert(Stopwatch.IsHighResolution, "System does not support high-resolution performance counter");
+
+            this.updateIntervalInMilliseconds = UpdateIntervalInMilliseconds;
 
             this.secondsPerCount = 0.0;
             this.DeltaTime = -1.0;
@@ -48,7 +52,7 @@ namespace NET.efilnukefesin.Implementations.Timing
 
             this.reset();
 
-            this.timeKeeperTimer = new Timer(this.timeKeeperTimerCallback, null, TimeSpan.FromMilliseconds(0), TimeSpan.FromMilliseconds(1));
+            this.timeKeeperTimer = new Timer(this.timeKeeperTimerCallback, null, TimeSpan.FromMilliseconds(0), TimeSpan.FromMilliseconds(this.updateIntervalInMilliseconds));
         }
 
         #endregion Construction
