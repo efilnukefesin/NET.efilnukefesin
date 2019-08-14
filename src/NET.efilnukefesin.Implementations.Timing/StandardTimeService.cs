@@ -92,6 +92,83 @@ namespace NET.efilnukefesin.Implementations.Timing
         }
         #endregion tick
 
+        #region Play: puts the progress of ElapsedTimeRelative back to standard
+        /// <summary>
+        /// puts the progress of ElapsedTimeRelative back to standard
+        /// </summary>
+        public void Play()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion Play
+
+        #region FastForward: Fast forwards ElapsedTimeRelative
+        /// <summary>
+        /// Fast forwards ElapsedTimeRelative
+        /// </summary>
+        /// <param name="Multiplier">The Multiplier to be applied, e.g. 0.5 for half speed or slo-mo</param>
+        public void FastForward(double Multiplier)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion FastForward
+
+        #region FastForward: Fast forwards ElapsedTimeRelative to a certain point in time since start
+        /// <summary>
+        /// Fast forwards ElapsedTimeRelative to a certain point in time since start
+        /// </summary>
+        /// <param name="Multiplier">The Multiplier to be applied, e.g. 0.5 for half speed or slo-mo</param>
+        /// <param name="TargetPoint">the target time in terms of Elapsed Time since start</param>
+        public void FastForward(double Multiplier, TimeSpan TargetPoint)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion FastForward
+
+        #region Rewind: Rewinds ElapsedTimeRelative
+        /// <summary>
+        /// Rewinds ElapsedTimeRelative
+        /// </summary>
+        /// <param name="Multiplier">The Multiplier to be applied, e.g. 0.5 for half speed or slo-mo</param>
+        public void Rewind(double Multiplier)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion Rewind
+
+        #region Rewind: Rewinds ElapsedTimeRelative to a certain point in time since start
+        /// <summary>
+        /// Rewinds ElapsedTimeRelative to a certain point in time since start
+        /// </summary>
+        /// <param name="Multiplier">The Multiplier to be applied, e.g. 0.5 for half speed or slo-mo</param>
+        /// <param name="TargetPoint">the target time in terms of Elapsed Time since start</param>
+        public void Rewind(double Multiplier, TimeSpan TargetPoint)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion Rewind
+
+        #region Pause: puts the progress of ElapsedTimeRelative on 'paused', so no progress at all
+        /// <summary>
+        /// puts the progress of ElapsedTimeRelative on 'paused', so no progress at all
+        /// </summary>
+        public void Pause()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion Pause
+
+        #region JumpTo: Jumps directly to a target time for ElapsedTimeRelative
+        /// <summary>
+        /// Jumps directly to a target time for ElapsedTimeRelative 
+        /// </summary>
+        /// <param name="TargetPoint">the target time in terms of Elapsed Time since start</param>
+        public void JumpTo(TimeSpan TargetPoint)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion JumpTo
+
         #region dispose
         protected override void dispose()
         {
