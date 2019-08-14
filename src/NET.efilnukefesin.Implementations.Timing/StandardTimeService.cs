@@ -31,6 +31,20 @@ namespace NET.efilnukefesin.Implementations.Timing
 
         private int updateIntervalInMilliseconds = 1;
 
+        #region CurrentMultiplicator
+        /// <summary>
+        /// the current factor, in which ElapsedTimeRelative is increased compared to ElapsedTimeAbsolute
+        /// </summary>
+        public double CurrentMultiplicator { get; set; } = 1f;
+        #endregion CurrentMultiplicator
+
+        #region CurrentTarget: the current target, where ElapsedTimeRelative is being moved to, null if there is none
+        /// <summary>
+        /// the current target, where ElapsedTimeRelative is being moved to, null if there is none
+        /// </summary>
+        public TimeSpan? CurrentTarget { get; set; } = null;
+        #endregion CurrentTarget
+
         #endregion Properties
 
         #region Construction
@@ -65,6 +79,9 @@ namespace NET.efilnukefesin.Implementations.Timing
             long currentTime = Stopwatch.GetTimestamp();
             this.baseTime = currentTime;
             this.previousTime = currentTime;
+
+            this.ElapsedTimeAbsolute = TimeSpan.FromTicks(currentTime - this.baseTime);
+            this.ElapsedTimeRelative = TimeSpan.FromTicks(currentTime - this.baseTime);
         }
         #endregion reset
 
@@ -88,7 +105,11 @@ namespace NET.efilnukefesin.Implementations.Timing
             }
 
             this.ElapsedTimeAbsolute = TimeSpan.FromTicks(this.currentTime - this.baseTime);
-            this.ElapsedTimeRelative = TimeSpan.FromTicks(this.currentTime - this.baseTime);
+
+            this.ElapsedTimeRelative += TimeSpan.FromMilliseconds(this.DeltaTime * this.CurrentMultiplicator);
+
+            //TODO: check if target is not null
+            //TODO: check if target has been reached, CurrentMultiplicator > 0 to determine direction
         }
         #endregion tick
 
@@ -98,9 +119,24 @@ namespace NET.efilnukefesin.Implementations.Timing
         /// </summary>
         public void Play()
         {
-            throw new NotImplementedException();
+            this.CurrentMultiplicator = 1f;
         }
         #endregion Play
+
+        #region moveTime
+        private void moveTime(double Multiplier)
+        {
+            this.CurrentMultiplicator = Multiplier;
+        }
+        #endregion moveTime
+
+        #region moveTimeTo
+        private void moveTimeTo(double Multiplier, TimeSpan TargetPoint)
+        {
+            this.CurrentMultiplicator = Multiplier;
+            this.CurrentTarget = TargetPoint;
+        }
+        #endregion moveTimeTo
 
         #region FastForward: Fast forwards ElapsedTimeRelative
         /// <summary>
@@ -109,7 +145,7 @@ namespace NET.efilnukefesin.Implementations.Timing
         /// <param name="Multiplier">The Multiplier to be applied, e.g. 0.5 for half speed or slo-mo</param>
         public void FastForward(double Multiplier)
         {
-            throw new NotImplementedException();
+            this.moveTime(Multiplier);
         }
         #endregion FastForward
 
@@ -121,7 +157,7 @@ namespace NET.efilnukefesin.Implementations.Timing
         /// <param name="TargetPoint">the target time in terms of Elapsed Time since start</param>
         public void FastForward(double Multiplier, TimeSpan TargetPoint)
         {
-            throw new NotImplementedException();
+            this.moveTimeTo(Multiplier, TargetPoint);
         }
         #endregion FastForward
 
@@ -132,7 +168,7 @@ namespace NET.efilnukefesin.Implementations.Timing
         /// <param name="Multiplier">The Multiplier to be applied, e.g. 0.5 for half speed or slo-mo</param>
         public void Rewind(double Multiplier)
         {
-            throw new NotImplementedException();
+            this.moveTime((-1) * Multiplier);
         }
         #endregion Rewind
 
@@ -144,7 +180,7 @@ namespace NET.efilnukefesin.Implementations.Timing
         /// <param name="TargetPoint">the target time in terms of Elapsed Time since start</param>
         public void Rewind(double Multiplier, TimeSpan TargetPoint)
         {
-            throw new NotImplementedException();
+            this.moveTimeTo((-1) * Multiplier, TargetPoint);
         }
         #endregion Rewind
 
@@ -154,7 +190,7 @@ namespace NET.efilnukefesin.Implementations.Timing
         /// </summary>
         public void Pause()
         {
-            throw new NotImplementedException();
+            this.CurrentMultiplicator = 0f;
         }
         #endregion Pause
 

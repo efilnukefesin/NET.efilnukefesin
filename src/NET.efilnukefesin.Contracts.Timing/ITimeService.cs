@@ -23,6 +23,20 @@ namespace NET.efilnukefesin.Contracts.Timing
         TimeSpan ElapsedTimeRelative { get; set; }
         #endregion ElapsedTimeRelative
 
+        #region CurrentMultiplicator
+        /// <summary>
+        /// the current factor, in which ElapsedTimeRelative is increased compared to ElapsedTimeAbsolute
+        /// </summary>
+        double CurrentMultiplicator { get; set; }
+        #endregion CurrentMultiplicator
+
+        #region CurrentTarget: the current target, where ElapsedTimeRelative is being moved to, null if there is none
+        /// <summary>
+        /// the current target, where ElapsedTimeRelative is being moved to, null if there is none
+        /// </summary>
+        TimeSpan? CurrentTarget { get; set; }
+        #endregion CurrentTarget
+
         #endregion Properties
 
         #region Methods

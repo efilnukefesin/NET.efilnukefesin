@@ -89,7 +89,10 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
 
                 ITimeService timeService = DiHelper.GetService<ITimeService>();
 
-                throw new NotImplementedException();
+                timeService.Play();
+
+                Assert.AreEqual(1, timeService.CurrentMultiplicator);
+                Assert.IsNull(timeService.CurrentTarget);
             }
             #endregion Play
 
@@ -148,8 +151,32 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
                 DiSetup.Tests();
 
                 ITimeService timeService = DiHelper.GetService<ITimeService>();
+                var testTime = timeService.ElapsedTimeRelative;
 
-                throw new NotImplementedException();
+                timeService.Pause();
+                Thread.Sleep(100);
+
+                Assert.AreEqual(0, timeService.CurrentMultiplicator);
+                Assert.IsNull(timeService.CurrentTarget);
+                Assert.AreEqual(testTime, timeService.ElapsedTimeRelative);
+            }
+            #endregion Pause
+
+            #region Pause
+            [TestMethod]
+            public void PauseNegative()
+            {
+                DiSetup.Tests();
+
+                ITimeService timeService = DiHelper.GetService<ITimeService>();
+                var testTime = timeService.ElapsedTimeRelative;
+
+                //timeService.Pause();  //<- do NOT pause here
+                Thread.Sleep(100);
+
+                //Assert.AreEqual(0, timeService.CurrentMultiplicator);
+                Assert.IsNull(timeService.CurrentTarget);
+                Assert.AreNotEqual(testTime, timeService.ElapsedTimeRelative);
             }
             #endregion Pause
 
