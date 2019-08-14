@@ -73,13 +73,98 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
         [TestClass]
         public class StandardTimeServiceMethods : StandardTimeServiceTests
         {
-            #region PublishBlocker
+            //#region PublishBlocker
+            //[TestMethod]
+            //public void PublishBlocker()
+            //{
+            //    throw new NotImplementedException();
+            //}
+            //#endregion PublishBlocker
+
+            #region Play
             [TestMethod]
-            public void PublishBlocker()
+            public void Play()
             {
+                DiSetup.Tests();
+
+                ITimeService timeService = DiHelper.GetService<ITimeService>();
+
                 throw new NotImplementedException();
             }
-            #endregion PublishBlocker
+            #endregion Play
+
+            #region FastForward
+            [TestMethod]
+            public void FastForward()
+            {
+                DiSetup.Tests();
+
+                ITimeService timeService = DiHelper.GetService<ITimeService>();
+
+                throw new NotImplementedException();
+            }
+            #endregion FastForward
+
+            #region FastForwardWithTarget
+            [TestMethod]
+            public void FastForwardWithTarget()
+            {
+                DiSetup.Tests();
+
+                ITimeService timeService = DiHelper.GetService<ITimeService>();
+
+                throw new NotImplementedException();
+            }
+            #endregion FastForwardWithTarget
+
+            #region Rewind
+            [TestMethod]
+            public void Rewind()
+            {
+                DiSetup.Tests();
+
+                ITimeService timeService = DiHelper.GetService<ITimeService>();
+
+                throw new NotImplementedException();
+            }
+            #endregion Rewind
+
+            #region RewindWithTarget
+            [TestMethod]
+            public void RewindWithTarget()
+            {
+                DiSetup.Tests();
+
+                ITimeService timeService = DiHelper.GetService<ITimeService>();
+
+                throw new NotImplementedException();
+            }
+            #endregion RewindWithTarget
+
+            #region Pause
+            [TestMethod]
+            public void Pause()
+            {
+                DiSetup.Tests();
+
+                ITimeService timeService = DiHelper.GetService<ITimeService>();
+
+                throw new NotImplementedException();
+            }
+            #endregion Pause
+
+            #region JumpTo
+            [TestMethod]
+            public void JumpTo()
+            {
+                DiSetup.Tests();
+
+                ITimeService timeService = DiHelper.GetService<ITimeService>();
+
+                throw new NotImplementedException();
+            }
+            #endregion JumpTo
+
         }
         #endregion StandardTimeServiceMethods
     }
