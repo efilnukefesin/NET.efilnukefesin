@@ -12,6 +12,27 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
     [TestClass]
     public class StandardTimeServiceTests : BaseSimpleTest
     {
+        #region timeEquals: compares two time spans on almost equality
+        /// <summary>
+        /// compares two time spans on almost equality
+        /// </summary>
+        /// <param name="timeSpan1">the first time span</param>
+        /// <param name="timeSpan2">the second time span</param>
+        /// <param name="numbersBehindComma">the precision</param>
+        /// <returns>if the numbers in terms of precision match</returns>
+        private static bool timeEquals(TimeSpan timeSpan1, TimeSpan timeSpan2, int numbersBehindComma = 5)
+        {
+            bool result = false;
+
+            if (Math.Abs((timeSpan1 - timeSpan2).TotalSeconds) < Math.Pow(10, -1 * numbersBehindComma))
+            {
+                result = true;
+            }
+
+            return result;
+        }
+        #endregion timeEquals
+
         #region StandardTimeServiceProperties
         [TestClass]
         public class StandardTimeServiceProperties : StandardTimeServiceTests
@@ -93,6 +114,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
 
                 Assert.AreEqual(1, timeService.CurrentMultiplicator);
                 Assert.IsNull(timeService.CurrentTarget);
+                Assert.IsTrue(StandardTimeServiceTests.timeEquals(timeService.ElapsedTimeAbsolute, timeService.ElapsedTimeRelative));
             }
             #endregion Play
 

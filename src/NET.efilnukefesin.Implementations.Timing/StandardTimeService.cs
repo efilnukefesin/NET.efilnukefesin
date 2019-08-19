@@ -106,7 +106,7 @@ namespace NET.efilnukefesin.Implementations.Timing
 
             this.ElapsedTimeAbsolute = TimeSpan.FromTicks(this.currentTime - this.baseTime);
 
-            this.ElapsedTimeRelative += TimeSpan.FromMilliseconds(this.DeltaTime * this.CurrentMultiplicator);
+            this.ElapsedTimeRelative += TimeSpan.FromSeconds(this.DeltaTime * this.CurrentMultiplicator);
 
             //TODO: check if target is not null
             //TODO: check if target has been reached, CurrentMultiplicator > 0 to determine direction
