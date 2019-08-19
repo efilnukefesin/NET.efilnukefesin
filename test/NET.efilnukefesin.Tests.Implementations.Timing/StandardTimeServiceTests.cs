@@ -115,6 +115,8 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
 
                 timeService.Play();
 
+                //TODO: address abbreviations
+
                 Assert.AreEqual(1, timeService.CurrentMultiplicator);
                 Assert.IsNull(timeService.CurrentTarget);
                 Assert.IsTrue(StandardTimeServiceTests.timeEquals(timeService.ElapsedTimeAbsolute, timeService.ElapsedTimeRelative, 3));
