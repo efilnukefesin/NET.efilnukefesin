@@ -115,6 +115,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
 
                 timeService.Play();
 
+                //TODO: works only the second time
                 //TODO: address abbreviations
 
                 Assert.AreEqual(1, timeService.CurrentMultiplicator);
@@ -208,6 +209,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
                 ITimeService timeService = DiHelper.GetService<ITimeService>();
                 var testTime = timeService.ElapsedTimeRelative;
 
+                //TODO: works only the second time
                 //timeService.Pause();  //<- do NOT pause here
                 Thread.Sleep(100);
 
