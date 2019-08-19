@@ -24,7 +24,10 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
         {
             bool result = false;
 
-            if (Math.Abs((timeSpan1 - timeSpan2).TotalSeconds) < Math.Pow(10, -1 * numbersBehindComma))
+            double diff = Math.Abs((timeSpan1 - timeSpan2).TotalSeconds);
+            double roundedDiff = Math.Round(diff, numbersBehindComma);
+
+            if (roundedDiff.Equals(0))
             {
                 result = true;
             }
@@ -114,7 +117,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
 
                 Assert.AreEqual(1, timeService.CurrentMultiplicator);
                 Assert.IsNull(timeService.CurrentTarget);
-                Assert.IsTrue(StandardTimeServiceTests.timeEquals(timeService.ElapsedTimeAbsolute, timeService.ElapsedTimeRelative));
+                Assert.IsTrue(StandardTimeServiceTests.timeEquals(timeService.ElapsedTimeAbsolute, timeService.ElapsedTimeRelative, 3));
             }
             #endregion Play
 
