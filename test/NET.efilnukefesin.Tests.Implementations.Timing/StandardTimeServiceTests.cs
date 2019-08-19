@@ -129,7 +129,12 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
 
                 ITimeService timeService = DiHelper.GetService<ITimeService>();
 
-                throw new NotImplementedException();
+                timeService.FastForward(2);
+                Thread.Sleep(100);
+
+                Assert.AreEqual(2, timeService.CurrentMultiplicator);
+                Assert.IsNull(timeService.CurrentTarget);
+                Assert.IsTrue(timeService.ElapsedTimeAbsolute < timeService.ElapsedTimeRelative);
             }
             #endregion FastForward
 
@@ -153,7 +158,12 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
 
                 ITimeService timeService = DiHelper.GetService<ITimeService>();
 
-                throw new NotImplementedException();
+                timeService.Rewind(2);
+                Thread.Sleep(100);
+
+                Assert.AreEqual(-2, timeService.CurrentMultiplicator);
+                Assert.IsNull(timeService.CurrentTarget);
+                Assert.IsTrue(timeService.ElapsedTimeAbsolute > timeService.ElapsedTimeRelative);
             }
             #endregion Rewind
 
@@ -187,7 +197,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
             }
             #endregion Pause
 
-            #region Pause
+            #region PauseNegative
             [TestMethod]
             public void PauseNegative()
             {
@@ -201,9 +211,9 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
 
                 //Assert.AreEqual(0, timeService.CurrentMultiplicator);
                 Assert.IsNull(timeService.CurrentTarget);
-                Assert.AreNotEqual(testTime, timeService.ElapsedTimeRelative);
+                Assert.IsTrue(testTime < timeService.ElapsedTimeRelative);
             }
-            #endregion Pause
+            #endregion PauseNegative
 
             #region JumpTo
             [TestMethod]
@@ -216,7 +226,6 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
                 throw new NotImplementedException();
             }
             #endregion JumpTo
-
         }
         #endregion StandardTimeServiceMethods
     }

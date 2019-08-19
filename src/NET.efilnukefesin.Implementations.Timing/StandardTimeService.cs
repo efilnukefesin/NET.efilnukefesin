@@ -108,6 +108,11 @@ namespace NET.efilnukefesin.Implementations.Timing
 
             this.ElapsedTimeRelative += TimeSpan.FromSeconds(this.DeltaTime * this.CurrentMultiplicator);
 
+            if (this.ElapsedTimeRelative < TimeSpan.Zero)
+            {
+                this.ElapsedTimeRelative = TimeSpan.Zero;  //reset to zero, when below zero
+            }
+
             //TODO: check if target is not null
             //TODO: check if target has been reached, CurrentMultiplicator > 0 to determine direction
         }
