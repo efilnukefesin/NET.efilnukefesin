@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <VersionPrefix>1.6.3</VersionPrefix>
-    <PackageReleaseNotes>Added some more logging</PackageReleaseNotes>
+    <VersionPrefix>1.6.4</VersionPrefix>
+    <PackageReleaseNotes>updated dependencies</PackageReleaseNotes>
     <Description>Implementation of Inversion of Control.</Description>
     <PackageTags>Dependency Injection, Inversion of Control, IoC, DI</PackageTags>
     <Company>efilnukefesin.NET</Company>
@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="4.9.2" />
+    <PackageReference Include="Autofac" Version="4.9.4" />
   </ItemGroup>
 
   <ItemGroup>
