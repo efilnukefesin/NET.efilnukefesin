@@ -10,6 +10,7 @@ using NET.efilnukefesin.Tests.BootStrapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest
@@ -30,10 +31,22 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest
         {
             this.startLocalServer();
 
-            var client = this.webApplicationFactory.CreateClient();
+            HttpClient client = null;
+            bool isError = false;
+            HttpResponseMessage result = null;
 
-            var result = await client.GetAsync("/api/values");
+            try
+            {
+                client = this.webApplicationFactory.CreateClient();
+                result = await client.GetAsync("/api/values");
+            }
+            catch (Exception ex)
+            {
+                isError = true;
+            }
 
+
+            Assert.IsFalse(isError);
             Assert.IsNotNull(result);
             Assert.AreEqual(true, result.IsSuccessStatusCode);
         }
