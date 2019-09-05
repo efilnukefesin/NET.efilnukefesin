@@ -45,7 +45,6 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest
                 isError = true;
             }
 
-
             Assert.IsFalse(isError);
             Assert.IsNotNull(result);
             Assert.AreEqual(true, result.IsSuccessStatusCode);
