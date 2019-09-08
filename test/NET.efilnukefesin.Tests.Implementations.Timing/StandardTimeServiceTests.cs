@@ -227,7 +227,11 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
 
                 ITimeService timeService = DiHelper.GetService<ITimeService>();
 
-                throw new NotImplementedException();
+                TimeSpan target = new TimeSpan(3, 2, 1, 59, 999);
+
+                timeService.JumpTo(target);
+
+                Assert.AreEqual(target, timeService.ElapsedTimeRelative);  //TODO: do not compare exactly
             }
             #endregion JumpTo
         }

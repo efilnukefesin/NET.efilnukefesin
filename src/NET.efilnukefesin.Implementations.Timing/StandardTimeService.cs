@@ -206,7 +206,9 @@ namespace NET.efilnukefesin.Implementations.Timing
         /// <param name="TargetPoint">the target time in terms of Elapsed Time since start</param>
         public void JumpTo(TimeSpan TargetPoint)
         {
-            throw new NotImplementedException();
+            this.ElapsedTimeRelative = TargetPoint;
+            this.CurrentMultiplicator = 1.0f;
+            this.CurrentTarget = null;
         }
         #endregion JumpTo
 
