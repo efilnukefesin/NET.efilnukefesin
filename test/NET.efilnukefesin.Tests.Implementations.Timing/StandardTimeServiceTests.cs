@@ -36,6 +36,20 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
         }
         #endregion timeEquals
 
+        #region timeEquals
+        private static bool timeEquals(TimeSpan timeSpan1, TimeSpan timeSpan2, TimeSpan abbreviation)
+        {
+            bool result = false;
+
+            if (((timeSpan1 - abbreviation) < timeSpan2) && ((timeSpan1 + abbreviation) > timeSpan2))
+            {
+                result = true;
+            }
+
+            return result;
+        }
+        #endregion timeEquals
+
         #region StandardTimeServiceProperties
         [TestClass]
         public class StandardTimeServiceProperties : StandardTimeServiceTests
@@ -113,14 +127,14 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
 
                 ITimeService timeService = DiHelper.GetService<ITimeService>();
 
+                timeService.Align();
                 timeService.Play();
 
-                //TODO: works only the second time
-                //TODO: address abbreviations
+                //TODO: address issue that this does not work in 'bunch run mode'
 
                 Assert.AreEqual(1, timeService.CurrentMultiplicator);
                 Assert.IsNull(timeService.CurrentTarget);
-                Assert.IsTrue(StandardTimeServiceTests.timeEquals(timeService.ElapsedTimeAbsolute, timeService.ElapsedTimeRelative, 3));
+                Assert.IsTrue(StandardTimeServiceTests.timeEquals(timeService.ElapsedTimeAbsolute, timeService.ElapsedTimeRelative, new TimeSpan(0, 0, 1)));
             }
             #endregion Play
 
@@ -160,6 +174,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
                 DiSetup.Tests();
 
                 ITimeService timeService = DiHelper.GetService<ITimeService>();
+
 
                 timeService.Rewind(2);
                 Thread.Sleep(100);
@@ -231,7 +246,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
 
                 timeService.JumpTo(target);
 
-                Assert.AreEqual(target, timeService.ElapsedTimeRelative);  //TODO: do not compare exactly
+                Assert.IsTrue(StandardTimeServiceTests.timeEquals(target, timeService.ElapsedTimeRelative, new TimeSpan(0, 0, 1)));
             }
             #endregion JumpTo
         }

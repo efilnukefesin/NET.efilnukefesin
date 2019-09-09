@@ -97,6 +97,13 @@ namespace NET.efilnukefesin.Contracts.Timing
         void JumpTo(TimeSpan TargetPoint);
         #endregion JumpTo
 
+        #region Align: sets the relative time equals with the absolute time again.
+        /// <summary>
+        /// sets the relative time equals with the absolute time again.
+        /// </summary>
+        void Align();
+        #endregion Align
+
         #endregion Methods
     }
 }

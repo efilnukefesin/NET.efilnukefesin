@@ -212,6 +212,16 @@ namespace NET.efilnukefesin.Implementations.Timing
         }
         #endregion JumpTo
 
+        #region Align: sets the relative time equals with the absolute time again.
+        /// <summary>
+        /// sets the relative time equals with the absolute time again.
+        /// </summary>
+        public void Align()
+        {
+            this.ElapsedTimeRelative = this.ElapsedTimeAbsolute;  //can be done as a copy will be performed; TimeSpan is a struct.
+        }
+        #endregion Align
+
         #region dispose
         protected override void dispose()
         {
