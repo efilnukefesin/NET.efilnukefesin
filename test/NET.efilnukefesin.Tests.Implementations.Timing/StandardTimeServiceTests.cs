@@ -232,6 +232,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
 
                 ITimeService timeService = DiHelper.GetService<ITimeService>();
                 timeService.Align();
+                timeService.Play();
                 var testTime = timeService.ElapsedTimeRelative;
 
                 //timeService.Pause();  //<- do NOT pause here
