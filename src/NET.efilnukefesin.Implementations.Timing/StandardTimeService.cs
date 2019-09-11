@@ -125,6 +125,7 @@ namespace NET.efilnukefesin.Implementations.Timing
         public void Play()
         {
             this.CurrentMultiplicator = 1f;
+            this.CurrentTarget = null;
         }
         #endregion Play
 

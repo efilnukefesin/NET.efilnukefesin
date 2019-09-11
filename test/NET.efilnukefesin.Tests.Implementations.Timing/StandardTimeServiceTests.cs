@@ -145,6 +145,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
                 DiSetup.Tests();
 
                 ITimeService timeService = DiHelper.GetService<ITimeService>();
+                timeService.Play();
 
                 timeService.FastForward(2);
                 Thread.Sleep(100);
@@ -162,6 +163,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
                 DiSetup.Tests();
 
                 ITimeService timeService = DiHelper.GetService<ITimeService>();
+                timeService.Play();
 
                 timeService.FastForward(2, new TimeSpan(1, 0, 0));
                 Thread.Sleep(100);
@@ -179,6 +181,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
                 DiSetup.Tests();
 
                 ITimeService timeService = DiHelper.GetService<ITimeService>();
+                timeService.Play();
 
                 timeService.Rewind(2);
                 Thread.Sleep(100);
@@ -196,6 +199,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
                 DiSetup.Tests();
 
                 ITimeService timeService = DiHelper.GetService<ITimeService>();
+                timeService.Play();
 
                 timeService.Rewind(2, new TimeSpan(0, 0, 0)); ;
                 Thread.Sleep(100);
@@ -213,6 +217,7 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
                 DiSetup.Tests();
 
                 ITimeService timeService = DiHelper.GetService<ITimeService>();
+                timeService.Play();
                 var testTime = timeService.ElapsedTimeRelative;
 
                 timeService.Pause();
