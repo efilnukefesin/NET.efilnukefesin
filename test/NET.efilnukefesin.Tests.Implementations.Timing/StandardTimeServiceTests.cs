@@ -163,7 +163,12 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
 
                 ITimeService timeService = DiHelper.GetService<ITimeService>();
 
-                throw new NotImplementedException();
+                timeService.FastForward(2, new TimeSpan(1, 0, 0));
+                Thread.Sleep(100);
+
+                Assert.AreEqual(2, timeService.CurrentMultiplicator);
+                Assert.AreEqual(new TimeSpan(1, 0, 0), timeService.CurrentTarget);
+                Assert.IsTrue(timeService.ElapsedTimeAbsolute < timeService.ElapsedTimeRelative);
             }
             #endregion FastForwardWithTarget
 
@@ -174,7 +179,6 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
                 DiSetup.Tests();
 
                 ITimeService timeService = DiHelper.GetService<ITimeService>();
-
 
                 timeService.Rewind(2);
                 Thread.Sleep(100);
@@ -193,7 +197,12 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
 
                 ITimeService timeService = DiHelper.GetService<ITimeService>();
 
-                throw new NotImplementedException();
+                timeService.Rewind(2, new TimeSpan(0, 0, 0)); ;
+                Thread.Sleep(100);
+
+                Assert.AreEqual(-2, timeService.CurrentMultiplicator);
+                Assert.AreEqual(new TimeSpan(0, 0, 0), timeService.CurrentTarget);
+                Assert.IsTrue(timeService.ElapsedTimeAbsolute > timeService.ElapsedTimeRelative);
             }
             #endregion RewindWithTarget
 
@@ -222,15 +231,15 @@ namespace NET.efilnukefesin.Tests.Implementations.Timing
                 DiSetup.Tests();
 
                 ITimeService timeService = DiHelper.GetService<ITimeService>();
+                timeService.Align();
                 var testTime = timeService.ElapsedTimeRelative;
 
-                //TODO: works only the second time
                 //timeService.Pause();  //<- do NOT pause here
                 Thread.Sleep(100);
 
-                //Assert.AreEqual(0, timeService.CurrentMultiplicator);
+                Assert.AreNotEqual(0, timeService.CurrentMultiplicator);
                 Assert.IsNull(timeService.CurrentTarget);
-                Assert.IsTrue(testTime < timeService.ElapsedTimeRelative);
+                Assert.IsTrue(testTime < timeService.ElapsedTimeRelative);  //TODO: faisl in batch mode
             }
             #endregion PauseNegative
 
