@@ -26,7 +26,7 @@ namespace NET.efilnukefesin.IntegrationTests.Implementations.Rest
         #region Methods
 
         #region SimpleCallWithStandardClient
-        [TestMethod]
+        //[TestMethod]
         public async Task SimpleCallWithStandardClient()
         {
             this.startLocalServer();
