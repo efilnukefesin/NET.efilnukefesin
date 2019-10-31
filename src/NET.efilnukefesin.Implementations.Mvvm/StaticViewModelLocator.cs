@@ -1,4 +1,6 @@
-﻿using NET.efilnukefesin.Contracts.Mvvm;
+﻿using NET.efilnukefesin.Contracts.Logger;
+using NET.efilnukefesin.Contracts.Mvvm;
+using NET.efilnukefesin.Implementations.Logger.SerilogLogger;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,6 +15,7 @@ namespace NET.efilnukefesin.Implementations.Mvvm
     {
         #region Properties
         private static IViewModelLocator locator = new ViewModelLocator();
+        private static ILogger logger = new SerilogLogger();  //TODO: replace by Di
 
         #region Current
         public static IViewModelLocator Current
@@ -31,11 +34,14 @@ namespace NET.efilnukefesin.Implementations.Mvvm
         #region Register
         public static void Register(IViewModelLocator locatorToRegister)
         {
+            StaticViewModelLocator.logger.Log($"StaticViewModelLocator.Register(): entered with parameter type '{locatorToRegister.GetType()}'");
             if (locatorToRegister == null)
             {
+                StaticViewModelLocator.logger.Log($"StaticViewModelLocator.Register(): locatorToRegister is null", Contracts.Logger.Enums.LogLevel.Error);
                 throw new ArgumentNullException("locatorToRegister");
             }
             StaticViewModelLocator.locator = locatorToRegister;
+            StaticViewModelLocator.logger.Log($"StaticViewModelLocator.Register(): exited");
         }
         #endregion Register
 

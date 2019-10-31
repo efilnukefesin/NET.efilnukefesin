@@ -26,7 +26,6 @@ namespace NET.efilnukefesin.Implementations.Mvvm
         {
             this.logger = new SerilogLogger();  //TODO: replace by Di
             this.findAndAddViewModelInstances();
-
         }
 
         #endregion Construction
