@@ -38,7 +38,7 @@ namespace NET.efilnukefesin.Implementations.Mvvm.WPF
         /// standard constructor
         /// </summary>
         /// <param name="packPrefix">e.g. "pack://application:,,,/UXDemo.Views.Wpf;component/", full pack Uri until the view name can be inserted</param>
-        /// <param name="typePrefix">Type prefix if needed</param>
+        /// <param name="typePrefix">Type prefix for the view if needed</param>
         /// <param name="logger">optional logger component</param>
         public BaseWpfNavigationPresenter(string packPrefix, string typePrefix, ILogger logger = null) : base()
         {
