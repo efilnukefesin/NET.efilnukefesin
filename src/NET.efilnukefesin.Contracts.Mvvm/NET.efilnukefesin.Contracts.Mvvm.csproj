@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <VersionPrefix>1.3.3</VersionPrefix>
+    <VersionPrefix>1.4.0</VersionPrefix>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
     <Description>Interfaces providing Mvvm functionality</Description>
-    <PackageReleaseNotes>Added Comments to INavigationPresenter</PackageReleaseNotes>
+    <PackageReleaseNotes>added IsBusy property</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

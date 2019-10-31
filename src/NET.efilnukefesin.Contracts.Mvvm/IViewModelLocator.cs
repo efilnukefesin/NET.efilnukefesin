@@ -7,6 +7,12 @@ namespace NET.efilnukefesin.Contracts.Mvvm
 {
     public interface IViewModelLocator : IBaseObject
     {
+        #region Properties
+
+        bool IsBusy { get; }
+
+        #endregion Properties
+
         #region Methods
         void Register(string name, object o);
         object GetInstance(string name);

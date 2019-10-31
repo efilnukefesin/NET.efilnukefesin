@@ -17,6 +17,7 @@ namespace NET.efilnukefesin.Implementations.Mvvm
 
         private Dictionary<string, object> registeredInstances = new Dictionary<string, object>();
         private ILogger logger;
+        public bool IsBusy { get; private set; } = false;
 
         #endregion Properties
 
@@ -77,6 +78,7 @@ namespace NET.efilnukefesin.Implementations.Mvvm
         #region findAndAddViewModelInstances
         private void findAndAddViewModelInstances()
         {
+            this.IsBusy = true;
             this.logger?.Log($"ViewModelLocator.findAndAddViewModelInstances(): entered");
             Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
             foreach (Assembly currentAssembly in assemblies)
@@ -120,6 +122,7 @@ namespace NET.efilnukefesin.Implementations.Mvvm
                 }
             }
             this.logger?.Log($"ViewModelLocator.findAndAddViewModelInstances(): exited");
+            this.IsBusy = false;
         }
         #endregion findAndAddViewModelInstances
 
