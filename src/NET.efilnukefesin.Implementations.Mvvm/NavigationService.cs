@@ -131,8 +131,17 @@ namespace NET.efilnukefesin.Implementations.Mvvm
                 this.lastViewModel = ViewModelName;
                 //TODO: add handling if Navigate is called before "RegisterPresenter"
                 var viewModelInstance = StaticViewModelLocator.Current.GetInstance(ViewModelName);
+                if (viewModelInstance != null)
+                {
+                    this.logger.Log($"NavigationService.Navigate: successfully got instance of ViewModel '{ViewModelName}': {viewModelInstance.GetType()}");
+                }
+                else
+                {
+                    this.logger.Log($"NavigationService.Navigate: could not get instance of ViewModel '{ViewModelName}'", Contracts.Logger.Enums.LogLevel.Warning);
+                }
                 if (this.navigationPresenter != null && viewModelInstance != null)
                 {
+                    this.logger.Log($"NavigationService.Navigate: this.navigationPresenter != null && viewModelInstance != null");
                     result = this.navigationPresenter.Present(viewName, viewModelInstance);  //waiting, if view is a window
                     if (result)
                     {
@@ -145,6 +154,7 @@ namespace NET.efilnukefesin.Implementations.Mvvm
                 }
                 else
                 {
+                    this.logger.Log($"NavigationService.Navigate: NOT this.navigationPresenter != null && viewModelInstance != null");
                     if (this.navigationPresenter == null)
                     {
                         this.logger.Log($"NavigationService.Navigate: this.navigationPresenter == null", Contracts.Logger.Enums.LogLevel.Error);
