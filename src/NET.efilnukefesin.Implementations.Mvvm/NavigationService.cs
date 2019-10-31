@@ -129,40 +129,49 @@ namespace NET.efilnukefesin.Implementations.Mvvm
                 this.history.Add(new NavigationInfo(ViewModelName, viewName, result));
                 this.logger.Log($"NavigationService.Navigate: setting this.lastViewModel from '{this.lastViewModel}' to '{ViewModelName}'");
                 this.lastViewModel = ViewModelName;
-                //TODO: add handling if Navigate is called before "RegisterPresenter"
-                var viewModelInstance = StaticViewModelLocator.Current.GetInstance(ViewModelName);
-                if (viewModelInstance != null)
+                this.logger.Log($"NavigationService.Navigate: successfully set this.lastViewModel from '{this.lastViewModel}' to '{ViewModelName}'");
+                if (StaticViewModelLocator.Current != null)
                 {
-                    this.logger.Log($"NavigationService.Navigate: successfully got instance of ViewModel '{ViewModelName}': {viewModelInstance.GetType()}");
-                }
-                else
-                {
-                    this.logger.Log($"NavigationService.Navigate: could not get instance of ViewModel '{ViewModelName}'", Contracts.Logger.Enums.LogLevel.Warning);
-                }
-                if (this.navigationPresenter != null && viewModelInstance != null)
-                {
-                    this.logger.Log($"NavigationService.Navigate: this.navigationPresenter != null && viewModelInstance != null");
-                    result = this.navigationPresenter.Present(viewName, viewModelInstance);  //waiting, if view is a window
-                    if (result)
+                    this.logger.Log($"NavigationService.Navigate: StaticViewModelLocator.Current is not null");
+                    //TODO: add handling if Navigate is called before "RegisterPresenter"
+                    var viewModelInstance = StaticViewModelLocator.Current.GetInstance(ViewModelName);
+                    if (viewModelInstance != null)
                     {
-                        this.OnNavigationSuccessful(new EventArgs());
+                        this.logger.Log($"NavigationService.Navigate: successfully got instance of ViewModel '{ViewModelName}': {viewModelInstance.GetType()}");
                     }
                     else
                     {
-                        this.OnNavigationFailed(new EventArgs());
+                        this.logger.Log($"NavigationService.Navigate: could not get instance of ViewModel '{ViewModelName}'", Contracts.Logger.Enums.LogLevel.Warning);
+                    }
+                    if (this.navigationPresenter != null && viewModelInstance != null)
+                    {
+                        this.logger.Log($"NavigationService.Navigate: this.navigationPresenter != null && viewModelInstance != null");
+                        result = this.navigationPresenter.Present(viewName, viewModelInstance);  //waiting, if view is a window
+                        if (result)
+                        {
+                            this.OnNavigationSuccessful(new EventArgs());
+                        }
+                        else
+                        {
+                            this.OnNavigationFailed(new EventArgs());
+                        }
+                    }
+                    else
+                    {
+                        this.logger.Log($"NavigationService.Navigate: NOT this.navigationPresenter != null && viewModelInstance != null");
+                        if (this.navigationPresenter == null)
+                        {
+                            this.logger.Log($"NavigationService.Navigate: this.navigationPresenter == null", Contracts.Logger.Enums.LogLevel.Error);
+                        }
+                        if (viewModelInstance == null)
+                        {
+                            this.logger.Log($"NavigationService.Navigate: this.navigationPresenter == null", Contracts.Logger.Enums.LogLevel.Error);
+                        }
                     }
                 }
                 else
                 {
-                    this.logger.Log($"NavigationService.Navigate: NOT this.navigationPresenter != null && viewModelInstance != null");
-                    if (this.navigationPresenter == null)
-                    {
-                        this.logger.Log($"NavigationService.Navigate: this.navigationPresenter == null", Contracts.Logger.Enums.LogLevel.Error);
-                    }
-                    if (viewModelInstance == null)
-                    {
-                        this.logger.Log($"NavigationService.Navigate: this.navigationPresenter == null", Contracts.Logger.Enums.LogLevel.Error);
-                    }
+                    this.logger.Log($"NavigationService.Navigate: StaticViewModelLocator.Current == null", Contracts.Logger.Enums.LogLevel.Error);
                 }
             }
             else
