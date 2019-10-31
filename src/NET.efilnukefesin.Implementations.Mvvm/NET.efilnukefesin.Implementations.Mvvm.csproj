@@ -3,9 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Company>efilnukefesin.NET</Company>
-    <Description>Mvvm implementations</Description>
-    <VersionPrefix>1.3.9</VersionPrefix>
-    <PackageReleaseNotes>Implemented an Event.</PackageReleaseNotes>
+    <Description>Mvvm implementations like NavigationService, StaticViewModelLocator to be used for an elegant implementation, not only in WPF</Description>
+    <VersionPrefix>1.3.10</VersionPrefix>
+    <PackageReleaseNotes>added more tracing</PackageReleaseNotes>
     <Copyright>efilnukefesin.NET</Copyright>
     <Authors>efilnukefesin</Authors>
   </PropertyGroup>

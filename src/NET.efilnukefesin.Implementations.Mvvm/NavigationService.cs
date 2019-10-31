@@ -129,14 +129,30 @@ namespace NET.efilnukefesin.Implementations.Mvvm
                 this.history.Add(new NavigationInfo(ViewModelName, viewName, result));
                 this.logger.Log($"NavigationService.Navigate: setting this.lastViewModel from '{this.lastViewModel}' to '{ViewModelName}'");
                 this.lastViewModel = ViewModelName;
-                result = this.navigationPresenter.Present(viewName, StaticViewModelLocator.Current.GetInstance(ViewModelName));  //waiting, if view is a window
-                if (result)
+                //TODO: add handling if Navigate is called before "RegisterPresenter"
+                var viewModelInstance = StaticViewModelLocator.Current.GetInstance(ViewModelName);
+                if (this.navigationPresenter != null && viewModelInstance != null)
                 {
-                    this.OnNavigationSuccessful(new EventArgs());
+                    result = this.navigationPresenter.Present(viewName, viewModelInstance);  //waiting, if view is a window
+                    if (result)
+                    {
+                        this.OnNavigationSuccessful(new EventArgs());
+                    }
+                    else
+                    {
+                        this.OnNavigationFailed(new EventArgs());
+                    }
                 }
                 else
                 {
-                    this.OnNavigationFailed(new EventArgs());
+                    if (this.navigationPresenter == null)
+                    {
+                        this.logger.Log($"NavigationService.Navigate: this.navigationPresenter == null", Contracts.Logger.Enums.LogLevel.Error);
+                    }
+                    if (viewModelInstance == null)
+                    {
+                        this.logger.Log($"NavigationService.Navigate: this.navigationPresenter == null", Contracts.Logger.Enums.LogLevel.Error);
+                    }
                 }
             }
             else
