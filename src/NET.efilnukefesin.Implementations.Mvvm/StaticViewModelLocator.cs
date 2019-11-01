@@ -23,6 +23,7 @@ namespace NET.efilnukefesin.Implementations.Mvvm
                 result.Initialize();
                 return result;
             }
+            set { StaticViewModelLocator.locator = value; StaticViewModelLocator.locator.Initialize(); }
         }
         private static ILogger logger = new SerilogLogger();  //TODO: replace by Di
 
