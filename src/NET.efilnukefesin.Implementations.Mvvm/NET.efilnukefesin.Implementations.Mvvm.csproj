@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\NET.efilnukefesin.Contracts.Logger\NET.efilnukefesin.Contracts.Logger.csproj" />
     <ProjectReference Include="..\NET.efilnukefesin.Contracts.Mvvm\NET.efilnukefesin.Contracts.Mvvm.csproj" />
+    <ProjectReference Include="..\NET.efilnukefesin.Helpers\NET.efilnukefesin.Helpers.csproj" />
     <ProjectReference Include="..\NET.efilnukefesin.Implementations.DependencyInjection\NET.efilnukefesin.Implementations.DependencyInjection.csproj" />
   </ItemGroup>
 

@@ -1,5 +1,6 @@
 ﻿using NET.efilnukefesin.Contracts.Logger;
 using NET.efilnukefesin.Contracts.Mvvm;
+using NET.efilnukefesin.Helpers;
 using NET.efilnukefesin.Implementations.Base;
 using NET.efilnukefesin.Implementations.DependencyInjection;
 using NET.efilnukefesin.Implementations.Logger.SerilogLogger;
@@ -126,6 +127,29 @@ namespace NET.efilnukefesin.Implementations.Mvvm
                     }
                 }
             }
+            this.logger?.Log($"ViewModelLocator.findAndAddViewModelInstances(): ended searching");
+
+            this.logger?.Log($"ViewModelLocator.findAndAddViewModelInstances(): calling Initialize Method if the Vm is IViewModel");
+
+            foreach (KeyValuePair<string, object> kvp in this.registeredInstances)
+            {
+                var instance = kvp.Value;
+                if (TypeHelper.ImplementsInterface(instance.GetType(), typeof(IViewModel)))
+                {
+                    this.logger?.Log($"ViewModelLocator.findAndAddViewModelInstances(): ViewModel '{kvp.Key}' implements IViewModel, and is '{instance.GetType()}'");
+                    IViewModel convertedInstance = (IViewModel)instance;
+                    this.logger?.Log($"ViewModelLocator.findAndAddViewModelInstances(): calling Initialize()");
+                    convertedInstance.Initialize();
+                    this.logger?.Log($"ViewModelLocator.findAndAddViewModelInstances(): ended calling Initialize()");
+                }
+                else
+                {
+                    this.logger?.Log($"ViewModelLocator.findAndAddViewModelInstances(): ViewModel '{kvp.Key}' does not implement IViewModel, but is '{instance.GetType()}'", Contracts.Logger.Enums.LogLevel.Warning);
+                }
+            }
+
+            this.logger?.Log($"ViewModelLocator.findAndAddViewModelInstances(): ended calling Initialize Method if the Vm is IViewModel");
+
             this.logger?.Log($"ViewModelLocator.findAndAddViewModelInstances(): exited");
             this.IsBusy = false;
         }

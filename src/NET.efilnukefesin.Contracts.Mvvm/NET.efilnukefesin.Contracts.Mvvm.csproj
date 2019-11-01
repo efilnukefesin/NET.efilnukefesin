@@ -7,7 +7,7 @@
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
     <Description>Interfaces providing Mvvm functionality</Description>
-    <PackageReleaseNotes>added IsBusy property</PackageReleaseNotes>
+    <PackageReleaseNotes>added Initialized method</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

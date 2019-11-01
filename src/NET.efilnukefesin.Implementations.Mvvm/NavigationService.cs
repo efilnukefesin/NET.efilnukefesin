@@ -131,14 +131,6 @@ namespace NET.efilnukefesin.Implementations.Mvvm
                 this.logger.Log($"NavigationService.Navigate: setting this.lastViewModel from '{this.lastViewModel}' to '{ViewModelName}'");
                 this.lastViewModel = ViewModelName;
                 this.logger.Log($"NavigationService.Navigate: successfully set this.lastViewModel from '{this.lastViewModel}' to '{ViewModelName}'");
-                ////TODO: find out, how to come to this -> Current is initialized with sth..., probably timing issue
-                //while (StaticViewModelLocator.Current == null)
-                //{
-                //    //wait until intialized
-                //    Thread.Sleep(10);
-                //    ***
-                //        //TODO: to it better
-                //}
                 if (StaticViewModelLocator.Current != null)
                 {
                     this.logger.Log($"NavigationService.Navigate: StaticViewModelLocator.Current is not null");
@@ -180,7 +172,7 @@ namespace NET.efilnukefesin.Implementations.Mvvm
                 }
                 else
                 {
-                    this.logger.Log($"NavigationService.Navigate: StaticViewModelLocator.Current == null", Contracts.Logger.Enums.LogLevel.Error);
+                    this.logger.Log($"NavigationService.Navigate: StaticViewModelLocator.Current == null, perhaps you try to navigate in a ViewModel c'tor?", Contracts.Logger.Enums.LogLevel.Error);
                 }
             }
             else
