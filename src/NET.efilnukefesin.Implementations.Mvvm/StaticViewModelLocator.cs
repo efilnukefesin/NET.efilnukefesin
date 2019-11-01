@@ -14,7 +14,16 @@ namespace NET.efilnukefesin.Implementations.Mvvm
     public static class StaticViewModelLocator
     {
         #region Properties
-        private static IViewModelLocator locator = new ViewModelLocator();
+        
+        private static IViewModelLocator locator
+        {
+            get 
+            {
+                IViewModelLocator result = new ViewModelLocator();
+                result.Initialize();
+                return result;
+            }
+        }
         private static ILogger logger = new SerilogLogger();  //TODO: replace by Di
 
         #region Current

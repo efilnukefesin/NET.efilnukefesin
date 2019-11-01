@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <VersionPrefix>1.5.0</VersionPrefix>
+    <VersionPrefix>1.5.1</VersionPrefix>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
     <Description>Interfaces providing Mvvm functionality</Description>
-    <PackageReleaseNotes>added Initialized method</PackageReleaseNotes>
+    <PackageReleaseNotes>added Initialize method</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

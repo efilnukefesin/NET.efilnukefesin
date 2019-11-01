@@ -14,6 +14,7 @@ namespace NET.efilnukefesin.Contracts.Mvvm
         #endregion Properties
 
         #region Methods
+        void Initialize();
         void Register(string name, object o);
         object GetInstance(string name);
         object this[string name] { get; }
