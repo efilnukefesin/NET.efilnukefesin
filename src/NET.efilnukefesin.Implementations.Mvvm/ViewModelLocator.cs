@@ -102,8 +102,13 @@ namespace NET.efilnukefesin.Implementations.Mvvm
                                     {
                                         if (!this.registeredInstances.ContainsKey(locatorAttribute.Name))
                                         {
+                                            this.logger?.Log($"ViewModelLocator.findAndAddViewModelInstances(): adding new instance '{locatorAttribute.Name}'");
                                             object instance = DiManager.GetInstance().Resolve(currentType);  //TODO: just add type, let resolving be done by using app
                                             this.registeredInstances.Add(locatorAttribute.Name, instance);
+                                        }
+                                        else
+                                        {
+                                            this.logger?.Log($"ViewModelLocator.findAndAddViewModelInstances(): skipping '{locatorAttribute.Name}' as already registered");
                                         }
                                     }
                                 

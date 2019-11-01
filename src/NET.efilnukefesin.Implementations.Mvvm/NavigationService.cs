@@ -136,6 +136,8 @@ namespace NET.efilnukefesin.Implementations.Mvvm
                 {
                     //wait until intialized
                     Thread.Sleep(10);
+                    ***
+                        //TODO: to it better
                 }
                 if (StaticViewModelLocator.Current != null)
                 {
