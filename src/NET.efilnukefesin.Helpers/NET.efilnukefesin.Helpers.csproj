@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <VersionPrefix>1.5.1</VersionPrefix>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <VersionPrefix>1.5.2</VersionPrefix>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
     <Copyright>efilnukefesin.NET</Copyright>
     <Description>Various Helper classes</Description>
-    <PackageReleaseNotes>added HasAttribute method</PackageReleaseNotes>
+    <PackageReleaseNotes>made compatible with net standard 2.0</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>
